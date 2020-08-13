@@ -4,4 +4,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def home(request):
-    return HttpResponse('testing')
+    context = {
+
+    }
+    return render(request, 'store/home.html', context)
