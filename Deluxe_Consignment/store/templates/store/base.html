@@ -1,19 +1,44 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
+    <!--Import Font Awesome Icons-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
+    <!--Link to CSS Sheet-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
     <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-g=1.0"/>
 </head>
 
 <body>
 
-{% block navbar %}
-{% endblock navbar %}
+<nav class="nav-extended">
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo left" style="margin-left: 15px">Deluxe Consignment</a>
+        <ul class="right hide-on-med-and-down">
+
+            <li><a href="#">Login / Signup</a></li>
+            <li><a href="#"><i class="material-icons">local_mall</i></a></li>
+        </ul>
+    </div>
+    <div class="nav-wrapper">
+        <ul>
+            <li class="tab"><a href="#test1">Test 1</a></li>
+            <li class="tab"><a href="#test2">Test 2</a></li>
+            <li class="tab"><a href="#test3">Test 3</a></li>
+            <li class="tab"><a href="#test4">Test 4</a></li>
+        </ul>
+    </div>
+</nav>
 
 {% block content %}
 {% endblock content %}
@@ -21,5 +46,7 @@
 
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+<script type="text/javascript" scr="{% static 'js/nav.js' %}"></script>
 </body>
 </html>
