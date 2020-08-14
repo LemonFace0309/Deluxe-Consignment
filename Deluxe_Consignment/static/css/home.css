@@ -1,5 +1,8 @@
 .parallax-container{
     height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .parallax-image {
@@ -10,9 +13,7 @@
     color: white;
     text-transform: uppercase;
     letter-spacing: 10px;
-    width: 100%;
-    text-align: center;
-    margin: 100px 0px;
+    padding-bottom: 30vh;
 }
 
 .banner {
@@ -35,4 +36,9 @@
 
 .banner h1:hover {
     letter-spacing: 20px;
+}
+
+.btn{
+    display: inline-block;
+
 }
