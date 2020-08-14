@@ -167,6 +167,10 @@ nav ul.popup-list li a:hover {
 }
 
 /* PROLLY WILL MOVE INTO SEPERATE CSS */
+.parallax-container{
+    height: 90vh;
+}
+
 .parallax-image {
   filter: brightness(30%);
 }
@@ -195,6 +199,7 @@ nav ul.popup-list li a:hover {
   letter-spacing: 10px;
   color: white;
   transition: 300ms;
+  transition-timing-function: ease-in;
 }
 
 .banner h1:hover {
