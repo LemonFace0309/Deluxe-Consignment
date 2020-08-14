@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 
 
@@ -9,6 +9,7 @@ class Product(models.Model):
     thumbnail = models.ImageField(null=True, blank=True)
     quantity = models.IntegerField(default=1)
     description = models.TextField(max_length=2000, null=True, blank=True)
+    # photos = ArrayField(ArrayField(models.ImageField(null=True, blank=True)))
 
 
 class Shoe(Product, models.Model):
