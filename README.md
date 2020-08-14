@@ -1,6 +1,6 @@
 # Deluxe-Consignment
 
-Inspirations: 
+### Inspirations:  
 https://imissyouvintage.com/  
 https://www.thebay.com/  
 http://www.extoggery.com/  
