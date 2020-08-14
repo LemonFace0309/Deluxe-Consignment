@@ -8,3 +8,10 @@ def home(request):
 
     }
     return render(request, 'store/home.html', context)
+
+
+def store(request):
+    context = {
+
+    }
+    return render(request, 'store/store.html', context)
