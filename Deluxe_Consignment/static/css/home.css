@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .parallax-image {
@@ -13,7 +14,32 @@
     color: white;
     text-transform: uppercase;
     letter-spacing: 10px;
-    padding-bottom: 30vh;
+}
+
+.custom_btn {
+    display: inline-block;
+    position: relative;
+    top: 10vh;
+    color: white;
+    opacity: 0;
+    padding: 1em 2em;
+    border: white 1px solid;
+    animation-name: custom_btn;
+    animation-duration: 1s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+
+    transition-property: all;
+    transition-duration: 0.5s;
+}
+
+.custom_btn:hover {
+    transform: rotateY(180deg);
+}
+
+@keyframes custom_btn {
+    0% {opacity:0}
+    100% {opacity:1}
 }
 
 .banner {
@@ -38,7 +64,3 @@
     letter-spacing: 20px;
 }
 
-.btn{
-    display: inline-block;
-
-}
