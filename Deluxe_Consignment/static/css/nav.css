@@ -8,6 +8,10 @@ nav form {
 .nav-wrapper{
   background: inherit;
 }
+.sacramento{
+  font-family: 'Sacramento';
+  font-size: 40px;
+}
 
 .search-close-icon{
   display: none!important;
