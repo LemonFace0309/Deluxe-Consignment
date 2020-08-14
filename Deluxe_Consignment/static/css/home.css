@@ -1,0 +1,33 @@
+.parallax-image {
+    filter: brightness(30%);
+}
+  
+.parallax-container h1 {
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    width: 100%;
+    text-align: center;
+    margin: 100px 0px;
+}
+  
+.banner {
+    background-color: #e2acac;
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.banner h1 {
+    margin: 0 0;
+    font-family: 'Ubuntu', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    color: white;
+    transition: 300ms;
+}
+  
+.banner h1:hover {
+    letter-spacing: 20px;
+}
