@@ -50,3 +50,10 @@ def about(request):
 
     }
     return render(request, 'store/about.html', context)
+
+
+def paymentPolicy(request):
+    context={
+
+    }
+    return render(request, 'store/paymentPolicy.html', context)

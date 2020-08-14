@@ -30,14 +30,14 @@
 <ul id="dropdown1" class="dropdown-content mega">
     <div class="row">
         <div class="col m4">
-            <li class="dropdown-head">Head 1</li>
+            <li class="dropdown-head">Designer Brands</li>
             <li class="divider"></li>
-            <li><a href="#!">one</a></li>
+            <li><a href="#!"></a></li>
             <li><a href="#!">two</a></li>
             <li><a href="#!">three</a></li>
         </div>
         <div class="col m4">
-            <li class="dropdown-head">Head 2</li>
+            <li class="dropdown-head">Categories</li>
             <li class="divider"></li>
             <li><a href="#!">one</a></li>
             <li><a href="#!">two</a></li>
@@ -88,12 +88,14 @@
             <li class="tab"><a href="{% url 'about'%}">About</a></li>
             <li class="tab"><a href="{% url 'consign'%}">Consign With Us</a></li>
             <li class="tab"><a href="#test4">Contact Us</a></li>
+            <li class="tab"><a href="{%url 'paymentPolicy'%}">Payment Policies</a></li>
         </ul>
     </div>
 </nav>
 
 {% block content %}
 {% endblock content %}
+
 
 
 <!-- Compiled and minified JavaScript -->
@@ -106,4 +108,5 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
         crossorigin="anonymous"></script>
 </body>
+
 </html>
