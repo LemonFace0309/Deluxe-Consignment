@@ -7,4 +7,5 @@ urlpatterns = [
     path('products', store_views.products, name='products'),
     path('consign', store_views.consign, name='consign'),
     path('about', store_views.about, name='about'),
+    path('paymentPolicy', store_views.paymentPolicy, name='paymentPolicy')
 ]
