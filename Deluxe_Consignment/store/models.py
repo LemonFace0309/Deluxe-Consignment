@@ -1,11 +1,31 @@
 from django.db import models
 # from django.contrib.postgres.fields import ArrayField
 
+BRAND_CHOICES = [
+    ('Bal', 'Balenciaga'),
+    ('Bur', 'Burberry'),
+    ('Cel', 'Celine'),
+    ('Cha', 'Chanel'),
+    ('Dio', 'Christian Dior'),
+    ('Loub', 'Christian Louboutins'),
+    ('Fer', 'Ferragamo'),
+    ('Giv', 'Givenchy'),
+    ('Guc', 'Gucci'),
+    ('Her', 'Hermes'),
+    ('Choo', 'Jimmy Choo'),
+    ('Vui', 'Louis Vuitton'),
+    ('Pra', 'Prada'),
+    ('Laur', 'Saint Laurent'),
+    ('Gar', 'Valentino Garavani'),
+    ('Oth', 'Others'),
+]
+
 
 # Create your models here.
 class Product(models.Model):
-    name = models.TextField(default="a")
-    price = models.IntegerField(default=1)
+    name = models.CharField(max_length=200)
+    brand = models.CharField(max_length=4, choices=BRAND_CHOICES, null=True)
+    price = models.DecimalField(max_digits=99, decimal_places=2)
     thumbnail = models.ImageField(null=True, blank=True)
     quantity = models.IntegerField(default=1)
     date_ordered = models.DateTimeField(auto_now=True)
