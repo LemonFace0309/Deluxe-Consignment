@@ -31,3 +31,17 @@ def products(request):
         'slgProducts':slgProducts,
     }
     return render(request, 'store/products.html', context)
+
+
+def consign(request):
+    context ={
+
+    }
+    return render(request, 'store/consign.html', context)
+
+
+def about(request):
+    context ={
+
+    }
+    return render(request, 'store/about.html', context)
