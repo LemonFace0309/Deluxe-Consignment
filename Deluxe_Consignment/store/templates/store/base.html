@@ -5,7 +5,7 @@
 <head>
     <!--Import Font Awesome Icons-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
-          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
     <!-- Import Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
@@ -36,87 +36,26 @@
 </head>
 
 <body>
-
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark primary-color">
-
-        <a class="navbar-brand" href="#">Navbar</a>
-    
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-        aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div class="collapse navbar-collapse" id="basicExampleNav">
-    
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-                <span class="sr-only">(current)</span>
-            </a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-            </li>
-    
-            <!-- Dropdown -->
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-            </li>
-    
-        </ul>
-
-    
-        <form action="" class="browser-default right">
-            <input id="search-input" placeholder="Search" type="text" class="browser-default search-field"
-                name="q" value="" autocomplete="off" aria-label="Search box">
-            <label for="search-input"><i class="material-icons search-icon">search</i></label>
-            <i class="material-icons search-close-icon">cancel</i>
-            <div class="search-popup">
-                <div class="search-content">
-                    <label class="search-heading">Most Visited</label>
-                    <ul class="popup-list">
-                        <li class=""><a class="grey-text" href="#">Google</a></li>
-                        <li class=""><a class="grey-text" href="#">Apple</a></li>
-                        <li class=""><a class="grey-text" href="#">Microsoft</a></li>
-                        <li class=""><a class="grey-text" href="#">Github</a></li>
-                    </ul>
-                </div>
-            </div>
-        </form>
-        </div>
-    </nav>
-    <!--/.Navbar-->
-
-
+{% include 'store/navbar.html' %}
 
 {% block content %}
 {% endblock content %}
 
 
-<!-- Compiled and minified JavaScript -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
-<!--JS Files-->
-<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-<script type="text/javascript" scr="{% static 'js/nav.js' %}"></script>
+    <!-- Compiled and minified JavaScript -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+    <!--JS Files-->
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <script type="text/javascript" scr="{% static 'js/nav.js' %}"></script>
 
-<!--BOOTSTAP JS-->
-<!-- JQuery -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <!--BOOTSTAP JS-->
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 </body>
 </html>
