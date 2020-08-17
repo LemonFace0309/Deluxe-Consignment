@@ -1,25 +1,6 @@
-.parallax-container{
-    height: 90vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.parallax-image {
-    filter: brightness(30%);
-}
-
-.parallax-container h1 {
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 10px;
-}
-
 .custom_btn {
     display: inline-block;
     position: relative;
-    top: 10vh;
     color: white;
     opacity: 0;
     padding: 1em 2em;
@@ -66,7 +47,6 @@
 
 .btn{
     display: inline-block;
-
 }
 
 .feature-container {

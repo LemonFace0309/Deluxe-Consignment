@@ -1,6 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from .models import *
+from django.views.generic import (
+    DetailView,
+)
 
 
 # Create your views here.
@@ -12,25 +15,28 @@ def home(request):
 
 
 def store(request):
+    products = Product.objects.all()
     context = {
-
+        'products': products,
     }
     return render(request, 'store/store.html', context)
 
 
-def products(request):
-    shoeProducts = Shoe.objects.all()
-    bagProducts = Bag.objects.all()
-    accessoryProducts = Accessory.objects.all()
-    slgProducts = SLGS.objects.all()
+class ProductDetailView(DetailView):
+    model = Product
+    context_object_name = 'product'
+    template_name = 'store/product.html'
 
+    # # Getting Product
+    # def get_object(self):
+    #     return get_object_or_404(Product, name=''.join(self.kwargs.get('product_name').split('-')))
+
+
+def checkout(request):
     context = {
-        'shoeProducts':shoeProducts,
-        'bagProducts':bagProducts,
-        'jewelryProducts':accessoryProducts,
-        'slgProducts':slgProducts,
+
     }
-    return render(request, 'store/products.html', context)
+    return render(request, 'store/cart.html', context)
 
 
 def consign(request):
@@ -45,3 +51,10 @@ def about(request):
 
     }
     return render(request, 'store/about.html', context)
+
+
+def paymentPolicy(request):
+    context={
+
+    }
+    return render(request, 'store/paymentPolicy.html', context)
