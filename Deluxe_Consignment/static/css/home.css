@@ -1,14 +1,6 @@
-.parallax-container{
-    height: 90vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.parallax-image {
+.parallax-image{
     filter: brightness(30%);
-}
+}*/
 
 .parallax-container h1 {
     color: white;
@@ -19,7 +11,6 @@
 .custom_btn {
     display: inline-block;
     position: relative;
-    top: 10vh;
     color: white;
     opacity: 0;
     padding: 1em 2em;
