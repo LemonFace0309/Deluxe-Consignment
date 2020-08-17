@@ -58,3 +58,8 @@ def paymentPolicy(request):
 
     }
     return render(request, 'store/paymentPolicy.html', context)
+
+
+def test(request):
+    return render(request, 'store/test.html')
+
