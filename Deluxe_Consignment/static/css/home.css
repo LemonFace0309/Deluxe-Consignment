@@ -1,25 +1,6 @@
-.parallax-container{
-    height: 90vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.parallax-image {
-    filter: brightness(30%);
-}
-
-.parallax-container h1 {
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 10px;
-}
-
 .custom_btn {
     display: inline-block;
     position: relative;
-    top: 10vh;
     color: white;
     opacity: 0;
     padding: 1em 2em;
@@ -64,3 +45,88 @@
     letter-spacing: 20px;
 }
 
+.btn{
+    display: inline-block;
+}
+
+.feature-container {
+    background: rgb(240, 211, 221);
+    height: 70vh;
+}
+
+.shop-list-container {
+    background: rgb(240, 211, 221);
+    min-height: 70vh;
+}
+
+.shop-list-container h2 {
+    margin: 0 0px;
+    padding: 80px 0px 0px 0px;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+}
+
+.shop-item-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.shop-item {
+    width: 300px;
+    height: 200px;
+    margin: 50px 10px;
+    overflow: hidden;
+    /* border: 1px black solid; */
+    position: relative;
+    display: flex;
+    align-items: center;
+    
+}
+
+.item-cover {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    transition: 300ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.item-cover:hover {
+    background-color: black;
+    opacity: 0.4;
+}
+
+.item-cover:hover a {
+    color: white;
+}
+
+.shop-item a {
+    text-transform: uppercase;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 30px;
+    letter-spacing: 10px;
+    color: black;
+    transition: 300ms;
+    text-align: center;
+}
+
+.shop-item img {
+    width: 100%;
+}
+
+@media only screen and (max-width: 630px) {
+    .shop-item {
+        width: 200px;
+        height: 130px;
+    }
+
+    .item-cover {
+        width: 130px;
+        height: 130px;
+    }
+}
