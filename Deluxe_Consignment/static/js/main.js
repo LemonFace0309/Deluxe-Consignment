@@ -1,4 +1,6 @@
-new WOW().init();
+$(document).ready(() => {
+    new WOW().init();
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     let elems = document.querySelectorAll('.carousel');
