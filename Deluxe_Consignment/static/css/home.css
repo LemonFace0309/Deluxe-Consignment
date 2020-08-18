@@ -1,0 +1,134 @@
+.custom_btn {
+    display: inline-block;
+    position: relative;
+    color: white;
+    opacity: 0;
+    padding: 1em 2em;
+    border: white 1px solid;
+    animation-name: custom_btn;
+    animation-duration: 1s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+
+    transition-property: all;
+    transition-duration: 0.5s;
+}
+
+.custom_btn:hover {
+    transform: rotateY(180deg);
+}
+
+@keyframes custom_btn {
+    0% {opacity:0}
+    100% {opacity:1}
+}
+
+.banner {
+    background-color: #e2acac;
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner h1 {
+    margin: 0 0;
+    font-family: 'Ubuntu', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    color: white;
+    transition: 700ms;
+    transition-timing-function: ease-in;
+}
+
+.banner h1:hover {
+    letter-spacing: 20px;
+}
+
+.btn{
+    display: inline-block;
+}
+
+.feature-container {
+    background: rgb(240, 211, 221);
+    height: 70vh;
+}
+
+.shop-list-container {
+    background: rgb(240, 211, 221);
+    min-height: 70vh;
+}
+
+.shop-list-container h2 {
+    margin: 0 0px;
+    padding: 80px 0px 0px 0px;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+}
+
+.shop-item-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: 0px;
+}
+
+.shop-item {
+    width: 20%;
+    /* min-height: 0%; */
+    max-height: 10%;
+    /* height: 10%; */
+    margin: 5vh 2%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* object-fit: cover; */
+    background: white;
+    
+}
+
+.item-cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: 300ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-transform: uppercase;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 30px;
+    letter-spacing: 10px;
+    color: black;
+    transition: 300ms;
+    text-align: center;
+}
+
+.item-cover:hover {
+    background-color: black;
+    color: white;
+    opacity: 0.7;
+}
+
+.item-cover h3 {
+    display: none;
+}
+
+.item-cover:hover h3 {
+    display: inline-block;
+}
+
+.shop-item img {
+    width: 100%;
+}
+
+@media only screen and (max-width: 700px) {
+    .shop-item {
+        width: 40%;
+    }
+}
