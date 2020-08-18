@@ -29,6 +29,7 @@ class Product(models.Model):
     brand = models.CharField(max_length=4, choices=BRAND_CHOICES, null=True)
     price = models.DecimalField(max_digits=99, decimal_places=2)
     discount_price = models.DecimalField(max_digits=99, decimal_places=2, blank=True, null=True)
+    featured = models.BooleanField(default=False)
     thumbnail = models.ImageField(null=True, blank=True)
     quantity = models.IntegerField(default=1)
     date_created = models.DateTimeField(auto_now=True)
@@ -45,6 +46,18 @@ class Product(models.Model):
         })
 
     @property
+    def get_add_to_cart_url(self):
+        return reverse("add-to-cart", kwargs={
+            'slug': self.slug
+        })
+
+    @property
+    def get_remove_from_cart_url(self):
+        return reverse("remove-from-cart", kwargs={
+            'slug': self.slug
+        })
+
+    @property
     def is_new(self):
         DATE_FORMAT = "%Y-%m-%d"
         today = datetime.date.today()
@@ -54,6 +67,13 @@ class Product(models.Model):
             return True
         return False
 
+    @property
+    def get_brand(self):
+        return self.get_brand_display()
+
+    @property
+    def is_shoe(self):
+        return hasattr(self, "shoe")
 
     @property
     def imageURL(self):
