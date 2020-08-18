@@ -2,6 +2,30 @@
 {% load static %}
 
 {% block content %}
+{% if messages %}
+{% for message in messages %}
+<div class="modal fade top" id="modalCookie1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" data-backdrop="true">
+    <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Body-->
+            <div class="modal-body">
+                <div class="row d-flex justify-content-center align-items-center">
+
+                    <p class="pt-3 pr-2">{{message}}</p>
+
+                    <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Exit</a>
+                </div>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+{% endfor %}
+{% endif %}
+
 <body class="hidden-sn pink-skin animated">
 
 <!-- Main Container -->
@@ -145,7 +169,7 @@
                     <h2
                             class="h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-1 ml-xl-0 ml-4">
 
-                        <strong>iPad PRO </strong>
+                        <strong>{{product}}</strong>
 
                     </h2>
 
@@ -191,31 +215,22 @@
                     </h3>
                     {% endif %}
 
-                    <p class="ml-xl-0 ml-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente nesciunt
-                        atque
-                        nemo neque ut officiis
-
-                        nostrum incidunt maiores, magni optio et sunt suscipit iusto nisi totam quis, nobis mollitia
-
-                        necessitatibus.
-
+                    <p class="ml-xl-0 ml-4">{{product.description}}
                     </p>
 
                     <p class="ml-xl-0 ml-4">
 
-                        <strong>Storage: </strong>64GB</p>
+                        <strong>Brand: </strong>{{product.get_brand}}</p>
+
+                    {% if product.is_shoe %}
+                    <p class="ml-xl-0 ml-4">
+
+                        <strong>Size: </strong>{{product.shoe.size}}</p>
+                    {% endif %}
 
                     <p class="ml-xl-0 ml-4">
 
-                        <strong>Size: </strong>9.6-inch</p>
-
-                    <p class="ml-xl-0 ml-4">
-
-                        <strong>Resolution: </strong>2048 x 1536</p>
-
-                    <p class="ml-xl-0 ml-4">
-
-                        <strong>Availability: </strong>In stock</p>
+                        <strong>Quantity Available: </strong>{{product.quantity}}</p>
 
                     <!-- Add to Cart -->
                     <section class="color">
@@ -270,12 +285,12 @@
 
                             <div class="row mt-3 mb-4">
 
-                                <div class="col-md-12 text-center text-md-left text-md-right">
+                                <div class="col-md-12 text-center text-md-right">
 
-                                    <button class="btn btn-primary btn-rounded">
-
-                                        <i class="fas fa-cart-plus mr-2" aria-hidden="true"></i> Add to cart
-                                    </button>
+                                    <a href="{{product.get_add_to_cart_url}}" class="btn btn-primary btn-rounded">
+                                        <i class="fas fa-shopping-bag white-text mr-2" aria-hidden="true"></i> Add to
+                                        shopping bag
+                                    </a>
 
                                 </div>
 
@@ -1817,5 +1832,6 @@
 
 </div>
 <!-- Cart Modal -->
+
 </body>
 {% endblock content %}
