@@ -1,6 +1,7 @@
 from django.db import models
 # from django.contrib.postgres.fields import ArrayField
 from django.shortcuts import reverse
+import datetime
 
 BRAND_CHOICES = [
     ('Bal', 'Balenciaga'),
@@ -30,7 +31,7 @@ class Product(models.Model):
     discount_price = models.DecimalField(max_digits=99, decimal_places=2, blank=True, null=True)
     thumbnail = models.ImageField(null=True, blank=True)
     quantity = models.IntegerField(default=1)
-    date_ordered = models.DateTimeField(auto_now=True)
+    date_created = models.DateTimeField(auto_now=True)
     description = models.TextField(max_length=2000, null=True, blank=True)
     slug = models.SlugField(max_length=200)
     # photos = ArrayField(ArrayField(models.ImageField(null=True, blank=True)))
@@ -42,6 +43,17 @@ class Product(models.Model):
         return reverse("product-detail", kwargs={
             'slug': self.slug
         })
+
+    @property
+    def is_new(self):
+        DATE_FORMAT = "%Y-%m-%d"
+        today = datetime.date.today()
+        date_created = self.date_created.strftime(DATE_FORMAT)
+        date_created = datetime.date(int(date_created[0:4]), int(date_created[5:7]), int(date_created[-2:]))
+        if date_created + datetime.timedelta(7) > today:
+            return True
+        return False
+
 
     @property
     def imageURL(self):

@@ -40,14 +40,14 @@ def checkout(request):
 
 
 def consign(request):
-    context ={
+    context = {
 
     }
     return render(request, 'store/consign.html', context)
 
 
 def about(request):
-    context ={
+    context = {
 
     }
     return render(request, 'store/about.html', context)
