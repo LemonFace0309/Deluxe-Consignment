@@ -47,8 +47,26 @@ def add_to_cart(request, slug):
         if orderItem.quantity < product.quantity:
             orderItem.quantity += 1
             orderItem.save()
+            messages.success(request, f'{product} has been successfully added to your shopping bag')
         else:
             messages.error(request, f'You\'ve reached the maximum number of {product}s available for purchase')
+    except:
+        messages.error(request, f'Please create an account first')
+    return redirect("product-detail", slug=slug)
+
+
+def remove_from_cart(request, slug):
+    product = get_object_or_404(Product, slug=slug)
+
+    try:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        if order.orderitem_set.filter(product=product).exists():
+            order.orderitem_set.filter(product=product).delete()
+            print('4')
+            messages.success(request, f'"{product}" has been successfully removed from your shopping bag')
+        else:
+            messages.error(request, f'Your bag does not contain a {product} item to be removed')
     except:
         messages.error(request, f'Please create an account first')
     return redirect("product-detail", slug=slug)

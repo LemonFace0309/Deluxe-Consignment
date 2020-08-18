@@ -52,6 +52,12 @@ class Product(models.Model):
         })
 
     @property
+    def get_remove_from_cart_url(self):
+        return reverse("remove-from-cart", kwargs={
+            'slug': self.slug
+        })
+
+    @property
     def is_new(self):
         DATE_FORMAT = "%Y-%m-%d"
         today = datetime.date.today()
