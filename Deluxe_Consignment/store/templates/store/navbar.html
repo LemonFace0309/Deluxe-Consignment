@@ -8,7 +8,7 @@
   </div>
   <div class="nav-container">
       <span id="menu-open" href="">=</span>
-      <div class="brand"><a href="">Deluxe Consignment Shop</a></div>
+      <div class="brand"><a href="{% url 'home'%}">Deluxe Consignment Shop</a></div>
       <form id="search"action="">
         <input id="searchBar" type="text" placeholder="Search">
       </form>
@@ -19,7 +19,7 @@
   </div>
   <div class="menu">
       <ul>
-          <li><a href="#">Shop</a>
+          <li><a href="{% url 'store'%}">Shop</a>
               <div class="menu-sub">
                   <div class="menu-col">
                       <div class="menu-category"><a href="">Shoe</a></div>
@@ -52,7 +52,7 @@
               </div>
           </li>
 
-          <li><a href="#">About</a>
+          <li><a href="{% url 'about'%}">About</a>
             <div class="menu-sub">
                 <div class="menu-col">
                     <div class="menu-category"><a href="">Shoe</a></div>
@@ -72,10 +72,11 @@
                 </div>
             </div>
         </li>
-          <li><a href="#">Consign</a></li>
+          <li><a href="{% url 'consign'%}">Consign</a></li>
       </ul>
-  </div>
+    </div>
 </nav>
+<div class="nav-back"></div>
 
 <div class="left-nav">
     <div class="side-nav-header">

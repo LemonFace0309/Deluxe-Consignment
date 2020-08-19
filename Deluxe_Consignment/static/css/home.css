@@ -66,7 +66,7 @@
     padding: 50px 0px 0px 0px;
     width: 100%;
     text-align: center;
-    font-size: 50px;
+    font-size: 40px;
 }
 
 .shop-item-container {
@@ -83,7 +83,6 @@
     position: relative;
     display: flex;
     align-items: center;
-    background: white;
     box-shadow: 0px 0px 4px;
 }
 
@@ -118,8 +117,15 @@
     display: inline-block;
 }
 
+.shop-item:hover img {
+    transform: scale(1.6);
+}
+
 .shop-item img {
     width: 100%;
+    transform: scale(1.05);
+    z-index: -1;
+    transition: 1s;
 }
 
 @media only screen and (max-width: 700px) {

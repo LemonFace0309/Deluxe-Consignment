@@ -19,8 +19,18 @@ searchBar.addEventListener('intput', () => {
 
 });
 
+const nav = document.querySelector('nav');
+const navHeader = document.querySelector('.nav-header');
+const navMenu = document.querySelector('.menu');
 window.addEventListener('scroll', function() {
-    let nav = document.querySelector('nav');
-    nav.classList.toggle('sticky', window.scrollY > window.innerHeight-150);
+    if (window.scrollY > window.innerHeight) {
+        nav.classList.add('sticky');
+        // setTimeout(() => navMenu.style.display = 'none', 200);
+        // navMenu.style.display = 'none';
+    } else {
+        nav.classList.remove('sticky');
+        // navMenu.style.display = 'flex'; 
+        // setTimeout(() => navMenu.style.display = 'flex', 10);
+    }
 })
 
