@@ -489,6 +489,10 @@
 <!--JS Files-->
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 <script>
+/* WOW.js init */
+new WOW().init();
+
+// MDB Lightbox Init
 $(function () {
     $("#mdb-lightbox-ui").load("{% static 'mdb-addons/mdb-lightbox-ui.html' %}");
 });
@@ -496,6 +500,12 @@ $(function () {
 // Tooltips Initialization
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
+});
+
+// Material Select Initialization
+$(document).ready(function () {
+
+  $('.mdb-select').material_select();
 });
 </script>
 </body>
