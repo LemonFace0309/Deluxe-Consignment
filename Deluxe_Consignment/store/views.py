@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.contrib import messages
+from django.http import HttpResponseRedirect
+from .utils import *
 from user.models import (
     Customer, Order, OrderItem, ShippingAddress
 )
@@ -11,16 +13,29 @@ from django.views.generic import (
 
 # Create your views here.
 def home(request):
-    context = {
+    data = cartData(request)
 
+    items = data['items']
+    cart_quantity = data['cart_quantity']
+    products = Product.objects.all()
+    context = {
+        'products': products,
+        'items': items,
+        'cart_quantity': cart_quantity,
     }
     return render(request, 'store/home.html', context)
 
 
 def store(request):
+    data = cartData(request)
+
+    items = data['items']
+    cart_quantity = data['cart_quantity']
     products = Product.objects.all()
     context = {
         'products': products,
+        'items': items,
+        'cart_quantity': cart_quantity,
     }
     return render(request, 'store/store.html', context)
 
@@ -69,12 +84,19 @@ def remove_from_cart(request, slug):
             messages.error(request, f'Your bag does not contain a {product} item to be removed')
     except:
         messages.error(request, f'Please create an account first')
-    return redirect("product-detail", slug=slug)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def checkout(request):
-    context = {
+    data = cartData(request)
 
+    items = data['items']
+    cart_quantity = data['cart_quantity']
+    products = Product.objects.all()
+    context = {
+        'products': products,
+        'items': items,
+        'cart_quantity': cart_quantity,
     }
     return render(request, 'store/cart.html', context)
 
