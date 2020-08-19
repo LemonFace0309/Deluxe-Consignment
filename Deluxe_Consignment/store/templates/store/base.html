@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
-<body>
+<body class="hidden-sn pink-skin animated">
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark primary-color">
 
@@ -162,9 +162,9 @@
             <li class="nav-item">
                 <a class="nav-link dark-grey-text font-weight-bold" href="#" data-toggle="modal"
                    data-target="#cart-modal-ex">
-                    <!-- <span class="badge danger-color">4</span> -->
-                    <!-- <i class="fas fa-shopping-bag white-text" aria-hidden="true"></i> -->
-                    <!-- <span class="clearfix d-none d-sm-inline-block" style="color:white">Cart</span> -->
+                    <span class="badge danger-color">{{cart_quantity}}</span>
+                    <i class="fas fa-shopping-bag white-text" aria-hidden="true"></i>
+                    <span class="clearfix d-none d-sm-inline-block" style="color:white">Cart</span>
                 </a>
             </li>
         </ul>
@@ -198,53 +198,25 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {% for item in items %}
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Product 1</td>
-                        <td>100$</td>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{item.product}}</td>
+                        <td>${{item.product.price}}</td>
                         <td>
-                            <a>
+                            <a href="{{item.product.get_remove_from_cart_url}}">
                                 <i class="fas fa-eraser"></i>
                             </a>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Product 2</td>
-                        <td>100$</td>
-                        <td>
-                            <a>
-                                <i class="fas fa-eraser"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Product 3</td>
-                        <td>100$</td>
-                        <td>
-                            <a>
-                                <i class="fas fa-eraser"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>Product 4</td>
-                        <td>100$</td>
-                        <td>
-                            <a>
-                                <i class="fas fa-eraser"></i>
-                            </a>
-                        </td>
-                    </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
-                <button class="btn btn-primary btn-rounded btn-sm">Checkout</button>
+                <a href="{% url 'checkout' %}" class="btn btn-primary btn-rounded btn-sm">Checkout</a>
             </div>
             <!-- Footer -->
             <div class="modal-footer">
-                <button type="button" class="btn blue darken-3 btn-rounded btn-sm" data-dismiss="modal">Close</button>
+                <button type="button" class="btn purple-gradient btn-rounded btn-sm" data-dismiss="modal">Close</button>
             </div>
         </div>
         <!-- Content -->
