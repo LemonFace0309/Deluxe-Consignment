@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Deluxe Consginment</title>
     <!--Import Font Awesome Icons-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 
@@ -22,458 +21,104 @@
     <!-- Plugin file -->
     <link rel="stylesheet" href="{% static './css/addons-pro/multi-range.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <title>Deluxe Consginment</title>
 </head>
 
 <body>
-<!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark primary-color">
 
-    <a class="navbar-brand" href="#">Navbar</a>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="basicExampleNav">
-
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-            </li>
-
-            <!-- Mega Dropdown -->
-            <li class="nav-item dropdown mega-dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink4" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Products</a>
-                <div class="dropdown-menu mega-menu v-2 z-depth-1 special-color py-5 px-3"
-                     aria-labelledby="navbarDropdownMenuLink1">
-                    <div class="row">
-                        <div class="col-md-6 col-xl-3 sub-menu mb-4">
-                            <h6 class="sub-title text-uppercase font-weight-bold white-text">Featured</h6>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a class="menu-item pl-0" href="#!">
-                                        <i class="fas fa-caret-right pl-1 pr-3"></i>Lorem ipsum dolor sit amet
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="menu-item pl-0" href="#!">
-                                        <i class="fas fa-caret-right pl-1 pr-3"></i>Consectetur adipiscing elit
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="menu-item pl-0" href="#!">
-                                        <i class="fas fa-caret-right pl-1 pr-3"></i>Sed do eiusmod tempor incididunt
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="menu-item pl-0" href="#!">
-                                        <i class="fas fa-caret-right pl-1 pr-3"></i>Ut labore et dolore magna
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="menu-item pl-0" href="#!">
-                                        <i class="fas fa-caret-right pl-1 pr-3"></i>Ut enim ad minim veniam
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6 col-xl-3 sub-menu mb-4 mb-xl-0">
-                            <h6 class="sub-title text-uppercase font-weight-bold white-text">Related</h6>
-                            <!--Featured image-->
-                            <a href="#!" class="view overlay z-depth-1 p-0 mb-2">
-                                <img src="https://mdbootstrap.com/img/Photos/Horizontal/Work/6-col/img%20(43).jpg"
-                                     class="img-fluid" alt="First sample image">
-                                <div class="mask rgba-white-slight"></div>
-                            </a>
-                            <a class="news-title font-weight-bold pl-0" href="#!">Lorem ipsum dolor sit</a>
-                            <p class="font-small text-uppercase white-text">
-                                <i class="fas fa-clock-o pr-2" aria-hidden="true"></i>July 17, 2017 / <i
-                                    class="far fa-comments px-1" aria-hidden="true"></i> 20
-                            </p>
-                        </div>
-                        <div class="col-md-6 col-xl-3 sub-menu mb-md-0 mb-xl-0 mb-4">
-                            <h6 class="sub-title text-uppercase font-weight-bold white-text">Design</h6>
-                            <!--Featured image-->
-                            <a href="#!" class="view overlay z-depth-1 p-0 mb-2">
-                                <img src="https://mdbootstrap.com/img/Photos/Horizontal/Work/6-col/img%20(44).jpg"
-                                     class="img-fluid" alt="First sample image">
-                                <div class="mask rgba-white-slight"></div>
-                            </a>
-                            <a class="news-title font-weight-bold pl-0" href="#!">Ut labore et dolore magna</a>
-                            <p class="font-small text-uppercase white-text">
-                                <i class="fas fa-clock-o pr-2" aria-hidden="true"></i>July 16, 2017 / <i
-                                    class="far fa-comments px-1" aria-hidden="true"></i> 25
-                            </p>
-                        </div>
-                        <div class="col-md-6 col-xl-3 sub-menu mb-0">
-                            <h6 class="sub-title text-uppercase font-weight-bold white-text">Programming</h6>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a class="menu-item pl-0" href="#!">
-                                        <i class="fas fa-caret-right pl-1 pr-3"></i>Totam rem aperiam eaque
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="menu-item pl-0" href="#!">
-                                        <i class="fas fa-caret-right pl-1 pr-3"></i>Beatae vitae dicta sun
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="menu-item pl-0" href="#!">
-                                        <i class="fas fa-caret-right pl-1 pr-3"></i>Quae ab illo inventore veritatis et
-                                        quasi
-                                        architecto
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="menu-item pl-0" href="#!">
-                                        <i class="fas fa-caret-right pl-1 pr-3"></i>Nemo enim ipsam voluptatem
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="menu-item pl-0" href="#!">
-                                        <i class="fas fa-caret-right pl-1 pr-3"></i>Neque porro quisquam est
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-
-
-        <ul class="navbar-nav ml-auto">
-            <li>
-                <form class="form-inline">
-                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                </form>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link dark-grey-text font-weight-bold" href="#" data-toggle="modal"
-                   data-target="#cart-modal-ex">
-                    <!-- <span class="badge danger-color">4</span> -->
-                    <!-- <i class="fas fa-shopping-bag white-text" aria-hidden="true"></i> -->
-                    <!-- <span class="clearfix d-none d-sm-inline-block" style="color:white">Cart</span> -->
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<!--/.Navbar-->
-
-
-<!-- Cart Modal -->
-<div class="modal fade cart-modal" id="cart-modal-ex" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <!-- Content -->
-        <div class="modal-content">
-            <!-- Header -->
-            <div class="modal-header">
-                <h4 class="modal-title font-weight-bold dark-grey-text" id="myModalLabel">Your cart</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <!-- Body -->
-            <div class="modal-body">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Product name</th>
-                        <th>Price</th>
-                        <th>Remove</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Product 1</td>
-                        <td>100$</td>
-                        <td>
-                            <a>
-                                <i class="fas fa-eraser"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Product 2</td>
-                        <td>100$</td>
-                        <td>
-                            <a>
-                                <i class="fas fa-eraser"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Product 3</td>
-                        <td>100$</td>
-                        <td>
-                            <a>
-                                <i class="fas fa-eraser"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>Product 4</td>
-                        <td>100$</td>
-                        <td>
-                            <a>
-                                <i class="fas fa-eraser"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <button class="btn btn-primary btn-rounded btn-sm">Checkout</button>
-            </div>
-            <!-- Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn blue darken-3 btn-rounded btn-sm" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-        <!-- Content -->
-    </div>
-</div>
-<!-- Cart Modal -->
-
+{% include 'store/navbar.html'%}
 
 {% block content %}
 {% endblock content %}
 
 
 <!-- Footer -->
-<footer class="page-footer text-center text-md-left stylish-color-dark pt-0">
-
-    <div style="background-color: #4285f4;">
-
-        <div class="container">
-
-            <!-- Grid row -->
-            <div class="row py-4 d-flex align-items-center">
-
-                <!-- Grid column -->
-                <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-
-                    <h6 class="mb-0 white-text">Get connected with us on social networks!</h6>
-
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-6 col-lg-7 text-center text-md-right">
-
-                    <!-- Facebook -->
-                    <a class="fb-ic ml-0 px-2">
-
-                        <i class="fab fa-facebook-f white-text"> </i>
-
-                    </a>
-
-                    <!-- Twitter -->
-                    <a class="tw-ic px-2">
-
-                        <i class="fab fa-twitter white-text"> </i>
-
-                    </a>
-
-                    <!-- Google + -->
-                    <a class="gplus-ic px-2">
-
-                        <i class="fab fa-google-plus-g white-text"> </i>
-
-                    </a>
-
-                    <!-- Linkedin -->
-                    <a class="li-ic px-2">
-
-                        <i class="fab fa-linkedin-in white-text"> </i>
-
-                    </a>
-
-                    <!-- Instagram -->
-                    <a class="ins-ic px-2">
-
-                        <i class="fab fa-instagram white-text"> </i>
-
-                    </a>
-
-                </div>
-
-                <!-- Grid column -->
-            </div>
-
-            <!-- Grid row -->
+<footer class="page-footer font-small pink lighten-3">
+    <div style="background-color: #e94a7a;">
+      <div class="container">
+        <!-- Grid row-->
+        <div class="row py-4 d-flex align-items-center">
+          <!-- Grid column -->
+          <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+            <h6 class="mb-0">Get connected with us on social networks!</h6>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-6 col-lg-7 text-center text-md-right">
+            <a class="fb-ic"><i class="fab fa-facebook-f white-text mr-4"> </i></a>
+            <a class="tw-ic"><i class="fab fa-twitter white-text mr-4"> </i></a>
+            <a class="gplus-ic"><i class="fab fa-google-plus-g white-text mr-4"> </i></a>
+            <a class="li-ic"><i class="fab fa-linkedin-in white-text mr-4"> </i></a>
+            <a class="ins-ic"><i class="fab fa-instagram white-text"> </i></a>
+          </div>
+          <!-- Grid column -->
+  
         </div>
-
+        <!-- Grid row-->
+      </div>
     </div>
-
+  
     <!-- Footer Links -->
-    <div class="container mt-5 mb-4 text-center text-md-left">
-
-        <div class="row mt-3">
-
-            <!-- First column -->
-            <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
-
-                <h6 class="text-uppercase font-weight-bold">
-
-                    <strong>Company name</strong>
-
-                </h6>
-
-                <hr class="blue mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-
-                <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet,
-
-                    consectetur
-
-                    adipisicing elit.</p>
-
-            </div>
-            <!-- First column -->
-
-            <!-- Second column -->
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-
-                <h6 class="text-uppercase font-weight-bold">
-
-                    <strong>Products</strong>
-
-                </h6>
-
-                <hr class="blue mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-
-                <p>
-
-                    <a href="#!">MDBootstrap</a>
-
-                </p>
-
-                <p>
-
-                    <a href="#!">MDWordPress</a>
-
-                </p>
-
-                <p>
-
-                    <a href="#!">BrandFlow</a>
-
-                </p>
-
-                <p>
-
-                    <a href="#!">Bootstrap Angular</a>
-
-                </p>
-
-            </div>
-            <!-- Second column -->
-
-            <!-- Third column -->
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
-                <h6 class="text-uppercase font-weight-bold">
-
-                    <strong>Useful links</strong>
-
-                </h6>
-
-                <hr class="blue mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-
-                <p>
-
-                    <a href="#!">Your Account</a>
-
-                </p>
-
-                <p>
-
-                    <a href="#!">Become an Affiliate</a>
-
-                </p>
-
-                <p>
-
-                    <a href="#!">Shipping Rates</a>
-
-                </p>
-
-                <p>
-
-                    <a href="#!">Help</a>
-
-                </p>
-
-            </div>
-            <!-- Third column -->
-
-            <!-- Fourth column -->
-            <div class="col-md-4 col-lg-3 col-xl-3">
-
-                <h6 class="text-uppercase font-weight-bold">
-
-                    <strong>Contact</strong>
-
-                </h6>
-
-                <hr class="blue mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-
-                <p>
-
-                    <i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-
-                <p>
-
-                    <i class="fas fa-envelope mr-3"></i> info@example.com</p>
-
-                <p>
-
-                    <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-
-                <p>
-
-                    <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
-
-            </div>
-            <!-- Fourth column -->
-
+    <div class="container text-center text-md-left mt-5">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <h6 class="text-uppercase font-weight-bold">Deluxe Consginment Shop</h6>
+          <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 100px;">
+          <p>Authentic, Entrupy Verified</p>
         </div>
+        <!-- Grid column -->
+  
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase font-weight-bold">Products</h6>
+          <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 100px;">
+          <p><a href="#!">Bags</a></p>
+          <p><a href="#!">Shoes</a></p>
+          <p><a href="#!">Jewelry</a></p>
+          <p><a href="#!">SLGs</a></p>
+        </div>
+        <!-- Grid column -->
+  
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">Brand</h6>
+            <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 100px;">
+            <p><a href="#!">Gucci</a></p>
+            <p><a href="#!">Prada</a></p>
+            <p><a href="#!">Chanel</a></p>
+            <p><a href="#!">LV</a></p>
+          </div>
+        <!-- Grid column -->
 
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">CONTACT</h6>
+            <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 100px;">
+            <p><a href="#!">1 800 639 2001</a></p>
+            <p><a href="#!">clarke@hotmale.com</a></p>
+            <p><a href="#!">@deluxeconsignmentshop</a></p>
+            <p><a href="#!">#shop</a></p>
+          </div>
+        <!-- Grid column -->
+  
+      </div>
+      <!-- Grid row -->
     </div>
     <!-- Footer Links -->
-
-    <!-- Copyright -->
-    <div class="footer-copyright py-3 text-center">
-
-        <div class="container-fluid">
-
-            © 2019 Copyright: <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank">
-            MDBootstrap.com </a>
-
-        </div>
-
+  
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+      <a href="https://mdbootstrap.com/"> deluxeconsignmentshop.com</a>
     </div>
-    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
 
-</footer>
-<!-- Footer -->
 
 <!--BOOTSTAP JS-->
 <!-- jQuery -->
