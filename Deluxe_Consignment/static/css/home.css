@@ -37,7 +37,7 @@
     text-transform: uppercase;
     letter-spacing: 10px;
     color: white;
-    transition: 700ms;
+    transition: 200ms;
     transition-timing-function: ease-in;
 }
 

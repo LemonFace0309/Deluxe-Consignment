@@ -67,7 +67,8 @@ def add_to_cart(request, slug):
             messages.error(request, f'You\'ve reached the maximum number of {product}s available for purchase')
     except:
         messages.error(request, f'Please create an account first')
-    return redirect("product-detail", slug=slug)
+    # return redirect("product-detail", slug=slug)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def remove_from_cart(request, slug):

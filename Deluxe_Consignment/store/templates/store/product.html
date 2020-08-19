@@ -2,29 +2,6 @@
 {% load static %}
 
 {% block content %}
-{% if messages %}
-{% for message in messages %}
-<div class="modal fade top" id="modalCookie1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true" data-backdrop="true">
-    <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
-        <!--Content-->
-        <div class="modal-content">
-            <!--Body-->
-            <div class="modal-body">
-                <div class="row d-flex justify-content-center align-items-center">
-
-                    <p class="pt-3 pr-2">{{message}}</p>
-
-                    <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Exit</a>
-                </div>
-            </div>
-        </div>
-        <!--/.Content-->
-    </div>
-</div>
-
-{% endfor %}
-{% endif %}
 
 <!-- Main Container -->
 <div class="container mt-5 pt-3">
@@ -175,7 +152,7 @@
                     <span class="badge badge-info mb-2 mr-2">NEW</span>
                     {% endif %}
                     {% if product.discount_price %}
-                    <span class="badge badge-success product mb-4">SALE</span>
+                    <span class="badge badge-success mb-4">SALE</span>
 
 
                     <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">

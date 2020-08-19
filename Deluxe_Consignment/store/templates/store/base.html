@@ -25,6 +25,31 @@
 </head>
 
 <body class="hidden-sn pink-skin animated">
+<!--Messages-->
+{% if messages %}
+{% for message in messages %}
+<div class="modal fade top" id="modalCookie1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" data-backdrop="true">
+    <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Body-->
+            <div class="modal-body">
+                <div class="row d-flex justify-content-center align-items-center">
+
+                    <p class="pt-3 pr-2">{{message}}</p>
+
+                    <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Exit</a>
+                </div>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+{% endfor %}
+{% endif %}
+
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark primary-color">
 
@@ -194,6 +219,7 @@
                         <th>#</th>
                         <th>Product name</th>
                         <th>Price</th>
+                        <th>Quantity</th>
                         <th>Remove</th>
                     </tr>
                     </thead>
@@ -201,8 +227,9 @@
                     {% for item in items %}
                     <tr>
                         <th scope="row">{{forloop.counter}}</th>
-                        <td>{{item.product}}</td>
+                        <td><a href="{% url 'product-detail' item.product.slug %}">{{item.product}}</a></td>
                         <td>${{item.product.price}}</td>
+                        <td>{{item.quantity}}</td>
                         <td>
                             <a href="{{item.product.get_remove_from_cart_url}}">
                                 <i class="fas fa-eraser"></i>
@@ -464,6 +491,11 @@
 <script>
 $(function () {
     $("#mdb-lightbox-ui").load("{% static 'mdb-addons/mdb-lightbox-ui.html' %}");
+});
+
+// Tooltips Initialization
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
 });
 </script>
 </body>
