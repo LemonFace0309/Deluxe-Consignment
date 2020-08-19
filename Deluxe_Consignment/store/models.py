@@ -63,7 +63,7 @@ class Product(models.Model):
         today = datetime.date.today()
         date_created = self.date_created.strftime(DATE_FORMAT)
         date_created = datetime.date(int(date_created[0:4]), int(date_created[5:7]), int(date_created[-2:]))
-        if date_created + datetime.timedelta(7) > today:
+        if date_created + datetime.timedelta(days=7) > today:
             return True
         return False
 
