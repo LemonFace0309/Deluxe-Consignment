@@ -1,0 +1,255 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+nav {
+    z-index: 100;
+    background: #f59cb2;
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    position: fixed;
+    width: 100%;
+    transition: 300ms;
+}
+
+.nav-header {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 10px 0px;
+}
+
+.nav-header a{
+    margin: 0px 0.5rem;
+    color: white;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.nav-container #menu-open {
+    display: none;
+    cursor: pointer;
+}
+
+.nav-container .brand {
+    font-size: 2rem;
+    margin: 0 2rem;
+    transition: 1s;
+}
+
+.nav-container .brand a {
+    color: white;
+}
+
+.nav-container #searchBar {
+    width: calc(33vw);
+    padding: 6px;
+    border: 0px;
+    border-radius: 10px;
+    transition: all .3s;
+}
+
+a > i {
+    color: white;
+}
+
+nav.sticky {
+    background-color: rgb(212, 110, 127);
+}
+
+nav.sticky .nav-header {
+    display: none;
+}
+
+
+nav.sticky .menu {
+    animation: hide 2s;
+    display: none;
+}
+
+@keyframes hide {
+    from {
+        background: red;
+    }
+    to {
+        display: blue;
+    }
+}
+
+.nav-container #searchBar:focus {
+    width: calc(35vw);
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+.menu > ul {
+    list-style: none;
+    position: relative;
+    width: 90%;
+    z-index: 1;
+    margin: 0;
+}
+
+.menu li {
+    display: inline-block;
+    padding: 10px 20px;
+    transition: 0.5s;
+    
+}
+
+.menu li:hover {
+    background: pink;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: white;
+}
+
+.menu-sub {
+    position: absolute;
+    left: 0;
+    top: 45px;
+    background: rgba(68, 68, 68, 0.9);
+    width: 100%;
+    display: none;
+    color: #fff;
+    padding: 2em;
+    transition: 1s;
+}
+
+.menu li:hover .menu-sub {
+    display: flex;
+    animation: fade 0.3s;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+        top: 40px;
+    }
+    to {top: 45px;}
+}
+
+.menu-col {
+    width: 25%;
+}
+
+.menu-category {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.menu-col li {
+    display: flex;
+    width: 90%;
+    list-style: none;
+    padding: 5px 10px;
+    transition: 0.3s;
+}
+
+.menu-col li a {
+    width: 100%;
+}
+
+.menu-col li:hover {
+    background: rgb(80, 80, 80);
+}
+
+.left-nav {
+    display: none;
+    position: absolute;
+    justify-items: center;
+    width: 100%;
+    top: 0px;
+    flex-direction: column;
+    background: rgba(51, 51, 51, 0.9);
+    color: white;
+    z-index: 5;
+    max-height: calc(100vh);
+    overflow-y: auto;
+}
+
+
+.left-nav .side-nav-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.left-nav ul{
+    list-style: none;
+    width: 100%;
+    text-align: center;
+}
+
+.left-nav li {
+    margin: 50px;
+}
+
+
+@media (max-width: 800px) {
+    .nav-container .brand {
+        font-size: 25px;
+        padding: 0;
+    }
+
+    .nav-container #searchBar {
+        width: calc(23vw);
+    }
+
+    .nav-container #searchBar:focus {
+        width: calc(25vw);
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-header,
+    .menu {
+        display: none
+    }
+
+    .nav-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        align-items: center;
+    }
+
+    .nav-container #cart{
+        order: 3;
+    }
+
+    .nav-container #search{
+        order: 4;
+        grid-column: 2;
+    }
+    .nav-container #search input{
+        width: 100%;
+    }
+
+    .nav-container #menu-open {
+        display: block;
+    }
+}
+
+.left-nav.toggle {
+    display: flex;
+    animation: slide 400ms;
+}
+
+@keyframes slide {
+    from {
+        transform: translateX(-100%);
+    }
+    to {}
+}
