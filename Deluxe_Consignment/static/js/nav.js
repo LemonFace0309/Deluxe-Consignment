@@ -19,18 +19,12 @@ searchBar.addEventListener('intput', () => {
 
 });
 
-const nav = document.querySelector('nav');
-const navHeader = document.querySelector('.nav-header');
-const navMenu = document.querySelector('.menu');
 window.addEventListener('scroll', function() {
-    if (window.scrollY > window.innerHeight) {
-        nav.classList.add('sticky');
-        // setTimeout(() => navMenu.style.display = 'none', 200);
-        // navMenu.style.display = 'none';
+    let nav = document.querySelector('nav');
+    if (!window.location.href.includes('store')) {
+        nav.classList.toggle('sticky', window.scrollY > window.innerHeight-150);
     } else {
-        nav.classList.remove('sticky');
-        // navMenu.style.display = 'flex'; 
-        // setTimeout(() => navMenu.style.display = 'flex', 10);
+        nav.classList.toggle('sticky', window.scrollY > 100);
     }
 })
 

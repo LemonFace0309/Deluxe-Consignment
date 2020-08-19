@@ -12,9 +12,18 @@
       <form id="search"action="">
         <input id="searchBar" type="text" placeholder="Search">
       </form>
-      <div>
+      <div class="mr-4">
         <!-- <button class="btn btn-rounded red">2</button> -->
-        <a href=""><i class="fas fa-shopping-cart mr-4"></i></a>
+        <!-- <a href=""><i class="fas fa-shopping-cart mr-4"></i></a> -->
+            <a class="nav-link dark-grey-text font-weight-bold" href="#" data-toggle="modal"
+                data-target="#cart-modal-ex">
+                <!-- <span class="badge danger-color">4</span> -->
+                <!-- <i class="fas fa-shopping-bag white-text" aria-hidden="true"></i> -->
+                <!-- <span class="clearfix d-none d-sm-inline-block" style="color:white">Cart</span> -->
+                <span class="badge danger-color">{{cart_quantity}}</span>
+                <i class="fas fa-shopping-bag white-text" aria-hidden="true"></i>
+                <span class="clearfix d-none d-sm-inline-block" style="color:white">Cart</span>
+            </a>
       </div>
   </div>
   <div class="menu">
@@ -101,6 +110,66 @@
         <li>Smores</li>
     </ul>
 </div>
+
+
+
+
+
+<!-- CART MODAL -->
+<!-- Cart Modal -->
+<div class="modal fade cart-modal" id="cart-modal-ex" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!-- Content -->
+        <div class="modal-content">
+            <!-- Header -->
+            <div class="modal-header">
+                <h4 class="modal-title font-weight-bold dark-grey-text" id="myModalLabel">Your cart</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- Body -->
+            <div class="modal-body">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Product name</th>
+                        <th>Price</th>
+                        <th>Remove</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{item.product}}</td>
+                        <td>${{item.product.price}}</td>
+                        <td>
+                            <a href="{{item.product.get_remove_from_cart_url}}">
+                                <i class="fas fa-eraser"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <a href="{% url 'checkout' %}" class="btn btn-primary btn-rounded btn-sm">Checkout</a>
+            </div>
+            <!-- Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn purple-gradient btn-rounded btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- Content -->
+    </div>
+</div>
+<!-- Cart Modal -->
+
+
+
+
 
 
 <script src="{% static 'js/nav.js' %}"></script>
