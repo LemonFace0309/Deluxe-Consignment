@@ -9,103 +9,70 @@
 
     <!-- Navbar -->
     <div class="row pt-4">
-
         <!-- Sidebar -->
         <div class="col-lg-3">
-
             <div class="">
-
                 <!-- Grid row -->
                 <div class="row">
-
                     <div class="col-md-6 col-lg-12 mb-5">
-
                         <!-- Panel -->
                         <h5 class="font-weight-bold dark-grey-text"><strong>Order By</strong></h3>
-
-                            <div class="divider"></div>
-
+                            <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 50px;">
+                            
                             <p class="blue-text"><a>Default</a></p>
-
                             <p class="dark-grey-text"><a>Popularity</a></p>
-
                             <p class="dark-grey-text"><a>Average rating</a></p>
-
                             <p class="dark-grey-text"><a>Price: low to high</a></p>
-
                             <p class="dark-grey-text"><a>Price: high to low</a></p>
-
                     </div>
 
                     <!-- Filter by category -->
                     <div class="col-md-6 col-lg-12 mb-5">
 
                         <h5 class="font-weight-bold dark-grey-text"><strong>Category</strong></h3>
-
-                            <div class="divider"></div>
+                            <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 50px;">
 
                             <!-- Radio group -->
                             <div class="form-group ">
-
                                 <input class="form-check-input" name="group100" type="radio" id="radio100">
-
                                 <label for="radio100" class="form-check-label dark-grey-text">All</label>
-
                             </div>
 
                             <div class="form-group">
-
                                 <input class="form-check-input" name="group100" type="radio" id="radio101" checked>
-
                                 <label for="radio101" class="form-check-label dark-grey-text">Laptop</label>
-
                             </div>
 
                             <div class="form-group">
-
                                 <input class="form-check-input" name="group100" type="radio" id="radio102">
-
                                 <label for="radio102" class="form-check-label dark-grey-text">Smartphone</label>
-
                             </div>
 
                             <div class="form-group">
-
                                 <input class="form-check-input" name="group100" type="radio" id="radio103">
-
                                 <label for="radio103" class="form-check-label dark-grey-text">Tablet</label>
-
                             </div>
 
                             <div class="form-group">
-
                                 <input class="form-check-input" name="group100" type="radio" id="radio104">
-
                                 <label for="radio104" class="form-check-label dark-grey-text">Headphones</label>
-
                             </div>
-
                             <!-- Radio group -->
                     </div>
-
                     <!-- Filter by category -->
                 </div>
                 <!-- Grid row -->
 
                 <!-- Grid row -->
                 <div class="row">
-
                     <!-- Filter by price -->
                     <div class="col-md-6 col-lg-12 mb-5">
 
                         <h5 class="font-weight-bold dark-grey-text"><strong>Price</strong></h3>
-
-                            <div class="divider"></div>
+                            <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 50px;">
 
                             <form class="range-field mt-3">
-
                                 <input id="calculatorSlider" class="no-border" type="range" value="0" min="0" max="30"/>
-
                             </form>
 
                             <!-- Grid row -->
@@ -113,92 +80,58 @@
 
                                 <!-- Grid column -->
                                 <div class="col-md-6 text-left">
-
                                     <p class="dark-grey-text"><strong id="resellerEarnings">0$</strong></p>
-
                                 </div>
-                                <!-- Grid column -->
 
-                                <!-- Grid column -->
                                 <div class="col-md-6 text-right">
-
                                     <p class="dark-grey-text"><strong id="clientPrice">319$</strong></p>
-
                                 </div>
                                 <!-- Grid column -->
-
                             </div>
                             <!-- Grid row -->
-
                     </div>
                     <!-- Filter by price -->
 
                     <!-- Filter by rating -->
                     <div class="col-md-6 col-lg-12 mb-5">
-
                         <h5 class="font-weight-bold dark-grey-text"><strong>Rating</strong></h3>
-
-                            <div class="divider"></div>
-
+                            <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 50px;">
                             <div class="row ml-1">
-
                             </div>
-
                             <div class="row ml-1">
-
                             </div>
-
                             <div class="row ml-1">
-
                             </div>
-
                     </div>
                     <!-- Filter by rating -->
-
                 </div>
                 <!-- Grid row -->
-
             </div>
-
         </div>
         <!-- Sidebar -->
 
         <!-- Content -->
         <div class="col-lg-9">
-
             <!-- Filter Area -->
             <div class="row">
-
                 <div class="col-md-8 text-right ml-auto">
-
                     <!-- View Switcher -->
                     <a class="btn blue darken-3 btn-sm"><i class="fas fa-th mr-2" aria-hidden="true"></i><strong>
                         Grid</strong></a>
-
                     <a class="btn blue darken-3 btn-sm"><i class="fas fa-th-list mr-2" aria-hidden="true"></i><strong>
-
                         List</strong></a>
                     <!-- View Switcher -->
-
                 </div>
-
             </div>
             <!-- Filter Area -->
 
             <!-- Products Grid -->
             <section class="section pt-4">
-
                 <!-- Grid row -->
                 <div class="row">
-
                     {% for product in products %}
-
-                    <!-- Grid column -->
                     <div class="col-lg-4 col-md-12 mb-4">
-
-                        <!-- Card -->
                         <div class="card card-ecommerce">
-                            <!-- Card image -->
                             <div class="view overlay">
                                 <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/1.jpg"
                                      class="img-fluid"
@@ -212,18 +145,27 @@
                             <!-- Card content -->
                             <div class="card-body">
                                 <!-- Category & Title -->
-                                <h5 class="card-title mb-1"><strong><a href="{{ product.get_absolute_url }}" class="dark-grey-text">iPad</a></strong>
-                                </h5><span
-                                    class="badge badge-danger mb-2">bestseller</span>
+                                <h5 class="card-title mb-1"><strong><a href="{{ product.get_absolute_url }}" class="dark-grey-text">{{ product.name }}</a></strong>
+                                </h5>
+                                {% if product.is_new %}
+                                    <span class="badge badge-info mb-2 mr-2">NEW</span>
+                                {% endif %}
+
+                                {% if product.discount_price %}
+                                    <span class="badge badge-success mb-2 mr-2">SALE</span>
+                                {% endif %}
 
                                 <!-- Card footer -->
                                 <div class="card-footer pb-0">
                                     <div class="row mb-0">
-                                        <span class="float-left"><strong>1439$</strong></span>
+                                        <span class="float-left">
+                                            {{ product.price }}
+                                        </span>
                                         <span class="float-right">
-                        <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i
-                                class="fas fa-shopping-cart ml-3"></i></a>
-                      </span>
+                                            <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+                                                <i class="fas fa-shopping-cart red-text ml-3"></i>
+                                            </a>
+                                        </span>
 
                                     </div>
 
@@ -372,7 +314,7 @@
                             <!-- Card image -->
                             <div class="view overlay">
 
-                                <img src="{% static 'images/shoe.jpg'%}"
+                                <img src="{% static 'images/bags.jpg'%}"
                                      class="img-fluid"
                                      alt="">
 

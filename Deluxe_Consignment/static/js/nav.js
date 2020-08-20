@@ -24,10 +24,11 @@ searchBar.addEventListener('intput', () => {
 
 window.addEventListener('scroll', function() {
     // console.log({{request.path}});
-    if (!window.location.href.includes('store')) {
-        nav.classList.toggle('sticky', window.scrollY > window.innerHeight-150);
-    } else {
+    const url = window.location.href;
+    if (url.includes('store') || url.includes('product')) {
         nav.classList.toggle('sticky', window.scrollY > 100);
+    } else {
+        nav.classList.toggle('sticky', window.scrollY > window.innerHeight-150);
     }
     resizeNav();
 });
