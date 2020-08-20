@@ -5,13 +5,12 @@
 }
 
 nav {
-    z-index: 100;
+    z-index: 4;
     background: #f59cb2;
     color: white;
     font-family: 'Ubuntu', sans-serif;
     position: fixed;
     width: 100%;
-    height: 22vh;
     transition: 300ms;
 }
 
@@ -27,10 +26,10 @@ nav {
 }
 
 .nav-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 40% 40% 20%;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    justify-items: center;
 }
 
 .nav-container #menu-open {
@@ -38,23 +37,42 @@ nav {
     cursor: pointer;
 }
 
+
 .nav-container .brand {
-    font-size: 2rem;
-    margin: 0 2rem;
-    transition: 0.3s;
+    font-size: calc(2vw);
+    margin: 0 1em;
+    justify-self: left;
+    /* transition: 0.3s; */
 }
 
 .nav-container .brand a {
     color: white;
 }
 
-.nav-container #searchBar {
-    width: calc(33vw);
-    padding: 6px;
-    border: 0px;
-    border-radius: 10px;
-    transition: all .3s;
+.nav-container #search {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
+
+.nav-container #searchBar {
+    box-sizing: border-box;
+    width: 90%;
+    padding: 5px;
+    margin: 2px 0;
+    /* border: 2px 2px black; */
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.nav-container #searchBar:focus {
+    width: 100%;
+}
+
+.nav-container #cart {
+    justify-self: right;
+}
+
 
 .nav-back {
     height: 21.9vh; 
@@ -86,16 +104,12 @@ nav.sticky .menu {
     display: none;
 }
 
-
-.nav-container #searchBar:focus {
-    width: calc(35vw);
-}
-
 .menu {
     display: flex;
     justify-content: center;
     margin: 0;
     transition: 0.2s;
+    /* border: 2px solid black; */
 }
 
 .menu > ul {
@@ -104,11 +118,13 @@ nav.sticky .menu {
     width: 90%;
     z-index: 1;
     margin: 0;
+    /* border: 2px solid black; */
+    height: 100%;
 }
 
 .menu li {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 14px 20px;
     transition: 0.5s;
     
 }
@@ -125,7 +141,7 @@ nav.sticky .menu {
 .menu-sub {
     position: absolute;
     left: 0;
-    top: 45px;
+    top: 53px;
     background: rgba(68, 68, 68, 0.9);
     width: 100%;
     display: none;
@@ -144,7 +160,7 @@ nav.sticky .menu {
         opacity: 0;
         top: 40px;
     }
-    to {top: 45px;}
+    to {top: 53px;}
 }
 
 .menu-col {
@@ -166,10 +182,15 @@ nav.sticky .menu {
 
 .menu-col li a {
     width: 100%;
+    height: 100%;
 }
 
 .menu-col li:hover {
     background: rgb(130, 130, 130);
+}
+
+.menu-col img {
+    width: 85%;
 }
 
 .left-nav {
@@ -182,54 +203,92 @@ nav.sticky .menu {
     background: rgba(51, 51, 51, 0.9);
     color: white;
     z-index: 5;
+    min-height: 100vh;
     max-height: calc(100vh);
     overflow-y: auto;
+    animation: slideout 400ms ease-out;
 }
 
 
 .left-nav .side-nav-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.left-nav .side-nav-header a {
+    color: white;
+}
+
+.left-nav #menu-close {
+    cursor: pointer;
 }
 
 
 .left-nav ul{
     list-style: none;
     width: 100%;
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    align-items: center;
 }
 
 .left-nav li {
-    margin: 50px;
+    margin: 2vw;
+    width: 80%;
+    margin: 2px 0;
+    display: flex;
+    transition: 0.2s;
+}
+
+.left-nav li:hover {
+    background: rgb(255, 255, 255);
+}
+
+.left-nav li:hover a {
+    color: black;
+    font-weight: bold;
+
+}
+
+.left-nav li a {
+    color: white;
+    font-size: 5vw;
+    width: 100%;
+    height: 100%;
+    padding: 10px 0;
+    text-transform: uppercase;
 }
 
 /* med */
 @media (max-width: 984px) {
     .nav-container .brand {
-        font-size: 25px;
-        padding: 0.2em 0;
-    }
-
-    .nav-container #searchBar {
-        width: calc(23vw);
-    }
-
-    .nav-container #searchBar:focus {
-        width: calc(25vw);
+        font-size: 2.3vw;
     }
 
     nav {
         position: absolute;
     }
+
+    .menu-sub {
+        top: 52px
+    }
 }
 
 /* smal */
 @media (max-width: 600px) {
-    .nav-back {
-        height: 12vh;
+    .nav-container .brand {
+        font-size: 4vw;
+        justify-self: center;
     }
+    
     nav {
         height: auto;
+    }
+
+    .nav-back {
+        height: 12vh;
     }
 
     .nav-header,
@@ -239,7 +298,7 @@ nav.sticky .menu {
 
     .nav-container {
         display: grid;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: 20% 60% 20%;
         align-items: center;
     }
 
@@ -250,9 +309,10 @@ nav.sticky .menu {
     .nav-container #search{
         order: 4;
         grid-column: 2;
+        margin-bottom: 4px;
     }
-    .nav-container #search input{
-        width: 100%;
+    .nav-container #searchBar{
+        padding: 0;
     }
 
     .nav-container #menu-open {
@@ -260,9 +320,14 @@ nav.sticky .menu {
     }
 }
 
-.left-nav.toggle {
+.left-nav.showSide {
     display: flex;
-    animation: slide 400ms;
+    animation: slide 400ms ease-out;
+}
+
+.left-nav.hideSide {
+    display: flex;
+    animation: slideout 400ms ease-out;
 }
 
 @keyframes slide {
@@ -270,4 +335,11 @@ nav.sticky .menu {
         transform: translateX(-100%);
     }
     to {}
+}
+
+@keyframes slideout {
+    from {}
+    to {
+        transform: translateX(-100%);
+    }
 }

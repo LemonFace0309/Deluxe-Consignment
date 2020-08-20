@@ -7,12 +7,13 @@
     <a href="">Login</a>
   </div>
   <div class="nav-container">
-      <span id="menu-open" href="">=</span>
+      <span id="menu-open" href=""><i class="fas fa-bars fa-1x"></i></span>
       <div class="brand"><a href="{% url 'home'%}">Deluxe Consignment Shop</a></div>
-      <form id="search"action="">
+      <form id="search" action="">
         <input id="searchBar" type="text" placeholder="Search">
+        <!-- <button></button> -->
       </form>
-      <div class="mr-4">
+      <div id="cart">
         <!-- <button class="btn btn-rounded red">2</button> -->
         <!-- <a href=""><i class="fas fa-shopping-cart mr-4"></i></a> -->
             <a class="nav-link dark-grey-text font-weight-bold" href="#" data-toggle="modal"
@@ -28,7 +29,7 @@
   </div>
   <div class="menu">
       <ul>
-          <li><a href="{% url 'store'%}">Shop</a>
+          <li><a>Shop</a> <!--do not like for mobile purposes -->
               <div class="menu-sub">
                   <div class="menu-col">
                       <div class="menu-category"><a href="">Shoe</a></div>
@@ -57,6 +58,12 @@
                         <li><a href="">Medium</a></li>
                         <li><a href="">Big!</a></li>
                     </ul>
+                </div>
+                <div class="menu-col">
+                    <img src="{% static 'images/lv.jpg'%}" alt="">
+                </div>
+                <div class="menu-col">
+                    <img src="{% static 'images/chanel.jpg'%}" alt="">
                 </div>
               </div>
           </li>
@@ -89,25 +96,23 @@
 
 <div class="left-nav">
     <div class="side-nav-header">
-        <span>Login</span>
-        <span id="menu-close" href="">X</span>
+        <div>
+            <span class="ml-3"><a href="">Login</a></span>
+            <span class="ml-3"><a href="">Account</a></span>
+        </div>
+        <span class="mr-3" id="menu-close" href=""><i class="fas fa-times fa-1x"></i></span>
     </div>
     <ul>
-        <li>Bag</li>
-        <li>Shoe</li>
-        <li>Jews</li>
-        <li>Jews</li>
-        <li>Jews</li>
-        <li>Smores</li>
-        <li>Smores</li>
-        <li>Smores</li>
-        <li>Smores</li>
-        <li>Smores</li>
-        <li>Smores</li>
-        <li>MARK</li>
-        <li>Smores</li>
-        <li>Smores</li>
-        <li>Smores</li>
+        <li><a class="waves-effect" href="#!">Bags</a></li>
+        <li><a class="waves-effect" href="#!">Shoes</a></li>
+        <li><a class="waves-effect" href="#!">Jews</a></li>
+        <li><a class="waves-effect" href="#!">Smores</a></li>
+        <li><a class="waves-effect" href="#!">Designer Brands</a></li>
+        <li><a class="waves-effect" href="#!">Bag</a></li>
+        <li><a class="waves-effect" href="#!">Bag</a></li>
+        <li><a class="waves-effect" href="#!">Bag</a></li>
+        <li><a class="waves-effect" href="#!">Bag</a></li>
+        <li><a class="waves-effect" href="#!">Clarke</a></li>
     </ul>
 </div>
 
