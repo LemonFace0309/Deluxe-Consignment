@@ -5,32 +5,28 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 
 <div id="home" class="view jarallax" data-jarallax='{"speed": 0.2}'
-     style="background-image: url({% static 'images/open-bag.jpg' %});
+     style="background-image: url({% static 'images/carry-bag.jpg' %});
      background-repeat: no-repeat; background-size: cover; background-position: center center; height: 95vh;">
-    <div class="mask rgba-black-strong">
+    <div class="mask rgba-stylish-strong">
         <div class="container h-100 d-flex justify-content-center align-items-center">
             <div class="row pt-5 mt-3">
                 <div class="col-md-12 mb-3">
-                    <div class="intro-info-content text-center" style="padding-bottom: 5rem">
-                        <h1 class="display-3 white-text mb-5 wow fadeInDown" data-wow-delay="0.3s">Change is Here</h1>
-                        <a href="{% url 'store' %}" class="btn btn-lg wow fadeInDown custom_btn text-white"
-                           data-wow-delay="0.3s">Shop Now</a>
+                    <div class="intro-info-content text-center" style="padding-bottom: 20rem">
+                        <h1 class="display-3 white-text mb-5 wow fadeInDown" data-wow-delay="0.3s">Insert Title</h1>
+                        <div class="custom-btn"><a href="{% url 'store'%}">Shop Now</a></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- <div class="parallax"><img class="parallax-image" src="{% static 'images/open-bag.jpg' %}"></div> -->
 
 
 <div class="banner"><h1>Featured Products</h1></div>
 
 <!--Carousel-->
 <div class="container">
-    <!--Section: Products v.5-->
     <section class="section pb-3 wow fadeIn" data-wow-delay="0.3s">
-
         <!--Section heading-->
         <h1 class="font-weight-bold text-center h1 my-5">Designer Brands at an Affordible Price</h1>
         <!--Section description-->
@@ -43,20 +39,19 @@
 
             <!--Controls-->
             <div class="controls-top">
-                <a class="btn-floating primary-color" href="#multi-item-example" data-slide="prev">
+                <a class="btn-floating pink lighten-3" href="#multi-item-example" data-slide="prev">
                     <i class="fas fa-chevron-left"></i>
                 </a>
-                <a class="btn-floating primary-color" href="#multi-item-example" data-slide="next">
+                <a class="btn-floating pink lighten-3" href="#multi-item-example" data-slide="next">
                     <i class="fas fa-chevron-right"></i>
                 </a>
             </div>
-            <!--Controls-->
 
             <!--Indicators-->
             <ol class="carousel-indicators">
-                <li class="primary-color" data-target="#multi-item-example" data-slide-to="0" class="active"></li>
-                <li class="primary-color" data-target="#multi-item-example" data-slide-to="1"></li>
-                <li class="primary-color" data-target="#multi-item-example" data-slide-to="2"></li>
+                <li class="pink lighten-3" data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+                <li class="pink lighten-3" data-target="#multi-item-example" data-slide-to="1"></li>
+                <li class="pink lighten-3" data-target="#multi-item-example" data-slide-to="2"></li>
             </ol>
             <!--Indicators-->
 
@@ -68,10 +63,7 @@
 
                     <div class="col-md-4">
 
-                        <!--Card-->
                         <div class="card card-cascade narrower card-ecommerce">
-
-                            <!--Card image-->
                             <div class="view view-cascade overlay">
                                 <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/img%20(39).jpg"
                                      class="card-img-top"
@@ -80,14 +72,11 @@
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
                             </div>
-                            <!--Card image-->
 
                             <!--Card content-->
                             <div class="card-body card-body-cascade text-center no-padding">
                                 <!--Category & Title-->
-                                <a href="" class="text-muted">
-                                    <h5>Shoes</h5>
-                                </a>
+                                <a href="" class="text-muted"><h5>Shoes</h5></a>
                                 <h4 class="card-title">
                                     <strong>
                                         <a href="">Leather boots</a>
@@ -118,6 +107,7 @@
 
                         </div>
                         <!--Card-->
+
 
                     </div>
 
@@ -589,59 +579,57 @@
 
     </section>
 </div>
-<!--Section: Products v.5-->
 
 <div class="banner"><h1>Shop</h1></div>
-
-<div class="shop-list-container">
+<div class="section-container">
     <h2>Shop Bags and Accessories</h2>
     <div class="shop-item-container">
         <div class="shop-item">
-            <a class="item-cover" href=""><h3>Bag</h3></a>
-            <img src="{% static 'images/blue-bag.jpg'%}" alt="">
+            <a class="item-cover" href=""><h3>Bags</h3></a>
+            <img src="{% static 'images/bags.jpg'%}" alt="">
         </div>
         <div class="shop-item">
-            <a class="item-cover" href=""><h3>Shoe</h3></a>
-            <img src="{% static 'images/Shoe.jpg'%}" alt="">
+            <a class="item-cover" href=""><h3>Shoes</h3></a>
+            <img src="{% static 'images/heels.jpg'%}" alt="">
         </div>
         <div class="shop-item">
-            <a class="item-cover" href=""><h3>Bag</h3></a>
-            <img src="{% static 'images/blue-bag.jpg'%}" alt="">
+            <a class="item-cover" href=""><h3>Jewelry</h3></a>
+            <img src="{% static 'images/jewelry.jpg'%}" alt="">
         </div>
         <div class="shop-item">
-            <a class="item-cover" href=""><h3>Hermes</h3></a>
-            <img src="{% static 'images/open-bag.jpg'%}" alt="">
+            <a class="item-cover" href=""><h3>SLGs</h3></a>
+            <img src="{% static 'images/slgs.jpg'%}" alt="">
         </div>
     </div>
 
     <h2>Shop by Brand</h2>
     <div class="shop-item-container">
         <div class="shop-item">
-            <div class="item-cover"><a href="#">gucci</a></div>
-            <img src="{% static 'images/shoe.jpg'%}" alt="">
+            <a class="item-cover" href=""><h3>Gucci</h3></a>
+            <img src="{% static 'images/gucci.jpg'%}" alt="">
         </div>
         <div class="shop-item">
-            <div class="item-cover"><a href="#">prada</a></div>
-            <img src="{% static 'images/shoe.jpg'%}" alt="">
+            <a class="item-cover" href=""><h3>Prada</h3></a>
+            <img src="{% static 'images/prada.jpg'%}" alt="">
         </div>
         <div class="shop-item">
-            <div class="item-cover"><a href="#">louis vuitton</a></div>
-            <img src="{% static 'images/shoe.jpg'%}" alt="">
+            <a class="item-cover" href=""><h3>Chanel</h3></a>
+            <img src="{% static 'images/chanel.jpg'%}" alt="">
         </div>
         <div class="shop-item">
-            <div class="item-cover"><a href="#">hermes</a></div>
-            <img src="{% static 'images/open-bag.jpg'%}" alt="">
+            <a class="item-cover" href=""><h3>Louis Vuitton</h3></a>
+            <img src="{% static 'images/lv.jpg'%}" alt="">
         </div>
     </div>
-</div>
 
-<div class="banner"><h1>Follow us on Instagram</h1></div>
-<!--Lightbox-->
-<secion>
-    <div class="row">
+
+    <div class="banner"><h1>Check us out!</h1></div>
+    <div style="height: 10vh;"></div>
+    <!--Lightbox-->
+    <div>
         <div class="col-md-12">
             <div id="mdb-lightbox-ui"></div>
-            <div class="mdb-lightbox no-margin">
+            <div class="mdb-lightbox">
                 <figure class="col-md-4">
                     <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg"
                        data-size="1600x1067">
@@ -708,10 +696,9 @@
             </div>
         </div>
     </div>
-</secion>
-
-<div class="shop-list-container">
-
+    <p style="text-align: center;">Instagram: @deluxe_consignment</p>
+    <!-- <div class="shop-item-container"> -->
+</div>
 </div>
 
 {% endblock content %}
