@@ -105,7 +105,7 @@ def checkout(request):
         'items': items,
         'cart_quantity': cart_quantity,
     }
-    return render(request, 'store/cart.html', context)
+    return render(request, 'store/checkout.html', context)
 
 
 def consign(request):
