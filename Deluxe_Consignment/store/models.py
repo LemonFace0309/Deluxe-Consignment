@@ -52,6 +52,11 @@ class Product(models.Model):
         return url
 
 
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL)
+    image = models.ImageField(null=True, blank=True)
+
+
 class Shoe(Product, models.Model):
     size = models.IntegerField(default=10)
 
