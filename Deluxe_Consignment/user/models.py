@@ -21,7 +21,7 @@ class Order(models.Model):
     transaction_id = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return str(self.id)
+        return f"{str(self.id)} created by {self.customer.name}"
 
     @property
     def get_cart_total(self):
@@ -41,7 +41,7 @@ class OrderItem(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.product.name
+        return f"{self.quantity} of {self.product.name}"
 
     @property
     def get_total(self):

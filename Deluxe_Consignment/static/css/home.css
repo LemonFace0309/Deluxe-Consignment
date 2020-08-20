@@ -1,31 +1,42 @@
-.custom_btn {
-    display: inline-block;
-    position: relative;
+* {
+    box-sizing: border-box;
+}
+
+.intro-info-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-btn {
+    display: flex;
     color: white;
-    opacity: 0;
+    justify-self: center;
+    align-self: center;
+    animation: custom-btn 1s;
+}
+
+.custom-btn a {
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
     padding: 1em 2em;
-    border: white 1px solid;
-    animation-name: custom_btn;
-    animation-duration: 1s;
-    animation-delay: 0.5s;
-    animation-fill-mode: forwards;
-
-    transition-property: all;
-    transition-duration: 0.5s;
+    transition: all 0.5s;
 }
 
-.custom_btn:hover {
-    transform: rotateY(180deg);
+.custom-btn:hover a{
+    color: white;
+    transform: rotateX(-360deg);
 }
 
-@keyframes custom_btn {
+@keyframes custom-btn {
     0% {opacity:0}
     100% {opacity:1}
 }
 
+
 .banner {
-    background-color: #e2acac;
-    height: 30vh;
+    background-color: #f48fb1;
+    height: 20vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,38 +44,29 @@
 
 .banner h1 {
     margin: 0 0;
-    font-family: 'Ubuntu', sans-serif;
     text-transform: uppercase;
+    text-align: right;
     letter-spacing: 10px;
     color: white;
-    transition: 300ms;
+    transition: 200ms;
     transition-timing-function: ease-in;
 }
 
-.banner h1:hover {
+.banner:hover h1{
     letter-spacing: 20px;
 }
 
-.btn{
-    display: inline-block;
-}
-
-.feature-container {
-    background: rgb(240, 211, 221);
-    height: 70vh;
-}
-
-.shop-list-container {
-    background: rgb(240, 211, 221);
+.section-container {
     min-height: 70vh;
 }
 
-.shop-list-container h2 {
-    margin: 0 0px;
-    padding: 80px 0px 0px 0px;
+.section-container h2 {
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0;
+    padding: 50px 0px 0px 0px;
     width: 100%;
     text-align: center;
-    font-size: 30px;
+    font-size: 35px;
 }
 
 .shop-item-container {
@@ -74,59 +76,64 @@
 }
 
 .shop-item {
-    width: 300px;
-    height: 200px;
-    margin: 50px 10px;
+    width: 20%;
+    height: auto;
+    margin: 2% 2%;
     overflow: hidden;
-    /* border: 1px black solid; */
     position: relative;
     display: flex;
     align-items: center;
-    
+    box-shadow: 0px 0px 4px;
 }
 
 .item-cover {
+    visibility: hidden;
     position: absolute;
-    width: 200px;
-    height: 200px;
-    transition: 300ms;
+    width: 100%;
+    height: 100%;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    transition: all 0.3s;
+    transform: translateY(-100%);
 }
 
-.item-cover:hover {
-    background-color: black;
-    opacity: 0.4;
-}
-
-.item-cover:hover a {
+.item-cover h3 {
     color: white;
-}
-
-.shop-item a {
     text-transform: uppercase;
     font-family: 'Ubuntu', sans-serif;
-    font-size: 30px;
-    letter-spacing: 10px;
-    color: black;
-    transition: 300ms;
     text-align: center;
+}
+.shop-item:hover .item-cover {
+    visibility: visible;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: translateY(0%);
+    /* transition: 0.4s; customizable up slide*/ 
+}
+
+.shop-item:hover .item-cover h3 {
+    display: inline-block;
+}
+
+.shop-item:hover img {
+    transform: scale(1.6);
 }
 
 .shop-item img {
     width: 100%;
+    transform: scale(1.05);
+    z-index: -1;
+    transition: 1s;
 }
 
-@media only screen and (max-width: 630px) {
+@media only screen and (max-width: 700px) {
     .shop-item {
-        width: 200px;
-        height: 130px;
+        width: 40%;
     }
 
-    .item-cover {
-        width: 130px;
-        height: 130px;
-    }
+    .banner h1 {
+        font-size: 30px;
+    } 
 }

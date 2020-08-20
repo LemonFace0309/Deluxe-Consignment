@@ -200,10 +200,10 @@
                         <div class="card card-ecommerce">
                             <!-- Card image -->
                             <div class="view overlay">
-                                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/1.jpg"
+                                <img src="{{product.imageURL}}"
                                      class="img-fluid"
                                      alt="">
-                                <a>
+                                <a data-toggle="modal" data-target="#modalQuickView{{forloop.counter}}">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
                             </div>
@@ -212,23 +212,26 @@
                             <!-- Card content -->
                             <div class="card-body">
                                 <!-- Category & Title -->
-                                <h5 class="card-title mb-1"><strong><a href="{{ product.get_absolute_url }}" class="dark-grey-text">iPad</a></strong>
-                                </h5><span
-                                    class="badge badge-danger mb-2">bestseller</span>
-
+                                <h5 class="card-title mb-1"><strong><a href="{{ product.get_absolute_url }}"
+                                                                       class="dark-grey-text">{{product}}</a></strong>
+                                </h5>
+                                {% if product.is_new %}
+                                <span class="badge badge-pill badge-info mb-1 mr-1">NEW</span>
+                                {% endif %}
+                                {% if product.discount_price %}
+                                <span class="badge badge-pill badge-success mb-1">SALE</span>
+                                {% endif %}
                                 <!-- Card footer -->
                                 <div class="card-footer pb-0">
                                     <div class="row mb-0">
-                                        <span class="float-left"><strong>1439$</strong></span>
+                                        <span class="float-left"><strong>${{product.price}}</strong></span>
                                         <span class="float-right">
-                        <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i
-                                class="fas fa-shopping-cart ml-3"></i></a>
-                      </span>
-
+                                            <a href="{{product.get_add_to_cart_url}}" data-toggle="tooltip"
+                                               data-placement="top"
+                                               title="Add to Bag"><i class="fas fa-shopping-bag ml-3"></i></a>
+                                        </span>
                                     </div>
-
                                 </div>
-
                             </div>
                             <!-- Card content -->
 
@@ -237,189 +240,145 @@
 
                     </div>
                     <!-- Grid column -->
+
+                    <!-- Modal: modalQuickView -->
+                    <div class="modal fade" id="modalQuickView{{forloop.counter}}" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <!--Carousel Wrapper-->
+                                            <div id="carousel-thumb{{forloop.counter}}"
+                                                 class="carousel slide carousel-fade carousel-thumbnails"
+                                                 data-ride="carousel">
+                                                <!--Slides-->
+                                                <div class="carousel-inner" role="listbox">
+                                                    <div class="carousel-item active">
+                                                        <a href="{% url 'product-detail' product.slug %}">
+                                                            <img class="d-block w-100"
+                                                                 src="{{product.imageURL}}"
+                                                                 alt="First slide">
+                                                        </a>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <a href="{% url 'product-detail' product.slug %}">
+                                                            <img class="d-block w-100"
+                                                                 src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(24).jpg"
+                                                                 alt="Second slide">
+                                                        </a>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <a href="{% url 'product-detail' product.slug %}">
+                                                            <img class="d-block w-100"
+                                                                 src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(25).jpg"
+                                                                 alt="Third slide">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--/.Slides-->
+                                                <!--Controls-->
+                                                <a class="carousel-control-prev"
+                                                   href="#carousel-thumb{{forloop.counter}}" role="button"
+                                                   data-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                                <a class="carousel-control-next"
+                                                   href="#carousel-thumb{{forloop.counter}}" role="button"
+                                                   data-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                                <!--/.Controls-->
+                                                <ol class="carousel-indicators">
+                                                    <li data-target="#carousel-thumb{{forloop.counter}}"
+                                                        data-slide-to="0" class="active">
+                                                        <img src="{{product.imageURL}}"
+                                                             width="60">
+                                                    </li>
+                                                    <li data-target="#carousel-thumb{{forloop.counter}}"
+                                                        data-slide-to="1">
+                                                        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(24).jpg"
+                                                             width="60">
+                                                    </li>
+                                                    <li data-target="#carousel-thumb{{forloop.counter}}"
+                                                        data-slide-to="2">
+                                                        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(25).jpg"
+                                                             width="60">
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                            <!--/.Carousel Wrapper-->
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <h2 class="h2-responsive product-name">
+                                                <strong>{{product}}</strong>
+                                            </h2>
+                                            {% if product.is_new %}
+                                            <span class="badge badge-info mb-2 mr-2">NEW</span>
+                                            {% endif %}
+                                            {% if product.discount_price %}
+                                            <span class="badge badge-success mb-4">SALE</span>
+                                            <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
+                                                <span class="green-text font-weight-bold">
+                                                    <strong>${{product.discount_price}}</strong>
+                                                </span>
+                                                <span class="grey-text">
+                                                    <small>
+                                                        <s>${{product.price}}</s>
+                                                    </small>
+                                                </span>
+                                            </h3>
+                                            {% else %}
+                                            <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4 mt-4">
+                                                <span class="green-text font-weight-bold">
+                                                    <strong>${{product.price}}</strong>
+                                                </span>
+                                            </h3>
+                                            {% endif %}
+
+                                            <p class="ml-xl-0 ml-4">{{product.description}}
+                                            </p>
+
+                                            <p class="ml-xl-0 ml-4">
+
+                                                <strong>Brand: </strong>{{product.get_brand}}</p>
+
+                                            {% if product.is_shoe %}
+                                            <p class="ml-xl-0 ml-4">
+
+                                                <strong>Size: </strong>{{product.shoe.size}}</p>
+                                            {% endif %}
+
+                                            <p class="ml-xl-0 ml-4">
+
+                                                <strong>Quantity Available: </strong>{{product.quantity}}</p>
+
+                                            <!-- Add to Cart -->
+                                            <div class="card-body">
+                                                <div class="text-center">
+                                                    <a href="{{product.get_add_to_cart_url}}" class="btn btn-primary">Add
+                                                        to Bag
+                                                        <i class="fas fa-shopping-bag ml-2" aria-hidden="true"></i>
+                                                    </a>
+                                                    <a href="{% url 'product-detail' product.slug %}" class="btn btn-light">Detail View</a>
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <!-- /.Add to Cart -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     {% endfor %}
-
-                    <!-- Grid column -->
-                    <div class="col-lg-4 col-md-6 mb-4">
-
-                        <!-- Card -->
-                        <div class="card card-ecommerce">
-
-                            <!-- Card image -->
-                            <div class="view overlay">
-
-                                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/15.jpg"
-                                     class="img-fluid"
-                                     alt="">
-
-                                <a>
-
-                                    <div class="mask rgba-white-slight"></div>
-
-                                </a>
-
-                            </div>
-                            <!-- Card image -->
-
-                            <!-- Card content -->
-                            <div class="card-body">
-
-                                <!-- Category & Title -->
-                                <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">Sony
-                                    T56-v</a></strong></h5>
-
-                                <span class="badge badge-info mb-2">new</span>
-
-                                <!-- Card footer -->
-                                <div class="card-footer pb-0">
-
-                                    <div class="row mb-0">
-
-                                        <span class="float-left"><strong>1439$</strong></span>
-
-                                        <span class="float-right">
-
-                        <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i
-                                class="fas fa-shopping-cart ml-3"></i></a>
-
-                      </span>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                            <!-- Card content -->
-
-                        </div>
-                        <!-- Card -->
-
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-lg-4 col-md-6 mb-4">
-
-                        <!-- Card -->
-                        <div class="card card-ecommerce">
-
-                            <!-- Card image -->
-                            <div class="view overlay">
-
-                                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/6.jpg"
-                                     class="img-fluid"
-                                     alt="">
-
-                                <a>
-
-                                    <div class="mask rgba-white-slight"></div>
-
-                                </a>
-
-                            </div>
-                            <!-- Card image -->
-
-                            <!-- Card content -->
-                            <div class="card-body">
-
-                                <!-- Category & Title -->
-                                <h5 class="card-title mb-1"><strong><a href=""
-                                                                       class="dark-grey-text">Headphones</a></strong>
-                                </h5>
-
-                                <span class="badge badge-danger mb-2">bestseller</span>
-
-                                <!-- Card footer -->
-                                <div class="card-footer pb-0">
-
-                                    <div class="row mb-0">
-
-                                        <span class="float-left"><strong>1439$</strong></span>
-
-                                        <span class="float-right">
-
-                        <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i
-                                class="fas fa-shopping-cart ml-3"></i></a>
-
-                      </span>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                            <!-- Card content -->
-
-                        </div>
-                        <!-- Card -->
-
-                    </div>
-                    <!-- Grid column -->
-
-                </div>
-                <!-- Grid row -->
-
-                <!-- Grid row -->
-                <div class="row">
-
-                    <!-- Grid column -->
-                    <div class="col-lg-4 col-md-12 mb-4">
-
-                        <!-- Card -->
-                        <div class="card card-ecommerce">
-
-                            <!-- Card image -->
-                            <div class="view overlay">
-
-                                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg"
-                                     class="img-fluid"
-                                     alt="">
-
-                                <a>
-
-                                    <div class="mask rgba-white-slight"></div>
-
-                                </a>
-
-                            </div>
-                            <!-- Card image -->
-
-                            <!-- Card content -->
-                            <div class="card-body">
-
-                                <!-- Category & Title -->
-                                <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">Samsung CT-567</a></strong>
-                                </h5>
-
-                                <span class="badge grey mb-2">best rated</span>
-
-                                <!-- Card footer -->
-                                <div class="card-footer pb-0">
-
-                                    <div class="row mb-0">
-
-                                        <span class="float-left"><strong>1439$</strong></span>
-
-                                        <span class="float-right">
-
-                        <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i
-                                class="fas fa-shopping-cart ml-3"></i></a>
-
-                      </span>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                            <!-- Card content -->
-
-                        </div>
-                        <!-- Card -->
-
-                    </div>
-                    <!-- Grid column -->
 
                 </div>
                 <!-- Grid row -->
@@ -437,148 +396,5 @@
 
 </main>
 
-<!-- Footer -->
-<footer class="page-footer text-center text-md-left stylish-color-dark pt-0">
-
-    <div style="background-color: #4285f4;">
-
-        <div class="container">
-
-            <!-- Grid row -->
-            <div class="row py-4 d-flex align-items-center">
-
-                <!-- Grid column -->
-                <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-
-                    <h6 class="mb-0 white-text">Get connected with us on social networks!</h6>
-
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-6 col-lg-7 text-center text-md-right">
-
-                    <!-- Facebook -->
-                    <a class="fb-ic ml-0 px-2"><i class="fab fa-facebook-f white-text"> </i></a>
-
-                    <!-- Twitter -->
-                    <a class="tw-ic px-2"><i class="fab fa-twitter white-text"> </i></a>
-
-                    <!-- Google + -->
-                    <a class="gplus-ic px-2"><i class="fab fa-google-plus-g white-text"> </i></a>
-
-                    <!-- Linkedin -->
-                    <a class="li-ic px-2"><i class="fab fa-linkedin-in white-text"> </i></a>
-
-                    -->
-                    <!-- Instagram -->
-                    <a class="ins-ic px-2"><i class="fab fa-instagram white-text"> </i></a>
-
-                </div>
-                <!-- Grid column -->
-
-            </div>
-            <!-- Grid row -->
-
-        </div>
-
-    </div>
-
-    <!-- Footer Links -->
-    <div class="container mt-5 mb-4 text-center text-md-left">
-
-        <div class="row mt-3">
-
-            <!-- First column -->
-            <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
-
-                <h6 class="text-uppercase font-weight-bold"><strong>Company name</strong></h6>
-
-                <hr class="blue mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-
-                <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet,
-
-                    consectetur
-
-                    adipisicing elit.</p>
-
-            </div>
-            <!-- First column -->
-
-            <!-- Second column -->
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-
-                <h6 class="text-uppercase font-weight-bold"><strong>Products</strong></h6>
-
-                <hr class="blue mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-
-                <p><a href="#!">MDBootstrap</a></p>
-
-                <p><a href="#!">MDWordPress</a></p>
-
-                <p><a href="#!">BrandFlow</a></p>
-
-                <p><a href="#!">Bootstrap Angular</a></p>
-
-            </div>
-            <!-- Second column -->
-
-            <!-- Third column -->
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
-                <h6 class="text-uppercase font-weight-bold"><strong>Useful links</strong></h6>
-
-                <hr class="blue mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-
-                <p><a href="#!">Your Account</a></p>
-
-                <p><a href="#!">Become an Affiliate</a></p>
-
-                <p><a href="#!">Shipping Rates</a></p>
-
-                <p><a href="#!">Help</a></p>
-
-            </div>
-            <!-- Third column -->
-
-            <!-- Fourth column -->
-            <div class="col-md-4 col-lg-3 col-xl-3">
-
-                <h6 class="text-uppercase font-weight-bold"><strong>Contact</strong></h6>
-
-                <hr class="blue mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-
-                <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-
-                <p><i class="fas fa-envelope mr-3"></i> info@example.com</p>
-
-                <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-
-                <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
-
-            </div>
-            <!-- Fourth column -->
-
-        </div>
-
-    </div>
-    <!-- Footer Links -->
-
-    <!-- Copyright -->
-    <div class="footer-copyright py-3 text-center">
-
-        <div class="container-fluid">
-
-            © 2019 Copyright: <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank">
-            MDBootstrap.com </a>
-
-        </div>
-
-    </div>
-    <!-- Copyright -->
-
-</footer>
-
-<!-- Footer -->
 
 {% endblock content %}
