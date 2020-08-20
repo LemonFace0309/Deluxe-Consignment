@@ -53,7 +53,7 @@
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark primary-color">
 
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a href="{% url 'home' %}" class="navbar-brand ml-2">Deluxe Consignment</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
             aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,18 +61,15 @@
     </button>
 
     <div class="collapse navbar-collapse" id="basicExampleNav">
-
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home
-                    <span class="sr-only">(current)</span>
-                </a>
+            <li class="nav-item {% if request.resolver_match.view_name == 'home' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+            <li class="nav-item {% if request.resolver_match.view_name == 'store' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'store' %}">Store</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+            <li class="nav-item {% if request.resolver_match.view_name == 'consign' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'consign' %}">Consign With Us</a>
             </li>
 
             <!-- Mega Dropdown -->
@@ -191,6 +188,18 @@
                     <i class="fas fa-shopping-bag white-text" aria-hidden="true"></i>
                     <span class="clearfix d-none d-sm-inline-block" style="color:white">Cart</span>
                 </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-default"
+                     aria-labelledby="navbarDropdownMenuLink-333">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
             </li>
         </ul>
     </div>
@@ -489,9 +498,6 @@
 <!--JS Files-->
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 <script>
-/* WOW.js init */
-new WOW().init();
-
 // MDB Lightbox Init
 $(function () {
     $("#mdb-lightbox-ui").load("{% static 'mdb-addons/mdb-lightbox-ui.html' %}");
@@ -503,10 +509,10 @@ $(function () {
 });
 
 // Material Select Initialization
-$(document).ready(function () {
-
-  $('.mdb-select').material_select();
+$(document).ready(function() {
+    $('.mdb-select').materialSelect();
 });
+
 </script>
 </body>
 

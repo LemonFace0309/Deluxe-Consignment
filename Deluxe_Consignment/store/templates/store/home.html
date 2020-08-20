@@ -13,7 +13,8 @@
                 <div class="col-md-12 mb-3">
                     <div class="intro-info-content text-center" style="padding-bottom: 5rem">
                         <h1 class="display-3 white-text mb-5 wow fadeInDown" data-wow-delay="0.3s">Change is Here</h1>
-                        <a class="btn btn-lg wow fadeInDown custom_btn" data-wow-delay="0.3s">Shop Now</a>
+                        <a href="{% url 'store' %}" class="btn btn-lg wow fadeInDown custom_btn text-white"
+                           data-wow-delay="0.3s">Shop Now</a>
                     </div>
                 </div>
             </div>
@@ -23,17 +24,7 @@
 <!-- <div class="parallax"><img class="parallax-image" src="{% static 'images/open-bag.jpg' %}"></div> -->
 
 
-<div class="banner"><h1>Feature</h1></div>
-<!-- <div class="feature-container">
-    <div class="carousel">
-        <a class="carousel-item" href="#one!"><img src="https://lorempixel.com/250/250/nature/1"></a>
-        <a class="carousel-item" href="#two!"><img src="{% static 'images/shoe.jpg' %}"></a>
-        <a class="carousel-item" href="#three!"><img src="{% static 'images/open-bag.jpg' %}"></a>
-        <a class="carousel-item" href="#four!"><img src="https://lorempixel.com/250/250/nature/4"></a>
-        <a class="carousel-item" href="#five!"><img src="https://lorempixel.com/250/250/nature/5"></a>
-      </div>
-</div> -->
-<div class="banner"><h1>Shop</h1></div>
+<div class="banner"><h1>Featured Products</h1></div>
 
 <!--Carousel-->
 <div class="container">
@@ -41,7 +32,7 @@
     <section class="section pb-3 wow fadeIn" data-wow-delay="0.3s">
 
         <!--Section heading-->
-        <h1 class="font-weight-bold text-center h1 my-5">Last products</h1>
+        <h1 class="font-weight-bold text-center h1 my-5">Designer Brands at an Affordible Price</h1>
         <!--Section description-->
         <p class="text-center grey-text mb-5 mx-auto w-responsive">Lorem ipsum dolor sit amet, consectetur adipisicing
             elit. Fugit, error amet numquam iure provident voluptate esse
@@ -600,6 +591,51 @@
 </div>
 <!--Section: Products v.5-->
 
+<div class="banner"><h1>Shop</h1></div>
+
+<div class="shop-list-container">
+    <h2>Shop Bags and Accessories</h2>
+    <div class="shop-item-container">
+        <div class="shop-item">
+            <a class="item-cover" href=""><h3>Bag</h3></a>
+            <img src="{% static 'images/blue-bag.jpg'%}" alt="">
+        </div>
+        <div class="shop-item">
+            <a class="item-cover" href=""><h3>Shoe</h3></a>
+            <img src="{% static 'images/Shoe.jpg'%}" alt="">
+        </div>
+        <div class="shop-item">
+            <a class="item-cover" href=""><h3>Bag</h3></a>
+            <img src="{% static 'images/blue-bag.jpg'%}" alt="">
+        </div>
+        <div class="shop-item">
+            <a class="item-cover" href=""><h3>Hermes</h3></a>
+            <img src="{% static 'images/open-bag.jpg'%}" alt="">
+        </div>
+    </div>
+
+    <h2>Shop by Brand</h2>
+    <div class="shop-item-container">
+        <div class="shop-item">
+            <div class="item-cover"><a href="#">gucci</a></div>
+            <img src="{% static 'images/shoe.jpg'%}" alt="">
+        </div>
+        <div class="shop-item">
+            <div class="item-cover"><a href="#">prada</a></div>
+            <img src="{% static 'images/shoe.jpg'%}" alt="">
+        </div>
+        <div class="shop-item">
+            <div class="item-cover"><a href="#">louis vuitton</a></div>
+            <img src="{% static 'images/shoe.jpg'%}" alt="">
+        </div>
+        <div class="shop-item">
+            <div class="item-cover"><a href="#">hermes</a></div>
+            <img src="{% static 'images/open-bag.jpg'%}" alt="">
+        </div>
+    </div>
+</div>
+
+<div class="banner"><h1>Follow us on Instagram</h1></div>
 <!--Lightbox-->
 <secion>
     <div class="row">
@@ -674,52 +710,8 @@
     </div>
 </secion>
 
-
 <div class="shop-list-container">
-    <h2>Shop Bags and Accessories</h2>
-    <div class="shop-item-container">
-        <div class="shop-item">
-            <a class="item-cover" href=""><h3>Bag</h3></a>
-            <img src="{% static 'images/blue-bag.jpg'%}" alt="">
-        </div>
-        <div class="shop-item">
-            <a class="item-cover" href=""><h3>Shoe</h3></a>
-            <img src="{% static 'images/Shoe.jpg'%}" alt="">
-        </div>
-        <div class="shop-item">
-            <a class="item-cover" href=""><h3>Bag</h3></a>
-            <img src="{% static 'images/blue-bag.jpg'%}" alt="">
-        </div>
-        <div class="shop-item">
-            <a class="item-cover" href=""><h3>Hermes</h3></a>
-            <img src="{% static 'images/open-bag.jpg'%}" alt="">
-        </div>
-    </div>
 
-    <h2>Shop by Brand</h2>
-    <div class="shop-item-container">
-        <div class="shop-item">
-            <div class="item-cover"><a href="#">gucci</a></div>
-            <img src="{% static 'images/shoe.jpg'%}" alt="">
-        </div>
-        <div class="shop-item">
-            <div class="item-cover"><a href="#">prada</a></div>
-            <img src="{% static 'images/shoe.jpg'%}" alt="">
-        </div>
-        <div class="shop-item">
-            <div class="item-cover"><a href="#">louis vuitton</a></div>
-            <img src="{% static 'images/shoe.jpg'%}" alt="">
-        </div>
-        <div class="shop-item">
-            <div class="item-cover"><a href="#">hermes</a></div>
-            <img src="{% static 'images/open-bag.jpg'%}" alt="">
-        </div>
-    </div>
-
-    <div class="banner"><h1>Free Shipping</h1></div>
-    <div class="shop-list-container">
-
-    </div>
 </div>
 
 {% endblock content %}

@@ -153,40 +153,21 @@
                     {% endif %}
                     {% if product.discount_price %}
                     <span class="badge badge-success mb-4">SALE</span>
-
-
                     <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
-
-              <span class="red-text font-weight-bold">
-
-                <strong>${{product.discount_price}}</strong>
-
-              </span>
-
+                        <span class="green-text font-weight-bold">
+                            <strong>${{product.discount_price}}</strong>
+                        </span>
                         <span class="grey-text">
-
-                <small>
-
-                  <s>${{product.price}}</s>
-
-                </small>
-
-              </span>
-
+                            <small>
+                                <s>${{product.price}}</s>
+                            </small>
+                        </span>
                     </h3>
                     {% else %}
                     <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4 mt-4">
-
-                        <span class="blue-text font-weight-bold">
-
-                <span>
-
-                  <strong>${{product.price}}</strong>
-
-                </span>
-
-              </span>
-
+                        <span class="green-text font-weight-bold">
+                            <strong>${{product.price}}</strong>
+                        </span>
                     </h3>
                     {% endif %}
 

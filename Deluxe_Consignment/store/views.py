@@ -15,29 +15,35 @@ from django.views.generic import (
 def home(request):
     data = cartData(request)
 
-    items = data['items']
-    cart_quantity = data['cart_quantity']
-    products = Product.objects.all()
-    context = {
-        'products': products,
-        'items': items,
-        'cart_quantity': cart_quantity,
-    }
-    return render(request, 'store/home.html', context)
+    if request.user.is_authenticated:
+        items = data['items']
+        cart_quantity = data['cart_quantity']
+        products = Product.objects.all()
+        context = {
+            'products': products,
+            'items': items,
+            'cart_quantity': cart_quantity,
+        }
+        return render(request, 'store/home.html', context)
+    else:
+        return render(request, 'store/home.html')
 
 
 def store(request):
     data = cartData(request)
 
-    items = data['items']
-    cart_quantity = data['cart_quantity']
-    products = Product.objects.all()
-    context = {
-        'products': products,
-        'items': items,
-        'cart_quantity': cart_quantity,
-    }
-    return render(request, 'store/store.html', context)
+    if request.user.is_authenticated:
+        items = data['items']
+        cart_quantity = data['cart_quantity']
+        products = Product.objects.all()
+        context = {
+            'products': products,
+            'items': items,
+            'cart_quantity': cart_quantity,
+        }
+        return render(request, 'store/store.html', context)
+    else:
+        return render(request, 'store/store.html')
 
 
 class ProductDetailView(DetailView):
@@ -125,4 +131,3 @@ def paymentPolicy(request):
 
 def test(request):
     return render(request, 'store/test.html')
-

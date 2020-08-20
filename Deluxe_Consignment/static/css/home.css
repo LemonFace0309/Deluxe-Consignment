@@ -1,7 +1,6 @@
 .custom_btn {
     display: inline-block;
     position: relative;
-    color: white;
     opacity: 0;
     padding: 1em 2em;
     border: white 1px solid;
