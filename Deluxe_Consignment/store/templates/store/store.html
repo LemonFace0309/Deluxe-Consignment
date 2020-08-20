@@ -22,19 +22,12 @@
 
                         <!-- Panel -->
                         <h5 class="font-weight-bold dark-grey-text"><strong>Order By</strong></h3>
-
                             <div class="divider"></div>
-
-                            <p class="blue-text"><a>Default</a></p>
-
+                            <p class="dark-grey-text"><a>Default</a></p>
                             <p class="dark-grey-text"><a>Popularity</a></p>
-
                             <p class="dark-grey-text"><a>Average rating</a></p>
-
                             <p class="dark-grey-text"><a>Price: low to high</a></p>
-
                             <p class="dark-grey-text"><a>Price: high to low</a></p>
-
                     </div>
 
                     <!-- Filter by category -->
@@ -54,11 +47,8 @@
                             </div>
 
                             <div class="form-group">
-
-                                <input class="form-check-input" name="group100" type="radio" id="radio101" checked>
-
-                                <label for="radio101" class="form-check-label dark-grey-text">Laptop</label>
-
+                                <input class="form-check-input" name="group100" type="radio" id="radio101">
+                                <label for="radio101" class="form-check-label dark-grey-text">Shoes</label>
                             </div>
 
                             <div class="form-group">
@@ -114,7 +104,7 @@
                                 <!-- Grid column -->
                                 <div class="col-md-6 text-left">
 
-                                    <p class="dark-grey-text"><strong id="resellerEarnings">0$</strong></p>
+                                    <p class="dark-grey-text"><strong id="resellerEarnings">$0</strong></p>
 
                                 </div>
                                 <!-- Grid column -->
@@ -122,7 +112,7 @@
                                 <!-- Grid column -->
                                 <div class="col-md-6 text-right">
 
-                                    <p class="dark-grey-text"><strong id="clientPrice">319$</strong></p>
+                                    <p class="dark-grey-text"><strong id="clientPrice">$1500</strong></p>
 
                                 </div>
                                 <!-- Grid column -->
@@ -190,9 +180,8 @@
 
                 <!-- Grid row -->
                 <div class="row">
-
                     {% for product in products %}
-
+                    {% if product %}
                     <!-- Grid column -->
                     <div class="col-lg-4 col-md-12 mb-4">
 
@@ -204,7 +193,7 @@
                                      class="img-fluid"
                                      alt="">
                                 <a data-toggle="modal" data-target="#modalQuickView{{forloop.counter}}">
-                                    <div class="mask rgba-white-slight"></div>
+                                    <div class="mask rgba-white-light"></div>
                                 </a>
                             </div>
                             <!-- Card image -->
@@ -216,28 +205,34 @@
                                                                        class="dark-grey-text">{{product}}</a></strong>
                                 </h5>
                                 {% if product.is_new %}
-                                <span class="badge badge-pill badge-info mb-1 mr-1">NEW</span>
+                                <span class="badge badge-pill badge-info mb-1 mr-1 ml-1">NEW</span>
                                 {% endif %}
                                 {% if product.discount_price %}
                                 <span class="badge badge-pill badge-success mb-1">SALE</span>
                                 {% endif %}
                                 <!-- Card footer -->
                                 <div class="card-footer pb-0">
-                                    <div class="row mb-0">
-                                        <span class="float-left"><strong>${{product.price}}</strong></span>
+                                    <div class="mb-0">
+                                        <!-- above had a row class -->
+
+                                        {% if product.discount_price %}
+                                            <span class="float-left">${{product.discount_price}}</span>
+                                        {% else %}
+                                            <span class="float-left">${{product.price}}</span>
+                                        {% endif%}
+
                                         <span class="float-right">
-                                            <a href="{{product.get_add_to_cart_url}}" data-toggle="tooltip"
-                                               data-placement="top"
-                                               title="Add to Bag"><i class="fas fa-shopping-bag ml-3"></i></a>
+                                            <a href="{{product.get_add_to_cart_url}}" 
+                                                data-toggle="tooltip" data-placement="top"
+                                                title="Add to Bag"><i class="fas grey-text fa-shopping-bag ml-3"></i>
+                                            </a>
                                         </span>
                                     </div>
                                 </div>
                             </div>
                             <!-- Card content -->
-
                         </div>
                         <!-- Card -->
-
                     </div>
                     <!-- Grid column -->
 
@@ -377,7 +372,7 @@
                             </div>
                         </div>
                     </div>
-
+                    {% endif %}
                     {% endfor %}
 
                 </div>

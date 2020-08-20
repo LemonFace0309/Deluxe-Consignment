@@ -44,6 +44,7 @@ def store(request):
         return render(request, 'store/store.html', context)
     else:
         return render(request, 'store/store.html')
+    #this needs reorder, cuz non auth user will not be able to look at items without 'prodcut' context
 
 
 class ProductDetailView(DetailView):
