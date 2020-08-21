@@ -8,10 +8,18 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 def createUser(request):
     if request.method == 'POST':
-        form = CreateUserForm(request.POST)
+        form = CreateUserForm(request.POST.copy())
+
+        form.is_valid()
+        print(form.cleaned_data)
         if form.is_valid():
-            messages.success(request, 'Account created successfully')
-            form.save()
+            user, created = User.objects.get_or_create(username=form.cleaned_data['email'], email=form.cleaned_data['email'],
+                                                       first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'],
+                                                       password=form.cleaned_data['password2'])
+            if created:
+                messages.success(request, 'Account created successfully')
+            else:
+                messages.success(request, 'Account already exists')
         else:
             messages.error(request, 'ERROR SAVING FORM: Make sure to use a UNIQUE username '
                                     'and that your passwords match!')
