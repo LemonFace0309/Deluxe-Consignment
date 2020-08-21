@@ -6,6 +6,9 @@ from .utils import *
 from user.models import (
     Customer, Order, OrderItem, ShippingAddress
 )
+from user.forms import (
+    CreateUserForm
+)
 from django.views.generic import (
     DetailView,
     ListView,
@@ -16,11 +19,11 @@ from django.views.generic import (
 # Create your views here.
 def home(request):
     data = cartData(request)
+    products = Product.objects.all()
 
     if request.user.is_authenticated:
         items = data['items']
         cart_quantity = data['cart_quantity']
-        products = Product.objects.all()
         context = {
             'products': products,
             'items': items,
@@ -28,7 +31,10 @@ def home(request):
         }
         return render(request, 'store/home.html', context)
     else:
-        return render(request, 'store/home.html')
+        context = {
+            'products': products,
+        }
+        return render(request, 'store/home.html', context)
 
 
 class StoreListView(ListView):

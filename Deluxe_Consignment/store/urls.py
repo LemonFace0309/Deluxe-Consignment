@@ -1,11 +1,12 @@
 from django.urls import path
-from django.views.decorators.cache import never_cache
 from . import views as store_views
+from django.views.decorators.cache import never_cache
 from .views import (
     ProductDetailView,
     StoreListView,
 )
 
+# app_name = "store" # CHANGE ALL URLS IN TEMPLATE AFTER UNCOMMENTING THIS
 urlpatterns = [
     path('', store_views.home, name='home'),
     path('store/', store_views.StoreListView.as_view(), name='store'), #idk what nevercahe is, might need to add it -jim
