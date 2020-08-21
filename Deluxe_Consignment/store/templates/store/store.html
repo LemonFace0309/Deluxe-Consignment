@@ -17,12 +17,17 @@
                         <!-- Panel -->
                         <h5 class="font-weight-bold dark-grey-text"><strong>Order By</strong></h3>
                         <div class="divider"></div>
-                        <select class="mdb-select md-form" name="sortOption">
-                            <option value="" disabled selected>Choose your option</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
-                        </select>
+                        <form action="" name="sortForm">
+                            <select class="mdb-select md-form" id="sort" name="sort" onchange="this.form.submit()">
+                                <option value="" disabled selected>Choose your option</option>
+                                <option value="pricelow">Price (low to high)</option>
+                                <option value="pricehigh">Price (high to low)</option>
+                                <option value="3">Option 3</option>
+                            </select>
+                            <!-- <button type="submit">s</button> -->
+                            <!-- <input type="submit" value="asd"> -->
+
+                        </form>
                     </div>
                     <form action="">
                         <input type="search" name="s">

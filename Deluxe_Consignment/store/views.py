@@ -38,19 +38,28 @@ class StoreListView(ListView):
         search = request.GET.get('searchBar')
         s = request.GET.get('s')
         category = request.GET.get('category')
-        sortOption = request.GET.get('sortOption')
+        sort = request.GET.get('sort')
 
         if search != '' and search is not None:
             products = products.filter(name__icontains=search)
-        elif s != '' and s is not None:
-            products = products.filter(name__iexact=s)
+
+        if sort == 'pricelow':
+            
+            products = products.order_by('discount_price')
+
+            # for product in products:
+            #     if product.discount_price:
+            #         products = products.order_by('price')
+            #         product.price = product.discount_price
+            # print(f'{product.name} cost {product.price} disc {product.discount_price}')
+
 
 
         if category is None:
             print('cat is none')
 
         print(category)
-        print(sortOption)
+        # print(sortOption)
         print("sort!")
         print(products)
 
@@ -66,7 +75,7 @@ class StoreListView(ListView):
 
         return render(request, 'store/store.html', context) 
 
-    #this needs reorder, cuz non auth user will not be able to look at items without 'prodcut' context
+    #this needs reorder, cuz non auth user will not be able to look at items without 'product' context
     #^fixed- so update this to ProductListView
 
     #OLD STORE VIEW BELOW
