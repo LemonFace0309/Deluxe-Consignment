@@ -17,11 +17,11 @@ from django.views.generic import (
 # Create your views here.
 def home(request):
     data = cartData(request)
+    products = Product.objects.all()
 
     if request.user.is_authenticated:
         items = data['items']
         cart_quantity = data['cart_quantity']
-        products = Product.objects.all()
         context = {
             'products': products,
             'items': items,
@@ -29,16 +29,19 @@ def home(request):
         }
         return render(request, 'store/home.html', context)
     else:
-        return render(request, 'store/home.html')
+        context = {
+            'products': products,
+        }
+        return render(request, 'store/home.html', context)
 
 
 def store(request):
     data = cartData(request)
+    products = Product.objects.all()
 
     if request.user.is_authenticated:
         items = data['items']
         cart_quantity = data['cart_quantity']
-        products = Product.objects.all()
         context = {
             'products': products,
             'items': items,
@@ -46,6 +49,9 @@ def store(request):
         }
         return render(request, 'store/store.html', context)
     else:
+        context = {
+            'products': products,
+        }
         return render(request, 'store/store.html')
 
 
