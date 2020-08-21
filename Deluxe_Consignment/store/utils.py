@@ -2,6 +2,9 @@ import json
 from user.models import (
     Customer, Order, OrderItem, ShippingAddress
 )
+from user.forms import (
+    CreateUserForm
+)
 
 
 def cartData(request):

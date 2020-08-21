@@ -6,6 +6,9 @@ from .utils import *
 from user.models import (
     Customer, Order, OrderItem, ShippingAddress
 )
+from user.forms import (
+    CreateUserForm
+)
 from django.views.generic import (
     DetailView,
 )
