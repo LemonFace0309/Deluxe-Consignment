@@ -6,172 +6,129 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/store.css' %}">
 
 <div class="container mt-5 pt-3">
-
     <!-- Navbar -->
     <div class="row pt-4">
-
         <!-- Sidebar -->
         <div class="col-lg-3">
-
             <div class="">
-
                 <!-- Grid row -->
                 <div class="row">
-
                     <div class="col-md-6 col-lg-12 mb-5">
-
                         <!-- Panel -->
                         <h5 class="font-weight-bold dark-grey-text"><strong>Order By</strong></h3>
-                            <div class="divider"></div>
-                            <p class="dark-grey-text"><a>Default</a></p>
-                            <p class="dark-grey-text"><a>Popularity</a></p>
-                            <p class="dark-grey-text"><a>Average rating</a></p>
-                            <p class="dark-grey-text"><a>Price: low to high</a></p>
-                            <p class="dark-grey-text"><a>Price: high to low</a></p>
+                        <div class="divider"></div>
+                        <select class="mdb-select md-form" name="sortOption">
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
                     </div>
+                    <form action="">
+                        <input type="search" name="s">
+                    </form>
+                    
 
                     <!-- Filter by category -->
                     <div class="col-md-6 col-lg-12 mb-5">
-
                         <h5 class="font-weight-bold dark-grey-text"><strong>Category</strong></h3>
-
-                            <div class="divider"></div>
-
+                        <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                             <!-- Radio group -->
+                        <form action="">
                             <div class="form-group ">
-
-                                <input class="form-check-input" name="group100" type="radio" id="radio100">
-
-                                <label for="radio100" class="form-check-label dark-grey-text">All</label>
-
+                                <input class="form-check-input" name="category" value="shoe" type="radio" id="radio100" checked>
+                                <label for="radio100" class="form-check-label dark-grey-text">Shoes</label>
                             </div>
-
+    
                             <div class="form-group">
-                                <input class="form-check-input" name="group100" type="radio" id="radio101">
-                                <label for="radio101" class="form-check-label dark-grey-text">Shoes</label>
+                                <input class="form-check-input" name="category" type="radio" id="radio101">
+                                <label for="radio101" class="form-check-label dark-grey-text">Bags</label>
                             </div>
-
+    
                             <div class="form-group">
-
-                                <input class="form-check-input" name="group100" type="radio" id="radio102">
-
-                                <label for="radio102" class="form-check-label dark-grey-text">Smartphone</label>
-
+                                <input class="form-check-input" name="category" type="radio" id="radio102">
+                                <label for="radio102" class="form-check-label dark-grey-text">Accessories</label>
                             </div>
-
+    
                             <div class="form-group">
-
-                                <input class="form-check-input" name="group100" type="radio" id="radio103">
-
+                                <input class="form-check-input" name="category" type="radio" id="radio103">
                                 <label for="radio103" class="form-check-label dark-grey-text">Tablet</label>
-
                             </div>
-
+    
                             <div class="form-group">
-
-                                <input class="form-check-input" name="group100" type="radio" id="radio104">
-
+                                <input class="form-check-input" name="category" type="radio" id="radio104">
                                 <label for="radio104" class="form-check-label dark-grey-text">Headphones</label>
-
                             </div>
+                        </form>
 
-                            <!-- Radio group -->
+                        <!-- Radio group -->
                     </div>
-
                     <!-- Filter by category -->
                 </div>
                 <!-- Grid row -->
 
                 <!-- Grid row -->
                 <div class="row">
-
                     <!-- Filter by price -->
                     <div class="col-md-6 col-lg-12 mb-5">
-
                         <h5 class="font-weight-bold dark-grey-text"><strong>Price</strong></h3>
-
                             <div class="divider"></div>
-
                             <form class="range-field mt-3">
-
                                 <input id="calculatorSlider" class="no-border" type="range" value="0" min="0" max="30"/>
-
                             </form>
 
                             <!-- Grid row -->
                             <div class="row justify-content-center">
-
                                 <!-- Grid column -->
                                 <div class="col-md-6 text-left">
-
                                     <p class="dark-grey-text"><strong id="resellerEarnings">$0</strong></p>
-
                                 </div>
                                 <!-- Grid column -->
 
                                 <!-- Grid column -->
                                 <div class="col-md-6 text-right">
-
                                     <p class="dark-grey-text"><strong id="clientPrice">$1500</strong></p>
-
                                 </div>
                                 <!-- Grid column -->
-
                             </div>
                             <!-- Grid row -->
-
                     </div>
                     <!-- Filter by price -->
 
                     <!-- Filter by rating -->
                     <div class="col-md-6 col-lg-12 mb-5">
-
                         <h5 class="font-weight-bold dark-grey-text"><strong>Rating</strong></h3>
-
                             <div class="divider"></div>
-
                             <div class="row ml-1">
-
                             </div>
-
                             <div class="row ml-1">
-
                             </div>
-
                             <div class="row ml-1">
-
                             </div>
-
                     </div>
                     <!-- Filter by rating -->
 
                 </div>
                 <!-- Grid row -->
-
             </div>
-
         </div>
         <!-- Sidebar -->
 
         <!-- Content -->
         <div class="col-lg-9">
-
             <!-- Filter Area -->
             <div class="row">
-
                 <div class="col-md-8 text-right ml-auto">
-
                     <!-- View Switcher -->
-                    <a class="btn blue darken-3 btn-sm"><i class="fas fa-th mr-2" aria-hidden="true"></i><strong>
-                        Grid</strong></a>
+                    <a class="btn blue darken-3 btn-sm"><i class="fas fa-th mr-2" aria-hidden="true"></i>
+                        <strong>Grid</strong>
+                    </a>
 
-                    <a class="btn blue darken-3 btn-sm"><i class="fas fa-th-list mr-2" aria-hidden="true"></i><strong>
-
-                        List</strong></a>
+                    <a class="btn blue darken-3 btn-sm"><i class="fas fa-th-list mr-2" aria-hidden="true"></i>
+                        <strong>List</strong>
+                    </a>
                     <!-- View Switcher -->
-
                 </div>
-
             </div>
             <!-- Filter Area -->
 
@@ -184,8 +141,6 @@
                     {% if product %}
                     <!-- Grid column -->
                     <div class="col-lg-4 col-md-12 mb-4">
-
-                        <!-- Card -->
                         <div class="card card-ecommerce">
                             <!-- Card image -->
                             <div class="view overlay">
@@ -261,7 +216,7 @@
                                                     <div class="carousel-item">
                                                         <a href="{% url 'product-detail' product.slug %}">
                                                             <img class="d-block w-100"
-                                                                 src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(24).jpg"
+                                                                 src="{{product.imageURL}}"
                                                                  alt="Second slide">
                                                         </a>
                                                     </div>
@@ -355,8 +310,7 @@
                                             <!-- Add to Cart -->
                                             <div class="card-body">
                                                 <div class="text-center">
-                                                    <a href="{{product.get_add_to_cart_url}}" class="btn btn-primary">Add
-                                                        to Bag
+                                                    <a href="{{product.get_add_to_cart_url}}" class="btn btn-secondary">Add to Bag
                                                         <i class="fas fa-shopping-bag ml-2" aria-hidden="true"></i>
                                                     </a>
                                                     <a href="{% url 'product-detail' product.slug %}" class="btn btn-light">Detail View</a>
@@ -374,22 +328,15 @@
                     </div>
                     {% endif %}
                     {% endfor %}
-
                 </div>
                 <!-- Grid row -->
-
             </section>
             <!-- Products Grid -->
-
         </div>
         <!-- Content -->
-
     </div>
-
 </div>
 <!-- Main Container -->
-
 </main>
-
 
 {% endblock content %}

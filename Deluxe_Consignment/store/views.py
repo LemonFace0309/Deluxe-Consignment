@@ -8,6 +8,8 @@ from user.models import (
 )
 from django.views.generic import (
     DetailView,
+    ListView,
+
 )
 
 
@@ -29,22 +31,61 @@ def home(request):
         return render(request, 'store/home.html')
 
 
-def store(request):
-    data = cartData(request)
-
-    if request.user.is_authenticated:
-        items = data['items']
-        cart_quantity = data['cart_quantity']
+class StoreListView(ListView):
+    def get(self, request, *args, **kwargs):
+        data = cartData(request)
         products = Product.objects.all()
+        search = request.GET.get('searchBar')
+        s = request.GET.get('s')
+        category = request.GET.get('category')
+        sortOption = request.GET.get('sortOption')
+
+        if search != '' and search is not None:
+            products = products.filter(name__icontains=search)
+        elif s != '' and s is not None:
+            products = products.filter(name__iexact=s)
+
+
+        if category is None:
+            print('cat is none')
+
+        print(category)
+        print(sortOption)
+        print("sort!")
+        print(products)
+
         context = {
             'products': products,
-            'items': items,
-            'cart_quantity': cart_quantity,
         }
-        return render(request, 'store/store.html', context)
-    else:
-        return render(request, 'store/store.html')
+
+        if request.user.is_authenticated:
+            items = data['items']
+            cart_quantity = data['cart_quantity']
+            context['items'] = items
+            context['cart_quantity'] = cart_quantity
+
+        return render(request, 'store/store.html', context) 
+
     #this needs reorder, cuz non auth user will not be able to look at items without 'prodcut' context
+    #^fixed- so update this to ProductListView
+
+    #OLD STORE VIEW BELOW
+    # def store(request):
+    #     data = cartData(request)
+
+    #     if request.user.is_authenticated:
+    #         items = data['items']
+    #         cart_quantity = data['cart_quantity']
+    #         products = Product.objects.all()
+    #         context = {
+    #             'products': products,
+    #             'items': items,
+    #             'cart_quantity': cart_quantity,
+    #         }
+    #         return render(request, 'store/store.html', context)
+    #     else:
+    #         return render(request, 'store/store.html')
+    #     #this needs reorder, cuz non auth user will not be able to look at items without 'prodcut' context
 
 
 class ProductDetailView(DetailView):
