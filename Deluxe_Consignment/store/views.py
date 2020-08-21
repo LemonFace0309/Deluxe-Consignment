@@ -52,7 +52,7 @@ def store(request):
         context = {
             'products': products,
         }
-        return render(request, 'store/store.html')
+        return render(request, 'store/store.html', context)
 
 
 class ProductDetailView(DetailView):
