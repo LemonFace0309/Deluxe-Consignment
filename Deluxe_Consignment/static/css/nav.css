@@ -2,6 +2,7 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+
 }
 
 nav {
@@ -39,7 +40,7 @@ nav {
 
 
 .nav-container .brand {
-    font-size: calc(2vw);
+    font-size: calc(3vw);
     margin: 0 1em;
     justify-self: left;
     /* transition: 0.3s; */
@@ -47,6 +48,8 @@ nav {
 
 .nav-container .brand a {
     color: white;
+    font-family: 'Sacramento';
+
 }
 
 .nav-container #search {
@@ -329,6 +332,8 @@ nav.sticky .menu {
     display: flex;
     animation: slideout 400ms ease-out;
 }
+
+
 
 @keyframes slide {
     from {
