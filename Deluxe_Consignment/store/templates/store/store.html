@@ -76,7 +76,7 @@
                 <div class="row">
                     <!-- Filter by price -->
                     <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Price</strong></h3>
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Price</strong></h5>
                             <div class="divider"></div>
                             <form class="range-field mt-3">
                                 <input id="calculatorSlider" class="no-border" type="range" value="0" min="0" max="30"/>
@@ -102,7 +102,7 @@
 
                     <!-- Filter by rating -->
                     <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Rating</strong></h3>
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Rating</strong></h5>
                             <div class="divider"></div>
                             <div class="row ml-1">
                             </div>
@@ -182,9 +182,10 @@
                                         {% endif%}
 
                                         <span class="float-right">
-                                            <a href="{{product.get_add_to_cart_url}}" 
-                                                data-toggle="tooltip" data-placement="top"
-                                                title="Add to Bag"><i class="fas grey-text fa-shopping-bag ml-3"></i>
+                                            <a href="#" class="update-cart"
+                                                data-toggle="tooltip" data-placement="top" data-product="{{product.id}}"
+                                                data-action="add" title="Add to Bag">
+                                                <i class="fas grey-text fa-shopping-bag ml-3"></i>
                                             </a>
                                         </span>
                                     </div>

@@ -53,14 +53,6 @@ class StoreListView(ListView):
             
             products = products.order_by('discount_price')
 
-            # for product in products:
-            #     if product.discount_price:
-            #         products = products.order_by('price')
-            #         product.price = product.discount_price
-            # print(f'{product.name} cost {product.price} disc {product.discount_price}')
-
-
-
         if category is None:
             print('cat is none')
 
@@ -79,28 +71,7 @@ class StoreListView(ListView):
             context['items'] = items
             context['cart_quantity'] = cart_quantity
 
-        return render(request, 'store/store.html', context) 
-
-    #this needs reorder, cuz non auth user will not be able to look at items without 'product' context
-    #^fixed- so update this to ProductListView
-
-    #OLD STORE VIEW BELOW
-    # def store(request):
-    #     data = cartData(request)
-
-    #     if request.user.is_authenticated:
-    #         items = data['items']
-    #         cart_quantity = data['cart_quantity']
-    #         products = Product.objects.all()
-    #         context = {
-    #             'products': products,
-    #             'items': items,
-    #             'cart_quantity': cart_quantity,
-    #         }
-    #         return render(request, 'store/store.html', context)
-    #     else:
-    #         return render(request, 'store/store.html')
-    #     #this needs reorder, cuz non auth user will not be able to look at items without 'prodcut' context
+        return render(request, 'store/store.html', context)
 
 
 class ProductDetailView(DetailView):
@@ -116,7 +87,7 @@ class ProductDetailView(DetailView):
 def add_to_cart(request, slug):
     product = get_object_or_404(Product, slug=slug)
 
-    try:
+    if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
@@ -128,7 +99,7 @@ def add_to_cart(request, slug):
             messages.success(request, f'{product} has been successfully added to your shopping bag')
         else:
             messages.error(request, f'You\'ve reached the maximum number of {product}s available for purchase')
-    except:
+    else:
         messages.error(request, f'Please create an account first')
     # return redirect("product-detail", slug=slug)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
