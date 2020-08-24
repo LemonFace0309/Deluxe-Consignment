@@ -151,7 +151,7 @@
                     {% if product.is_new %}
                     <span class="badge badge-info mb-2 mr-2">NEW</span>
                     {% endif %}
-                    {% if product.discount_price %}
+                    {% if product.discount_price != product.price %}
                     <span class="badge badge-success mb-4">SALE</span>
                     <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
                         <span class="green-text font-weight-bold">
