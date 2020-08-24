@@ -1,13 +1,29 @@
 $(document).ready(() => {
     new WOW().init();
+    $('#modalCookie1').modal('show')
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    let elems = document.querySelectorAll('.carousel');
-    let items = document.querySelectorAll('.carousel-item');
-    // items.forEach();
-    let instances = M.Carousel.init(elems, {
-        numVisible: 3,
-        dist: -50,
-    });
-});
+//$(document).ready(
+function removeCover(){
+    //setTimeout(() => {
+    let aTags = document.getElementsByTagName('a')
+        // console.log(aTags.length);
+    for (i = 0; i < aTags.length; i++){
+        // console.log(aTags[i].href);
+        if (aTags[i].innerText.includes('Free Instagram Feed widget')){
+            // console.log();
+            aTags[i].remove();
+            break;
+        }
+    }
+    //}, 500);
+}
+//)
+
+const onChangeElements = document.querySelectorAll('.submitonchange');
+onChangeElements.forEach(item => {
+    item.addEventListener('click', () => {
+        item.closest('form').submit();
+    })
+})
+
