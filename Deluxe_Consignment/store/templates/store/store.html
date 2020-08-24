@@ -24,14 +24,8 @@
                                 <option value="pricehigh">Price (high to low)</option>
                                 <option value="3">Option 3</option>
                             </select>
-                            <!-- <button type="submit">s</button> -->
-                            <!-- <input type="submit" value="asd"> -->
-
                         </form>
                     </div>
-                    <form action="">
-                        <input type="search" name="s">
-                    </form>
                     
 
                     <!-- Filter by category -->
@@ -39,29 +33,29 @@
                         <h5 class="font-weight-bold dark-grey-text"><strong>Category</strong></h3>
                         <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                             <!-- Radio group -->
-                        <form action="">
+                        <form action="" onchange="this.form.submit()">
                             <div class="form-group ">
-                                <input class="form-check-input" name="category" value="shoe" type="radio" id="radio100" checked>
+                                <input class="form-check-input submitonchange" name="category" value="shoes" type="radio" id="radio100">
                                 <label for="radio100" class="form-check-label dark-grey-text">Shoes</label>
                             </div>
     
                             <div class="form-group">
-                                <input class="form-check-input" name="category" type="radio" id="radio101">
+                                <input class="form-check-input submitonchange" name="category" value="bags" type="radio" id="radio101">
                                 <label for="radio101" class="form-check-label dark-grey-text">Bags</label>
                             </div>
     
                             <div class="form-group">
-                                <input class="form-check-input" name="category" type="radio" id="radio102">
+                                <input class="form-check-input submitonchange" name="category" type="radio" id="radio102">
                                 <label for="radio102" class="form-check-label dark-grey-text">Accessories</label>
                             </div>
     
                             <div class="form-group">
-                                <input class="form-check-input" name="category" type="radio" id="radio103">
-                                <label for="radio103" class="form-check-label dark-grey-text">Tablet</label>
+                                <input class="form-check-input" name="category" value="gucci" type="radio" id="radio103">
+                                <label for="radio103" class="form-check-label dark-grey-text">Gucci</label>
                             </div>
     
                             <div class="form-group">
-                                <input class="form-check-input" name="category" type="radio" id="radio104">
+                                <input class="form-check-input" name="category" type="radio" id="radio104" onchange="this.form.submit()">
                                 <label for="radio104" class="form-check-label dark-grey-text">Headphones</label>
                             </div>
                         </form>
@@ -167,7 +161,7 @@
                                 {% if product.is_new %}
                                 <span class="badge badge-pill badge-info mb-1 mr-1 ml-1">NEW</span>
                                 {% endif %}
-                                {% if product.discount_price %}
+                                {% if product.discount_price != product.price %}
                                 <span class="badge badge-pill badge-success mb-1">SALE</span>
                                 {% endif %}
                                 <!-- Card footer -->
@@ -175,7 +169,7 @@
                                     <div class="mb-0">
                                         <!-- above had a row class -->
 
-                                        {% if product.discount_price %}
+                                        {% if product.discount_price != product.price %}
                                             <span class="float-left">${{product.discount_price}}</span>
                                         {% else %}
                                             <span class="float-left">${{product.price}}</span>
@@ -275,7 +269,7 @@
                                             {% if product.is_new %}
                                             <span class="badge badge-info mb-2 mr-2">NEW</span>
                                             {% endif %}
-                                            {% if product.discount_price %}
+                                            {% if product.discount_price != product.price %}
                                             <span class="badge badge-success mb-4">SALE</span>
                                             <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
                                                 <span class="green-text font-weight-bold">

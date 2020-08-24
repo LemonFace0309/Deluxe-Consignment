@@ -41,48 +41,26 @@ class StoreListView(ListView):
     def get(self, request, *args, **kwargs):
         data = cartData(request)
         products = Product.objects.all()
-        search = request.GET.get('searchBar')
-        s = request.GET.get('s')
-        category = request.GET.get('category')
+        search = request.GET.get('q')
         sort = request.GET.get('sort')
-
-        productlist = list(Product.objects.all())
-        for product in productlist:
-            print(product)
-        # print(productlist)
+        category = request.GET.get('category')
 
         if search != '' and search is not None:
             products = products.filter(name__icontains=search)
 
         if sort == 'pricelow':
-            for product in products:
-                print(f'{product.name} cost {product.price} disc {product.discount_price}')
-                if product.discount_price:
-                    product.price = product.discount_price
-                    products = products.order_by('price')
+            products = products.order_by('discount_price', 'name')
 
+        if category == 'shoes':
+            products = products.filter(bag__gt=0)
+        elif category == 'gucci':
+            products = products.filter(brand__icontains='guc')
 
-
-            # for product in products:
-            #     if product.discount_price:
-            #         products = products.order_by('price')
-            #         product.price = product.discount_price
-            
-
-
-        if category is None:
-            print('cat is none')
-
-        print(category)
-        # print(sortOption)
-        print("sort!")
-        print(products)
-
-        # from django.db.models.utils import list_to_queryset
-        # productlist = list_to_queryset(productlist)
+        for product in products:
+            print(product.id)
 
         context = {
-            'products': productlist,
+            'products': products,
         }
 
         if request.user.is_authenticated:

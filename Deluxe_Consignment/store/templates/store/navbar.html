@@ -143,10 +143,10 @@
 <nav>
     <div class="nav-header">
         {% if not request.user.is_authenticated %}
-        <a href="" data-toggle="modal" data-target="#modalLRForm">Login or Register</a>
+            <a href="" data-toggle="modal" data-target="#modalLRForm">Login or Register</a>
         {% else %}
-        <a href="{% url 'user:logout-user' %}">Sign Out</a>
-        <a href="">Profile</a>
+            <a href="{% url 'user:logout-user' %}">Sign Out</a>
+            <a href="">Profile</a>
         {% endif %}
     </div>
 
@@ -154,7 +154,7 @@
         <span id="menu-open" href=""><i class="fas fa-bars fa-1x"></i></span>
         <div class="brand"><a href="{% url 'home'%}">Deluxe Consignment Shop</a></div>
         <form id="search" action="">
-            <input class="form-control" id="searchBar" name="searchBar" type="search" placeholder="Search">
+            <input class="form-control" id="searchBar" name="q" type="search" placeholder="Search">
         </form>
         <div id="cart">
             <!-- <button class="btn btn-rounded red">2</button> -->
@@ -274,7 +274,11 @@
                     <tr>
                         <th scope="row">{{forloop.counter}}</th>
                         <td>{{item.product}}</td>
-                        <td>${{item.product.price}}</td>
+                        {% if item.product.discount_price != item.product.price %}
+                            <td>${{item.product.discount_price}}</td>
+                        {% else %}
+                            <td>${{item.product.price}}</td>
+                        {% endif %}
                         <td>
                             <a href="{{item.product.get_remove_from_cart_url}}">
                                 <i class="fas black-text fa-times"></i>
