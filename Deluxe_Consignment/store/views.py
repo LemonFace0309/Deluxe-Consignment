@@ -46,12 +46,25 @@ class StoreListView(ListView):
         category = request.GET.get('category')
         sort = request.GET.get('sort')
 
+        productlist = list(Product.objects.all())
+        for product in productlist:
+            print(product)
+        # print(productlist)
+
         if search != '' and search is not None:
             products = products.filter(name__icontains=search)
 
         if sort == 'pricelow':
-            
-            products = products.order_by('discount_price')
+            for product in products:
+                print(f'{product.name} cost {product.price} disc {product.discount_price}')
+                if product.discount_price:
+                    product.price = product.discount_price
+                    products = products.order_by('price')
+
+            # for product in products:
+            #     if product.discount_price:
+            #         products = products.order_by('price')
+            #         product.price = product.discount_price
 
         if category is None:
             print('cat is none')
@@ -61,8 +74,11 @@ class StoreListView(ListView):
         print("sort!")
         print(products)
 
+        # from django.db.models.utils import list_to_queryset
+        # productlist = list_to_queryset(productlist)
+
         context = {
-            'products': products,
+            'products': productlist,
         }
 
         if request.user.is_authenticated:
@@ -133,7 +149,7 @@ def checkout(request):
         'items': items,
         'cart_quantity': cart_quantity,
     }
-    return render(request, 'store/cart.html', context)
+    return render(request, 'store/checkout.html', context)
 
 
 def consign(request):
