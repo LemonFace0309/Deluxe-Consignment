@@ -58,6 +58,12 @@ class Product(models.Model):
         })
 
     @property
+    def get_reduce_quantity_url(self):
+        return reverse("reduce-quantity", kwargs={
+            'slug': self.slug
+        })
+
+    @property
     def is_new(self):
         DATE_FORMAT = "%Y-%m-%d"
         today = datetime.date.today()
@@ -74,6 +80,18 @@ class Product(models.Model):
     @property
     def is_shoe(self):
         return hasattr(self, "shoe")
+
+    @property
+    def is_bag(self):
+        return hasattr(self, "bag")
+
+    @property
+    def is_accessory(self):
+        return hasattr(self, "accessory")
+
+    @property
+    def is_SLG(self):
+        return hasattr(self, "SLG")
 
     @property
     def imageURL(self):
@@ -101,7 +119,7 @@ class Accessory(Product, models.Model):
     pass
 
 
-class SLGS(Product, models.Model):
+class SLG(Product, models.Model):
     pass
 
 

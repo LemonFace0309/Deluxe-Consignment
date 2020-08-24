@@ -14,5 +14,5 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Shoe, ProductAdmin)
 admin.site.register(Bag, ProductAdmin)
 admin.site.register(Accessory, ProductAdmin)
-admin.site.register(SLGS, ProductAdmin)
+admin.site.register(SLG, ProductAdmin)
 admin.site.register(ProductImage)

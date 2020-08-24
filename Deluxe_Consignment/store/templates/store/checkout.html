@@ -26,7 +26,7 @@
                             <strong>Product</strong>
                         </th>
                         <th class="font-weight-bold">
-                            <strong>Color</strong>
+                            <strong>Type</strong>
                         </th>
                         <th></th>
                         <th class="font-weight-bold">
@@ -47,118 +47,77 @@
                     <tbody>
 
                     <!-- First row -->
+                    {% for item in items %}
                     <tr>
                         <th scope="row">
-                            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" alt=""
+                            <img src="{{item.product.imageURL}}" alt=""
                                  class="img-fluid z-depth-0">
                         </th>
                         <td>
                             <h5 class="mt-3">
-                                <strong>iPhone</strong>
+                                <strong>{{item.product}}</strong>
                             </h5>
-                            <p class="text-muted">Apple</p>
+                            <p class="text-muted">{{item.product.get_brand}}</p>
                         </td>
-                        <td>White</td>
+                        {% if item.product.is_shoe%}
+                        <td>Shoe</td>
+                        {% endif %}
+                        {% if item.product.is_bag%}
+                        <td>Bag</td>
+                        {% endif %}
+                        {% if item.product.is_accessory%}
+                        <td>Accessory</td>
+                        {% endif %}
+                        {% if item.product.is_SLG%}
+                        <td>SLG</td>
+                        {% endif %}
                         <td></td>
-                        <td>$800</td>
+                        <td>{{item.product.price}}</td>
                         <td class="text-center text-md-left">
-                            <span class="qty">1 </span>
+                            <span class="qty">{{item.quantity}} </span>
                             <div class="btn-group radio-group ml-2" data-toggle="buttons">
-                                <label class="btn btn-sm btn-primary btn-rounded">
-                                    <input type="radio" style="display: none;" name="options" class="qty_changer">&mdash;
-                                </label>
-                                <label class="btn btn-sm btn-primary btn-rounded">
-                                    <input type="radio" name="options" class="qty_changer">+
-                                </label>
+                                {% if item.quantity is 1 %}
+                                <a href="{{item.product.get_remove_from_cart_url}}">
+                                    <button type="button" class="btn btn-sm btn-primary btn-rounded" data-toggle="tooltip"
+                                    data-placement="top"
+                                    title="Remove item">--
+                                    </button>
+                                </a>
+                                {% endif %}
+                                {% if item.quantity > 1 %}
+                                <a href="{{item.product.get_reduce_quantity_url}}">
+                                    <button type="button" class="btn btn-sm btn-primary btn-rounded" data-toggle="tooltip"
+                                    data-placement="top"
+                                    title="Remove item">--
+                                    </button>
+                                </a>
+                                {% endif %}
+                                <a href="{{item.product.get_add_to_cart_url}}">
+                                    <button type="button" class="btn btn-sm btn-primary btn-rounded" data-toggle="tooltip"
+                                    data-placement="top"
+                                    title="Add item">+
+                                </button>
+                                </a>
+
+
                             </div>
                         </td>
                         <td class="font-weight-bold">
-                            <strong>$800</strong>
+                            <strong>{{item.get_total}}</strong>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-primary" data-toggle="tooltip"
+                            <a href="{{item.product.get_remove_from_cart_url}}">
+                                <button type="button" class="btn btn-sm btn-primary" data-toggle="tooltip"
                                     data-placement="top"
                                     title="Remove item">X
-                            </button>
+                                </button>
+                            </a>
                         </td>
                     </tr>
+                    {% endfor %}
                     <!-- First row -->
 
                     <!-- Second row -->
-                    <tr>
-                        <th scope="row">
-                            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/6.jpg" alt=""
-                                 class="img-fluid z-depth-0">
-                        </th>
-                        <td>
-                            <h5 class="mt-3">
-                                <strong>Headphones</strong>
-                            </h5>
-                            <p class="text-muted">Sony</p>
-                        </td>
-                        <td>Red</td>
-                        <td></td>
-                        <td>$200</td>
-                        <td class="text-center text-md-left">
-                            <span class="qty">3 </span>
-                            <div class="btn-group radio-group ml-2" data-toggle="buttons">
-                                <label class="btn btn-sm btn-primary btn-rounded">
-                                    <input type="radio" name="options" class="qty_changer">&mdash;
-                                </label>
-                                <label class="btn btn-sm btn-primary btn-rounded">
-                                    <input type="radio" name="options" class="qty_changer">+
-                                </label>
-                            </div>
-                        </td>
-                        <td class="font-weight-bold">
-                            <strong>$600</strong>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-primary" data-toggle="tooltip"
-                                    data-placement="top"
-                                    title="Remove item">X
-                            </button>
-                        </td>
-                    </tr>
-                    <!-- Second row -->
-
-                    <!-- Third row -->
-                    <tr>
-                        <th scope="row">
-                            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/1.jpg" alt=""
-                                 class="img-fluid z-depth-0">
-                        </th>
-                        <td>
-                            <h5 class="mt-3">
-                                <strong>iPad Pro</strong>
-                            </h5>
-                            <p class="text-muted">by FifeSteps</p>
-                        </td>
-                        <td>Gold</td>
-                        <td></td>
-                        <td>$600</td>
-                        <td class="text-center text-md-left">
-                            <span class="qty">2 </span>
-                            <div class="btn-group radio-group ml-2" data-toggle="buttons">
-                                <label class="btn btn-sm btn-primary btn-rounded">
-                                    <input type="radio" name="options" class="qty_changer">&mdash;
-                                </label>
-                                <label class="btn btn-sm btn-primary btn-rounded">
-                                    <input type="radio" name="options" class="qty_changer">+
-                                </label>
-                            </div>
-                        </td>
-                        <td class="font-weight-bold">
-                            <strong>$1200</strong>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-primary" data-toggle="tooltip"
-                                    data-placement="top"
-                                    title="Remove item">X
-                            </button>
-                        </td>
-                    </tr>
-                    <!-- Third row -->
 
                     <!-- Fourth row -->
                     <tr>
@@ -170,7 +129,7 @@
                         </td>
                         <td class="text-right">
                             <h4 class="mt-2">
-                                <strong>$2600</strong>
+                                <strong>{{data.order.get_cart_total}}</strong>
                             </h4>
                         </td>
                         <td colspan="3" class="text-right">

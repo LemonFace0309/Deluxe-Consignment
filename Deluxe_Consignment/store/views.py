@@ -77,6 +77,27 @@ def add_to_cart(request, slug):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+def reduce_quantity(request, slug):
+    product = get_object_or_404(Product, slug=slug)
+    try:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+
+        # Updating order item quantity
+        if orderItem.quantity > 1:
+            orderItem.quantity -= 1
+            orderItem.save()
+            messages.success(request, f'{product} quantity has successfully been updated')
+        else:
+            pass
+    except:
+        messages.error(request, f'Please create an account first')
+    # return redirect("product-detail", slug=slug)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
 def remove_from_cart(request, slug):
     product = get_object_or_404(Product, slug=slug)
 
@@ -104,6 +125,7 @@ def checkout(request):
         'products': products,
         'items': items,
         'cart_quantity': cart_quantity,
+        'data': data,
     }
     return render(request, 'store/checkout.html', context)
 
