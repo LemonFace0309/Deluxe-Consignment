@@ -6,19 +6,24 @@ from .utils import *
 from user.models import (
     Customer, Order, OrderItem, ShippingAddress
 )
+from user.forms import (
+    CreateUserForm
+)
 from django.views.generic import (
     DetailView,
+    ListView,
+
 )
 
 
 # Create your views here.
 def home(request):
     data = cartData(request)
+    products = Product.objects.all()
 
     if request.user.is_authenticated:
         items = data['items']
         cart_quantity = data['cart_quantity']
-        products = Product.objects.all()
         context = {
             'products': products,
             'items': items,
@@ -26,24 +31,88 @@ def home(request):
         }
         return render(request, 'store/home.html', context)
     else:
-        return render(request, 'store/home.html')
-
-
-def store(request):
-    data = cartData(request)
-
-    if request.user.is_authenticated:
-        items = data['items']
-        cart_quantity = data['cart_quantity']
-        products = Product.objects.all()
         context = {
             'products': products,
-            'items': items,
-            'cart_quantity': cart_quantity,
         }
-        return render(request, 'store/store.html', context)
-    else:
-        return render(request, 'store/store.html')
+        return render(request, 'store/home.html', context)
+
+
+class StoreListView(ListView):
+    def get(self, request, *args, **kwargs):
+        data = cartData(request)
+        products = Product.objects.all()
+        search = request.GET.get('searchBar')
+        s = request.GET.get('s')
+        category = request.GET.get('category')
+        sort = request.GET.get('sort')
+
+        productlist = list(Product.objects.all())
+        for product in productlist:
+            print(product)
+        # print(productlist)
+
+        if search != '' and search is not None:
+            products = products.filter(name__icontains=search)
+
+        if sort == 'pricelow':
+            for product in products:
+                print(f'{product.name} cost {product.price} disc {product.discount_price}')
+                if product.discount_price:
+                    product.price = product.discount_price
+                    products = products.order_by('price')
+
+
+
+            # for product in products:
+            #     if product.discount_price:
+            #         products = products.order_by('price')
+            #         product.price = product.discount_price
+            
+
+
+        if category is None:
+            print('cat is none')
+
+        print(category)
+        # print(sortOption)
+        print("sort!")
+        print(products)
+
+        # from django.db.models.utils import list_to_queryset
+        # productlist = list_to_queryset(productlist)
+
+        context = {
+            'products': productlist,
+        }
+
+        if request.user.is_authenticated:
+            items = data['items']
+            cart_quantity = data['cart_quantity']
+            context['items'] = items
+            context['cart_quantity'] = cart_quantity
+
+        return render(request, 'store/store.html', context) 
+
+    #this needs reorder, cuz non auth user will not be able to look at items without 'product' context
+    #^fixed- so update this to ProductListView
+
+    #OLD STORE VIEW BELOW
+    # def store(request):
+    #     data = cartData(request)
+
+    #     if request.user.is_authenticated:
+    #         items = data['items']
+    #         cart_quantity = data['cart_quantity']
+    #         products = Product.objects.all()
+    #         context = {
+    #             'products': products,
+    #             'items': items,
+    #             'cart_quantity': cart_quantity,
+    #         }
+    #         return render(request, 'store/store.html', context)
+    #     else:
+    #         return render(request, 'store/store.html')
+    #     #this needs reorder, cuz non auth user will not be able to look at items without 'prodcut' context
 
 
 class ProductDetailView(DetailView):
