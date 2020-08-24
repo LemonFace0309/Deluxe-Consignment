@@ -52,7 +52,11 @@ class StoreListView(ListView):
             products = products.order_by('discount_price', 'name')
 
         if category == 'shoes':
+            products = products.filter(shoe__gt=0)
+
+        if category == 'bags':
             products = products.filter(bag__gt=0)
+
         elif category == 'gucci':
             products = products.filter(brand__icontains='guc')
 
