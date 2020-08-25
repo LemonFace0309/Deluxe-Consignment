@@ -43,24 +43,39 @@ class StoreListView(ListView):
         products = Product.objects.all()
         search = request.GET.get('q')
         sort = request.GET.get('sort')
+        brand = request.GET.get('brand')
         category = request.GET.get('category')
+
+        brands = []
+        for choice in BRAND_CHOICES:
+            brands += [choice[1]]
 
         if search != '' and search is not None:
             products = products.filter(name__icontains=search)
 
         if sort == 'pricelow':
             products = products.order_by('discount_price', 'name')
+        elif sort == 'pricehigh':
+            products = products.order_by('-discount_price', 'name')
+
+
+        if brand != '' and brand is not None:
+            print(f'sarch for {brand}')
+            products = products.filter(brand__icontains=brand)
+
 
         if category == 'shoes':
+            products = products.filter(shoe__gt=0)
+        elif category == 'bags':
             products = products.filter(bag__gt=0)
-        elif category == 'gucci':
-            products = products.filter(brand__icontains='guc')
-
-        for product in products:
-            print(product.id)
+        elif category == 'accessories':
+            products = products.filter(accessory__gt=0)
+        elif category == 'slgs':
+            products = products.filter(slgs__gt=0)
 
         context = {
             'products': products,
+            'brands': brands,
         }
 
         if request.user.is_authenticated:

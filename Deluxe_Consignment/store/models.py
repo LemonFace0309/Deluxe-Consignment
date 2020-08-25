@@ -4,29 +4,29 @@ from django.shortcuts import reverse
 import datetime
 
 BRAND_CHOICES = [
-    ('Bal', 'Balenciaga'),
-    ('Bur', 'Burberry'),
-    ('Cel', 'Celine'),
-    ('Cha', 'Chanel'),
-    ('Dio', 'Christian Dior'),
-    ('Loub', 'Christian Louboutins'),
-    ('Fer', 'Ferragamo'),
-    ('Giv', 'Givenchy'),
-    ('Guc', 'Gucci'),
-    ('Her', 'Hermes'),
-    ('Choo', 'Jimmy Choo'),
-    ('Vui', 'Louis Vuitton'),
-    ('Pra', 'Prada'),
-    ('Laur', 'Saint Laurent'),
-    ('Gar', 'Valentino Garavani'),
-    ('Oth', 'Others'),
+    ('Balenciaga', 'Balenciaga'),
+    ('Burberry', 'Burberry'),
+    ('Celine', 'Celine'),
+    ('Chanel', 'Chanel'),
+    ('Christian Dior', 'Christian Dior'),
+    ('Christian Louboutins', 'Christian Louboutins'),
+    ('Ferragamo', 'Ferragamo'),
+    ('Givenchy', 'Givenchy'),
+    ('Gucci', 'Gucci'),
+    ('Hermes', 'Hermes'),
+    ('Jimmy Choo', 'Jimmy Choo'),
+    ('Louis Vuitton', 'Louis Vuitton'),
+    ('Prada', 'Prada'),
+    ('Saint Laurent', 'Saint Laurent'),
+    ('Valentino Garavani', 'Valentino Garavani'),
+    ('Others', 'Others'),
 ]
 
 
 # Create your models here.
 class Product(models.Model):
     name = models.CharField(max_length=200)
-    brand = models.CharField(max_length=4, choices=BRAND_CHOICES, null=True)
+    brand = models.CharField(max_length=100, choices=BRAND_CHOICES, null=True)
     price = models.DecimalField(max_digits=99, decimal_places=2)
     discount_price = models.DecimalField(max_digits=99, decimal_places=2, blank=True, null=True)
     featured = models.BooleanField(default=False)
