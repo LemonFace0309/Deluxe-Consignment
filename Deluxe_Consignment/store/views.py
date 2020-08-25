@@ -3,6 +3,7 @@ from .models import *
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .utils import *
+from django.db.models.functions import Lower
 from user.models import (
     Customer, Order, OrderItem, ShippingAddress
 )
@@ -38,26 +39,33 @@ def home(request):
 
 
 class StoreListView(ListView):
+
     def get(self, request, *args, **kwargs):
+        paginate_by = 2
         data = cartData(request)
         products = Product.objects.all()
         search = request.GET.get('q')
         sort = request.GET.get('sort')
         brand = request.GET.get('brand')
         category = request.GET.get('category')
+        pricemax = request.GET.get('pricemax')
 
         brands = []
         for choice in BRAND_CHOICES:
-            brands += [choice[1]]
+            if products.filter(brand__icontains=choice[1]).count() != 0:
+                brands += [choice[1]]
 
         if search != '' and search is not None:
             products = products.filter(name__icontains=search)
 
         if sort == 'pricelow':
-            products = products.order_by('discount_price', 'name')
+            products = products.order_by('discount_price', Lower('name'))
         elif sort == 'pricehigh':
-            products = products.order_by('-discount_price', 'name')
-
+            products = products.order_by('-discount_price', Lower('name'))
+        elif sort == 'a-z':
+            products = products.order_by(Lower('name'), 'discount_price')
+        elif sort == 'z-a':
+            products = products.order_by(Lower('-name'), 'discount_price')
 
         if brand != '' and brand is not None:
             print(f'sarch for {brand}')
@@ -72,6 +80,10 @@ class StoreListView(ListView):
             products = products.filter(accessory__gt=0)
         elif category == 'slgs':
             products = products.filter(slgs__gt=0)
+
+        if pricemax != 0 and pricemax is not None:
+            print(pricemax)
+            products = products.filter(price__lte=pricemax)
 
         context = {
             'products': products,
