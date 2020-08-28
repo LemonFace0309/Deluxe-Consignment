@@ -35,7 +35,12 @@ class Product(models.Model):
     date_created = models.DateTimeField(auto_now=True)
     description = models.TextField(max_length=2000, null=True, blank=True)
     slug = models.SlugField(max_length=200)
-    # photos = ArrayField(ArrayField(models.ImageField(null=True, blank=True)))
+
+    # setting a discount price equal to price if not set by admin
+    def save(self, *args, **kwargs):
+        if not self.discount_price:
+            self.discount_price = self.price
+        super(Product, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -58,8 +63,8 @@ class Product(models.Model):
         })
 
     @property
-    def get_reduce_quantity_url(self):
-        return reverse("reduce-quantity", kwargs={
+    def get_subtract_from_cart_url(self):
+        return reverse("subtract-from-cart", kwargs={
             'slug': self.slug
         })
 

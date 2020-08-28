@@ -173,7 +173,7 @@
                                     <div class="mb-0">
                                         <!-- above had a row class -->
 
-                                        {% if product.discount_price != product.price %}
+                                        {% if product.discount_price and product.discount_price != product.price %}
                                         <span class="float-left">${{product.discount_price}}</span>
                                         {% else %}
                                         <span class="float-left">${{product.price}}</span>

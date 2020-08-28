@@ -279,7 +279,7 @@
                     <tr>
                         <th scope="row">{{forloop.counter}}</th>
                         <td>{{item.product.name}}</td>
-                        {% if item.product.discount_price != item.product.price %}
+                        {% if item.product.discount_price and item.product.discount_price != item.product.price %}
                         <td>${{item.product.discount_price}}</td>
                         {% else %}
                         <td>${{item.product.price}}</td>

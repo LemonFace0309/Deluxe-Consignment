@@ -24,13 +24,13 @@ function addCookieItem(productId, action){
     }
     */
 
-    var url = "/update-cookie-cart-quantity/"
     if(cart[productId] == undefined){
         itemQuantity = 0
     } else {
         itemQuantity = cart[productId]['quantity']
     }
 
+    var url = "/update-cookie-cart-quantity/"
     fetch(url, {
         method: 'POST',
         headers: {
@@ -55,15 +55,24 @@ function addCookieItem(productId, action){
                 console.log('Cart:', cart)
                 document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
             }else{
-                // Overriding cart cookie
                 cart[productId]['quantity'] += 1
                 console.log('Cart:', cart)
                 document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
             }
         }
-        if(result == 'remove'){
+        else if(result == 'subtract'){
+            if(cart[productId]['quantity'] > 1){
+                cart[productId]['quantity'] -= 1
+                console.log('Cart:', cart)
+                document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+            } else {
+                delete cart[productId]
+                console.log('Cart:', cart)
+                document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+            }
+        }
+        else if(result == 'remove'){
             delete cart[productId]
-            // Overriding cart cookie
             console.log('Cart:', cart)
             document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
         }
@@ -75,12 +84,11 @@ function addCookieItem(productId, action){
 
 
 function removeCover(){
-    console.log('hi')
     setTimeout(() => {
         var aTags = document.getElementsByTagName('a')
-            console.log(aTags.length);
+            // console.log(aTags.length);
         for (i = 0; i < aTags.length; i++){
-            console.log(aTags[i].href);
+            // console.log(aTags[i].href);
             if (aTags[i].innerText.includes('Free Instagram Feed widget')){
                 console.log();
                 aTags[i].remove();
@@ -88,23 +96,6 @@ function removeCover(){
             }
         }
     }, 1000);
-    //setTimeout(() => {
-<<<<<<< HEAD
-    var aTags = document.getElementsByTagName('a')
-    for (i = 0; i < aTags.length; i++){
-=======
-    let aTags = document.getElementsByTagName('a')
-        // console.log(aTags.length);
-    for (i = 0; i < aTags.length; i++){
-        // console.log(aTags[i].href);
->>>>>>> store
-        if (aTags[i].innerText.includes('Free Instagram Feed widget')){
-            // console.log();
-            aTags[i].remove();
-            break;
-        }
-    }
-    //}, 500);
 }
 
 window.onload = removeCover()
@@ -114,4 +105,3 @@ onChangeElements.forEach(item => {
         item.closest('form').submit();
     })
 })
-

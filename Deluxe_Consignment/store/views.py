@@ -117,9 +117,10 @@ def add_to_cart(request, slug):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-def reduce_quantity(request, slug):
+def subtract_from_cart(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    try:
+
+    if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
@@ -130,12 +131,9 @@ def reduce_quantity(request, slug):
             orderItem.save()
             messages.success(request, f'{product} quantity has successfully been updated')
         else:
-            pass
-    except:
-        messages.error(request, f'Please create an account first')
-    # return redirect("product-detail", slug=slug)
+            orderItem.delete()
+            messages.success(request, f'{product} has been removed from cart')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
 
 
 def remove_from_cart(request, slug):
@@ -164,11 +162,18 @@ def update_cookie_cart_quantity(request):
 
     if action == 'add':
         if int(itemQuantity) < product.quantity:
-            messages.success(request, f'{product} has been successfully added to your shopping bag')
+            messages.success(request, f'"{product}" has been successfully added to your shopping bag')
             return JsonResponse('add', safe=False)
         else:
             messages.error(request, f'You\'ve reached the maximum number of {product}s available for purchase')
             return JsonResponse('', safe=False)
+    elif action == 'subtract':
+        if int(itemQuantity) != 0:
+            messages.success(request, f'Order quantity of "{product}" has been successfully reduced')
+            return JsonResponse('subtract', safe=False)
+        else:
+            messages.error(request, f'Your bag does not contain a {product} item to be reduced')
+            return JsonResponse('subtract', safe=False)
     elif action == 'remove':
         if int(itemQuantity) != 0:
             messages.success(request, f'"{product}" has been successfully removed from your shopping bag')
@@ -198,8 +203,9 @@ def cart(request):
     }
     return render(request, 'store/cart.html', context)
 
+
 def checkout(request):
-    return 'Hi'
+    return render(request, 'store/checkout.html')
 
 
 def consign(request):
