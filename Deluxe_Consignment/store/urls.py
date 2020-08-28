@@ -18,6 +18,7 @@ urlpatterns = [
     path('about/', store_views.about, name='about'),
     path('payment-policy/', store_views.paymentPolicy, name='payment-policy'),
     path('test-test-test/', store_views.test, name="test"),
+    path('account/', store_views.account, name='account'),
 
     path('add-to-cart/<slug>/', store_views.add_to_cart, name='add-to-cart'),
     path('remove-from-cart/<slug>/', store_views.remove_from_cart, name='remove-from-cart'),

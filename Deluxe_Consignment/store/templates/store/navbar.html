@@ -146,7 +146,7 @@
             <a href="" data-toggle="modal" data-target="#modalLRForm">Login or Register</a>
         {% else %}
             <a href="{% url 'user:logout-user' %}">Sign Out</a>
-            <a href="">Profile</a>
+            <a href="{% url 'account'%}">Profile</a>
         {% endif %}
     </div>
 

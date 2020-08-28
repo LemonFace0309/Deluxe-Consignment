@@ -1,0 +1,150 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Main Container -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/store.css' %}">
+
+<div class="container mt-5 pt-3">
+    <!-- Navbar -->
+    <div class="row pt-4">
+        <!-- Sidebar -->
+        <div class="col-lg-3">
+            <div class="">
+                <!-- Grid row -->
+                <div class="row">
+                    <div class="col-md-6 col-lg-12 mb-5">
+                        <!-- Panel -->
+                        <h3 class="font-weight-bold dark-grey-text"><strong>Order By</strong></h3>
+                        <div class="divider"></div>
+                        <form action="" name="sortForm">
+                            <select class="mdb-select md-form" id="sort" name="sort" onchange="this.form.submit()">
+                                <option value="" disabled selected>Choose your option</option>
+                                <option value="pricelow">Price (low to high)</option>
+                                <option value="pricehigh">Price (high to low)</option>
+                                <option value="3">Option 3</option>
+                            </select>
+                        </form>
+                    </div>
+
+                    <!-- Filter by category -->
+                    <div class="col-md-6 col-lg-12 mb-5">
+                        <h3 class="font-weight-bold dark-grey-text"><strong>Category</strong></h3>
+                        <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <!-- Radio group -->
+                        <form action="" onchange="this.form.submit()">
+                            <div class="form-group ">
+                                <input class="form-check-input submitonchange" name="category" value="shoes"
+                                       type="radio" id="radio100">
+                                <label for="radio100" class="form-check-label dark-grey-text">Shoes</label>
+                            </div>
+
+                            <div class="form-group">
+                                <input class="form-check-input submitonchange" name="category" value="bags" type="radio"
+                                       id="radio101">
+                                <label for="radio101" class="form-check-label dark-grey-text">Bags</label>
+                            </div>
+
+                            <div class="form-group">
+                                <input class="form-check-input submitonchange" name="category" type="radio"
+                                       id="radio102">
+                                <label for="radio102" class="form-check-label dark-grey-text">Accessories</label>
+                            </div>
+
+                            <div class="form-group">
+                                <input class="form-check-input" name="category" value="gucci" type="radio"
+                                       id="radio103">
+                                <label for="radio103" class="form-check-label dark-grey-text">Gucci</label>
+                            </div>
+
+                            <div class="form-group">
+                                <input class="form-check-input" name="category" type="radio" id="radio104"
+                                       onchange="this.form.submit()">
+                                <label for="radio104" class="form-check-label dark-grey-text">Headphones</label>
+                            </div>
+                        </form>
+
+                        <!-- Radio group -->
+                    </div>
+                    <!-- Filter by category -->
+                </div>
+                <!-- Grid row -->
+
+                <!-- Grid row -->
+                <div class="row">
+                    <!-- Filter by price -->
+                    <div class="col-md-6 col-lg-12 mb-5">
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Price</strong></h5>
+                        <div class="divider"></div>
+                        <form class="range-field mt-3">
+                            <input id="calculatorSlider" class="no-border" type="range" value="0" min="0" max="30"/>
+                        </form>
+
+                        <!-- Grid row -->
+                        <div class="row justify-content-center">
+                            <!-- Grid column -->
+                            <div class="col-md-6 text-left">
+                                <p class="dark-grey-text"><strong id="resellerEarnings">$0</strong></p>
+                            </div>
+                            <!-- Grid column -->
+
+                            <!-- Grid column -->
+                            <div class="col-md-6 text-right">
+                                <p class="dark-grey-text"><strong id="clientPrice">$1500</strong></p>
+                            </div>
+                            <!-- Grid column -->
+                        </div>
+                        <!-- Grid row -->
+                    </div>
+                    <!-- Filter by price -->
+
+                    <!-- Filter by rating -->
+                    <div class="col-md-6 col-lg-12 mb-5">
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Rating</strong></h5>
+                        <div class="divider"></div>
+                        <div class="row ml-1">
+                        </div>
+                        <div class="row ml-1">
+                        </div>
+                        <div class="row ml-1">
+                        </div>
+                    </div>
+                    <!-- Filter by rating -->
+
+                </div>
+                <!-- Grid row -->
+            </div>
+        </div>
+        <!-- Sidebar -->
+
+        <!-- Content -->
+        <div class="col-lg-9">
+            <!-- Filter Area -->
+            <div class="row">
+                <div class="col-md-8 text-right ml-auto">
+                    <!-- View Switcher -->
+                    <a class="btn blue darken-3 btn-sm"><i class="fas fa-th mr-2" aria-hidden="true"></i>
+                        <strong>Grid</strong>
+                    </a>
+
+                    <a class="btn blue darken-3 btn-sm"><i class="fas fa-th-list mr-2" aria-hidden="true"></i>
+                        <strong>List</strong>
+                    </a>
+                    <!-- View Switcher -->
+                </div>
+            </div>
+            <!-- Filter Area -->
+
+            <!-- Products Grid -->
+            <section class="section pt-4">
+                
+            </section>
+            <!-- Products Grid -->
+        </div>
+        <!-- Content -->
+    </div>
+</div>
+<!-- Main Container -->
+</main>
+
+{% endblock content %}

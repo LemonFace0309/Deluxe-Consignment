@@ -177,6 +177,7 @@ def update_cookie_cart_quantity(request):
             messages.error(request, f'Your bag does not contain a {product} item to be removed')
             return JsonResponse('remove', safe=False)
 
+
 def cart(request):
     products = Product.objects.all()
 
@@ -225,3 +226,10 @@ def paymentPolicy(request):
 
 def test(request):
     return render(request, 'store/test.html')
+
+
+def account(request):
+    context = {
+
+    }
+    return render(request, 'store/account.html')
