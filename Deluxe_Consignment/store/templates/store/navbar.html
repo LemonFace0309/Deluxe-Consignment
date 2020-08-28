@@ -273,10 +273,12 @@
                     {% for item in items %}
                     <tr>
                         <th scope="row">{{forloop.counter}}</th>
-                        <td>{{item.product}}</td>
+                        <td>{{item.product.name}}</td>
                         <td>${{item.product.price}}</td>
                         <td>
-                            <a href="{{item.product.get_remove_from_cart_url}}">
+                            <a class="update-cart" data-product="{{item.product.id}}" data-action="remove"
+                               {% if request.user.is_authenticated %}
+                               href="{{item.product.get_remove_from_cart_url}}" {% endif %}>
                                 <i class="fas black-text fa-times"></i>
                             </a>
                         </td>

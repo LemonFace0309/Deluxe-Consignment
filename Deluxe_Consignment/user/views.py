@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-from . forms import *
+from .forms import *
+from .models import *
 from django.contrib.auth import authenticate, login, logout
 
 
@@ -10,13 +11,17 @@ def createUser(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST.copy())
 
-        form.is_valid()
-        print(form.cleaned_data)
         if form.is_valid():
-            user, created = User.objects.get_or_create(username=form.cleaned_data['email'], email=form.cleaned_data['email'],
-                                                       first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'],
-                                                       password=form.cleaned_data['password2'])
+            user, created = User.objects.get_or_create(username=form.cleaned_data['email'],
+                                                       email=form.cleaned_data['email'],
+                                                       first_name=form.cleaned_data['first_name'],
+                                                       last_name=form.cleaned_data['last_name'])
+            customer, created = Customer.objects.get_or_create(user=user, name=form.cleaned_data['first_name'] + ' ' +
+                                                               form.cleaned_data['last_name'],
+                                                               email=form.cleaned_data['email'])
             if created:
+                user.set_password(form.cleaned_data['password2'])
+                user.save()
                 messages.success(request, 'Account created successfully')
             else:
                 messages.success(request, 'Account already exists')
@@ -37,10 +42,12 @@ def loginUser(request):
 
             if user:
                 login(request, user)
+                messages.success(request, 'Welcome Back!')
             else:
-                messages.error(request, 'Authentication Error: Email or password is incorrect')
+                print('sad!')
+                messages.error(request, 'Authentication Error: Email or password is invalid')
         except:
-            messages.error(request, 'Authentication Error: Email or password is incorrect')
+            messages.error(request, 'Authentication Error: Email or password is invalid')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 

@@ -243,12 +243,16 @@
 
                                 <div class="col-md-12 text-center text-md-right">
 
-                                    <a href="{{product.get_add_to_cart_url}}" class="btn btn-primary btn-rounded">
+                                    <a href="{{product.get_add_to_cart_url}}"
+                                       class="btn btn-primary btn-rounded update-cart"
+                                       data-product="{{product.id}}" data-action="add">
                                         <i class="fas fa-shopping-bag white-text mr-2" aria-hidden="true"></i> Add to
                                         shopping bag
                                     </a>
 
-                                    <a href="{{product.get_remove_from_cart_url}}" class="btn btn-danger btn-rounded">
+                                    <a href="{{product.get_remove_from_cart_url}}"
+                                       class="btn btn-danger btn-rounded update-cart"
+                                       data-product="{{product.id}}" data-action="remove">
                                         Remove
                                     </a>
 

@@ -76,6 +76,18 @@ class Product(models.Model):
         return hasattr(self, "shoe")
 
     @property
+    def is_bag(self):
+        return hasattr(self, "bag")
+
+    @property
+    def is_accessory(self):
+        return hasattr(self, "accessory")
+
+    @property
+    def is_slg(self):
+        return hasattr(self, "slgs")
+
+    @property
     def imageURL(self):
         try:
             url = self.thumbnail.url

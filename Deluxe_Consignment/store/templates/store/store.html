@@ -16,57 +16,58 @@
                     <div class="col-md-6 col-lg-12 mb-5">
                         <!-- Panel -->
                         <h5 class="font-weight-bold dark-grey-text"><strong>Order By</strong></h3>
-                        <div class="divider"></div>
-                        <form action="" name="sortForm">
-                            <select class="mdb-select md-form" id="sort" name="sort" onchange="this.form.submit()">
-                                <option value="" disabled selected>Choose your option</option>
-                                <option value="pricelow">Price (low to high)</option>
-                                <option value="pricehigh">Price (high to low)</option>
-                                <option value="3">Option 3</option>
-                            </select>
-                            <!-- <button type="submit">s</button> -->
-                            <!-- <input type="submit" value="asd"> -->
+                            <div class="divider"></div>
+                            <form action="" name="sortForm">
+                                <select class="mdb-select md-form" id="sort" name="sort" onchange="this.form.submit()">
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="pricelow">Price (low to high)</option>
+                                    <option value="pricehigh">Price (high to low)</option>
+                                    <option value="3">Option 3</option>
+                                </select>
+                                <!-- <button type="submit">s</button> -->
+                                <!-- <input type="submit" value="asd"> -->
 
-                        </form>
+                            </form>
                     </div>
                     <form action="">
                         <input type="search" name="s">
                     </form>
-                    
+
 
                     <!-- Filter by category -->
                     <div class="col-md-6 col-lg-12 mb-5">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Category</strong></h3>
-                        <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                            <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                             <!-- Radio group -->
-                        <form action="">
-                            <div class="form-group ">
-                                <input class="form-check-input" name="category" value="shoe" type="radio" id="radio100" checked>
-                                <label for="radio100" class="form-check-label dark-grey-text">Shoes</label>
-                            </div>
-    
-                            <div class="form-group">
-                                <input class="form-check-input" name="category" type="radio" id="radio101">
-                                <label for="radio101" class="form-check-label dark-grey-text">Bags</label>
-                            </div>
-    
-                            <div class="form-group">
-                                <input class="form-check-input" name="category" type="radio" id="radio102">
-                                <label for="radio102" class="form-check-label dark-grey-text">Accessories</label>
-                            </div>
-    
-                            <div class="form-group">
-                                <input class="form-check-input" name="category" type="radio" id="radio103">
-                                <label for="radio103" class="form-check-label dark-grey-text">Tablet</label>
-                            </div>
-    
-                            <div class="form-group">
-                                <input class="form-check-input" name="category" type="radio" id="radio104">
-                                <label for="radio104" class="form-check-label dark-grey-text">Headphones</label>
-                            </div>
-                        </form>
+                            <form action="">
+                                <div class="form-group ">
+                                    <input class="form-check-input" name="category" value="shoe" type="radio"
+                                           id="radio100" checked>
+                                    <label for="radio100" class="form-check-label dark-grey-text">Shoes</label>
+                                </div>
 
-                        <!-- Radio group -->
+                                <div class="form-group">
+                                    <input class="form-check-input" name="category" type="radio" id="radio101">
+                                    <label for="radio101" class="form-check-label dark-grey-text">Bags</label>
+                                </div>
+
+                                <div class="form-group">
+                                    <input class="form-check-input" name="category" type="radio" id="radio102">
+                                    <label for="radio102" class="form-check-label dark-grey-text">Accessories</label>
+                                </div>
+
+                                <div class="form-group">
+                                    <input class="form-check-input" name="category" type="radio" id="radio103">
+                                    <label for="radio103" class="form-check-label dark-grey-text">Tablet</label>
+                                </div>
+
+                                <div class="form-group">
+                                    <input class="form-check-input" name="category" type="radio" id="radio104">
+                                    <label for="radio104" class="form-check-label dark-grey-text">Headphones</label>
+                                </div>
+                            </form>
+
+                            <!-- Radio group -->
                     </div>
                     <!-- Filter by category -->
                 </div>
@@ -77,39 +78,39 @@
                     <!-- Filter by price -->
                     <div class="col-md-6 col-lg-12 mb-5">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Price</strong></h5>
-                            <div class="divider"></div>
-                            <form class="range-field mt-3">
-                                <input id="calculatorSlider" class="no-border" type="range" value="0" min="0" max="30"/>
-                            </form>
+                        <div class="divider"></div>
+                        <form class="range-field mt-3">
+                            <input id="calculatorSlider" class="no-border" type="range" value="0" min="0" max="30"/>
+                        </form>
 
-                            <!-- Grid row -->
-                            <div class="row justify-content-center">
-                                <!-- Grid column -->
-                                <div class="col-md-6 text-left">
-                                    <p class="dark-grey-text"><strong id="resellerEarnings">$0</strong></p>
-                                </div>
-                                <!-- Grid column -->
-
-                                <!-- Grid column -->
-                                <div class="col-md-6 text-right">
-                                    <p class="dark-grey-text"><strong id="clientPrice">$1500</strong></p>
-                                </div>
-                                <!-- Grid column -->
+                        <!-- Grid row -->
+                        <div class="row justify-content-center">
+                            <!-- Grid column -->
+                            <div class="col-md-6 text-left">
+                                <p class="dark-grey-text"><strong id="resellerEarnings">$0</strong></p>
                             </div>
-                            <!-- Grid row -->
+                            <!-- Grid column -->
+
+                            <!-- Grid column -->
+                            <div class="col-md-6 text-right">
+                                <p class="dark-grey-text"><strong id="clientPrice">$1500</strong></p>
+                            </div>
+                            <!-- Grid column -->
+                        </div>
+                        <!-- Grid row -->
                     </div>
                     <!-- Filter by price -->
 
                     <!-- Filter by rating -->
                     <div class="col-md-6 col-lg-12 mb-5">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Rating</strong></h5>
-                            <div class="divider"></div>
-                            <div class="row ml-1">
-                            </div>
-                            <div class="row ml-1">
-                            </div>
-                            <div class="row ml-1">
-                            </div>
+                        <div class="divider"></div>
+                        <div class="row ml-1">
+                        </div>
+                        <div class="row ml-1">
+                        </div>
+                        <div class="row ml-1">
+                        </div>
                     </div>
                     <!-- Filter by rating -->
 
@@ -151,7 +152,7 @@
                             <div class="view overlay">
                                 <img src="{{product.imageURL}}"
                                      class="img-fluid"
-                                     alt="">
+                                     alt="Product Image">
                                 <a data-toggle="modal" data-target="#modalQuickView{{forloop.counter}}">
                                     <div class="mask rgba-white-light"></div>
                                 </a>
@@ -162,7 +163,7 @@
                             <div class="card-body">
                                 <!-- Category & Title -->
                                 <h5 class="card-title mb-1"><strong><a href="{{ product.get_absolute_url }}"
-                                                                       class="dark-grey-text">{{product}}</a></strong>
+                                                                       class="dark-grey-text">{{product.name}}</a></strong>
                                 </h5>
                                 {% if product.is_new %}
                                 <span class="badge badge-pill badge-info mb-1 mr-1 ml-1">NEW</span>
@@ -176,15 +177,15 @@
                                         <!-- above had a row class -->
 
                                         {% if product.discount_price %}
-                                            <span class="float-left">${{product.discount_price}}</span>
+                                        <span class="float-left">${{product.discount_price}}</span>
                                         {% else %}
-                                            <span class="float-left">${{product.price}}</span>
+                                        <span class="float-left">${{product.price}}</span>
                                         {% endif%}
 
                                         <span class="float-right">
-                                            <a href="#" class="update-cart"
-                                                data-toggle="tooltip" data-placement="top" data-product="{{product.id}}"
-                                                data-action="add" title="Add to Bag">
+                                            <a href="{{product.get_add_to_cart_url}}"
+                                               class="update-cart" data-toggle="tooltip" data-placement="top"
+                                               data-product="{{product.id}}" data-action="add" title="Add to Bag">
                                                 <i class="fas grey-text fa-shopping-bag ml-3"></i>
                                             </a>
                                         </span>
@@ -316,10 +317,13 @@
                                             <!-- Add to Cart -->
                                             <div class="card-body">
                                                 <div class="text-center">
-                                                    <a href="{{product.get_add_to_cart_url}}" class="btn btn-secondary">Add to Bag
+                                                    <a href="{{product.get_add_to_cart_url}}"
+                                                       class="btn btn-secondary update-cart"
+                                                       data-product="{{product.id}}" data-action="add">Add to Bag
                                                         <i class="fas fa-shopping-bag ml-2" aria-hidden="true"></i>
                                                     </a>
-                                                    <a href="{% url 'product-detail' product.slug %}" class="btn btn-light">Detail View</a>
+                                                    <a href="{% url 'product-detail' product.slug %}"
+                                                       class="btn btn-light">Detail View</a>
                                                     <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Close
                                                     </button>
@@ -332,6 +336,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Modal: modalQuickView -->
                     {% endif %}
                     {% endfor %}
                 </div>

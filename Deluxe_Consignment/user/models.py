@@ -29,7 +29,7 @@ class Order(models.Model):
         return sum([item.get_total for item in items])
 
     @property
-    def get_cart_items(self):
+    def get_cart_quantity(self):
         items = self.orderitem_set.all()
         return sum([item.quantity for item in items])
 

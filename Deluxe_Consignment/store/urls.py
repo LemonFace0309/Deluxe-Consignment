@@ -19,7 +19,8 @@ urlpatterns = [
     path('test-test-test/', store_views.test, name="test"),
 
     path('add-to-cart/<slug>/', store_views.add_to_cart, name='add-to-cart'),
-    path('remove-from-cart/<slug>/', store_views.remove_from_cart, name='remove-from-cart')
+    path('remove-from-cart/<slug>/', store_views.remove_from_cart, name='remove-from-cart'),
+    path('update-cookie-cart-quantity/', store_views.update_cookie_cart_quantity, name="update-cookie-cart-quantity")
 ]
 
 # Figure out why order manipulation (add/remove from cart) is being undone after going back in the browser in JUST

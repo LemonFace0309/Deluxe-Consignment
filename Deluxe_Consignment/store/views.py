@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from .utils import *
 from user.models import (
     Customer, Order, OrderItem, ShippingAddress
@@ -18,28 +18,26 @@ from django.views.generic import (
 
 # Create your views here.
 def home(request):
-    data = cartData(request)
     products = Product.objects.all()
 
     if request.user.is_authenticated:
+        data = cartData(request)
         items = data['items']
         cart_quantity = data['cart_quantity']
-        context = {
-            'products': products,
-            'items': items,
-            'cart_quantity': cart_quantity,
-        }
-        return render(request, 'store/home.html', context)
     else:
-        context = {
-            'products': products,
-        }
-        return render(request, 'store/home.html', context)
+        data = cookieCartData(request)
+        items = data['items']
+        cart_quantity = data['cart_quantity']
+    context = {
+        'products': products,
+        'items': items,
+        'cart_quantity': cart_quantity,
+    }
+    return render(request, 'store/home.html', context)
 
 
 class StoreListView(ListView):
     def get(self, request, *args, **kwargs):
-        data = cartData(request)
         products = Product.objects.all()
         search = request.GET.get('searchBar')
         s = request.GET.get('s')
@@ -77,16 +75,20 @@ class StoreListView(ListView):
         # from django.db.models.utils import list_to_queryset
         # productlist = list_to_queryset(productlist)
 
-        context = {
-            'products': productlist,
-        }
-
         if request.user.is_authenticated:
+            data = cartData(request)
             items = data['items']
             cart_quantity = data['cart_quantity']
-            context['items'] = items
-            context['cart_quantity'] = cart_quantity
+        else:
+            data = cookieCartData(request)
+            items = data['items']
+            cart_quantity = data['cart_quantity']
 
+        context = {
+            'products': products,
+            'items': items,
+            'cart_quantity': cart_quantity,
+        }
         return render(request, 'store/store.html', context)
 
 
@@ -115,8 +117,6 @@ def add_to_cart(request, slug):
             messages.success(request, f'{product} has been successfully added to your shopping bag')
         else:
             messages.error(request, f'You\'ve reached the maximum number of {product}s available for purchase')
-    else:
-        messages.error(request, f'Please create an account first')
     # return redirect("product-detail", slug=slug)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
@@ -124,26 +124,53 @@ def add_to_cart(request, slug):
 def remove_from_cart(request, slug):
     product = get_object_or_404(Product, slug=slug)
 
-    try:
+    if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         if order.orderitem_set.filter(product=product).exists():
             order.orderitem_set.filter(product=product).delete()
-            print('4')
             messages.success(request, f'"{product}" has been successfully removed from your shopping bag')
         else:
             messages.error(request, f'Your bag does not contain a {product} item to be removed')
-    except:
-        messages.error(request, f'Please create an account first')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-def checkout(request):
-    data = cartData(request)
+def update_cookie_cart_quantity(request):
+    data = json.loads(request.body)
+    # getting product
+    product = Product.objects.get(id=data['productId'])
+    # getting order item quantity
+    itemQuantity = data['itemQuantity']
+    print(itemQuantity)
+    # getting action
+    action = data['action']
 
-    items = data['items']
-    cart_quantity = data['cart_quantity']
+    if action == 'add':
+        if int(itemQuantity) < product.quantity:
+            messages.success(request, f'{product} has been successfully added to your shopping bag')
+            return JsonResponse('add', safe=False)
+        else:
+            messages.error(request, f'You\'ve reached the maximum number of {product}s available for purchase')
+            return JsonResponse('', safe=False)
+    elif action == 'remove':
+        if int(itemQuantity) != 0:
+            messages.success(request, f'"{product}" has been successfully removed from your shopping bag')
+            return JsonResponse('remove', safe=False)
+        else:
+            messages.error(request, f'Your bag does not contain a {product} item to be removed')
+            return JsonResponse('remove', safe=False)
+
+def checkout(request):
     products = Product.objects.all()
+
+    if request.user.is_authenticated:
+        data = cartData(request)
+        items = data['items']
+        cart_quantity = data['cart_quantity']
+    else:
+        data = cookieCartData(request)
+        items = data['items']
+        cart_quantity = data['cart_quantity']
     context = {
         'products': products,
         'items': items,
