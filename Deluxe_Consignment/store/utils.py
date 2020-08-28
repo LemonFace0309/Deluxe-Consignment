@@ -13,7 +13,8 @@ def cartData(request):
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
     items = order.orderitem_set.all()
     cart_quantity = order.get_cart_quantity
-    return {'order': order, 'items': items, 'cart_quantity': cart_quantity}
+    cart_total = order.get_cart_total
+    return {'order': order, 'items': items, 'cart_quantity': cart_quantity, 'cart_total': cart_total}
 
 
 def cookieCartData(request):
@@ -57,5 +58,6 @@ def cookieCartData(request):
         items.append(item)
 
     cart_quantity = order['get_cart_quantity']
+    cart_total = order['get_cart_total']
 
-    return {'order': order, 'items': items, 'cart_quantity': cart_quantity}
+    return {'order': order, 'items': items, 'cart_quantity': cart_quantity, 'cart_total': cart_total}

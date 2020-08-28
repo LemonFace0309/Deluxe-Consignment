@@ -24,7 +24,7 @@ function addCookieItem(productId, action){
     }
     */
 
-    var url = "http://127.0.0.1:8000/update-cookie-cart-quantity/"
+    var url = "/update-cookie-cart-quantity/"
     if(cart[productId] == undefined){
         itemQuantity = 0
     } else {

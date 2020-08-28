@@ -160,23 +160,29 @@ def update_cookie_cart_quantity(request):
             messages.error(request, f'Your bag does not contain a {product} item to be removed')
             return JsonResponse('remove', safe=False)
 
-def checkout(request):
+def cart(request):
     products = Product.objects.all()
 
     if request.user.is_authenticated:
         data = cartData(request)
         items = data['items']
         cart_quantity = data['cart_quantity']
+        cart_total = data['cart_total']
     else:
         data = cookieCartData(request)
         items = data['items']
         cart_quantity = data['cart_quantity']
+        cart_total = data['cart_total']
     context = {
         'products': products,
         'items': items,
         'cart_quantity': cart_quantity,
+        'cart_total': cart_total
     }
-    return render(request, 'store/checkout.html', context)
+    return render(request, 'store/cart.html', context)
+
+def checkout(request):
+    return 'Hi'
 
 
 def consign(request):

@@ -266,6 +266,7 @@
                         <th>#</th>
                         <th>Product name</th>
                         <th>Price</th>
+                        <th>QTY</th>
                         <th>Remove</th>
                     </tr>
                     </thead>
@@ -275,6 +276,7 @@
                         <th scope="row">{{forloop.counter}}</th>
                         <td>{{item.product.name}}</td>
                         <td>${{item.product.price}}</td>
+                        <td>{{item.quantity}}</td>
                         <td>
                             <a class="update-cart" data-product="{{item.product.id}}" data-action="remove"
                                {% if request.user.is_authenticated %}
@@ -286,7 +288,7 @@
                     {% endfor %}
                     </tbody>
                 </table>
-                <a href="{% url 'checkout' %}" class="btn btn-primary btn-rounded btn-sm">Checkout</a>
+                <a href="{% url 'cart' %}" class="btn btn-primary btn-rounded btn-sm">Cart</a>
             </div>
             <!-- Footer -->
             <div class="modal-footer">

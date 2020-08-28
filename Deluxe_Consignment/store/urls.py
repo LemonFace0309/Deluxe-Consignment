@@ -12,6 +12,7 @@ urlpatterns = [
     path('store/', store_views.StoreListView.as_view(), name='store'), #idk what nevercahe is, might need to add it -jim
     path('product/<slug>/', never_cache(ProductDetailView.as_view()), name='product-detail'),  # never_cache prevents
     # web_browser from caching the page and re-triggering an add/remove item model if clicked on previously
+    path('cart/', store_views.cart, name="cart"),
     path('checkout/', store_views.checkout, name="checkout"),
     path('consign/', store_views.consign, name='consign'),
     path('about/', store_views.about, name='about'),
