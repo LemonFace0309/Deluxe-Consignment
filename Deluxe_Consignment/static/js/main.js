@@ -74,19 +74,44 @@ function addCookieItem(productId, action){
 }
 
 
-//$(document).ready(
 function removeCover(){
+    console.log('hi')
+    setTimeout(() => {
+        var aTags = document.getElementsByTagName('a')
+            console.log(aTags.length);
+        for (i = 0; i < aTags.length; i++){
+            console.log(aTags[i].href);
+            if (aTags[i].innerText.includes('Free Instagram Feed widget')){
+                console.log();
+                aTags[i].remove();
+                break;
+            }
+        }
+    }, 1000);
     //setTimeout(() => {
+<<<<<<< HEAD
     var aTags = document.getElementsByTagName('a')
     for (i = 0; i < aTags.length; i++){
+=======
+    let aTags = document.getElementsByTagName('a')
+        // console.log(aTags.length);
+    for (i = 0; i < aTags.length; i++){
+        // console.log(aTags[i].href);
+>>>>>>> store
         if (aTags[i].innerText.includes('Free Instagram Feed widget')){
-            console.log();
+            // console.log();
             aTags[i].remove();
             break;
         }
     }
     //}, 500);
-
 }
-//)
+
+window.onload = removeCover()
+const onChangeElements = document.querySelectorAll('.submitonchange');
+onChangeElements.forEach(item => {
+    item.addEventListener('click', () => {
+        item.closest('form').submit();
+    })
+})
 

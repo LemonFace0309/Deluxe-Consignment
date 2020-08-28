@@ -39,15 +39,9 @@ def home(request):
 class StoreListView(ListView):
     def get(self, request, *args, **kwargs):
         products = Product.objects.all()
-        search = request.GET.get('searchBar')
-        s = request.GET.get('s')
-        category = request.GET.get('category')
+        search = request.GET.get('q')
         sort = request.GET.get('sort')
-
-        productlist = list(Product.objects.all())
-        for product in productlist:
-            print(product)
-        # print(productlist)
+        category = request.GET.get('category')
 
         if search != '' and search is not None:
             products = products.filter(name__icontains=search)
@@ -63,17 +57,19 @@ class StoreListView(ListView):
             #     if product.discount_price:
             #         products = products.order_by('price')
             #         product.price = product.discount_price
+            products = products.order_by('discount_price', 'name')
 
-        if category is None:
-            print('cat is none')
+        if category == 'shoes':
+            products = products.filter(shoe__gt=0)
 
-        print(category)
-        # print(sortOption)
-        print("sort!")
-        print(products)
+        if category == 'bags':
+            products = products.filter(bag__gt=0)
 
-        # from django.db.models.utils import list_to_queryset
-        # productlist = list_to_queryset(productlist)
+        elif category == 'gucci':
+            products = products.filter(brand__icontains='guc')
+
+        for product in products:
+            print(product.id)
 
         if request.user.is_authenticated:
             data = cartData(request)
@@ -119,6 +115,27 @@ def add_to_cart(request, slug):
             messages.error(request, f'You\'ve reached the maximum number of {product}s available for purchase')
     # return redirect("product-detail", slug=slug)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def reduce_quantity(request, slug):
+    product = get_object_or_404(Product, slug=slug)
+    try:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+
+        # Updating order item quantity
+        if orderItem.quantity > 1:
+            orderItem.quantity -= 1
+            orderItem.save()
+            messages.success(request, f'{product} quantity has successfully been updated')
+        else:
+            pass
+    except:
+        messages.error(request, f'Please create an account first')
+    # return redirect("product-detail", slug=slug)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 
 def remove_from_cart(request, slug):

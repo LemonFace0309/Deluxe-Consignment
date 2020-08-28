@@ -58,6 +58,12 @@ class Product(models.Model):
         })
 
     @property
+    def get_reduce_quantity_url(self):
+        return reverse("reduce-quantity", kwargs={
+            'slug': self.slug
+        })
+
+    @property
     def is_new(self):
         DATE_FORMAT = "%Y-%m-%d"
         today = datetime.date.today()
@@ -100,6 +106,9 @@ class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True)
 
+    def __str__(self):
+        return self.product.name
+
 
 class Shoe(Product, models.Model):
     size = models.IntegerField(default=10)
@@ -113,7 +122,7 @@ class Accessory(Product, models.Model):
     pass
 
 
-class SLGS(Product, models.Model):
+class SLG(Product, models.Model):
     pass
 
 
