@@ -4,7 +4,6 @@ $(document).ready(() => {
 });
 
 function removeCover(){
-<<<<<<< HEAD
     console.log('hi')
     setTimeout(() => {
         var aTags = document.getElementsByTagName('a')
@@ -18,7 +17,6 @@ function removeCover(){
             }
         }
     }, 1000);
-=======
     //setTimeout(() => {
     let aTags = document.getElementsByTagName('a')
         // console.log(aTags.length);
@@ -31,12 +29,9 @@ function removeCover(){
         }
     }
     //}, 500);
->>>>>>> home
 }
 
-<<<<<<< HEAD
 window.onload = removeCover()
-=======
 const onChangeElements = document.querySelectorAll('.submitonchange');
 onChangeElements.forEach(item => {
     item.addEventListener('click', () => {
@@ -44,4 +39,3 @@ onChangeElements.forEach(item => {
     })
 })
 
->>>>>>> home
