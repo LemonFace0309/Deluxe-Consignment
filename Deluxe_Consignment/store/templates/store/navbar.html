@@ -172,19 +172,23 @@
     </div>
     <div class="menu">
         <ul>
-            <li><a>Shop</a> <!--do not like for mobile purposes -->
+            <li><a href="{% url 'store'%}">Shop</a> <!--do not like for mobile purposes -->
                 <div class="menu-sub">
                     <div class="menu-col">
                         <div class="menu-category"><a href="">Brands</a></div>
                         <ul>
-
+                            <li><a href="{% url 'store'%}">Burberry</a></li>
                         </ul>
+
+                    </div>
+                    <div class="menu-col">
                         <div class="menu-category"><a href="">Categories</a></div>
                         <ul>
                             <li><a href="">Small</a></li>
                             <li><a href="">Small</a></li>
                             <li><a href="">Small</a></li>
                         </ul>
+
                     </div>
                     <div class="menu-col">
                         <img src="{% static 'images/lv.jpg'%}" alt="">
@@ -266,6 +270,7 @@
                         <th>#</th>
                         <th>Product name</th>
                         <th>Price</th>
+                        <th>QTY</th>
                         <th>Remove</th>
                     </tr>
                     </thead>
@@ -273,14 +278,17 @@
                     {% for item in items %}
                     <tr>
                         <th scope="row">{{forloop.counter}}</th>
-                        <td>{{item.product}}</td>
-                        {% if item.product.discount_price != item.product.price %}
-                            <td>${{item.product.discount_price}}</td>
+                        <td>{{item.product.name}}</td>
+                        {% if item.product.discount_price and item.product.discount_price != item.product.price %}
+                        <td>${{item.product.discount_price}}</td>
                         {% else %}
-                            <td>${{item.product.price}}</td>
+                        <td>${{item.product.price}}</td>
                         {% endif %}
+                        <td>{{item.quantity}}</td>
                         <td>
-                            <a href="{{item.product.get_remove_from_cart_url}}">
+                            <a class="update-cart" data-product="{{item.product.id}}" data-action="remove"
+                               {% if request.user.is_authenticated %}
+                               href="{{item.product.get_remove_from_cart_url}}" {% endif %}>
                                 <i class="fas black-text fa-times"></i>
                             </a>
                         </td>
@@ -288,7 +296,7 @@
                     {% endfor %}
                     </tbody>
                 </table>
-                <a href="{% url 'checkout' %}" class="btn btn-primary btn-rounded btn-sm">Checkout</a>
+                <a href="{% url 'cart' %}" class="btn btn-primary btn-rounded btn-sm">Cart</a>
             </div>
             <!-- Footer -->
             <div class="modal-footer">

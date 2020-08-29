@@ -15,7 +15,11 @@
                 <div class="row">
                     <div class="col-md-6 col-lg-12">
                         <!-- Panel -->
+<<<<<<< HEAD
                         <h5 class="font-weight-bold dark-grey-text mb-0"><strong>Sort By</strong></h3>
+=======
+                        <h3 class="font-weight-bold dark-grey-text"><strong>Order By</strong></h3>
+>>>>>>> checkout
                         <div class="divider"></div>
                         <form action="" name="sortForm">
                             <select class="mdb-select md-form" id="sort" name="sort" onchange="this.form.submit()">
@@ -44,6 +48,7 @@
                             </select>
                         </form>
                     </div>
+<<<<<<< HEAD
                     <!-- Filter by brand -->
                     
 
@@ -52,24 +57,52 @@
                         <h5 class="font-weight-bold dark-grey-text mb-3 "><strong>Category</strong></h3>
                             <!-- Radio group -->
                         <form action="">
+=======
+
+                    <!-- Filter by category -->
+                    <div class="col-md-6 col-lg-12 mb-5">
+                        <h3 class="font-weight-bold dark-grey-text"><strong>Category</strong></h3>
+                        <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <!-- Radio group -->
+                        <form action="" onchange="this.form.submit()">
+>>>>>>> checkout
                             <div class="form-group ">
-                                <input class="form-check-input submitonchange" name="category" value="shoes" type="radio" id="radio100">
+                                <input class="form-check-input submitonchange" name="category" value="shoes"
+                                       type="radio" id="radio100">
                                 <label for="radio100" class="form-check-label dark-grey-text">Shoes</label>
                             </div>
-    
+
                             <div class="form-group">
-                                <input class="form-check-input submitonchange" name="category" value="bags" type="radio" id="radio101">
+                                <input class="form-check-input submitonchange" name="category" value="bags" type="radio"
+                                       id="radio101">
                                 <label for="radio101" class="form-check-label dark-grey-text">Bags</label>
                             </div>
-    
+
                             <div class="form-group">
+<<<<<<< HEAD
                                 <input class="form-check-input submitonchange" name="category" value="accessories" type="radio" id="radio102">
+=======
+                                <input class="form-check-input submitonchange" name="category" type="radio"
+                                       id="radio102">
+>>>>>>> checkout
                                 <label for="radio102" class="form-check-label dark-grey-text">Accessories</label>
                             </div>
-    
+
                             <div class="form-group">
+<<<<<<< HEAD
                                 <input class="form-check-input submitonchange" name="category" value="slgs" type="radio" id="radio103">
                                 <label for="radio103" class="form-check-label dark-grey-text">SLGs</label>
+=======
+                                <input class="form-check-input" name="category" value="gucci" type="radio"
+                                       id="radio103">
+                                <label for="radio103" class="form-check-label dark-grey-text">Gucci</label>
+                            </div>
+
+                            <div class="form-group">
+                                <input class="form-check-input" name="category" type="radio" id="radio104"
+                                       onchange="this.form.submit()">
+                                <label for="radio104" class="form-check-label dark-grey-text">Headphones</label>
+>>>>>>> checkout
                             </div>
                         </form>
                         <!-- Radio group -->
@@ -137,7 +170,7 @@
                             <div class="view overlay">
                                 <img src="{{product.imageURL}}"
                                      class="img-fluid"
-                                     alt="">
+                                     alt="Product Image">
                                 <a data-toggle="modal" data-target="#modalQuickView{{forloop.counter}}">
                                     <div class="mask rgba-white-light"></div>
                                 </a>
@@ -148,7 +181,7 @@
                             <div class="card-body">
                                 <!-- Category & Title -->
                                 <h5 class="card-title mb-1"><strong><a href="{{ product.get_absolute_url }}"
-                                                                       class="dark-grey-text">{{product}}</a></strong>
+                                                                       class="dark-grey-text">{{product.name}}</a></strong>
                                 </h5>
                                 {% if product.is_new %}
                                 <span class="badge badge-pill badge-info mb-1 mr-1 ml-1">NEW</span>
@@ -161,16 +194,17 @@
                                     <div class="mb-0">
                                         <!-- above had a row class -->
 
-                                        {% if product.discount_price != product.price %}
-                                            <span class="float-left">${{product.discount_price}}</span>
+                                        {% if product.discount_price and product.discount_price != product.price %}
+                                        <span class="float-left">${{product.discount_price}}</span>
                                         {% else %}
-                                            <span class="float-left">${{product.price}}</span>
+                                        <span class="float-left">${{product.price}}</span>
                                         {% endif%}
 
                                         <span class="float-right">
-                                            <a href="{{product.get_add_to_cart_url}}" 
-                                                data-toggle="tooltip" data-placement="top"
-                                                title="Add to Bag"><i class="fas grey-text fa-shopping-bag ml-3"></i>
+                                            <a href="{{product.get_add_to_cart_url}}"
+                                               class="update-cart" data-toggle="tooltip" data-placement="top"
+                                               data-product="{{product.id}}" data-action="add" title="Add to Bag">
+                                                <i class="fas grey-text fa-shopping-bag ml-3"></i>
                                             </a>
                                         </span>
                                     </div>
@@ -326,10 +360,13 @@
                                             <!-- Add to Cart -->
                                             <div class="card-body">
                                                 <div class="text-center">
-                                                    <a href="{{product.get_add_to_cart_url}}" class="btn btn-secondary">Add to Bag
+                                                    <a href="{{product.get_add_to_cart_url}}"
+                                                       class="btn btn-secondary update-cart"
+                                                       data-product="{{product.id}}" data-action="add">Add to Bag
                                                         <i class="fas fa-shopping-bag ml-2" aria-hidden="true"></i>
                                                     </a>
-                                                    <a href="{% url 'product-detail' product.slug %}" class="btn btn-light">Detail View</a>
+                                                    <a href="{% url 'product-detail' product.slug %}"
+                                                       class="btn btn-light">Detail View</a>
                                                     <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Close
                                                     </button>
@@ -342,6 +379,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Modal: modalQuickView -->
                     {% endif %}
                     {% endfor %}
                 </div>

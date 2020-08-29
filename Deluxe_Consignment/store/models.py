@@ -35,7 +35,12 @@ class Product(models.Model):
     date_created = models.DateTimeField(auto_now=True)
     description = models.TextField(max_length=2000, null=True, blank=True)
     slug = models.SlugField(max_length=200)
-    # photos = ArrayField(ArrayField(models.ImageField(null=True, blank=True)))
+
+    # setting a discount price equal to price if not set by admin
+    def save(self, *args, **kwargs):
+        if not self.discount_price:
+            self.discount_price = self.price
+        super(Product, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -58,6 +63,12 @@ class Product(models.Model):
         })
 
     @property
+    def get_subtract_from_cart_url(self):
+        return reverse("subtract-from-cart", kwargs={
+            'slug': self.slug
+        })
+
+    @property
     def is_new(self):
         DATE_FORMAT = "%Y-%m-%d"
         today = datetime.date.today()
@@ -76,6 +87,18 @@ class Product(models.Model):
         return hasattr(self, "shoe")
 
     @property
+    def is_bag(self):
+        return hasattr(self, "bag")
+
+    @property
+    def is_accessory(self):
+        return hasattr(self, "accessory")
+
+    @property
+    def is_slg(self):
+        return hasattr(self, "slgs")
+
+    @property
     def imageURL(self):
         try:
             url = self.thumbnail.url
@@ -87,6 +110,9 @@ class Product(models.Model):
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True)
+
+    def __str__(self):
+        return self.product.name
 
 
 class Shoe(Product, models.Model):
@@ -101,7 +127,7 @@ class Accessory(Product, models.Model):
     pass
 
 
-class SLGS(Product, models.Model):
+class SLG(Product, models.Model):
     pass
 
 
