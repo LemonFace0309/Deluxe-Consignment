@@ -205,7 +205,25 @@ def cart(request):
 
 
 def checkout(request):
-    return render(request, 'store/checkout.html')
+    products = Product.objects.all()
+
+    if request.user.is_authenticated:
+        data = cartData(request)
+        items = data['items']
+        cart_quantity = data['cart_quantity']
+        cart_total = data['cart_total']
+    else:
+        data = cookieCartData(request)
+        items = data['items']
+        cart_quantity = data['cart_quantity']
+        cart_total = data['cart_total']
+    context = {
+        'products': products,
+        'items': items,
+        'cart_quantity': cart_quantity,
+        'cart_total': cart_total
+    }
+    return render(request, 'store/checkout.html', context)
 
 
 def consign(request):

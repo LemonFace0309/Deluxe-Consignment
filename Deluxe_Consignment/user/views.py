@@ -55,3 +55,7 @@ def logoutUser(request):
     logout(request)
     messages.success(request, 'You have been logged out')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def checkoutUser(request):
+    pass
