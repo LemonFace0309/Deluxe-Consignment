@@ -18,13 +18,12 @@
                         <h3 class="font-weight-bold dark-grey-text"><strong>Sort By</strong></h3>
                         <div class="divider"></div>
                         <form action="" name="sortForm">
-                            <select class="mdb-select md-form" id="sort" name="sort" onchange="this.form.submit()">
+                            <select class="mdb-select md-form" id="sort" name="sort">
                                 <option value="" disabled selected>Choose your option</option>
-                                <option value="pricelow">Price (Low to High)</option>
+                                <option class="submitonchange" value="pricelow">Price (Low to High)</option>
                                 <option value="pricehigh">Price (High to Low)</option>
                                 <option value="a-z">Name (A to Z)</option>
                                 <option value="z-a">Name (Z to A)</option>
-                        
                             </select>
                         </form>
                     </div>
@@ -54,7 +53,7 @@
                         <form action="">
                             <div class="form-group ">
                                 <input class="form-check-input submitonchange" name="category" value="shoes"
-                                       type="radio" id="radio100">
+                                       type="radio" id="radio100" checked>
                                 <label for="radio100" class="form-check-label dark-grey-text">Shoes</label>
                             </div>
 
@@ -109,28 +108,11 @@
 
         <!-- Content -->
         <div class="col-lg-9">
-            <!-- Filter Area -->
-            <div class="row">
-                <div class="col-md-8 text-right ml-auto">
-                    <!-- View Switcher -->
-                    <a class="btn blue darken-3 btn-sm"><i class="fas fa-th mr-2" aria-hidden="true"></i>
-                        <strong>Grid</strong>
-                    </a>
-
-                    <a class="btn blue darken-3 btn-sm"><i class="fas fa-th-list mr-2" aria-hidden="true"></i>
-                        <strong>List</strong>
-                    </a>
-                    <!-- View Switcher -->
-                </div>
-            </div>
-            <!-- Filter Area -->
-
             <!-- Products Grid -->
             <section class="section pt-4">
-
                 <!-- Grid row -->
                 <div class="row">
-                    {% for product in products %}
+                    {% for product in page_obj %}
                     {% if product %}
                     <!-- Grid column -->
                     <div class="col-lg-4 col-md-12 mb-4">
@@ -184,31 +166,6 @@
                         <!-- Card -->
                     </div>
                     <!-- Grid column -->
-
-
-                    <!-- Pagination Section -->
-                    {% if is_paginated %}
-                        <div class="center">
-                        {% if page_obj.has_previous %}
-                            <a class="btn" href="?page=1">First</a>
-                            <a class="btn" href="?page={{page_obj.previous_page_number}}">Previous</a>
-                        {% endif %}
-
-                        {% for num in page_obj.paginator.page_range %}
-                            {% if page_obj.number == num %}
-                                <a class="btn" href="?page={{num}}">{{num}}</a>
-                            {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"+3" %}
-                                <a class="btn" href="?page={{num}}">{{num}}</a>
-                            {% endif %}
-                        {% endfor%}
-
-                        {% if page_obj.has_next %}
-                            <a class="btn" href="?page={{page_obj.next_page_number}}">Next</a>
-                            <a class="btn" href="?page={{page_obj.paginator.num_pages}}">Last</a>
-                        {% endif %}
-                        </div>
-                    {% endif %}
-
 
                     <!-- Modal: modalQuickView -->
                     <div class="modal fade" id="modalQuickView{{forloop.counter}}" tabindex="-1" role="dialog"
@@ -355,11 +312,38 @@
                 <!-- Grid row -->
             </section>
             <!-- Products Grid -->
+
+            <!-- Pagination Section --> 
+            {% if page_obj.has_other_pages %}
+                <div class="paginate text-center mt-5 pt-5">
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-sm" href="?page={{page_obj.previous_page_number}}">
+                        <i class="fas fa-chevron-left black-text"></i>
+                    </a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <a class="btn btn-outline-grey" href="?page={{num}}">{{num}}</a>
+                    {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"+3" %}
+                        <a class="btn btn-sm rounded-3" href="?page={{num}}">{{num}}</a>
+                    {% endif %}
+                {% endfor%}
+
+                {% if page_obj.has_next %}
+                    <a class="btn btn-sm" href="?page={{page_obj.next_page_number}}">
+                        <i class="fas fa-chevron-right black-text"></i>
+                    </a>
+                {% endif %}
+                </div>
+            {% endif %}
+
         </div>
         <!-- Content -->
     </div>
 </div>
 <!-- Main Container -->
 </main>
+<script src="{% static 'js/store.js' %}"></script>
 
 {% endblock content %}

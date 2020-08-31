@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, JsonResponse
 from .utils import *
 from django.db.models.functions import Lower
+from django.core.paginator import Paginator
 from user.models import (
     Customer, Order, OrderItem, ShippingAddress
 )
@@ -38,11 +39,8 @@ def home(request):
 
 
 class StoreListView(ListView):
-
     def get(self, request, *args, **kwargs):
-        paginate_by = 2
-        # data = cartData(request)
-        products = Product.objects.all()
+        products = Product.objects.all().order_by('id')
         search = request.GET.get('q')
         sort = request.GET.get('sort')
         brand = request.GET.get('brand')
@@ -67,7 +65,6 @@ class StoreListView(ListView):
             products = products.order_by(Lower('-name'), 'discount_price')
 
         if brand != '' and brand is not None:
-            print(f'sarch for {brand}')
             products = products.filter(brand__icontains=brand)
 
 
@@ -83,6 +80,11 @@ class StoreListView(ListView):
         if pricemax != 0 and pricemax is not None:
             products = products.filter(discount_price__lte=pricemax)
 
+        # Pagination
+        paginator = Paginator(products, 2)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
         if request.user.is_authenticated:
             data = cartData(request)
             items = data['items']
@@ -97,6 +99,7 @@ class StoreListView(ListView):
             'items': items,
             'cart_quantity': cart_quantity,
             'brands': brands,
+            'page_obj': page_obj,
         }
         return render(request, 'store/store.html', context)
 

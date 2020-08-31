@@ -99,9 +99,3 @@ function removeCover(){
 }
 
 window.onload = removeCover()
-const onChangeElements = document.querySelectorAll('.submitonchange');
-onChangeElements.forEach(item => {
-    item.addEventListener('click', () => {
-        item.closest('form').submit();
-    })
-})
