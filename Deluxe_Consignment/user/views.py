@@ -16,9 +16,7 @@ def createUser(request):
                                                        email=form.cleaned_data['email'],
                                                        first_name=form.cleaned_data['first_name'],
                                                        last_name=form.cleaned_data['last_name'])
-            customer, created = Customer.objects.get_or_create(user=user, name=form.cleaned_data['first_name'] + ' ' +
-                                                               form.cleaned_data['last_name'],
-                                                               email=form.cleaned_data['email'])
+
             if created:
                 user.set_password(form.cleaned_data['password2'])
                 user.save()
