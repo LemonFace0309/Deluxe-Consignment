@@ -41,7 +41,7 @@ class StoreListView(ListView):
 
     def get(self, request, *args, **kwargs):
         paginate_by = 2
-        data = cartData(request)
+        # data = cartData(request)
         products = Product.objects.all()
         search = request.GET.get('q')
         sort = request.GET.get('sort')
@@ -78,16 +78,10 @@ class StoreListView(ListView):
         elif category == 'accessories':
             products = products.filter(accessory__gt=0)
         elif category == 'slgs':
-            products = products.filter(slgs__gt=0)
+            products = products.filter(slg__gt=0)
 
         if pricemax != 0 and pricemax is not None:
-            print(pricemax)
-            products = products.filter(price__lte=pricemax)
-
-        # context = {
-        #     'products': products,
-        #     'brands': brands,
-        # }
+            products = products.filter(discount_price__lte=pricemax)
 
         if request.user.is_authenticated:
             data = cartData(request)
@@ -102,6 +96,7 @@ class StoreListView(ListView):
             'products': products,
             'items': items,
             'cart_quantity': cart_quantity,
+            'brands': brands,
         }
         return render(request, 'store/store.html', context)
 
