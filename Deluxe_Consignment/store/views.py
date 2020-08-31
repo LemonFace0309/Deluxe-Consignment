@@ -58,7 +58,6 @@ class StoreListView(ListView):
             products = products.filter(name__icontains=search)
 
         if sort == 'pricelow':
-<<<<<<< HEAD
             products = products.order_by('discount_price', Lower('name'))
         elif sort == 'pricehigh':
             products = products.order_by('-discount_price', Lower('name'))
@@ -80,41 +79,16 @@ class StoreListView(ListView):
             products = products.filter(accessory__gt=0)
         elif category == 'slgs':
             products = products.filter(slgs__gt=0)
-=======
-            for product in products:
-                print(f'{product.name} cost {product.price} disc {product.discount_price}')
-                if product.discount_price:
-                    product.price = product.discount_price
-                    products = products.order_by('price')
-
-            # for product in products:
-            #     if product.discount_price:
-            #         products = products.order_by('price')
-            #         product.price = product.discount_price
-            products = products.order_by('discount_price', 'name')
-
-        if category == 'shoes':
-            products = products.filter(shoe__gt=0)
-
-        if category == 'bags':
-            products = products.filter(bag__gt=0)
-
-        elif category == 'gucci':
-            products = products.filter(brand__icontains='guc')
->>>>>>> checkout
 
         if pricemax != 0 and pricemax is not None:
             print(pricemax)
             products = products.filter(price__lte=pricemax)
 
-<<<<<<< HEAD
-        context = {
-            'products': products,
-            'brands': brands,
-        }
+        # context = {
+        #     'products': products,
+        #     'brands': brands,
+        # }
 
-=======
->>>>>>> checkout
         if request.user.is_authenticated:
             data = cartData(request)
             items = data['items']
