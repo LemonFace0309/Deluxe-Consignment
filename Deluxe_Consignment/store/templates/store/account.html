@@ -4,141 +4,86 @@
 {% block content %}
 <!-- Main Container -->
 <link rel="stylesheet" type="text/css" href="{% static 'css/store.css' %}">
-
 <div class="container mt-5 pt-3">
     <!-- Navbar -->
     <div class="row pt-4">
         <!-- Sidebar -->
         <div class="col-lg-3">
-            <div class="">
-                <!-- Grid row -->
-                <div class="row">
-                    <div class="col-md-6 col-lg-12 mb-5">
-                        <!-- Panel -->
-                        <h3 class="font-weight-bold dark-grey-text"><strong>Order By</strong></h3>
-                        <div class="divider"></div>
-                        <form action="" name="sortForm">
-                            <select class="mdb-select md-form" id="sort" name="sort" onchange="this.form.submit()">
-                                <option value="" disabled selected>Choose your option</option>
-                                <option value="pricelow">Price (low to high)</option>
-                                <option value="pricehigh">Price (high to low)</option>
-                                <option value="3">Option 3</option>
-                            </select>
-                        </form>
-                    </div>
-
-                    <!-- Filter by category -->
-                    <div class="col-md-6 col-lg-12 mb-5">
-                        <h3 class="font-weight-bold dark-grey-text"><strong>Category</strong></h3>
-                        <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                        <!-- Radio group -->
-                        <form action="" onchange="this.form.submit()">
-                            <div class="form-group ">
-                                <input class="form-check-input submitonchange" name="category" value="shoes"
-                                       type="radio" id="radio100">
-                                <label for="radio100" class="form-check-label dark-grey-text">Shoes</label>
-                            </div>
-
-                            <div class="form-group">
-                                <input class="form-check-input submitonchange" name="category" value="bags" type="radio"
-                                       id="radio101">
-                                <label for="radio101" class="form-check-label dark-grey-text">Bags</label>
-                            </div>
-
-                            <div class="form-group">
-                                <input class="form-check-input submitonchange" name="category" type="radio"
-                                       id="radio102">
-                                <label for="radio102" class="form-check-label dark-grey-text">Accessories</label>
-                            </div>
-
-                            <div class="form-group">
-                                <input class="form-check-input" name="category" value="gucci" type="radio"
-                                       id="radio103">
-                                <label for="radio103" class="form-check-label dark-grey-text">Gucci</label>
-                            </div>
-
-                            <div class="form-group">
-                                <input class="form-check-input" name="category" type="radio" id="radio104"
-                                       onchange="this.form.submit()">
-                                <label for="radio104" class="form-check-label dark-grey-text">Headphones</label>
-                            </div>
-                        </form>
-
-                        <!-- Radio group -->
-                    </div>
-                    <!-- Filter by category -->
+            <!-- Side navigation links -->
+            <ul style="list-style-type: none;">
+                <li style="list-style-type: none;"><h4><strong>Manage Your Account</strong></h4></li>
+                <div>
+                    <ul class="tabs" style="list-style-type: none;" id="myClassicTab" role="tablist">
+                        <li><a class="nav-link waves-light" id="edit-account-tab-classic" data-toggle="tab"
+                               href="#edit-account-classic" role="tab"
+                               aria-controls="edit-account-classic" aria-selected="false">Edit Account Details</a>
+                        </li>
+                        <li><a class="nav-link waves-light" id="view-order-tab-classic" data-toggle="tab"
+                               href="#view-order-classic" role="tab"
+                               aria-controls="view-order-classic" aria-selected="false">View Orders</a>
+                        </li>
+                        <li><a class="nav-link waves-light" id="recently-viewed-tab-classic" data-toggle="tab"
+                               href="#recently-viewed-classic" role="tab"
+                               aria-controls="recently-viewed-classic" aria-selected="false">Recently Viewed</a>
+                        </li>
+                        <li><a class="nav-link waves-light" id="messages-tab-classic" data-toggle="tab"
+                               href="#messages-classic" role="tab"
+                               aria-controls="messages-classic" aria-selected="false">Messages</a>
+                        </li>
+                        <li><a class="nav-link waves-light" id="address-book-tab-classic" data-toggle="tab"
+                               href="#address-book-classic" role="tab"
+                               aria-controls="address-book-classic" aria-selected="false">Address book</a>
+                        </li>
+                        <li><a class="nav-link waves-light" id="payment-tab-classic" data-toggle="tab"
+                               href="#payment-classic" role="tab"
+                               aria-controls="payment-classic" aria-selected="false">Payment Information</a>
+                        </li>
+                        <li><a class="nav-link waves-light" id="track-order-tab-classic" data-toggle="tab"
+                               href="#track-order-classic" role="tab"
+                               aria-controls="track-order-classic" aria-selected="false">Track Order Status</a>
+                        </li>
+                    </ul>
                 </div>
-                <!-- Grid row -->
-
-                <!-- Grid row -->
-                <div class="row">
-                    <!-- Filter by price -->
-                    <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Price</strong></h5>
-                        <div class="divider"></div>
-                        <form class="range-field mt-3">
-                            <input id="calculatorSlider" class="no-border" type="range" value="0" min="0" max="30"/>
-                        </form>
-
-                        <!-- Grid row -->
-                        <div class="row justify-content-center">
-                            <!-- Grid column -->
-                            <div class="col-md-6 text-left">
-                                <p class="dark-grey-text"><strong id="resellerEarnings">$0</strong></p>
-                            </div>
-                            <!-- Grid column -->
-
-                            <!-- Grid column -->
-                            <div class="col-md-6 text-right">
-                                <p class="dark-grey-text"><strong id="clientPrice">$1500</strong></p>
-                            </div>
-                            <!-- Grid column -->
-                        </div>
-                        <!-- Grid row -->
-                    </div>
-                    <!-- Filter by price -->
-
-                    <!-- Filter by rating -->
-                    <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Rating</strong></h5>
-                        <div class="divider"></div>
-                        <div class="row ml-1">
-                        </div>
-                        <div class="row ml-1">
-                        </div>
-                        <div class="row ml-1">
-                        </div>
-                    </div>
-                    <!-- Filter by rating -->
-
-                </div>
-                <!-- Grid row -->
-            </div>
+                </li>
+            </ul>
         </div>
         <!-- Sidebar -->
 
         <!-- Content -->
         <div class="col-lg-9">
-            <!-- Filter Area -->
-            <div class="row">
-                <div class="col-md-8 text-right ml-auto">
-                    <!-- View Switcher -->
-                    <a class="btn blue darken-3 btn-sm"><i class="fas fa-th mr-2" aria-hidden="true"></i>
-                        <strong>Grid</strong>
-                    </a>
-
-                    <a class="btn blue darken-3 btn-sm"><i class="fas fa-th-list mr-2" aria-hidden="true"></i>
-                        <strong>List</strong>
-                    </a>
-                    <!-- View Switcher -->
+            <!-- Products Grid -->
+            <div class="tab-content section pt-4" id="myClassicTabContent">
+                <div class="tab-pane fade" id="edit-account-classic" role="tabpanel"
+                     aria-labelledby="edit-account-tab-classic">
+                    <div class="md-form">
+                        <i class="fas fa-envelope prefix"></i>
+                        <input type="email" id="inputValidationEx" class="form-control validate" value="{{user.email}}">
+                        <label for="inputValidationEx" data-error="wrong" data-success="right">E-mail</label>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="view-order-classic" role="tabpanel"
+                     aria-labelledby="view-order-tab-classic">
+                    <p>View Order Content</p>
+                </div>
+                <div class="tab-pane fade" id="recently-viewed-classic" role="tabpanel"
+                     aria-labelledby="recently-viewed-tab-classic">
+                    <p>Recently Viewed Content</p>
+                </div>
+                <div class="tab-pane fade" id="messages-classic" role="tabpanel" aria-labelledby="messages-tab-classic">
+                    <p>Message Content</p>
+                </div>
+                <div class="tab-pane fade" id="address-book-classic" role="tabpanel"
+                     aria-labelledby="address-book-tab-classic">
+                    <p>Address Book Content</p>
+                </div>
+                <div class="tab-pane fade" id="payment-classic" role="tabpanel" aria-labelledby="payment-tab-classic">
+                    <p>Payment Content</p>
+                </div>
+                <div class="tab-pane fade" id="track-order-classic" role="tabpanel"
+                     aria-labelledby="track-order-tab-classic">
+                    <p>Track Order Content</p>
                 </div>
             </div>
-            <!-- Filter Area -->
-
-            <!-- Products Grid -->
-            <section class="section pt-4">
-                
-            </section>
             <!-- Products Grid -->
         </div>
         <!-- Content -->

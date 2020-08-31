@@ -137,7 +137,6 @@ def reduce_quantity(request, slug):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-
 def remove_from_cart(request, slug):
     product = get_object_or_404(Product, slug=slug)
 
@@ -233,3 +232,5 @@ def account(request):
 
     }
     return render(request, 'store/account.html')
+
+
