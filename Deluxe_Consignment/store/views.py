@@ -7,7 +7,7 @@ from user.models import (
     Customer, Order, OrderItem, ShippingAddress
 )
 from user.forms import (
-    CreateUserForm
+    ShippingAddressForm
 )
 from django.views.generic import (
     DetailView,
@@ -205,8 +205,6 @@ def cart(request):
 
 
 def checkout(request):
-    products = Product.objects.all()
-
     if request.user.is_authenticated:
         data = cartData(request)
         items = data['items']
@@ -217,11 +215,15 @@ def checkout(request):
         items = data['items']
         cart_quantity = data['cart_quantity']
         cart_total = data['cart_total']
+
+    products = Product.objects.all()
+    form = ShippingAddressForm()
     context = {
         'products': products,
         'items': items,
         'cart_quantity': cart_quantity,
-        'cart_total': cart_total
+        'cart_total': cart_total,
+        'form': form,
     }
     return render(request, 'store/checkout.html', context)
 

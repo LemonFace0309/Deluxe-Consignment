@@ -46,25 +46,25 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("product-detail", kwargs={
+        return reverse("shop:product-detail", kwargs={
             'slug': self.slug
         })
 
     @property
     def get_add_to_cart_url(self):
-        return reverse("add-to-cart", kwargs={
+        return reverse("shop:add-to-cart", kwargs={
             'slug': self.slug
         })
 
     @property
     def get_remove_from_cart_url(self):
-        return reverse("remove-from-cart", kwargs={
+        return reverse("shop:remove-from-cart", kwargs={
             'slug': self.slug
         })
 
     @property
     def get_subtract_from_cart_url(self):
-        return reverse("subtract-from-cart", kwargs={
+        return reverse("shop:subtract-from-cart", kwargs={
             'slug': self.slug
         })
 
