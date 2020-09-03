@@ -63,7 +63,9 @@ def editUser(request):
             first_name = request.POST.get('first_name')
             last_name = request.POST.get('last_name')
             customer = request.user.customer
-
+        except:
+            print('fil this')
+            # clark you need an except block
 
 def processOrder(request):
     transaction_id = datetime.datetime.now().timestamp()
