@@ -3,11 +3,13 @@ from .models import *
 from django.contrib import messages
 from django.http import HttpResponseRedirect, JsonResponse
 from .utils import *
+from django.db.models.functions import Lower
+from django.core.paginator import Paginator
 from user.models import (
     Customer, Order, OrderItem, ShippingAddress
 )
 from user.forms import (
-    CreateUserForm
+    ShippingAddressForm
 )
 from django.views.generic import (
     DetailView,
@@ -38,38 +40,50 @@ def home(request):
 
 class StoreListView(ListView):
     def get(self, request, *args, **kwargs):
-        products = Product.objects.all()
+        products = Product.objects.all().order_by('id')
         search = request.GET.get('q')
         sort = request.GET.get('sort')
+        brand = request.GET.get('brand')
         category = request.GET.get('category')
+        pricemax = request.GET.get('pricemax')
+
+        brands = []
+        for choice in BRAND_CHOICES:
+            if products.filter(brand__icontains=choice[1]).count() != 0:
+                brands += [choice[1]]
 
         if search != '' and search is not None:
             products = products.filter(name__icontains=search)
 
         if sort == 'pricelow':
-            for product in products:
-                print(f'{product.name} cost {product.price} disc {product.discount_price}')
-                if product.discount_price:
-                    product.price = product.discount_price
-                    products = products.order_by('price')
+            products = products.order_by('discount_price', Lower('name'))
+        elif sort == 'pricehigh':
+            products = products.order_by('-discount_price', Lower('name'))
+        elif sort == 'a-z':
+            products = products.order_by(Lower('name'), 'discount_price')
+        elif sort == 'z-a':
+            products = products.order_by(Lower('-name'), 'discount_price')
 
-            # for product in products:
-            #     if product.discount_price:
-            #         products = products.order_by('price')
-            #         product.price = product.discount_price
-            products = products.order_by('discount_price', 'name')
+        if brand != '' and brand is not None:
+            products = products.filter(brand__icontains=brand)
+
 
         if category == 'shoes':
             products = products.filter(shoe__gt=0)
-
-        if category == 'bags':
+        elif category == 'bags':
             products = products.filter(bag__gt=0)
+        elif category == 'accessories':
+            products = products.filter(accessory__gt=0)
+        elif category == 'slgs':
+            products = products.filter(slg__gt=0)
 
-        elif category == 'gucci':
-            products = products.filter(brand__icontains='guc')
+        if pricemax != 0 and pricemax is not None:
+            products = products.filter(discount_price__lte=pricemax)
 
-        for product in products:
-            print(product.id)
+        # Pagination
+        paginator = Paginator(products, 2)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
 
         if request.user.is_authenticated:
             data = cartData(request)
@@ -84,6 +98,8 @@ class StoreListView(ListView):
             'products': products,
             'items': items,
             'cart_quantity': cart_quantity,
+            'brands': brands,
+            'page_obj': page_obj,
         }
         return render(request, 'store/store.html', context)
 
@@ -117,9 +133,10 @@ def add_to_cart(request, slug):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-def reduce_quantity(request, slug):
+def subtract_from_cart(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    try:
+
+    if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
@@ -130,10 +147,8 @@ def reduce_quantity(request, slug):
             orderItem.save()
             messages.success(request, f'{product} quantity has successfully been updated')
         else:
-            pass
-    except:
-        messages.error(request, f'Please create an account first')
-    # return redirect("product-detail", slug=slug)
+            orderItem.delete()
+            messages.success(request, f'{product} has been removed from cart')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
@@ -163,11 +178,18 @@ def update_cookie_cart_quantity(request):
 
     if action == 'add':
         if int(itemQuantity) < product.quantity:
-            messages.success(request, f'{product} has been successfully added to your shopping bag')
+            messages.success(request, f'"{product}" has been successfully added to your shopping bag')
             return JsonResponse('add', safe=False)
         else:
             messages.error(request, f'You\'ve reached the maximum number of {product}s available for purchase')
             return JsonResponse('', safe=False)
+    elif action == 'subtract':
+        if int(itemQuantity) != 0:
+            messages.success(request, f'Order quantity of "{product}" has been successfully reduced')
+            return JsonResponse('subtract', safe=False)
+        else:
+            messages.error(request, f'Your bag does not contain a {product} item to be reduced')
+            return JsonResponse('subtract', safe=False)
     elif action == 'remove':
         if int(itemQuantity) != 0:
             messages.success(request, f'"{product}" has been successfully removed from your shopping bag')
@@ -198,8 +220,29 @@ def cart(request):
     }
     return render(request, 'store/cart.html', context)
 
+
 def checkout(request):
-    return 'Hi'
+    if request.user.is_authenticated:
+        data = cartData(request)
+        items = data['items']
+        cart_quantity = data['cart_quantity']
+        cart_total = data['cart_total']
+    else:
+        data = cookieCartData(request)
+        items = data['items']
+        cart_quantity = data['cart_quantity']
+        cart_total = data['cart_total']
+
+    products = Product.objects.all()
+    form = ShippingAddressForm()
+    context = {
+        'products': products,
+        'items': items,
+        'cart_quantity': cart_quantity,
+        'cart_total': cart_total,
+        'form': form,
+    }
+    return render(request, 'store/checkout.html', context)
 
 
 def consign(request):

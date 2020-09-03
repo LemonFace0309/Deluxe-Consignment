@@ -1,7 +1,3 @@
-/* .divider {
-    height: 3px;
-    display: block;
-    background-color: rgba(0,0,0,.1);
-    margin: 1em 0;
-    width: 30px;
-} already exists with mdb*/
+.paginate .btn-sm {
+    padding: 10px 10px;
+}

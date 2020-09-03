@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 from .forms import *
 from .models import *
+import datetime
+import json
 from django.contrib.auth import authenticate, login, logout
 
 
@@ -16,9 +18,7 @@ def createUser(request):
                                                        email=form.cleaned_data['email'],
                                                        first_name=form.cleaned_data['first_name'],
                                                        last_name=form.cleaned_data['last_name'])
-            customer, created = Customer.objects.get_or_create(user=user, name=form.cleaned_data['first_name'] + ' ' +
-                                                               form.cleaned_data['last_name'],
-                                                               email=form.cleaned_data['email'])
+
             if created:
                 user.set_password(form.cleaned_data['password2'])
                 user.save()
@@ -64,3 +64,31 @@ def editUser(request):
             last_name = request.POST.get('last_name')
             customer = request.user.customer
 
+
+def processOrder(request):
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        total = float(data['form']['total'])
+        order.transaction_id = transaction_id
+
+        if total == order.get_cart_total:
+            order.complete = True
+        order.save()
+
+        ShippingAddress.objects.create(
+            customer=customer,
+            order=order,
+            address=data['shipping']['address'],
+            address2=data['shipping']['address2'],
+            city=data['shipping']['city'],
+            province=data['shipping']['province'],
+            country=data['shipping']['country'],
+            postal_code=data['shipping']['postal_code'],
+        )
+    else:
+        pass
+    return JsonResponse('Payment submitted...', safe=False)

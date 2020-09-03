@@ -6,7 +6,7 @@ from .views import (
     StoreListView,
 )
 
-# app_name = "store" # CHANGE ALL URLS IN TEMPLATE AFTER UNCOMMENTING THIS
+app_name = "shop"
 urlpatterns = [
     path('', store_views.home, name='home'),
     path('store/', store_views.StoreListView.as_view(), name='store'), #idk what nevercahe is, might need to add it -jim
@@ -21,8 +21,8 @@ urlpatterns = [
     path('account/', store_views.account, name='account'),
 
     path('add-to-cart/<slug>/', store_views.add_to_cart, name='add-to-cart'),
+    path('subtract-from-cart/<slug>/', store_views.subtract_from_cart, name='subtract-from-cart'),
     path('remove-from-cart/<slug>/', store_views.remove_from_cart, name='remove-from-cart'),
-    path('reduce-quantity/<slug>/', store_views.reduce_quantity, name='reduce-quantity'),
     path('update-cookie-cart-quantity/', store_views.update_cookie_cart_quantity, name="update-cookie-cart-quantity")
 ]
 

@@ -5,7 +5,7 @@
 <!-- Main Container -->
 <link rel="stylesheet" type="text/css" href="{% static 'css/store.css' %}">
 
-<div class="container mt-5 pt-3">
+<div class="container">
     <!-- Navbar -->
     <div class="row pt-4">
         <!-- Sidebar -->
@@ -13,26 +13,44 @@
             <div class="">
                 <!-- Grid row -->
                 <div class="row">
-                    <div class="col-md-6 col-lg-12 mb-5">
+                    <div class="col-md-6 col-lg-12">
                         <!-- Panel -->
-                        <h3 class="font-weight-bold dark-grey-text"><strong>Order By</strong></h3>
+                        <h3 class="font-weight-bold dark-grey-text"><strong>Sort By</strong></h3>
                         <div class="divider"></div>
                         <form action="" name="sortForm">
-                            <select class="mdb-select md-form" id="sort" name="sort" onchange="this.form.submit()">
+                            <select class="mdb-select md-form" id="sort" name="sort">
                                 <option value="" disabled selected>Choose your option</option>
-                                <option value="pricelow">Price (low to high)</option>
-                                <option value="pricehigh">Price (high to low)</option>
-                                <option value="3">Option 3</option>
+                                <option class="submitonchange" value="pricelow">Price (Low to High)</option>
+                                <option value="pricehigh">Price (High to Low)</option>
+                                <option value="a-z">Name (A to Z)</option>
+                                <option value="z-a">Name (Z to A)</option>
                             </select>
                         </form>
                     </div>
 
+                    <!-- Brand Filter -->
+                    <div class="col-md-6 col-lg-12 mb-4">
+                        <!-- Panel -->
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Brand</strong></h3>
+                        <div class="divider"></div>
+                        <form action="" name="brandForm">
+                            <select class="mdb-select md-form" id="brand" name="brand" onchange="this.form.submit()">
+                                <option value="" disabled selected>Brand</option>
+                                {% for brand in brands %}
+                                    <option value="{{brand}}">{{ brand }}</option>
+                                {% endfor %}
+                                <!-- <option value="3">Option 3</option> -->
+                            </select>
+                        </form>
+                    </div>
+                    <!-- Filter by brand -->
+                    
+
                     <!-- Filter by category -->
                     <div class="col-md-6 col-lg-12 mb-5">
-                        <h3 class="font-weight-bold dark-grey-text"><strong>Category</strong></h3>
-                        <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                        <!-- Radio group -->
-                        <form action="" onchange="this.form.submit()">
+                        <h5 class="font-weight-bold dark-grey-text mb-3 "><strong>Category</strong></h3>
+                            <!-- Radio group -->
+                        <form action="">
                             <div class="form-group ">
                                 <input class="form-check-input submitonchange" name="category" value="shoes"
                                        type="radio" id="radio100">
@@ -46,27 +64,17 @@
                             </div>
 
                             <div class="form-group">
-                                <input class="form-check-input submitonchange" name="category" type="radio"
-                                       id="radio102">
+                                <input class="form-check-input submitonchange" name="category" value="accessories" type="radio" id="radio102">
                                 <label for="radio102" class="form-check-label dark-grey-text">Accessories</label>
                             </div>
 
                             <div class="form-group">
-                                <input class="form-check-input" name="category" value="gucci" type="radio"
-                                       id="radio103">
-                                <label for="radio103" class="form-check-label dark-grey-text">Gucci</label>
-                            </div>
-
-                            <div class="form-group">
-                                <input class="form-check-input" name="category" type="radio" id="radio104"
-                                       onchange="this.form.submit()">
-                                <label for="radio104" class="form-check-label dark-grey-text">Headphones</label>
+                                <input class="form-check-input submitonchange" name="category" value="slgs" type="radio" id="radio103">
+                                <label for="radio103" class="form-check-label dark-grey-text">SLGs</label>
                             </div>
                         </form>
-
                         <!-- Radio group -->
                     </div>
-                    <!-- Filter by category -->
                 </div>
                 <!-- Grid row -->
 
@@ -74,43 +82,24 @@
                 <div class="row">
                     <!-- Filter by price -->
                     <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Price</strong></h5>
-                        <div class="divider"></div>
-                        <form class="range-field mt-3">
-                            <input id="calculatorSlider" class="no-border" type="range" value="0" min="0" max="30"/>
-                        </form>
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Max Price</strong></h3>
+                            <div class="divider"></div>
 
-                        <!-- Grid row -->
-                        <div class="row justify-content-center">
-                            <!-- Grid column -->
-                            <div class="col-md-6 text-left">
-                                <p class="dark-grey-text"><strong id="resellerEarnings">$0</strong></p>
-                            </div>
-                            <!-- Grid column -->
+                            <div class="row justify-content-center">
+                                <div class="col-md-6 text-left">
+                                    <p class="dark-grey-text"><strong id="resellerEarnings">$0</strong></p>
+                                </div>
 
-                            <!-- Grid column -->
-                            <div class="col-md-6 text-right">
-                                <p class="dark-grey-text"><strong id="clientPrice">$1500</strong></p>
+                                <div class="col-md-6 text-right">
+                                    <p class="dark-grey-text"><strong id="clientPrice">$1500</strong></p>
+                                </div>
                             </div>
-                            <!-- Grid column -->
-                        </div>
-                        <!-- Grid row -->
+                            <form class="range-field mt-0">
+                                <input id="calculatorSlider" class="no-border" name="pricemax" type="range" min="0" max="1500"/>
+                                <button class="btn btn-sm blue white-text" type="submit">Search</button>
+                            </form>
                     </div>
                     <!-- Filter by price -->
-
-                    <!-- Filter by rating -->
-                    <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Rating</strong></h5>
-                        <div class="divider"></div>
-                        <div class="row ml-1">
-                        </div>
-                        <div class="row ml-1">
-                        </div>
-                        <div class="row ml-1">
-                        </div>
-                    </div>
-                    <!-- Filter by rating -->
-
                 </div>
                 <!-- Grid row -->
             </div>
@@ -119,28 +108,11 @@
 
         <!-- Content -->
         <div class="col-lg-9">
-            <!-- Filter Area -->
-            <div class="row">
-                <div class="col-md-8 text-right ml-auto">
-                    <!-- View Switcher -->
-                    <a class="btn blue darken-3 btn-sm"><i class="fas fa-th mr-2" aria-hidden="true"></i>
-                        <strong>Grid</strong>
-                    </a>
-
-                    <a class="btn blue darken-3 btn-sm"><i class="fas fa-th-list mr-2" aria-hidden="true"></i>
-                        <strong>List</strong>
-                    </a>
-                    <!-- View Switcher -->
-                </div>
-            </div>
-            <!-- Filter Area -->
-
             <!-- Products Grid -->
             <section class="section pt-4">
-
                 <!-- Grid row -->
                 <div class="row">
-                    {% for product in products %}
+                    {% for product in page_obj %}
                     {% if product %}
                     <!-- Grid column -->
                     <div class="col-lg-4 col-md-12 mb-4">
@@ -173,7 +145,7 @@
                                     <div class="mb-0">
                                         <!-- above had a row class -->
 
-                                        {% if product.discount_price != product.price %}
+                                        {% if product.discount_price and product.discount_price != product.price %}
                                         <span class="float-left">${{product.discount_price}}</span>
                                         {% else %}
                                         <span class="float-left">${{product.price}}</span>
@@ -211,21 +183,21 @@
                                                 <!--Slides-->
                                                 <div class="carousel-inner" role="listbox">
                                                     <div class="carousel-item active">
-                                                        <a href="{% url 'product-detail' product.slug %}">
+                                                        <a href="{% url 'shop:product-detail' product.slug %}">
                                                             <img class="d-block w-100"
                                                                  src="{{product.imageURL}}"
                                                                  alt="First slide">
                                                         </a>
                                                     </div>
                                                     <div class="carousel-item">
-                                                        <a href="{% url 'product-detail' product.slug %}">
+                                                        <a href="{% url 'shop:product-detail' product.slug %}">
                                                             <img class="d-block w-100"
                                                                  src="{{product.imageURL}}"
                                                                  alt="Second slide">
                                                         </a>
                                                     </div>
                                                     <div class="carousel-item">
-                                                        <a href="{% url 'product-detail' product.slug %}">
+                                                        <a href="{% url 'shop:product-detail' product.slug %}">
                                                             <img class="d-block w-100"
                                                                  src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(25).jpg"
                                                                  alt="Third slide">
@@ -319,7 +291,7 @@
                                                        data-product="{{product.id}}" data-action="add">Add to Bag
                                                         <i class="fas fa-shopping-bag ml-2" aria-hidden="true"></i>
                                                     </a>
-                                                    <a href="{% url 'product-detail' product.slug %}"
+                                                    <a href="{% url 'shop:product-detail' product.slug %}"
                                                        class="btn btn-light">Detail View</a>
                                                     <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Close
@@ -340,11 +312,38 @@
                 <!-- Grid row -->
             </section>
             <!-- Products Grid -->
+
+            <!-- Pagination Section --> 
+            {% if page_obj.has_other_pages %}
+                <div class="paginate text-center mt-5 pt-5">
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-sm" href="?page={{page_obj.previous_page_number}}">
+                        <i class="fas fa-chevron-left black-text"></i>
+                    </a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <a class="btn btn-outline-grey" href="?page={{num}}">{{num}}</a>
+                    {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"+3" %}
+                        <a class="btn btn-sm rounded-3" href="?page={{num}}">{{num}}</a>
+                    {% endif %}
+                {% endfor%}
+
+                {% if page_obj.has_next %}
+                    <a class="btn btn-sm" href="?page={{page_obj.next_page_number}}">
+                        <i class="fas fa-chevron-right black-text"></i>
+                    </a>
+                {% endif %}
+                </div>
+            {% endif %}
+
         </div>
         <!-- Content -->
     </div>
 </div>
 <!-- Main Container -->
 </main>
+<script src="{% static 'js/store.js' %}"></script>
 
 {% endblock content %}
