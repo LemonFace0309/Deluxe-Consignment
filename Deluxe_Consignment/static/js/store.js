@@ -15,7 +15,7 @@ pages.forEach(page => {
 const onChangeElements = document.querySelectorAll('.submitonchange');
 onChangeElements.forEach(item => {
     item.addEventListener('click', () => {
+        item.closest('form').submit();
         item.selected = true;
-        // item.closest('form').submit();
     })
 })
