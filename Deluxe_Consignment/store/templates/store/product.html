@@ -151,7 +151,7 @@
                     {% if product.is_new %}
                     <span class="badge badge-info mb-2 mr-2">NEW</span>
                     {% endif %}
-                    {% if product.discount_price %}
+                    {% if product.discount_price != product.price %}
                     <span class="badge badge-success mb-4">SALE</span>
                     <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
                         <span class="green-text font-weight-bold">
@@ -243,12 +243,16 @@
 
                                 <div class="col-md-12 text-center text-md-right">
 
-                                    <a href="{{product.get_add_to_cart_url}}" class="btn btn-primary btn-rounded">
+                                    <a href="{{product.get_add_to_cart_url}}"
+                                       class="btn btn-primary btn-rounded update-cart"
+                                       data-product="{{product.id}}" data-action="add">
                                         <i class="fas fa-shopping-bag white-text mr-2" aria-hidden="true"></i> Add to
                                         shopping bag
                                     </a>
 
-                                    <a href="{{product.get_remove_from_cart_url}}" class="btn btn-danger btn-rounded">
+                                    <a href="{{product.get_remove_from_cart_url}}"
+                                       class="btn btn-danger btn-rounded update-cart"
+                                       data-product="{{product.id}}" data-action="remove">
                                         Remove
                                     </a>
 
