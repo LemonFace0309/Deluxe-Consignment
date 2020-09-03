@@ -6,7 +6,7 @@ from .views import (
     StoreListView,
 )
 
-# app_name = "store" # CHANGE ALL URLS IN TEMPLATE AFTER UNCOMMENTING THIS
+app_name = "shop"
 urlpatterns = [
     path('', store_views.home, name='home'),
     path('store/', store_views.StoreListView.as_view(), name='store'), #idk what nevercahe is, might need to add it -jim

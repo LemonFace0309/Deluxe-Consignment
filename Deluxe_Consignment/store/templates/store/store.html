@@ -183,21 +183,21 @@
                                                 <!--Slides-->
                                                 <div class="carousel-inner" role="listbox">
                                                     <div class="carousel-item active">
-                                                        <a href="{% url 'product-detail' product.slug %}">
+                                                        <a href="{% url 'shop:product-detail' product.slug %}">
                                                             <img class="d-block w-100"
                                                                  src="{{product.imageURL}}"
                                                                  alt="First slide">
                                                         </a>
                                                     </div>
                                                     <div class="carousel-item">
-                                                        <a href="{% url 'product-detail' product.slug %}">
+                                                        <a href="{% url 'shop:product-detail' product.slug %}">
                                                             <img class="d-block w-100"
                                                                  src="{{product.imageURL}}"
                                                                  alt="Second slide">
                                                         </a>
                                                     </div>
                                                     <div class="carousel-item">
-                                                        <a href="{% url 'product-detail' product.slug %}">
+                                                        <a href="{% url 'shop:product-detail' product.slug %}">
                                                             <img class="d-block w-100"
                                                                  src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(25).jpg"
                                                                  alt="Third slide">
@@ -291,7 +291,7 @@
                                                        data-product="{{product.id}}" data-action="add">Add to Bag
                                                         <i class="fas fa-shopping-bag ml-2" aria-hidden="true"></i>
                                                     </a>
-                                                    <a href="{% url 'product-detail' product.slug %}"
+                                                    <a href="{% url 'shop:product-detail' product.slug %}"
                                                        class="btn btn-light">Detail View</a>
                                                     <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Close

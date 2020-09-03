@@ -2,6 +2,9 @@
 {% load static %}
 
 {% block content %}
+<!-- Include the PayPal JavaScript SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=AarC0V2b30VX617wZMKb-qsD9hbLUQ10fIlyr-YCzmis-NjjPI1NLL_AL1U3ENRLRqXW6S3Dr4vU2bq1&currency=CAD"></script>
+
 <!--Main layout-->
 <main class="mb-5 pt-4">
     <div class="container wow fadeIn">
@@ -19,7 +22,8 @@
                 <div class="card">
 
                     <!--Card content-->
-                    <form method="POST" action="{% url 'user:checkout-user' %}" class="card-body">
+                    <form id="checkout_form" method="POST" action="" class="card-body">
+                        {% csrf_token %}
 
                         <!--Grid row-->
                         <div class="row">
@@ -29,8 +33,8 @@
 
                                 <!--firstName-->
                                 <div class="md-form ">
-                                    <input type="text" id="firstName" class="form-control">
-                                    <label for="firstName" class="">First name</label>
+                                    {{form.first_name}}
+                                    <label for="{{form.first_name.id_for_label}}" class="">First name</label>
                                 </div>
 
                             </div>
@@ -41,8 +45,8 @@
 
                                 <!--lastName-->
                                 <div class="md-form">
-                                    <input type="text" id="lastName" class="form-control">
-                                    <label for="lastName" class="">Last name</label>
+                                    {{form.last_name}}
+                                    <label for="{{form.last_name.id_for_label}}" class="">Last name</label>
                                 </div>
 
                             </div>
@@ -53,20 +57,26 @@
 
                         <!--email-->
                         <div class="md-form mb-5">
-                            <input type="text" id="email" class="form-control" placeholder="youremail@example.com">
-                            <label for="email" class="">Email (optional)</label>
+                            {{form.email}}
+                            <label for="{{form.email.id_for_label}}" class="">Email (optional)</label>
                         </div>
 
                         <!--address-->
                         <div class="md-form mb-5">
-                            <input type="text" id="address" class="form-control" placeholder="1234 Main St">
-                            <label for="address" class="">Address</label>
+                            {{form.address}}
+                            <label for="{{form.address.id_for_label}}" class="">Address</label>
                         </div>
 
                         <!--address-2-->
                         <div class="md-form mb-5">
-                            <input type="text" id="address-2" class="form-control" placeholder="Apartment or suite">
-                            <label for="address-2" class="">Address 2 (optional)</label>
+                            {{form.address2}}
+                            <label for="{form.address2.id_for_label}}" class="">Address 2 (optional)</label>
+                        </div>
+
+                        <!--city-->
+                        <div class="md-form mb-5">
+                            {{form.city}}
+                            <label for="{{form.city.id_for_label}}" class="">City</label>
                         </div>
 
                         <!--Grid row-->
@@ -75,11 +85,8 @@
                             <!--Grid column-->
                             <div class="col-lg-4 col-md-12 mb-4">
 
-                                <label for="country">Country</label>
-                                <select class="custom-select d-block w-100" id="country" required>
-                                    <option value="">Choose...</option>
-                                    <option>United States</option>
-                                </select>
+                                <label for="{{forms.country.id_for_label}}">Country</label>
+                                {{form.country}}
                                 <div class="invalid-feedback">
                                     Please select a valid country.
                                 </div>
@@ -90,11 +97,8 @@
                             <!--Grid column-->
                             <div class="col-lg-4 col-md-6 mb-4">
 
-                                <label for="state">State</label>
-                                <select class="custom-select d-block w-100" id="state" required>
-                                    <option value="">Choose...</option>
-                                    <option>California</option>
-                                </select>
+                                <label for="{{form.province.id_for_label}}">Province or State</label>
+                                {{form.province}}
                                 <div class="invalid-feedback">
                                     Please provide a valid state.
                                 </div>
@@ -105,8 +109,8 @@
                             <!--Grid column-->
                             <div class="col-lg-4 col-md-6 mb-4">
 
-                                <label for="zip">Zip</label>
-                                <input type="text" class="form-control" id="zip" placeholder="" required>
+                                <label for="{{form.postal_code.id_for_label}}">Postal Code or Zip</label>
+                                {{form.postal_code}}
                                 <div class="invalid-feedback">
                                     Zip code required.
                                 </div>
@@ -117,15 +121,8 @@
                         </div>
                         <!--Grid row-->
 
-                        <hr>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="save-info">
-                            <label class="custom-control-label" for="save-info">Save this information for next
-                                time</label>
-                        </div>
-
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                        <button id="continue-button" class="btn btn-primary btn-lg btn-block" type="submit">Continue</button>
 
                     </form>
 
@@ -189,7 +186,19 @@
         </div>
         <!--Grid row-->
 
+        <!--Pay Pal-->
+        <div id="paypal-payment" class="row pt-4 hidden">
+            <div class="col-md-8 mb-4">
+                <!-- Set up a container element for the button -->
+                <div id="paypal-button-container"></div>
+                <script type="text/javascript">
+                    total = '{{cart_total}}'
+                </script>
+            </div>
+        </div>
     </div>
 </main>
+
+<script type="text/javascript" src="{% static 'js/checkout.js' %}"></script>
 <!--Main layout-->
 {% endblock content %}

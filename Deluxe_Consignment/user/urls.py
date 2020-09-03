@@ -6,5 +6,6 @@ urlpatterns = [
     path('create-user/', user_views.createUser, name='create-user'),
     path('login-user/', user_views.loginUser, name='login-user'),
     path('logout-user/', user_views.logoutUser, name='logout-user'),
-    path('checkout-user/', user_views.checkoutUser, name='checkout-user')
+
+    path('process-order/', user_views.processOrder, name='process-order'),
 ]

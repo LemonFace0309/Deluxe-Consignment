@@ -152,7 +152,7 @@
 
     <div class="nav-container">
         <span id="menu-open" href=""><i class="fas fa-bars fa-1x"></i></span>
-        <div class="brand"><a href="{% url 'home'%}">Deluxe Consignment Shop</a></div>
+        <div class="brand"><a href="{% url 'shop:home' %}">Deluxe Consignment Shop</a></div>
         <form id="search" action="">
             <input class="form-control" id="searchBar" name="q" type="search" placeholder="Search">
         </form>
@@ -172,12 +172,12 @@
     </div>
     <div class="menu">
         <ul>
-            <li><a href="{% url 'store'%}">Shop</a> <!--do not like for mobile purposes -->
+            <li><a href="{% url 'shop:store' %}">Shop</a> <!--do not like for mobile purposes -->
                 <div class="menu-sub">
                     <div class="menu-col">
                         <div class="menu-category"><a href="">Brands</a></div>
                         <ul>
-                            <li><a href="{% url 'store'%}">Burberry</a></li>
+                            <li><a href="{% url 'shop:store' %}">Burberry</a></li>
                         </ul>
 
                     </div>
@@ -199,7 +199,7 @@
                 </div>
             </li>
 
-            <li><a href="{% url 'about'%}">About</a>
+            <li><a href="{% url 'shop:about' %}">About</a>
                 <div class="menu-sub">
                     <div class="menu-col">
                         <div class="menu-category"><a href="">Shoe</a></div>
@@ -219,7 +219,7 @@
                     </div>
                 </div>
             </li>
-            <li><a href="{% url 'consign'%}">Consign</a></li>
+            <li><a href="{% url 'shop:consign' %}">Consign</a></li>
         </ul>
     </div>
 </nav>
@@ -295,7 +295,7 @@
                     {% endfor %}
                     </tbody>
                 </table>
-                <a href="{% url 'cart' %}" class="btn btn-primary btn-rounded btn-sm">Cart</a>
+                <a href="{% url 'shop:cart' %}" class="btn btn-primary btn-rounded btn-sm">Cart</a>
             </div>
             <!-- Footer -->
             <div class="modal-footer">
