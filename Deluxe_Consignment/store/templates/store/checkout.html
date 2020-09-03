@@ -25,6 +25,7 @@
                     <form id="checkout_form" method="POST" action="" class="card-body">
                         {% csrf_token %}
 
+                        {% if not request.user.is_authenticated %}
                         <!--Grid row-->
                         <div class="row">
 
@@ -58,8 +59,10 @@
                         <!--email-->
                         <div class="md-form mb-5">
                             {{form.email}}
-                            <label for="{{form.email.id_for_label}}" class="">Email (optional)</label>
+                            <label for="{{form.email.id_for_label}}" class="">Email</label>
                         </div>
+
+                        {% endif %}
 
                         <!--address-->
                         <div class="md-form mb-5">
