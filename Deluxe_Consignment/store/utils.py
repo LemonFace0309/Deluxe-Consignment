@@ -31,7 +31,7 @@ def cookieCartData(request):
         # getting product
         product = Product.objects.get(id=i)
         # getting item total
-        total = (product.price * cart[i]['quantity'])
+        total = (product.discount_price * cart[i]['quantity'])
 
         # incrementing totals in order
         order['get_cart_quantity'] += cart[i]['quantity']

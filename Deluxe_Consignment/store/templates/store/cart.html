@@ -25,9 +25,6 @@
                         <th class="font-weight-bold">
                             <strong>Product</strong>
                         </th>
-                        <th class="font-weight-bold">
-                            <strong>Type</strong>
-                        </th>
                         <th></th>
                         <th class="font-weight-bold">
                             <strong>Price</strong>
@@ -61,7 +58,11 @@
                             <p class="text-muted">{{item.product.get_brand}}</p>
                         </td>
                         <td></td>
+                        {% if item.product.discount_price and item.product.discount_price != item.product.price %}
+                        <td>${{item.product.discount_price}}</td>
+                        {% else %}
                         <td>${{item.product.price}}</td>
+                        {% endif %}
                         <td></td>
                         <td class="text-center text-md-left">
                             <span class="qty">{{item.quantity}} </span>
@@ -98,13 +99,12 @@
 
                     <!-- Last row -->
                     <tr>
-                        <td></td>
+                        <td colspan="2"></td>
                         <td>
                             <h4 class="mt-2">
-                                <strong>Total</strong>
+                                <strong>Total:</strong>
                             </h4>
                         </td>
-                        <td></td>
                         <td class="text-left">
                             <h4 class="mt-2">
                                 <strong>${{cart_total}}</strong>
@@ -112,9 +112,9 @@
                         </td>
                         <td colspan="1"></td>
                         <td colspan="3" class="text-right">
-                            <button type="button" class="btn btn-primary btn-rounded">Complete purchase
+                            <a href="{% url 'shop:checkout' %}" type="button" class="btn btn-primary btn-rounded">Complete purchase
                                 <i class="fas fa-angle-right right"></i>
-                            </button>
+                            </a>
                         </td>
                     </tr>
                     <!-- Last row -->

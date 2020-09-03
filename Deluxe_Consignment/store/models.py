@@ -4,29 +4,29 @@ from django.shortcuts import reverse
 import datetime
 
 BRAND_CHOICES = [
-    ('Bal', 'Balenciaga'),
-    ('Bur', 'Burberry'),
-    ('Cel', 'Celine'),
-    ('Cha', 'Chanel'),
-    ('Dio', 'Christian Dior'),
-    ('Loub', 'Christian Louboutins'),
-    ('Fer', 'Ferragamo'),
-    ('Giv', 'Givenchy'),
-    ('Guc', 'Gucci'),
-    ('Her', 'Hermes'),
-    ('Choo', 'Jimmy Choo'),
-    ('Vui', 'Louis Vuitton'),
-    ('Pra', 'Prada'),
-    ('Laur', 'Saint Laurent'),
-    ('Gar', 'Valentino Garavani'),
-    ('Oth', 'Others'),
+    ('Balenciaga', 'Balenciaga'),
+    ('Burberry', 'Burberry'),
+    ('Celine', 'Celine'),
+    ('Chanel', 'Chanel'),
+    ('Christian Dior', 'Christian Dior'),
+    ('Christian Louboutins', 'Christian Louboutins'),
+    ('Ferragamo', 'Ferragamo'),
+    ('Givenchy', 'Givenchy'),
+    ('Gucci', 'Gucci'),
+    ('Hermes', 'Hermes'),
+    ('Jimmy Choo', 'Jimmy Choo'),
+    ('Louis Vuitton', 'Louis Vuitton'),
+    ('Prada', 'Prada'),
+    ('Saint Laurent', 'Saint Laurent'),
+    ('Valentino Garavani', 'Valentino Garavani'),
+    ('Others', 'Others'),
 ]
 
 
 # Create your models here.
 class Product(models.Model):
     name = models.CharField(max_length=200)
-    brand = models.CharField(max_length=4, choices=BRAND_CHOICES, null=True)
+    brand = models.CharField(max_length=100, choices=BRAND_CHOICES, null=True)
     price = models.DecimalField(max_digits=99, decimal_places=2)
     discount_price = models.DecimalField(max_digits=99, decimal_places=2, blank=True, null=True)
     featured = models.BooleanField(default=False)
@@ -35,31 +35,36 @@ class Product(models.Model):
     date_created = models.DateTimeField(auto_now=True)
     description = models.TextField(max_length=2000, null=True, blank=True)
     slug = models.SlugField(max_length=200)
-    # photos = ArrayField(ArrayField(models.ImageField(null=True, blank=True)))
+
+    # setting a discount price equal to price if not set by admin
+    def save(self, *args, **kwargs):
+        if not self.discount_price:
+            self.discount_price = self.price
+        super(Product, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("product-detail", kwargs={
+        return reverse("shop:product-detail", kwargs={
             'slug': self.slug
         })
 
     @property
     def get_add_to_cart_url(self):
-        return reverse("add-to-cart", kwargs={
+        return reverse("shop:add-to-cart", kwargs={
             'slug': self.slug
         })
 
     @property
     def get_remove_from_cart_url(self):
-        return reverse("remove-from-cart", kwargs={
+        return reverse("shop:remove-from-cart", kwargs={
             'slug': self.slug
         })
 
     @property
-    def get_reduce_quantity_url(self):
-        return reverse("reduce-quantity", kwargs={
+    def get_subtract_from_cart_url(self):
+        return reverse("shop:subtract-from-cart", kwargs={
             'slug': self.slug
         })
 

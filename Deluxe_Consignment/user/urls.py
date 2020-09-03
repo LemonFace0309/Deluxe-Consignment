@@ -7,4 +7,6 @@ urlpatterns = [
     path('login-user/', user_views.loginUser, name='login-user'),
     path('logout-user/', user_views.logoutUser, name='logout-user'),
     path('edit-user/', user_views.editUser, name='edit-user'),
+
+    path('process-order/', user_views.processOrder, name='process-order'),
 ]
