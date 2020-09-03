@@ -59,19 +59,31 @@
                         {% csrf_token %}
                         <div class="md-form">
                             <i class="fas fa-user prefix"></i>
-                            <input type="text" id="inputFirstName" class="form-control" value="{{user.first_name}}">
+                            <input type="text" id="inputFirstName" class="form-control" value="{{user.first_name}}"
+                                   name="first_name">
                             <label for="inputFirstName">First Name</label>
                         </div>
                         <div class="md-form">
                             <i class="fas fa-user prefix"></i>
-                            <input type="text" id="inputLastName" class="form-control" value="{{user.last_name}}">
+                            <input type="text" id="inputLastName" class="form-control" value="{{user.last_name}}"
+                                   name="last_name">
                             <label for="inputLastName">Last Name</label>
                         </div>
                         <div class="md-form">
                             <i class="fas fa-envelope prefix"></i>
-                            <input type="email" id="inputEmail" class="form-control validate"
+                            <input type="email" id="inputEmail" class="form-control validate" name="email"
                                    value="{{user.email}}">
                             <label for="inputEmail" data-error="wrong" data-success="right">E-mail</label>
+                        </div>
+                        <div class="md-form">
+                            <i class="fas fa-envelope prefix"></i>
+                            <input type="email" id="inputPhone" class="form-control validate"
+                                   value="{{customer.Phone}}" name="phone">
+                            <label for="inputEmail" data-error="wrong" data-success="right">Phone</label>
+                        </div>
+                        <div class="text-center mt-2">
+                            <button type="submit" class="btn btn-info">Change<i
+                                    class="fas fa-sign-in ml-1"></i></button>
                         </div>
                     </form>
                 </div>

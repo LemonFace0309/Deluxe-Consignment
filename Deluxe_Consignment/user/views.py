@@ -56,7 +56,7 @@ def logoutUser(request):
     messages.success(request, 'You have been logged out')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-<<<<<<< HEAD
+
 # def editUser(request):
 #     if request.method == 'POST':
 #         try:
@@ -64,17 +64,29 @@ def logoutUser(request):
 #             first_name = request.POST.get('first_name')
 #             last_name = request.POST.get('last_name')
 #             phone = request.POST.get('phone')
-=======
+
 def editUser(request):
     if request.method == 'POST':
         try:
             email = request.POST.get('email')
             first_name = request.POST.get('first_name')
             last_name = request.POST.get('last_name')
+            phone = request.POST.get('phone')
             customer = request.user.customer
+            customer.user.first_name = first_name
+            customer.user.last_name = last_name
+            customer.user.email = email
+            customer.phone = phone
+            customer.name = first_name + ' ' + last_name
+            customer.email = email
+            customer.save()
+            customer.user.save()
+
         except:
             print('fil this')
             # clark you need an except block
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 def processOrder(request):
     transaction_id = datetime.datetime.now().timestamp()
@@ -89,7 +101,6 @@ def processOrder(request):
         if total == order.get_cart_total:
             order.complete = True
         order.save()
->>>>>>> 22df31a110fc505e92d538a03e78cb58a0656575
 
         ShippingAddress.objects.create(
             customer=customer,

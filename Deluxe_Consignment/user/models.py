@@ -27,14 +27,9 @@ PROVINCE_OPTIONS = (
 # Create your models here.
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-<<<<<<< HEAD
     name = models.CharField(max_length=200, null=True)
     email = models.EmailField(max_length=200, null=True)
     phone = models.CharField(max_length=12, null=True)
-=======
-    name = models.CharField(max_length=200, null=True, blank=True)
-    email = models.EmailField(max_length=200, null=True, blank=True)
->>>>>>> 22df31a110fc505e92d538a03e78cb58a0656575
 
     def __str__(self):
         return self.name
