@@ -18,9 +18,9 @@
                         <h3 class="font-weight-bold dark-grey-text"><strong>Sort By</strong></h3>
                         <div class="divider"></div>
                         <form action="" name="sortForm">
-                            <select class="mdb-select md-form" id="sort" name="sort">
+                            <select class="mdb-select md-form" id="sort" name="sort" onchange="this.form.submit()">
                                 <option value="" disabled selected>Choose your option</option>
-                                <option class="submitonchange" value="pricelow">Price (Low to High)</option>
+                                <option value="pricelow">Price (Low to High)</option>
                                 <option value="pricehigh">Price (High to Low)</option>
                                 <option value="a-z">Name (A to Z)</option>
                                 <option value="z-a">Name (Z to A)</option>
@@ -58,18 +58,20 @@
                             </div>
 
                             <div class="form-group">
-                                <input class="form-check-input submitonchange" name="category" value="bags" type="radio"
-                                       id="radio101">
+                                <input class="form-check-input submitonchange" name="category" value="bags" 
+                                    type="radio" id="radio101">
                                 <label for="radio101" class="form-check-label dark-grey-text">Bags</label>
                             </div>
 
                             <div class="form-group">
-                                <input class="form-check-input submitonchange" name="category" value="accessories" type="radio" id="radio102">
+                                <input class="form-check-input submitonchange" name="category" value="accessories" 
+                                    type="radio" id="radio102">
                                 <label for="radio102" class="form-check-label dark-grey-text">Accessories</label>
                             </div>
 
                             <div class="form-group">
-                                <input class="form-check-input submitonchange" name="category" value="slgs" type="radio" id="radio103">
+                                <input class="form-check-input submitonchange" name="category" value="slgs" 
+                                    type="radio" id="radio103">
                                 <label for="radio103" class="form-check-label dark-grey-text">SLGs</label>
                             </div>
                         </form>
@@ -107,7 +109,7 @@
         <!-- Sidebar -->
 
         <!-- Content -->
-        <div class="col-lg-9">
+        <div class="col-lg-9 product-grid">
             <!-- Products Grid -->
             <section class="section pt-4">
                 <!-- Grid row -->
@@ -131,9 +133,9 @@
                             <!-- Card content -->
                             <div class="card-body">
                                 <!-- Category & Title -->
-                                <h5 class="card-title mb-1"><strong><a href="{{ product.get_absolute_url }}"
+                                <h6 class="card-title mb-1"><strong><a href="{{ product.get_absolute_url }}"
                                                                        class="dark-grey-text">{{product.name}}</a></strong>
-                                </h5>
+                                </h6>
                                 {% if product.is_new %}
                                 <span class="badge badge-pill badge-info mb-1 mr-1 ml-1">NEW</span>
                                 {% endif %}
@@ -142,23 +144,23 @@
                                 {% endif %}
                                 <!-- Card footer -->
                                 <div class="card-footer pb-0">
-                                    <div class="mb-0">
+                                
                                         <!-- above had a row class -->
 
-                                        {% if product.discount_price and product.discount_price != product.price %}
-                                        <span class="float-left">${{product.discount_price}}</span>
+                                        {% if product.discount_price != product.price %}
+                                        <span class="sfloat-left pr-0">${{product.discount_price}}</span>
                                         {% else %}
-                                        <span class="float-left">${{product.price}}</span>
+                                        <span class="sfloat-left mr-0">${{product.price}}</span>
                                         {% endif%}
 
-                                        <span class="float-right">
+                                        <span class="sfloat-right">
                                             <a href="{{product.get_add_to_cart_url}}"
                                                class="update-cart" data-toggle="tooltip" data-placement="top"
                                                data-product="{{product.id}}" data-action="add" title="Add to Bag">
                                                 <i class="fas grey-text fa-shopping-bag ml-3"></i>
                                             </a>
                                         </span>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             <!-- Card content -->
@@ -215,20 +217,20 @@
                                                 <a class="carousel-control-next"
                                                    href="#carousel-thumb{{forloop.counter}}" role="button"
                                                    data-slide="next">
-                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                    <span class="sr-only">Next</span>
+                                                    <span class="carousel-control-next-icon black-text" aria-hidden="true"></span>
+                                                    <span class="sr-only black-text black">Next</span>
                                                 </a>
                                                 <!--/.Controls-->
                                                 <ol class="carousel-indicators">
                                                     <li data-target="#carousel-thumb{{forloop.counter}}"
                                                         data-slide-to="0" class="active">
                                                         <img src="{{product.imageURL}}"
-                                                             width="60">
+                                                             width="60" height="60">
                                                     </li>
                                                     <li data-target="#carousel-thumb{{forloop.counter}}"
                                                         data-slide-to="1">
                                                         <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(24).jpg"
-                                                             width="60">
+                                                             width="60" height="60">
                                                     </li>
                                                     <li data-target="#carousel-thumb{{forloop.counter}}"
                                                         data-slide-to="2">
@@ -266,7 +268,7 @@
                                             </h3>
                                             {% endif %}
 
-                                            <p class="ml-xl-0 ml-4">{{product.description}}
+                                            <p class="ml-xl-0 ml-4">{{product.description|linebreaks}}
                                             </p>
 
                                             <p class="ml-xl-0 ml-4">
@@ -313,9 +315,12 @@
             </section>
             <!-- Products Grid -->
 
+            <div style="height: 10vh;"></div>
+            <!-- Ensure spacing for paginate button -->
+
             <!-- Pagination Section --> 
             {% if page_obj.has_other_pages %}
-                <div class="paginate text-center mt-5 pt-5">
+                <div class="paginate col-lg-12">
                 {% if page_obj.has_previous %}
                     <a class="btn btn-sm" href="?page={{page_obj.previous_page_number}}">
                         <i class="fas fa-chevron-left black-text"></i>

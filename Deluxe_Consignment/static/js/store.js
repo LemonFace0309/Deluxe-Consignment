@@ -11,11 +11,34 @@ pages.forEach(page => {
         page.href = `${search}&${pageLink}`
     }
 })
+// end pagination
+
+// let catSel = sessionStorage.getItem('catSel')
+let catSel =''
+
+
 
 const onChangeElements = document.querySelectorAll('.submitonchange');
 onChangeElements.forEach(item => {
     item.addEventListener('click', () => {
+        sessionStorage.setItem('catSel', item.id)
+        // console.log(sessionStorage.getItem('catSel'))
         item.closest('form').submit();
-        item.selected = true;
     })
 })
+
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        console.log(localStorage.getItem('catSel'))
+        console.log(`#${catSel}`)
+        document.querySelector(`#${sessionStorage.getItem('catSel')}`).checked = true;
+    }, 0);
+}) 
+
+
+function test() {
+    console.log('he')
+    const b = document.querySelector('#radio101')
+    b.checked = true;
+    console.log(b.value)
+}

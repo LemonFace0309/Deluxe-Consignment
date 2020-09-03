@@ -1,3 +1,55 @@
+.product-grid {
+    position: relative;
+}
+
+.paginate {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .paginate .btn-sm {
     padding: 10px 10px;
+}
+
+.card {
+    height: 60vh;
+    position: relative;
+    display: grid;
+    grid-template-rows: 60% 40%;
+    /* border: 2px solid blue; */
+}
+
+.card-body {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.view {
+    /* border: 2px solid black; */
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.card-footer {
+    /* border: 1px solid green; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-footer {
+    padding: 0;
+}
+
+.view img {
+    width: 100%;
+    text-align: center;
+    /* border: 1px solid red; */
 }
