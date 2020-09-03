@@ -55,22 +55,25 @@
             <div class="tab-content section pt-4" id="myClassicTabContent">
                 <div class="tab-pane fade" id="edit-account-classic" role="tabpanel"
                      aria-labelledby="edit-account-tab-classic">
-                    <div class="md-form">
+                    <form method="POST" action="{% url 'user:edit-user' %}">
+                        {% csrf_token %}
+                        <div class="md-form">
                             <i class="fas fa-user prefix"></i>
                             <input type="text" id="inputFirstName" class="form-control" value="{{user.first_name}}">
                             <label for="inputFirstName">First Name</label>
-                    </div>
-                    <div class="md-form">
+                        </div>
+                        <div class="md-form">
                             <i class="fas fa-user prefix"></i>
                             <input type="text" id="inputLastName" class="form-control" value="{{user.last_name}}">
                             <label for="inputLastName">Last Name</label>
-                    </div>
-                    <div class="md-form">
+                        </div>
+                        <div class="md-form">
                             <i class="fas fa-envelope prefix"></i>
                             <input type="email" id="inputEmail" class="form-control validate"
                                    value="{{user.email}}">
                             <label for="inputEmail" data-error="wrong" data-success="right">E-mail</label>
-                    </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="tab-pane fade" id="view-order-classic" role="tabpanel"
                      aria-labelledby="view-order-tab-classic">

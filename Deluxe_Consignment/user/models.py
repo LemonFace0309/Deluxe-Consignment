@@ -8,7 +8,7 @@ class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=200, null=True)
     email = models.EmailField(max_length=200, null=True)
-    phone = models.intege
+    phone = models.CharField(max_length=12, null=True)
 
     def __str__(self):
         return self.name

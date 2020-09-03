@@ -56,11 +56,11 @@ def logoutUser(request):
     messages.success(request, 'You have been logged out')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-def editUser(request):
-    if request.method == 'POST':
-        try:
-            email = request.POST.get('email')
-            first_name = request.POST.get('first_name')
-            last_name = request.POST.get('last_name')
-            customer = request.user.customer
+# def editUser(request):
+#     if request.method == 'POST':
+#         try:
+#             email = request.POST.get('email')
+#             first_name = request.POST.get('first_name')
+#             last_name = request.POST.get('last_name')
+#             phone = request.POST.get('phone')
 
