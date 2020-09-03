@@ -5,9 +5,7 @@ const sideNav = document.querySelector('.left-nav');
 const searchBar = document.querySelector('#searchBar');
 
 menuOpen.addEventListener('click', () =>  {
-    console.log("asd");
     sideNav.classList.add('showSide');
-    // document.querySelector('#menu-open').style.color = 'green';
     document.body.style.overflow = "hidden";
 });
 
@@ -23,24 +21,10 @@ searchBar.addEventListener('intput', () => {
 });
 
 window.addEventListener('scroll', function() {
-    // console.log({{request.path}});
-    const url = window.location.href;
-    if (url.includes('store') || url.includes('product')) {
-        nav.classList.toggle('sticky', window.scrollY > 100);
+    const url = location.pathname;
+    if (url != '/') {
+        nav.classList.toggle('sticky', window.scrollY > 80);
     } else {
         nav.classList.toggle('sticky', window.scrollY > window.innerHeight-150);
     }
-    resizeNav();
-});
-
-
-const navBack = document.querySelector('.nav-back');
-function resizeNav() {
-    navBack.style.height = `${nav.clientHeight}px`;
-} 
-window.addEventListener('resize', resizeNav);
-
-
-document.addEventListener("DOMContentLoaded", function(){
-    resizeNav();
 });
