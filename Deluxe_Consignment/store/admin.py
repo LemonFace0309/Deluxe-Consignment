@@ -6,6 +6,7 @@ admin.site.site_header = "Deluxe Consignment Shop Admin Dashboard"
 
 class ProductImageAdmin(admin.StackedInline):
     model = ProductImage
+    extra = 0
 
 
 @admin.register(Product)

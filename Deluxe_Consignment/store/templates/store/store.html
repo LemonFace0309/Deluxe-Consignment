@@ -132,9 +132,19 @@
 
                             <!-- Card content -->
                             <div class="card-body">
+
+                                {% for image in product.productimage_set.all %}
+                                    <!-- <img src="{{ image.image.url }}" /> -->
+                                    <p>{{ image.image.url }} </p>
+                                {% endfor %} 
+
+                                <p>{{ product.productimage.imageURL }}</p>
+                                <p>js</p>
+
+
                                 <!-- Category & Title -->
                                 <h6 class="card-title mb-1"><strong><a href="{{ product.get_absolute_url }}"
-                                                                       class="dark-grey-text">{{product.name}}</a></strong>
+                                                                       class="dark-grey-text">{{product.name|truncatechars:30}}</a></strong>
                                 </h6>
                                 {% if product.is_new %}
                                 <span class="badge badge-pill badge-info mb-1 mr-1 ml-1">NEW</span>

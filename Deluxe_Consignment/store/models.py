@@ -2,6 +2,7 @@ from django.db import models
 # from django.contrib.postgres.fields import ArrayField
 from django.shortcuts import reverse
 import datetime
+from django.template.defaultfilters import slugify
 
 BRAND_CHOICES = [
     ('Balenciaga', 'Balenciaga'),
@@ -34,13 +35,18 @@ class Product(models.Model):
     quantity = models.IntegerField(default=1)
     date_created = models.DateTimeField(auto_now=True)
     description = models.TextField(max_length=2000, null=True, blank=True)
-    slug = models.SlugField(max_length=200)
+    slug = models.SlugField(max_length=200, blank=True)
 
     # setting a discount price equal to price if not set by admin
     def save(self, *args, **kwargs):
         if not self.discount_price:
             self.discount_price = self.price
         super(Product, self).save(*args, **kwargs)
+
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super(Product, self).save(*args, **kwargs)
+
 
     def __str__(self):
         return self.name
