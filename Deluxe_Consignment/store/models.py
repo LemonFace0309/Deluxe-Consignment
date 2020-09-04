@@ -31,7 +31,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=99, decimal_places=2)
     discount_price = models.DecimalField(max_digits=99, decimal_places=2, blank=True, null=True)
     featured = models.BooleanField(default=False)
-    thumbnail = models.ImageField(null=True, blank=True)
+    thumbnail = models.ImageField(null=True, blank=True, upload_to='thumbnails')
     quantity = models.IntegerField(default=1)
     date_created = models.DateTimeField(auto_now=True)
     description = models.TextField(max_length=2000, null=True, blank=True)
@@ -115,7 +115,7 @@ class Product(models.Model):
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to='thumbnails')
 
     def __str__(self):
         return self.product.name

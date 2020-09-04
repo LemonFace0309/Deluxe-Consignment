@@ -175,7 +175,7 @@
                                         <!--Carousel Wrapper-->
                                         <div class="col-lg-5">
                                             <div id="carousel-thumb{{forloop.counter}}"
-                                                 class="carousel slide carousel-fade carousel-thumbnails"
+                                                 class="carousel slide carousel-fade carousel-thumbnails h-100"
                                                  data-ride="carousel">
                                                 <!--Slides-->
                                                 <div class="carousel-inner" role="listbox">
@@ -205,14 +205,14 @@
                                                     <li data-target="#carousel-thumb{{forloop.counter}}"
                                                         data-slide-to="0" class="active">
                                                         <img src="{{product.imageURL}}"
-                                                             width="60" height="60">
+                                                            width="60">
                                                     </li>
                                                     
                                                     {% for image in product.productimage_set.all %}
                                                     <li data-target="#carousel-thumb{{forloop.parentloop.counter}}"
                                                         data-slide-to="{{ forloop.counter }}">
                                                         <img src="{{image.image.url}}"
-                                                            width="60" height="60">
+                                                            width="60">
                                                     </li>
                                                     {% endfor%} 
                                                 </ol>
@@ -221,9 +221,7 @@
                                         <!--/.Carousel Wrapper-->
 
                                         <div class="col-lg-7">
-                                            <h3 class="h2-responsive product-name">
-                                                <strong>{{product}}</strong>
-                                            </h3>
+                                            <h3 class="h3-responsive"> {{product}} </h3>
                                             {% if product.is_new %}
                                             <span class="badge badge-info">NEW</span>
                                             {% endif %}
@@ -263,7 +261,8 @@
                                                 <strong>Quantity Available: </strong>{{product.quantity}}</p>
 
                                             <!-- Add to Cart -->
-                                            <div class="card-body">
+                                            <div>b</div>
+                                            <div class="">
                                                 <div class="text-center">
                                                     <a href="{{product.get_add_to_cart_url}}"
                                                        class="btn btn-secondary update-cart"
@@ -278,7 +277,11 @@
                                                 </div>
                                             </div>
                                             <!-- /.Add to Cart -->
+
                                         </div>
+                                        <!-- col7 -->
+
+                                        <div>bot</div>
                                     </div>
                                 </div>
                             </div>
