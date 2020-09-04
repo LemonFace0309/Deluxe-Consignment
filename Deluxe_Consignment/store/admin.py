@@ -8,7 +8,6 @@ class ProductImageAdmin(admin.StackedInline):
     model = ProductImage
 
 
-@admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageAdmin]
     readonly_fields = ('date_created',)
@@ -18,12 +17,9 @@ class ProductAdmin(admin.ModelAdmin):
         model = Product
 
 
-@admin.register(ProductImage)
-class ProductImageAdmin(admin.ModelAdmin):
-    pass
-
-
 # Register your models here.
+admin.site.register(Product, ProductAdmin)
+admin.site.register(ProductImage)
 admin.site.register(Shoe, ProductAdmin)
 admin.site.register(Bag, ProductAdmin)
 admin.site.register(Accessory, ProductAdmin)

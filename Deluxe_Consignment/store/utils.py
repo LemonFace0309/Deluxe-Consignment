@@ -1,7 +1,7 @@
 import json
 from .models import *
 from user.models import (
-    Customer, Order, OrderItem, ShippingAddress
+    Customer, Order, OrderItem, ShippingAddress, Coupon
 )
 from user.forms import (
     CreateUserForm
@@ -17,14 +17,14 @@ def cartData(request):
     return {'order': order, 'items': items, 'cart_quantity': cart_quantity, 'cart_total': cart_total}
 
 
-def cookieCartData(request):
+def cookieCartData(request, code=None):
     try:
         cart = json.loads(request.COOKIES['cart'])
     except:
         # For first load when cookies are not loaded yet
         cart = {}
     # creating order
-    order = {'get_cart_total': 0, 'get_cart_quantity': 0, 'shipping': False}
+    order = {'get_cart_total': 0, 'get_cart_quantity': 0, 'get_discount_total': 0, 'shipping': False}
     items = []
 
     for i in cart:
@@ -51,6 +51,7 @@ def cookieCartData(request):
                 'description': product.description,
                 'slug': product.slug,
                 'imageURL': product.imageURL,
+                'get_brand': product.get_brand,
             },
             'quantity': cart[i]['quantity'],
             'get_total': total,
@@ -58,6 +59,13 @@ def cookieCartData(request):
         items.append(item)
 
     cart_quantity = order['get_cart_quantity']
+    order['get_cart_total'] = float(order['get_cart_total'])
     cart_total = order['get_cart_total']
+    if code is not None:
+        coupon = Coupon.objects.get(code=code)
+        order['coupon'] = coupon
+        order['get_cart_total'] *= (1 - (order['coupon'].discount_percentage / 100))
+        cart_total *= order['get_cart_total']
+        order['get_discount_total'] = (cart_total / (1 - (coupon.discount_percentage/100))) - cart_total
 
     return {'order': order, 'items': items, 'cart_quantity': cart_quantity, 'cart_total': cart_total}

@@ -51,3 +51,18 @@ class ShippingAddressForm(ModelForm):
                 'class': "form-control"
             }),
         }
+
+
+class CouponForm(ModelForm):
+    class Meta:
+        model = Coupon
+        fields = ['code']
+
+        widgets = {
+            'code': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Promo code',
+                'aria-label': 'Recipient\'s username',
+                'aria-describedby': 'basic-addon2'
+            })
+        }

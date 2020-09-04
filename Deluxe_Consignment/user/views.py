@@ -1,12 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 from .forms import *
 from .models import *
 from .utils import *
 import datetime
 import json
 from django.contrib.auth import authenticate, login, logout
+
+from store.utils import cartData, cookieCartData
 
 
 # Create your views here.
@@ -58,6 +61,33 @@ def logoutUser(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+def addCoupon(request):
+    if request.method == 'POST':
+        form = CouponForm(request.POST or None)
+        if form.is_valid():
+            code = form.cleaned_data.get('code')
+
+            if request.user.is_authenticated:
+                data = cartData(request)
+                order = data['order']
+                try:
+                    coupon = Coupon.objects.get(code=code)
+                    order.coupon = coupon
+                    order.save()
+                    messages.success(request, 'Coupon Code Successfully Applied')
+                except ObjectDoesNotExist:
+                    messages.info(request, 'Invalid Coupon Code')
+            else:
+                try:
+                    request.session['code'] = code
+                    messages.success(request, 'Coupon Code Successfully Applied')
+                except ObjectDoesNotExist:
+                    messages.info(request, 'Invalid Coupon Code')
+            return redirect('shop:checkout')
+    # TODO: raise error
+    return None
+
+
 def processOrder(request):
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
@@ -75,6 +105,9 @@ def processOrder(request):
         order.complete = True
     order.save()
 
+    if 'code' in request.session:
+        del request.session['code']
+
     ShippingAddress.objects.create(
         customer=customer,
         order=order,
@@ -86,3 +119,6 @@ def processOrder(request):
         postal_code=data['shipping']['postal_code'],
     )
     return JsonResponse('Payment submitted...', safe=False)
+
+
+
