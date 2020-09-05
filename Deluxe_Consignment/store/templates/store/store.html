@@ -220,47 +220,50 @@
                                         </div>
                                         <!--/.Carousel Wrapper-->
 
-                                        <div class="col-lg-7">
-                                            <h3 class="h3-responsive mt-xl-0 mt-1"> {{product.name}} </h3>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <h4 class="text-center">
-                                                <span class="font-weight-bold">${{product.discount_price}}</span>
-                                                {% if product.discount_price != product.price %}
-                                                    <span class="green-text ml-2">
-                                                        <small><s>${{product.price}}</s></small>
-                                                    </span>
-                                                {% endif%}
-                                                </h4>
-
-                                                <div class="d-flex align-items-center">
-                                                    {% if product.is_new %}
-                                                    <span class="badge badge-info">NEW</span>
-                                                    {% endif %}
+                                        <div class="product-info col-lg-7">
+                                            <div class="product-body">
+                                                <h3 class="h3-responsive mt-xl-0 mt-1"> {{product.name}} </h3>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h4 class="text-center">
+                                                    <span class="font-weight-bold">${{product.discount_price}}</span>
                                                     {% if product.discount_price != product.price %}
-                                                    <span class="badge badge-success ml-2">SALE</span>
-                                                    {% endif %}
-                                                </div>
-                                            </div>
-                                            
-                                            <div>{{product.description|linebreaks}}</div>
+                                                        <span class="green-text ml-2">
+                                                            <small><s>${{product.price}}</s></small>
+                                                        </span>
+                                                    {% endif%}
+                                                    </h4>
 
-                                            <div> Brand: {{ product.get_brand }}</div>
-                                            {% if product.is_shoe %}
-                                            <div> Size: {{ product.shoe.size }}</div>
-                                            {% endif %}
-                                            <div> Quantity: {{ product.quantity }}</div>
+                                                    <div class="d-flex align-items-center">
+                                                        {% if product.is_new %}
+                                                        <span class="badge badge-info">NEW</span>
+                                                        {% endif %}
+                                                        {% if product.discount_price != product.price %}
+                                                        <span class="badge badge-success ml-2">SALE</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div>{{product.description|linebreaks}}</div>
+                                            </div>
 
                                             <!-- Add to Cart -->
-                                            <div class="">
-                                                <div class="text-center">
+                                            <div class="product-footer">
+                                                <!-- information -->
+                                                <div> Brand: {{ product.get_brand }}</div>
+                                                {% if product.is_shoe %}
+                                                <div> Size: {{ product.shoe.size }}</div>
+                                                {% endif %}
+                                                <div> Quantity: {{ product.quantity }}</div>
+
+                                                <div>
                                                     <a href="{{product.get_add_to_cart_url}}"
-                                                       class="btn btn-secondary update-cart"
-                                                       data-product="{{product.id}}" data-action="add">Add to Bag
-                                                        <i class="fas fa-shopping-bag ml-2" aria-hidden="true"></i>
+                                                        class="btn btn-outline-secondary update-cart"
+                                                        data-product="{{product.id}}" data-action="add">Add to Bag
+                                                        <i class="fas fa-shopping-bag pink-text ml-1" aria-hidden="true"></i>
                                                     </a>
                                                     <a href="{% url 'shop:product-detail' product.slug %}"
-                                                       class="btn btn-light">Detail View</a>
-                                                    <button type="button" class="btn btn-secondary"
+                                                        class="btn btn-outline-secondary">Detail View</a>
+                                                    <button type="button" 
+                                                        class="btn btn-outline-secondary"
                                                             data-dismiss="modal">Close
                                                     </button>
                                                 </div>

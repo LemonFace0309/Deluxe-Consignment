@@ -88,3 +88,19 @@
     overflow: hidden;
     border-radius: 0% !important;
 }
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-footer .btn{
+    padding: 10px 15px;
+}
