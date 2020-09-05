@@ -6,19 +6,19 @@ class OrderItemAdmin(admin.StackedInline):
     model = OrderItem
 
 
-@admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderItemAdmin]
+    readonly_fields = ('date_created',)
+    list_filter = ('date_created',)
+
+    list_display = ('__str__', 'date_created', 'complete')
 
     class Meta:
         model = Order
 
-
-@admin.register(OrderItem)
-class OrderItemAdmin(admin.ModelAdmin):
-    pass
-
-
 # Register your models here.
 admin.site.register(Customer)
+admin.site.register(Order, OrderAdmin)
+admin.site.register(OrderItem)
 admin.site.register(ShippingAddress)
+admin.site.register(Coupon)

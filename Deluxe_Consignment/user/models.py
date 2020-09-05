@@ -37,23 +37,39 @@ class Customer(models.Model):
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
+<<<<<<< HEAD
     date_ordered = models.DateTimeField(auto_now_add=True, null=True)
     complete = models.BooleanField(default=False, null=True)
     shipping = models.BooleanField(default=False, null=True)
+=======
+    coupon = models.ForeignKey('Coupon', on_delete=models.SET_NULL, null=True, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    complete = models.BooleanField(default=False)
+    shipping = models.BooleanField(default=False)
+>>>>>>> checkout
     transaction_id = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return f"{str(self.id)} created by {self.customer.name}"
+        return f"{str(self.id)} created by {str(self.customer)}"
 
     @property
     def get_cart_total(self):
         items = self.orderitem_set.all()
-        return sum([item.get_total for item in items])
+        total = sum([item.get_total for item in items])
+        total = float(total)
+        if self.coupon:
+            total *= (1 - (self.coupon.discount_percentage/100))
+        return total
 
     @property
     def get_cart_quantity(self):
         items = self.orderitem_set.all()
         return sum([item.quantity for item in items])
+
+    def get_discount_total(self):
+        if self.coupon:
+            return float((self.get_cart_total / (1 - (self.coupon.discount_percentage/100))) - self.get_cart_total)
+        return 0
 
 
 class OrderItem(models.Model):
@@ -83,3 +99,11 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
+
+
+class Coupon(models.Model):
+    code = models.CharField(max_length=25)
+    discount_percentage = models.FloatField(default=5)
+
+    def __str__(self):
+        return self.code
