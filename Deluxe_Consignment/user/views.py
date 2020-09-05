@@ -1,7 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
-from . forms import *
+from .forms import *
+from .models import *
+import datetime
+import json
 from django.contrib.auth import authenticate, login, logout
 
 
@@ -10,13 +13,15 @@ def createUser(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST.copy())
 
-        form.is_valid()
-        print(form.cleaned_data)
         if form.is_valid():
-            user, created = User.objects.get_or_create(username=form.cleaned_data['email'], email=form.cleaned_data['email'],
-                                                       first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'],
-                                                       password=form.cleaned_data['password2'])
+            user, created = User.objects.get_or_create(username=form.cleaned_data['email'],
+                                                       email=form.cleaned_data['email'],
+                                                       first_name=form.cleaned_data['first_name'],
+                                                       last_name=form.cleaned_data['last_name'])
+
             if created:
+                user.set_password(form.cleaned_data['password2'])
+                user.save()
                 messages.success(request, 'Account created successfully')
             else:
                 messages.success(request, 'Account already exists')
@@ -37,10 +42,12 @@ def loginUser(request):
 
             if user:
                 login(request, user)
+                messages.success(request, 'Welcome Back!')
             else:
-                messages.error(request, 'Authentication Error: Email or password is incorrect')
+                print('sad!')
+                messages.error(request, 'Authentication Error: Email or password is invalid')
         except:
-            messages.error(request, 'Authentication Error: Email or password is incorrect')
+            messages.error(request, 'Authentication Error: Email or password is invalid')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
@@ -48,3 +55,32 @@ def logoutUser(request):
     logout(request)
     messages.success(request, 'You have been logged out')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def processOrder(request):
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        total = float(data['form']['total'])
+        order.transaction_id = transaction_id
+
+        if total == order.get_cart_total:
+            order.complete = True
+        order.save()
+
+        ShippingAddress.objects.create(
+            customer=customer,
+            order=order,
+            address=data['shipping']['address'],
+            address2=data['shipping']['address2'],
+            city=data['shipping']['city'],
+            province=data['shipping']['province'],
+            country=data['shipping']['country'],
+            postal_code=data['shipping']['postal_code'],
+        )
+    else:
+        pass
+    return JsonResponse('Payment submitted...', safe=False)

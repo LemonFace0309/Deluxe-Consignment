@@ -5,7 +5,7 @@
 <!-- Main Container -->
 <link rel="stylesheet" type="text/css" href="{% static 'css/store.css' %}">
 
-<div class="container mt-5 pt-3">
+<div class="container">
     <!-- Navbar -->
     <div class="row pt-4">
         <!-- Sidebar -->
@@ -13,56 +13,70 @@
             <div class="">
                 <!-- Grid row -->
                 <div class="row">
-                    <div class="col-md-6 col-lg-12 mb-5">
+                    <div class="col-md-6 col-lg-12">
                         <!-- Panel -->
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Order By</strong></h3>
+                        <h3 class="font-weight-bold dark-grey-text"><strong>Sort By</strong></h3>
                         <div class="divider"></div>
                         <form action="" name="sortForm">
                             <select class="mdb-select md-form" id="sort" name="sort" onchange="this.form.submit()">
                                 <option value="" disabled selected>Choose your option</option>
-                                <option value="pricelow">Price (low to high)</option>
-                                <option value="pricehigh">Price (high to low)</option>
-                                <option value="3">Option 3</option>
+                                <option value="pricelow">Price (Low to High)</option>
+                                <option value="pricehigh">Price (High to Low)</option>
+                                <option value="a-z">Name (A to Z)</option>
+                                <option value="z-a">Name (Z to A)</option>
                             </select>
                         </form>
                     </div>
+
+                    <!-- Brand Filter -->
+                    <div class="col-md-6 col-lg-12 mb-4">
+                        <!-- Panel -->
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Brand</strong></h3>
+                        <div class="divider"></div>
+                        <form action="" name="brandForm">
+                            <select class="mdb-select md-form" id="brand" name="brand" onchange="this.form.submit()">
+                                <option value="" disabled selected>Brand</option>
+                                {% for brand in brands %}
+                                    <option value="{{brand}}">{{ brand }}</option>
+                                {% endfor %}
+                                <!-- <option value="3">Option 3</option> -->
+                            </select>
+                        </form>
+                    </div>
+                    <!-- Filter by brand -->
                     
 
                     <!-- Filter by category -->
                     <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Category</strong></h3>
-                        <hr class="black accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <h5 class="font-weight-bold dark-grey-text mb-3 "><strong>Category</strong></h3>
                             <!-- Radio group -->
-                        <form action="" onchange="this.form.submit()">
+                        <form action="">
                             <div class="form-group ">
-                                <input class="form-check-input submitonchange" name="category" value="shoes" type="radio" id="radio100">
+                                <input class="form-check-input submitonchange" name="category" value="shoes"
+                                       type="radio" id="radio100">
                                 <label for="radio100" class="form-check-label dark-grey-text">Shoes</label>
                             </div>
-    
+
                             <div class="form-group">
-                                <input class="form-check-input submitonchange" name="category" value="bags" type="radio" id="radio101">
+                                <input class="form-check-input submitonchange" name="category" value="bags" 
+                                    type="radio" id="radio101">
                                 <label for="radio101" class="form-check-label dark-grey-text">Bags</label>
                             </div>
-    
+
                             <div class="form-group">
-                                <input class="form-check-input submitonchange" name="category" type="radio" id="radio102">
+                                <input class="form-check-input submitonchange" name="category" value="accessories" 
+                                    type="radio" id="radio102">
                                 <label for="radio102" class="form-check-label dark-grey-text">Accessories</label>
                             </div>
-    
+
                             <div class="form-group">
-                                <input class="form-check-input" name="category" value="gucci" type="radio" id="radio103">
-                                <label for="radio103" class="form-check-label dark-grey-text">Gucci</label>
-                            </div>
-    
-                            <div class="form-group">
-                                <input class="form-check-input" name="category" type="radio" id="radio104" onchange="this.form.submit()">
-                                <label for="radio104" class="form-check-label dark-grey-text">Headphones</label>
+                                <input class="form-check-input submitonchange" name="category" value="slgs" 
+                                    type="radio" id="radio103">
+                                <label for="radio103" class="form-check-label dark-grey-text">SLGs</label>
                             </div>
                         </form>
-
                         <!-- Radio group -->
                     </div>
-                    <!-- Filter by category -->
                 </div>
                 <!-- Grid row -->
 
@@ -70,43 +84,24 @@
                 <div class="row">
                     <!-- Filter by price -->
                     <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Price</strong></h3>
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Max Price</strong></h3>
                             <div class="divider"></div>
-                            <form class="range-field mt-3">
-                                <input id="calculatorSlider" class="no-border" type="range" value="0" min="0" max="30"/>
-                            </form>
 
-                            <!-- Grid row -->
                             <div class="row justify-content-center">
-                                <!-- Grid column -->
                                 <div class="col-md-6 text-left">
                                     <p class="dark-grey-text"><strong id="resellerEarnings">$0</strong></p>
                                 </div>
-                                <!-- Grid column -->
 
-                                <!-- Grid column -->
                                 <div class="col-md-6 text-right">
                                     <p class="dark-grey-text"><strong id="clientPrice">$1500</strong></p>
                                 </div>
-                                <!-- Grid column -->
                             </div>
-                            <!-- Grid row -->
+                            <form class="range-field mt-0">
+                                <input id="calculatorSlider" class="no-border" name="pricemax" type="range" min="0" max="1500"/>
+                                <button class="btn btn-sm blue white-text" type="submit">Search</button>
+                            </form>
                     </div>
                     <!-- Filter by price -->
-
-                    <!-- Filter by rating -->
-                    <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Rating</strong></h3>
-                            <div class="divider"></div>
-                            <div class="row ml-1">
-                            </div>
-                            <div class="row ml-1">
-                            </div>
-                            <div class="row ml-1">
-                            </div>
-                    </div>
-                    <!-- Filter by rating -->
-
                 </div>
                 <!-- Grid row -->
             </div>
@@ -114,74 +109,52 @@
         <!-- Sidebar -->
 
         <!-- Content -->
-        <div class="col-lg-9">
-            <!-- Filter Area -->
-            <div class="row">
-                <div class="col-md-8 text-right ml-auto">
-                    <!-- View Switcher -->
-                    <a class="btn blue darken-3 btn-sm"><i class="fas fa-th mr-2" aria-hidden="true"></i>
-                        <strong>Grid</strong>
-                    </a>
-
-                    <a class="btn blue darken-3 btn-sm"><i class="fas fa-th-list mr-2" aria-hidden="true"></i>
-                        <strong>List</strong>
-                    </a>
-                    <!-- View Switcher -->
-                </div>
-            </div>
-            <!-- Filter Area -->
-
+        <div class="col-lg-9 product-grid">
             <!-- Products Grid -->
             <section class="section pt-4">
-
-                <!-- Grid row -->
                 <div class="row">
-                    {% for product in products %}
-                    {% if product %}
-                    <!-- Grid column -->
+                    {% for product in page_obj %}
                     <div class="col-lg-4 col-md-12 mb-4">
                         <div class="card card-ecommerce">
                             <!-- Card image -->
                             <div class="view overlay">
                                 <img src="{{product.imageURL}}"
                                      class="img-fluid"
-                                     alt="">
+                                     alt="Product Image">
                                 <a data-toggle="modal" data-target="#modalQuickView{{forloop.counter}}">
                                     <div class="mask rgba-white-light"></div>
                                 </a>
                             </div>
-                            <!-- Card image -->
 
                             <!-- Card content -->
                             <div class="card-body">
-                                <!-- Category & Title -->
-                                <h5 class="card-title mb-1"><strong><a href="{{ product.get_absolute_url }}"
-                                                                       class="dark-grey-text">{{product}}</a></strong>
-                                </h5>
+                                <h6 class="card-title mb-1">
+                                    <a class="dark-grey-text" href="{{ product.get_absolute_url }}">
+                                        {{product.name|truncatechars:30}}
+                                    </a>
+                                </h6>
+
                                 {% if product.is_new %}
-                                <span class="badge badge-pill badge-info mb-1 mr-1 ml-1">NEW</span>
+                                    <span class="badge badge-pill badge-info mb-1 mr-1">NEW</span>
                                 {% endif %}
                                 {% if product.discount_price != product.price %}
-                                <span class="badge badge-pill badge-success mb-1">SALE</span>
+                                    <span class="badge badge-pill badge-success mb-1">SALE</span>
                                 {% endif %}
                                 <!-- Card footer -->
                                 <div class="card-footer pb-0">
-                                    <div class="mb-0">
-                                        <!-- above had a row class -->
+                                    {% if product.discount_price != product.price %}
+                                        <span>${{product.discount_price}}</span>
+                                    {% else %}
+                                        <span>${{product.price}}</span>
+                                    {% endif%}
 
-                                        {% if product.discount_price != product.price %}
-                                            <span class="float-left">${{product.discount_price}}</span>
-                                        {% else %}
-                                            <span class="float-left">${{product.price}}</span>
-                                        {% endif%}
-
-                                        <span class="float-right">
-                                            <a href="{{product.get_add_to_cart_url}}" 
-                                                data-toggle="tooltip" data-placement="top"
-                                                title="Add to Bag"><i class="fas grey-text fa-shopping-bag ml-3"></i>
-                                            </a>
-                                        </span>
-                                    </div>
+                                    <span>
+                                        <a href="{{product.get_add_to_cart_url}}"
+                                            class="update-cart" data-toggle="tooltip" data-placement="top"
+                                            data-product="{{product.id}}" data-action="add" title="Add to Bag">
+                                            <i class="fas dark-grey-text fa-shopping-bag"></i>
+                                        </a>
+                                    </span>
                                 </div>
                             </div>
                             <!-- Card content -->
@@ -190,106 +163,89 @@
                     </div>
                     <!-- Grid column -->
 
+
                     <!-- Modal: modalQuickView -->
                     <div class="modal fade" id="modalQuickView{{forloop.counter}}" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
+                        aria-labelledby="{{product.name}" aria-hidden="true">
+                        
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-body">
                                     <div class="row">
+                                        <!--Carousel Wrapper-->
                                         <div class="col-lg-5">
-                                            <!--Carousel Wrapper-->
                                             <div id="carousel-thumb{{forloop.counter}}"
                                                  class="carousel slide carousel-fade carousel-thumbnails"
                                                  data-ride="carousel">
                                                 <!--Slides-->
                                                 <div class="carousel-inner" role="listbox">
                                                     <div class="carousel-item active">
-                                                        <a href="{% url 'product-detail' product.slug %}">
+                                                        <a href="{% url 'shop:product-detail' product.slug %}">
                                                             <img class="d-block w-100"
                                                                  src="{{product.imageURL}}"
-                                                                 alt="First slide">
+                                                                 alt="Product Image">
                                                         </a>
                                                     </div>
+                                                    
+                                                    {% for image in product.productimage_set.all %}
                                                     <div class="carousel-item">
-                                                        <a href="{% url 'product-detail' product.slug %}">
+                                                        <a href="{% url 'shop:product-detail' product.slug %}">
                                                             <img class="d-block w-100"
-                                                                 src="{{product.imageURL}}"
-                                                                 alt="Second slide">
+                                                                 src="{{image.image.url}}"
+                                                                 alt="Product Image">
                                                         </a>
                                                     </div>
-                                                    <div class="carousel-item">
-                                                        <a href="{% url 'product-detail' product.slug %}">
-                                                            <img class="d-block w-100"
-                                                                 src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(25).jpg"
-                                                                 alt="Third slide">
-                                                        </a>
-                                                    </div>
+                                                    {% endfor %}
+
                                                 </div>
                                                 <!--/.Slides-->
-                                                <!--Controls-->
-                                                <a class="carousel-control-prev"
-                                                   href="#carousel-thumb{{forloop.counter}}" role="button"
-                                                   data-slide="prev">
-                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                    <span class="sr-only">Previous</span>
-                                                </a>
-                                                <a class="carousel-control-next"
-                                                   href="#carousel-thumb{{forloop.counter}}" role="button"
-                                                   data-slide="next">
-                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                    <span class="sr-only">Next</span>
-                                                </a>
-                                                <!--/.Controls-->
+                                               <!-- here lies the deprecated controls -->
+
                                                 <ol class="carousel-indicators">
                                                     <li data-target="#carousel-thumb{{forloop.counter}}"
                                                         data-slide-to="0" class="active">
                                                         <img src="{{product.imageURL}}"
-                                                             width="60">
+                                                             width="60" height="60">
                                                     </li>
-                                                    <li data-target="#carousel-thumb{{forloop.counter}}"
-                                                        data-slide-to="1">
-                                                        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(24).jpg"
-                                                             width="60">
+                                                    
+                                                    {% for image in product.productimage_set.all %}
+                                                    <li data-target="#carousel-thumb{{forloop.parentloop.counter}}"
+                                                        data-slide-to="{{ forloop.counter }}">
+                                                        <img src="{{image.image.url}}"
+                                                            width="60" height="60">
                                                     </li>
-                                                    <li data-target="#carousel-thumb{{forloop.counter}}"
-                                                        data-slide-to="2">
-                                                        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(25).jpg"
-                                                             width="60">
-                                                    </li>
+                                                    {% endfor%} 
                                                 </ol>
                                             </div>
-                                            <!--/.Carousel Wrapper-->
                                         </div>
+                                        <!--/.Carousel Wrapper-->
+
                                         <div class="col-lg-7">
-                                            <h2 class="h2-responsive product-name">
+                                            <h3 class="h2-responsive product-name">
                                                 <strong>{{product}}</strong>
-                                            </h2>
+                                            </h3>
                                             {% if product.is_new %}
-                                            <span class="badge badge-info mb-2 mr-2">NEW</span>
+                                            <span class="badge badge-info">NEW</span>
                                             {% endif %}
                                             {% if product.discount_price != product.price %}
                                             <span class="badge badge-success mb-4">SALE</span>
-                                            <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
-                                                <span class="green-text font-weight-bold">
-                                                    <strong>${{product.discount_price}}</strong>
+                                            <h3 class="h3-responsive text-center text-md-left ml-xl-0 ml-4">
+                                                <span class="font-weight-bold">
+                                                    ${{product.discount_price}}
                                                 </span>
                                                 <span class="grey-text">
-                                                    <small>
-                                                        <s>${{product.price}}</s>
-                                                    </small>
+                                                    <small><s>${{product.price}}</s></small>
                                                 </span>
                                             </h3>
                                             {% else %}
-                                            <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4 mt-4">
-                                                <span class="green-text font-weight-bold">
-                                                    <strong>${{product.price}}</strong>
+                                            <h3 class="h3-responsive text-center text-md-left ml-xl-0 ml-4 mt-4">
+                                                <span class="font-weight-bold">
+                                                    ${{product.price}}
                                                 </span>
                                             </h3>
                                             {% endif %}
 
-                                            <p class="ml-xl-0 ml-4">{{product.description}}
+                                            <p class="ml-xl-0 ml-4">{{product.description|linebreaks}}
                                             </p>
 
                                             <p class="ml-xl-0 ml-4">
@@ -309,10 +265,13 @@
                                             <!-- Add to Cart -->
                                             <div class="card-body">
                                                 <div class="text-center">
-                                                    <a href="{{product.get_add_to_cart_url}}" class="btn btn-secondary">Add to Bag
+                                                    <a href="{{product.get_add_to_cart_url}}"
+                                                       class="btn btn-secondary update-cart"
+                                                       data-product="{{product.id}}" data-action="add">Add to Bag
                                                         <i class="fas fa-shopping-bag ml-2" aria-hidden="true"></i>
                                                     </a>
-                                                    <a href="{% url 'product-detail' product.slug %}" class="btn btn-light">Detail View</a>
+                                                    <a href="{% url 'shop:product-detail' product.slug %}"
+                                                       class="btn btn-light">Detail View</a>
                                                     <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Close
                                                     </button>
@@ -325,17 +284,47 @@
                             </div>
                         </div>
                     </div>
-                    {% endif %}
+                    <!-- Modal: modalQuickView -->
                     {% endfor %}
                 </div>
                 <!-- Grid row -->
             </section>
             <!-- Products Grid -->
+
+            <div style="height: 10vh;"></div>
+            <!-- Ensure spacing for paginate button -->
+
+            <!-- Pagination Section --> 
+            {% if page_obj.has_other_pages %}
+                <div class="paginate col-lg-12">
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-sm" href="?page={{page_obj.previous_page_number}}">
+                        <i class="fas fa-chevron-left black-text"></i>
+                    </a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <a class="btn btn-outline-grey" href="?page={{num}}">{{num}}</a>
+                    {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"+3" %}
+                        <a class="btn btn-sm rounded-3" href="?page={{num}}">{{num}}</a>
+                    {% endif %}
+                {% endfor%}
+
+                {% if page_obj.has_next %}
+                    <a class="btn btn-sm" href="?page={{page_obj.next_page_number}}">
+                        <i class="fas fa-chevron-right black-text"></i>
+                    </a>
+                {% endif %}
+                </div>
+            {% endif %}
+
         </div>
         <!-- Content -->
     </div>
 </div>
 <!-- Main Container -->
 </main>
+<script src="{% static 'js/store.js' %}"></script>
 
 {% endblock content %}

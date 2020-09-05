@@ -2,15 +2,23 @@ from django.contrib import admin
 from .models import *
 
 
-class OrderAdmin(admin.ModelAdmin):
-    readonly_fields = ('orderItems', 'complete')
+class OrderItemAdmin(admin.StackedInline):
+    model = OrderItem
 
-    def orderItems(self, obj):
-        return obj.orderitem_set.all()
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    inlines = [OrderItemAdmin]
+
+    class Meta:
+        model = Order
+
+
+@admin.register(OrderItem)
+class OrderItemAdmin(admin.ModelAdmin):
+    pass
 
 
 # Register your models here.
 admin.site.register(Customer)
-admin.site.register(Order, OrderAdmin)
-admin.site.register(OrderItem)
 admin.site.register(ShippingAddress)

@@ -2,7 +2,6 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-
 }
 
 nav {
@@ -11,14 +10,17 @@ nav {
     color: white;
     font-family: 'Ubuntu', sans-serif;
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 100%;
+    height: 25vh;
     transition: 300ms;
 }
 
 .nav-header {
     display: flex;
     flex-direction: row-reverse;
-    padding: 10px 0px;
 }
 
 .nav-header a{
@@ -31,6 +33,8 @@ nav {
     grid-template-columns: 40% 40% 20%;
     align-items: center;
     justify-items: center;
+    height: 50%;
+    overflow: hidden;
 }
 
 .nav-container #menu-open {
@@ -40,16 +44,14 @@ nav {
 
 
 .nav-container .brand {
-    font-size: calc(3vw);
+    font-size: calc(12px + 1.4vw);
     margin: 0 1em;
     justify-self: left;
-    /* transition: 0.3s; */
 }
 
 .nav-container .brand a {
     color: white;
     font-family: 'Sacramento';
-
 }
 
 .nav-container #search {
@@ -76,11 +78,9 @@ nav {
     justify-self: right;
 }
 
-
 .nav-back {
-    height: 21.9vh; 
-    background: #da8b9f;
-    /* transition: 0.2ms; */
+    height: 25vh; 
+    background: #f59cb2;
 }
 
 a > i {
@@ -89,19 +89,16 @@ a > i {
 
 nav.sticky {
     background-color: rgb(212, 110, 127);
-    height: auto;
-    animation: collapseNav 0.3s;
-}
-
-@keyframes collapseNav {
-    from{height: 22vh;}
-    to{height: 8vh;}
+    height: 10vh;
 }
 
 nav.sticky .nav-header {
     display: none;
 }
 
+nav.sticky .nav-container {
+    height: 100%;
+}
 
 nav.sticky .menu {
     display: none;
@@ -252,7 +249,6 @@ nav.sticky .menu {
 .left-nav li:hover a {
     color: black;
     font-weight: bold;
-
 }
 
 .left-nav li a {
@@ -266,32 +262,25 @@ nav.sticky .menu {
 
 /* med */
 @media (max-width: 984px) {
-    .nav-container .brand {
-        font-size: 2.3vw;
-    }
-
     nav {
         position: absolute;
-    }
-
-    .menu-sub {
-        top: 52px
     }
 }
 
 /* smal */
 @media (max-width: 600px) {
     .nav-container .brand {
-        font-size: 4vw;
+        font-size: calc(12px + 1vw);
+        width: 100%;
         justify-self: center;
+        text-align: center;
     }
-    
     nav {
         height: auto;
     }
 
     .nav-back {
-        height: 12vh;
+        height: 11vh;
     }
 
     .nav-header,
@@ -301,7 +290,7 @@ nav.sticky .menu {
 
     .nav-container {
         display: grid;
-        grid-template-columns: 20% 60% 20%;
+        grid-template-columns: 25% 50% 25%;
         align-items: center;
     }
 
@@ -332,8 +321,6 @@ nav.sticky .menu {
     display: flex;
     animation: slideout 400ms ease-out;
 }
-
-
 
 @keyframes slide {
     from {
