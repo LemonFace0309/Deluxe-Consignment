@@ -37,16 +37,10 @@ class Customer(models.Model):
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
-<<<<<<< HEAD
-    date_ordered = models.DateTimeField(auto_now_add=True, null=True)
-    complete = models.BooleanField(default=False, null=True)
-    shipping = models.BooleanField(default=False, null=True)
-=======
     coupon = models.ForeignKey('Coupon', on_delete=models.SET_NULL, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False)
     shipping = models.BooleanField(default=False)
->>>>>>> checkout
     transaction_id = models.CharField(max_length=100, null=True)
 
     def __str__(self):

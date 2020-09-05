@@ -61,7 +61,7 @@ def logoutUser(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-<<<<<<< HEAD
+
 def editUser(request):
     if request.method == 'POST':
         try:
@@ -83,7 +83,8 @@ def editUser(request):
         except:
             messages.error(request, 'Unable to change information')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-=======
+
+
 def addCoupon(request):
     if request.method == 'POST':
         form = CouponForm(request.POST or None)
@@ -109,7 +110,6 @@ def addCoupon(request):
             return redirect('shop:checkout')
     # TODO: raise error
     return None
->>>>>>> checkout
 
 
 def processOrder(request):
