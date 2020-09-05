@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 from .forms import *
 from .models import *
+from .utils import *
 import datetime
 import json
 from django.contrib.auth import authenticate, login, logout
@@ -64,23 +65,24 @@ def processOrder(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        total = float(data['form']['total'])
-        order.transaction_id = transaction_id
-
-        if total == order.get_cart_total:
-            order.complete = True
-        order.save()
-
-        ShippingAddress.objects.create(
-            customer=customer,
-            order=order,
-            address=data['shipping']['address'],
-            address2=data['shipping']['address2'],
-            city=data['shipping']['city'],
-            province=data['shipping']['province'],
-            country=data['shipping']['country'],
-            postal_code=data['shipping']['postal_code'],
-        )
     else:
-        pass
+        customer, order = guestOrder(request, data)
+
+    total = float(data['form']['total'])
+    order.transaction_id = transaction_id
+
+    if total == order.get_cart_total:
+        order.complete = True
+    order.save()
+
+    ShippingAddress.objects.create(
+        customer=customer,
+        order=order,
+        address=data['shipping']['address'],
+        address2=data['shipping']['address2'],
+        city=data['shipping']['city'],
+        province=data['shipping']['province'],
+        country=data['shipping']['country'],
+        postal_code=data['shipping']['postal_code'],
+    )
     return JsonResponse('Payment submitted...', safe=False)
