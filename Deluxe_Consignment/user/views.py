@@ -58,14 +58,6 @@ def logoutUser(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-# def editUser(request):
-#     if request.method == 'POST':
-#         try:
-#             email = request.POST.get('email')
-#             first_name = request.POST.get('first_name')
-#             last_name = request.POST.get('last_name')
-#             phone = request.POST.get('phone')
-
 def editUser(request):
     if request.method == 'POST':
         try:
@@ -82,10 +74,10 @@ def editUser(request):
             customer.email = email
             customer.save()
             customer.user.save()
+            messages.success(request, 'Account information changed')
 
         except:
-            print('fil this')
-            # clark you need an except block
+            messages.error(request, 'Unable to change information')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 

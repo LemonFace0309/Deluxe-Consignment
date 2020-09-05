@@ -89,7 +89,9 @@
                 </div>
                 <div class="tab-pane fade" id="view-order-classic" role="tabpanel"
                      aria-labelledby="view-order-tab-classic">
-                    <p>View Order Content</p>
+                    {% for orders in customer.orders%}
+                    <p>hi</p>
+                    {% endfor %}
                 </div>
                 <div class="tab-pane fade" id="recently-viewed-classic" role="tabpanel"
                      aria-labelledby="recently-viewed-tab-classic">
