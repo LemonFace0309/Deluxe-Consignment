@@ -81,7 +81,7 @@ class StoreListView(ListView):
             products = products.filter(discount_price__lte=pricemax)
 
         # Pagination
-        paginator = Paginator(products, 2)
+        paginator = Paginator(products, 8)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
