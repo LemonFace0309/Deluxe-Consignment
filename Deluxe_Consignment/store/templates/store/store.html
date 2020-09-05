@@ -221,47 +221,36 @@
                                         <!--/.Carousel Wrapper-->
 
                                         <div class="col-lg-7">
-                                            <h3 class="h3-responsive"> {{product}} </h3>
-                                            {% if product.is_new %}
-                                            <span class="badge badge-info">NEW</span>
-                                            {% endif %}
-                                            {% if product.discount_price != product.price %}
-                                            <span class="badge badge-success mb-4">SALE</span>
-                                            <h3 class="h3-responsive text-center text-md-left ml-xl-0 ml-4">
-                                                <span class="font-weight-bold">
-                                                    ${{product.discount_price}}
-                                                </span>
-                                                <span class="grey-text">
-                                                    <small><s>${{product.price}}</s></small>
-                                                </span>
-                                            </h3>
-                                            {% else %}
-                                            <h3 class="h3-responsive text-center text-md-left ml-xl-0 ml-4 mt-4">
-                                                <span class="font-weight-bold">
-                                                    ${{product.price}}
-                                                </span>
-                                            </h3>
-                                            {% endif %}
+                                            <h3 class="h3-responsive mt-xl-0 mt-1"> {{product.name}} </h3>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h4 class="text-center">
+                                                <span class="font-weight-bold">${{product.discount_price}}</span>
+                                                {% if product.discount_price != product.price %}
+                                                    <span class="green-text ml-2">
+                                                        <small><s>${{product.price}}</s></small>
+                                                    </span>
+                                                {% endif%}
+                                                </h4>
 
-                                            <p class="ml-xl-0 ml-4">{{product.description|linebreaks}}
-                                            </p>
+                                                <div class="d-flex align-items-center">
+                                                    {% if product.is_new %}
+                                                    <span class="badge badge-info">NEW</span>
+                                                    {% endif %}
+                                                    {% if product.discount_price != product.price %}
+                                                    <span class="badge badge-success ml-2">SALE</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            
+                                            <div>{{product.description|linebreaks}}</div>
 
-                                            <p class="ml-xl-0 ml-4">
-
-                                                <strong>Brand: </strong>{{product.get_brand}}</p>
-
+                                            <div> Brand: {{ product.get_brand }}</div>
                                             {% if product.is_shoe %}
-                                            <p class="ml-xl-0 ml-4">
-
-                                                <strong>Size: </strong>{{product.shoe.size}}</p>
+                                            <div> Size: {{ product.shoe.size }}</div>
                                             {% endif %}
-
-                                            <p class="ml-xl-0 ml-4">
-
-                                                <strong>Quantity Available: </strong>{{product.quantity}}</p>
+                                            <div> Quantity: {{ product.quantity }}</div>
 
                                             <!-- Add to Cart -->
-                                            <div>b</div>
                                             <div class="">
                                                 <div class="text-center">
                                                     <a href="{{product.get_add_to_cart_url}}"
@@ -280,8 +269,6 @@
 
                                         </div>
                                         <!-- col7 -->
-
-                                        <div>bot</div>
                                     </div>
                                 </div>
                             </div>

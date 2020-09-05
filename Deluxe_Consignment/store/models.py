@@ -1,6 +1,7 @@
 from django.db import models
 # from django.contrib.postgres.fields import ArrayField
 from django.shortcuts import reverse
+from django.utils import timezone
 import datetime
 from django.template.defaultfilters import slugify
 
@@ -33,7 +34,7 @@ class Product(models.Model):
     featured = models.BooleanField(default=False)
     thumbnail = models.ImageField(null=True, blank=True, upload_to='thumbnails')
     quantity = models.IntegerField(default=1)
-    date_created = models.DateTimeField(auto_now=True)
+    date_created = models.DateTimeField(default=timezone.now)
     description = models.TextField(max_length=2000, null=True, blank=True)
     slug = models.SlugField(max_length=200, blank=True)
 
@@ -41,10 +42,10 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         if not self.discount_price:
             self.discount_price = self.price
-        super(Product, self).save(*args, **kwargs)
 
         if not self.slug:
             self.slug = slugify(self.name)
+
         super(Product, self).save(*args, **kwargs)
 
 
