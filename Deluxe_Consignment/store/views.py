@@ -9,7 +9,7 @@ from user.models import (
     Customer, Order, OrderItem, ShippingAddress
 )
 from user.forms import (
-    ShippingAddressForm, CouponForm
+    ShippingAddressForm, PickUpForm, CouponForm
 )
 from django.views.generic import (
     DetailView,
@@ -235,6 +235,7 @@ def checkout(request):
 
     products = Product.objects.all()
     form = ShippingAddressForm()
+    pick_up_form = PickUpForm()
     coupon_form = CouponForm()
     context = {
         'products': products,
@@ -243,6 +244,7 @@ def checkout(request):
         'cart_quantity': cart_quantity,
         'cart_total': cart_total,
         'form': form,
+        'pick_up_form': pick_up_form,
         'coupon_form': coupon_form
     }
     return render(request, 'store/checkout.html', context)

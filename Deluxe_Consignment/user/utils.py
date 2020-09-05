@@ -8,20 +8,24 @@ def guestOrder(request, data):
     customer.name = data['form']['name']
     customer.save()
 
-    order = Order.objects.create(
+    order, created = Order.objects.get_or_create(
         customer=customer,
         complete=False,
     )
+    if created:
+        if 'code' in request.session:
+            coupon = Coupon.objects.get(code=request.session['code'])
+            order.coupon = coupon
 
-    cookieData = cookieCartData(request)
-    items = cookieData['items']
+        cookieData = cookieCartData(request)
+        items = cookieData['items']
 
-    for item in items:
-        product = Product.objects.get(id=item['product']['id'])
+        for item in items:
+            product = Product.objects.get(id=item['product']['id'])
 
-        orderItem = OrderItem.objects.create(
-            order=order,
-            product=product,
-            quantity=item['quantity']
-        )
+            orderItem = OrderItem.objects.create(
+                order=order,
+                product=product,
+                quantity=item['quantity']
+            )
     return customer, order
