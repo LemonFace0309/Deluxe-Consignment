@@ -81,9 +81,30 @@
                 </div>
                 <div class="tab-pane fade" id="vieworder" role="tabpanel"
                      aria-labelledby="vieworder-tab">
-                    {% for orders in user.customer.order_set.all %}
-                    <p>hi</p>
-                    {% endfor %}
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Transaction ID</th>
+                            <th scope="col">Delivery Method</th>
+                            <th scope="col">Date Ordered</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for orders in user.customer.order_set.all %}
+                        {% if orders.complete == False %}
+                        <tr>
+                            <th scope="row">{{orders.transaction_id}}</th>
+                            <td>{{orders.delivery}}</td>
+                            <td>{{orders.date_created}}</td>
+                            <td>{{orders.get_cart_total}}</td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+
                 </div>
                 <div class="tab-pane fade" id="recentlyviewed" role="tabpanel"
                      aria-labelledby="recentlyviewed-tab">
