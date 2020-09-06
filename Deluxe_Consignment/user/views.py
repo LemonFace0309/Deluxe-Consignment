@@ -142,16 +142,19 @@ def processOrder(request):
     if 'code' in request.session:
         del request.session['code']
 
-    ShippingAddress.objects.create(
-        customer=customer,
-        order=order,
-        address=data['shipping']['address'],
-        address2=data['shipping']['address2'],
-        city=data['shipping']['city'],
-        province=data['shipping']['province'],
-        country=data['shipping']['country'],
-        postal_code=data['shipping']['postal_code'],
-    )
+    # order delivery options are set in updateDelivery function
+
+    if order.delivery == 'Shipping':
+        ShippingAddress.objects.create(
+            customer=customer,
+            order=order,
+            address=data['shipping']['address'],
+            address2=data['shipping']['address2'],
+            city=data['shipping']['city'],
+            province=data['shipping']['province'],
+            country=data['shipping']['country'],
+            postal_code=data['shipping']['postal_code'],
+        )
     return JsonResponse('Payment submitted...', safe=False)
 
 

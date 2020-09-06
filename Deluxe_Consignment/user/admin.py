@@ -4,10 +4,16 @@ from .models import *
 
 class OrderItemAdmin(admin.StackedInline):
     model = OrderItem
+    extra = 0
+
+
+class ShippingAddressAdmin(admin.StackedInline):
+    model = ShippingAddress
+    extra = 0
 
 
 class OrderAdmin(admin.ModelAdmin):
-    inlines = [OrderItemAdmin]
+    inlines = [OrderItemAdmin, ShippingAddressAdmin]
     readonly_fields = ('date_created',)
     list_filter = ('date_created',)
 

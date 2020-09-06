@@ -13,10 +13,12 @@ def guestOrder(request, data):
         complete=False,
     )
     if created:
+        # adding coupon code
         if 'code' in request.session:
             coupon = Coupon.objects.get(code=request.session['code'])
             order.coupon = coupon
 
+        # appending order items
         cookieData = cookieCartData(request)
         items = cookieData['items']
 

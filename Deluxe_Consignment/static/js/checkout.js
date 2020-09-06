@@ -6,8 +6,9 @@ for(let i = 0; i < delivery_forms.length; i++){
     delivery_forms[i].addEventListener('submit', function(e){
         e.preventDefault()
 
-
         // is_layaway returns true or false
+        // layaway checkbox has different names on both forms. This is used to determine which form was filled out
+        // between shipping and pick-up
         try{
             is_layaway = this.layaway.checked
             delivery = 'Shipping'
@@ -30,13 +31,17 @@ for(let i = 0; i < delivery_forms.length; i++){
             userFormData.email = this.email.value
         }
 
-        var shippingInfo = {
-            'address': this.address.value,
-            'address2': this.address2.value,
-            'city': this.city.value,
-            'province': this.province.value,
-            'country': this.country.value,
-            'postal_code': this.postal_code.value,
+        if (delivery == 'Shipping') {
+            var shippingInfo = {
+                'address': this.address.value,
+                'address2': this.address2.value,
+                'city': this.city.value,
+                'province': this.province.value,
+                'country': this.country.value,
+                'postal_code': this.postal_code.value,
+            }
+        } else {
+            var shippingInfo = null
         }
 
         let url = '/user/update-delivery/'
@@ -120,10 +125,6 @@ paypal.Buttons({
 }).render('#paypal-button-container');
 
 
-// sets form data for order processing in submitFormData function
-form = document.getElementById.on('submit')
-
-
 // Processes Order
 function submitFormData(){
     console.log('Payment button clicked')
@@ -138,8 +139,17 @@ function submitFormData(){
     paypal = document.getElementById('paypal-payment')
     if (paypal.classList.contains('Shipping')){
         form = document.getElementById('shipping_form')
+        var shippingInfo = {
+            'address': form.address.value,
+            'address2': form.address2.value,
+            'city': form.city.value,
+            'province': form.province.value,
+            'country': form.country.value,
+            'postal_code': form.postal_code.value,
+        }
     } else if (paypal.classList.contains('Pick-up')){
         form = document.getElementById('pick_up_form')
+        var shippingInfo = null
     }
 
     if(user == 'AnonymousUser'){
@@ -147,14 +157,6 @@ function submitFormData(){
         userFormData.email = form.email.value
     }
 
-    var shippingInfo = {
-        'address': form.address.value,
-        'address2': form.address2.value,
-        'city': form.city.value,
-        'province': form.province.value,
-        'country': form.country.value,
-        'postal_code': form.postal_code.value,
-    }
 
     let url = '/user/process-order/'
     fetch(url, {

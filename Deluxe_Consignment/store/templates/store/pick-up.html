@@ -47,14 +47,18 @@
                     {{pick_up_form.email}}
                     <label for="{{form.email.id_for_label}}" class="">Email</label>
                 </div>
-
                 {% endif %}
 
-                <div class="custom-control custom-checkbox">
+                {% if cart_total >= 500 %}
+                <hr>
+                {% endif %}
+                <div {% if cart_total >= 500 %} class="custom-control custom-checkbox"
+                    {% else %} class="custom-control custom-checkbox hidden" {% endif %}>
                     {{pick_up_form.layaway2}}
                     <label class="custom-control-label" for="{{pick_up_form.layaway2.id_for_label}}">Request Layaway
                         <strong>(25% DEPOSIT REQUIRED)</strong></label>
                 </div>
+
                 <hr class="mb-4">
                 <button id="continue-button" class="btn btn-primary btn-lg btn-block" type="submit">
                     Continue
