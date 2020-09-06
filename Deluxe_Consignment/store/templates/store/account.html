@@ -8,53 +8,44 @@
     <!-- Navbar -->
     <div class="row pt-4">
         <!-- Sidebar -->
-        <div class="col-lg-3">
-            <!-- Side navigation links -->
-            <ul style="list-style-type: none;">
-                <li style="list-style-type: none;"><h4><strong>Manage Your Account</strong></h4></li>
-                <div>
-                    <ul class="tabs" style="list-style-type: none;" id="myClassicTab" role="tablist">
-                        <li><a class="nav-link waves-light" id="edit-account-tab-classic" data-toggle="tab"
-                               href="#edit-account-classic" role="tab"
-                               aria-controls="edit-account-classic" aria-selected="false">Edit Account Details</a>
-                        </li>
-                        <li><a class="nav-link waves-light" id="view-order-tab-classic" data-toggle="tab"
-                               href="#view-order-classic" role="tab"
-                               aria-controls="view-order-classic" aria-selected="false">View Orders</a>
-                        </li>
-                        <li><a class="nav-link waves-light" id="recently-viewed-tab-classic" data-toggle="tab"
-                               href="#recently-viewed-classic" role="tab"
-                               aria-controls="recently-viewed-classic" aria-selected="false">Recently Viewed</a>
-                        </li>
-                        <li><a class="nav-link waves-light" id="messages-tab-classic" data-toggle="tab"
-                               href="#messages-classic" role="tab"
-                               aria-controls="messages-classic" aria-selected="false">Messages</a>
-                        </li>
-                        <li><a class="nav-link waves-light" id="address-book-tab-classic" data-toggle="tab"
-                               href="#address-book-classic" role="tab"
-                               aria-controls="address-book-classic" aria-selected="false">Address book</a>
-                        </li>
-                        <li><a class="nav-link waves-light" id="payment-tab-classic" data-toggle="tab"
-                               href="#payment-classic" role="tab"
-                               aria-controls="payment-classic" aria-selected="false">Payment Information</a>
-                        </li>
-                        <li><a class="nav-link waves-light" id="track-order-tab-classic" data-toggle="tab"
-                               href="#track-order-classic" role="tab"
-                               aria-controls="track-order-classic" aria-selected="false">Track Order Status</a>
-                        </li>
-                    </ul>
-                </div>
-                </li>
-            </ul>
-        </div>
         <!-- Sidebar -->
 
         <!-- Content -->
-        <div class="col-lg-9">
-            <!-- Products Grid -->
-            <div class="tab-content section pt-4" id="myClassicTabContent">
-                <div class="tab-pane fade" id="edit-account-classic" role="tabpanel"
-                     aria-labelledby="edit-account-tab-classic">
+        <h4><strong>Manage Your Account</strong></h4>
+        <div class="col-lg-12">
+            <ul class="nav nav-tabs" style="list-style-type: none;" id="myTab" role="tablist">
+                <li><a class="nav-link active" id="edit-tab" data-toggle="tab"
+                       href="#edit" role="tab"
+                       aria-controls="edit" aria-selected="true">Edit Account Details</a>
+                </li>
+                <li><a class="nav-link" id="vieworder-tab" data-toggle="tab"
+                       href="#vieworder" role="tab"
+                       aria-controls="vieworder" aria-selected="false">View Orders</a>
+                </li>
+                <li><a class="nav-link" id="recentlyviewed-tab" data-toggle="tab"
+                       href="#recentlyviewed" role="tab"
+                       aria-controls="recentlyviewed" aria-selected="false">Recently Viewed</a>
+                </li>
+                <li><a class="nav-link" id="messages-tab" data-toggle="tab"
+                       href="#messages" role="tab"
+                       aria-controls="messages" aria-selected="false">Messages</a>
+                </li>
+                <li><a class="nav-link" id="addressbook-tab" data-toggle="tab"
+                       href="#addressbook" role="tab"
+                       aria-controls="addressbook" aria-selected="false">Address book</a>
+                </li>
+                <li><a class="nav-link" id="payment-tab" data-toggle="tab"
+                       href="#payment" role="tab"
+                       aria-controls="payment" aria-selected="false">Payment Information</a>
+                </li>
+                <li><a class="nav-link" id="trackorder-tab" data-toggle="tab"
+                       href="#trackorder" role="tab"
+                       aria-controls="trackorder" aria-selected="false">Track Order Status</a>
+                </li>
+            </ul>
+            <div class="tab-content section pt-4" id="myTabContent">
+                <div class="tab-pane fade show active" id="edit" role="tabpanel"
+                     aria-labelledby="edit-tab">
                     <form method="POST" action="{% url 'user:edit-user' %}">
                         {% csrf_token %}
                         <div class="md-form">
@@ -86,34 +77,36 @@
                                     class="fas fa-sign-in ml-1"></i></button>
                         </div>
                     </form>
+                    <p>hi</p>
                 </div>
-                <div class="tab-pane fade" id="view-order-classic" role="tabpanel"
-                     aria-labelledby="view-order-tab-classic">
-                    {% for orders in customer.orders%}
+                <div class="tab-pane fade" id="vieworder" role="tabpanel"
+                     aria-labelledby="vieworder-tab">
+                    {% for orders in user.customer.order%}
                     <p>hi</p>
                     {% endfor %}
                 </div>
-                <div class="tab-pane fade" id="recently-viewed-classic" role="tabpanel"
-                     aria-labelledby="recently-viewed-tab-classic">
+                <div class="tab-pane fade" id="recentlyviewed" role="tabpanel"
+                     aria-labelledby="recentlyviewed-tab">
                     <p>Recently Viewed Content</p>
                 </div>
-                <div class="tab-pane fade" id="messages-classic" role="tabpanel" aria-labelledby="messages-tab-classic">
+                <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages-tab">
                     <p>Message Content</p>
                 </div>
-                <div class="tab-pane fade" id="address-book-classic" role="tabpanel"
-                     aria-labelledby="address-book-tab-classic">
+                <div class="tab-pane fade" id="addressbook" role="tabpanel"
+                     aria-labelledby="addressbook-tab">
                     <p>Address Book Content</p>
                 </div>
-                <div class="tab-pane fade" id="payment-classic" role="tabpanel" aria-labelledby="payment-tab-classic">
+                <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
                     <p>Payment Content</p>
                 </div>
-                <div class="tab-pane fade" id="track-order-classic" role="tabpanel"
-                     aria-labelledby="track-order-tab-classic">
+                <div class="tab-pane fade" id="trackorder" role="tabpanel"
+                     aria-labelledby="trackorder-tab">
                     <p>Track Order Content</p>
                 </div>
             </div>
             <!-- Products Grid -->
         </div>
+
         <!-- Content -->
     </div>
 </div>
