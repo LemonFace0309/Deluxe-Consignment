@@ -20,7 +20,7 @@
                 </li>
                 <li><a class="nav-link" id="vieworder-tab" data-toggle="tab"
                        href="#vieworder" role="tab"
-                       aria-controls="vieworder" aria-selected="false">View Orders</a>
+                       aria-controls="vieworder" aria-selected="false">View Past Orders</a>
                 </li>
                 <li><a class="nav-link" id="recentlyviewed-tab" data-toggle="tab"
                        href="#recentlyviewed" role="tab"
@@ -40,7 +40,7 @@
                 </li>
                 <li><a class="nav-link" id="trackorder-tab" data-toggle="tab"
                        href="#trackorder" role="tab"
-                       aria-controls="trackorder" aria-selected="false">Track Order Status</a>
+                       aria-controls="trackorder" aria-selected="false">Active Orders</a>
                 </li>
             </ul>
             <div class="tab-content section pt-4" id="myTabContent">
@@ -101,10 +101,8 @@
                         </tr>
                         {% endif %}
                         {% endfor %}
-
                         </tbody>
                     </table>
-
                 </div>
                 <div class="tab-pane fade" id="recentlyviewed" role="tabpanel"
                      aria-labelledby="recentlyviewed-tab">
@@ -115,7 +113,28 @@
                 </div>
                 <div class="tab-pane fade" id="addressbook" role="tabpanel"
                      aria-labelledby="addressbook-tab">
-                    <p>Address Book Content</p>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Address</th>
+                            <th scope="col">2nd Address</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Province</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">Postal Code</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for orders in user.customer.shippingaddress_set.all %}
+                        <tr>
+                            <th scope="row">{{user.customer.name}}</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
                 <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
                     <p>Payment Content</p>

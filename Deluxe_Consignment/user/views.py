@@ -180,10 +180,7 @@ def processOrder(request):
 
 
 def account(request):
-    Orders = Customer.order_set
     context = {
-        'Orders': Orders,
-
     }
     return render(request, 'store/account.html')
 
