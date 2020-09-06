@@ -103,6 +103,7 @@ def addCoupon(request):
                     messages.info(request, 'Invalid Coupon Code')
             else:
                 try:
+                    coupon = Coupon.objects.get(code=code)
                     request.session['code'] = code
                     messages.success(request, 'Coupon Code Successfully Applied')
                 except ObjectDoesNotExist:
@@ -110,6 +111,39 @@ def addCoupon(request):
             return redirect('shop:checkout')
     # TODO: raise error
     return None
+
+
+def updateDelivery(request):
+    data = json.loads(request.body)
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    else:
+        customer, order = guestOrder(request, data)
+
+    order.delivery = data['delivery']
+
+    if order.delivery == 'Shipping':
+        if data['shipping']['country'] == 'Canada':
+            order.shipping_cost = 15
+        elif data['shipping']['country'] == 'USA':
+            order.shipping_cost = 30
+        else:
+            order.shipping_cost = 50
+
+    if data['is_layaway']:
+        order.layaway = True
+    order.save()
+
+    order_data = {
+        'delivery': order.delivery,
+        'shipping_cost': order.shipping_cost,
+        'is_layaway': order.layaway,
+        'get_cart_total': order.get_cart_total,
+    }
+
+    return JsonResponse(order_data)
 
 
 def processOrder(request):

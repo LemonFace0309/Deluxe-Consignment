@@ -19,6 +19,7 @@ class ShippingAddressForm(ModelForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=100, required=False)
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=100, required=False)
     email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=100, required=False)
+    layaway = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': 'custom-control-input layaway'}), required=False)
 
     class Meta:
         model = ShippingAddress
@@ -26,12 +27,6 @@ class ShippingAddressForm(ModelForm):
         exclude = ['customer', 'order']
 
         widgets = {
-            'first_name': forms.TextInput(attrs={
-                'class': 'form-control'
-            }),
-            'last_name': forms.TextInput(attrs={
-                'class': "form-control"
-            }),
             'address': forms.TextInput(attrs={
                 'class': "form-control", 'placeholder': "1234 Main St"
             }),
@@ -51,6 +46,13 @@ class ShippingAddressForm(ModelForm):
                 'class': "form-control"
             }),
         }
+
+
+class PickUpForm(forms.Form):
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=100, required=False)
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=100, required=False)
+    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=100, required=False)
+    layaway2 = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': 'custom-control-input layaway'}), required=False)
 
 
 class CouponForm(ModelForm):

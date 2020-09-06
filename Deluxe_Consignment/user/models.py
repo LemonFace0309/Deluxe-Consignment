@@ -24,6 +24,12 @@ PROVINCE_OPTIONS = (
     ('Yukon', 'Yukon'),
 )
 
+DELIVERY_OPTIONS = (
+    ('Shipping', 'Shipping'),
+    ('Pick-up', 'Pick-up')
+)
+
+
 # Create your models here.
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -40,7 +46,10 @@ class Order(models.Model):
     coupon = models.ForeignKey('Coupon', on_delete=models.SET_NULL, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False)
-    shipping = models.BooleanField(default=False)
+    delivery = models.CharField(max_length=100, choices=DELIVERY_OPTIONS, default='Shipping',
+                                null=True, blank=True)
+    shipping_cost = models.FloatField(null=True, blank=True)
+    layaway = models.BooleanField(default=False)
     transaction_id = models.CharField(max_length=100, null=True)
 
     def __str__(self):
@@ -53,6 +62,8 @@ class Order(models.Model):
         total = float(total)
         if self.coupon:
             total *= (1 - (self.coupon.discount_percentage/100))
+        if self.shipping_cost:
+            total += self.shipping_cost
         return total
 
     @property
