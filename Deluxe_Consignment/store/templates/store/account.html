@@ -68,8 +68,8 @@
                         </div>
                         <div class="md-form">
                             <i class="fas fa-envelope prefix"></i>
-                            <input type="email" id="inputPhone" class="form-control validate"
-                                   value="{{customer.Phone}}" name="phone">
+                            <input type="tel" id="inputPhone" class="form-control validate"
+                                   value="{{user.customer.phone}}" name="phone">
                             <label for="inputEmail" data-error="wrong" data-success="right">Phone</label>
                         </div>
                         <div class="text-center mt-2">
@@ -81,7 +81,7 @@
                 </div>
                 <div class="tab-pane fade" id="vieworder" role="tabpanel"
                      aria-labelledby="vieworder-tab">
-                    {% for orders in user.customer.order%}
+                    {% for orders in user.customer.order_set.all %}
                     <p>hi</p>
                     {% endfor %}
                 </div>

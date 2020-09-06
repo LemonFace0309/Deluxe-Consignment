@@ -179,4 +179,13 @@ def processOrder(request):
     return JsonResponse('Payment submitted...', safe=False)
 
 
+def account(request):
+    Orders = Customer.order_set
+    context = {
+        'Orders': Orders,
+
+    }
+    return render(request, 'store/account.html')
+
+
 

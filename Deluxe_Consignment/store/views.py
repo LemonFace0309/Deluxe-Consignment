@@ -67,7 +67,6 @@ class StoreListView(ListView):
         if brand != '' and brand is not None:
             products = products.filter(brand__icontains=brand)
 
-
         if category == 'shoes':
             products = products.filter(shoe__gt=0)
         elif category == 'bags':
@@ -275,11 +274,5 @@ def paymentPolicy(request):
 def test(request):
     return render(request, 'store/test.html')
 
-
-def account(request):
-    context = {
-
-    }
-    return render(request, 'store/account.html')
 
 
