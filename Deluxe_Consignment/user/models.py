@@ -123,3 +123,13 @@ class Coupon(models.Model):
 
     def __str__(self):
         return self.code
+
+
+class Message(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    title = models.CharField(max_length=250)
+    message = models.TextField(max_length=5000)
+    date_submitted = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.first_name}\'s Message'
