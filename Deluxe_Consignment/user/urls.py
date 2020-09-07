@@ -9,6 +9,7 @@ urlpatterns = [
     path('edit-user/', user_views.editUser, name='edit-user'),
     
     path('account/',user_views.account, name='account'),
+    path('remove-address/', user_views.removeAddress, name='remove-address'),
 
     path('add-coupon/', user_views.addCoupon, name='add-coupon'),
     path('update-delivery/', user_views.updateDelivery, name='update-delivery'),

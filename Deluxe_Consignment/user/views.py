@@ -188,4 +188,19 @@ def account(request):
     return render(request, 'store/account.html')
 
 
+def editAddress(request, id=None):
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def removeAddress(request, id=None):
+
+    address = get_object_or_404(ShippingAddress, id=id)
+    customer = address.cutomer.name
+    if request.method == "POST" and request.user.is_authenticated and request.user.customer.name == customer:
+        address.delete()
+        messages.success(request, f'"{address}" has been successfully removed from your account')
+    else:
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
 
