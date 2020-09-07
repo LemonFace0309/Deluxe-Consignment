@@ -33,7 +33,7 @@ nav {
     grid-template-columns: 40% 40% 20%;
     align-items: center;
     justify-items: center;
-    height: 50%;
+    height: 100%;
     overflow: hidden;
 }
 
@@ -44,7 +44,7 @@ nav {
 
 
 .nav-container .brand {
-    font-size: calc(12px + 1.4vw);
+    font-size: calc(30px + 0.4vw);
     margin: 0 1em;
     justify-self: left;
 }
@@ -265,12 +265,16 @@ nav.sticky .menu {
     nav {
         position: absolute;
     }
+
+    .nav-container .brand {
+        font-size: calc(12px + 1.2vw);
+    }
 }
 
 /* smal */
 @media (max-width: 600px) {
     .nav-container .brand {
-        font-size: calc(12px + 1vw);
+        font-size: calc(20px + 0.1vw);
         width: 100%;
         justify-self: center;
         text-align: center;

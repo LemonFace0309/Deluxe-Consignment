@@ -18,7 +18,7 @@
     height: 60vh;
     position: relative;
     display: grid;
-    grid-template-rows: 65% 35%;
+    grid-template-rows: 60% 40%;
     /* border: 2px solid blue; */
 }
 
@@ -26,6 +26,10 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+.card-body h6 {
+    font-size: 15px;
 }
 
 .view {
