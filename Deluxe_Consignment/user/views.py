@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
@@ -192,15 +192,11 @@ def editAddress(request, id=None):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-def removeAddress(request, id=None):
-
+def removeAddress(request, id):
     address = get_object_or_404(ShippingAddress, id=id)
-    customer = address.cutomer.name
-    if request.method == "POST" and request.user.is_authenticated and request.user.customer.name == customer:
+    customer = address.customer.name
+    if request.user.is_authenticated and request.user.customer.name == customer:
         address.delete()
         messages.success(request, f'"{address}" has been successfully removed from your account')
-    else:
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 

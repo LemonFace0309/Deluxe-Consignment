@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 from django.contrib.auth.models import User
 from store.models import Product
 
@@ -104,6 +105,11 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
+
+    def get_remove_address_url(self):
+        return reverse("user:remove-address", kwargs={
+            'id': self.id
+        })
 
 
 class Coupon(models.Model):

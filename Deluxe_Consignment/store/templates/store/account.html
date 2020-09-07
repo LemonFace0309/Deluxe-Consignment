@@ -135,36 +135,14 @@
                             <td>{{address.province}}</td>
                             <td>{{address.country}}</td>
                             <td>{{address.postal_code}}</td>
-                            <!-- Button trigger modal -->
                             <td>
-                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                                        data-target="#{{address.address|cut:' '}}">
-                                    Launch demo modal
-                                </button>
+                                <a href="{{address.get_remove_address_url}}">
+                                    <button type="button" class="btn btn-sm btn-primary">
+                                        {{address.id}}
+                                    </button>
+                                </a>
                             </td>
                         </tr>
-                        <div class="modal" id="{{address.address|cut:' '}}" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">{{address.address}}</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ...
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         {% endfor %}
                         </tbody>
                     </table>
