@@ -136,9 +136,16 @@
                             <td>{{address.country}}</td>
                             <td>{{address.postal_code}}</td>
                             <td>
+                                <a href="{{address.get_edit_address_url}}">
+                                    <button type="button" class="btn btn-sm btn-primary">
+                                        Edit
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
                                 <a href="{{address.get_remove_address_url}}">
                                     <button type="button" class="btn btn-sm btn-primary">
-                                        {{address.id}}
+                                        Delete
                                     </button>
                                 </a>
                             </td>

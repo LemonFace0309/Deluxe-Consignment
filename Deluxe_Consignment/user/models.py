@@ -111,6 +111,11 @@ class ShippingAddress(models.Model):
             'id': self.id
         })
 
+    def get_edit_address_url(self):
+        return reverse("user:edit-address", kwargs={
+            'id': self.id
+        })
+
 
 class Coupon(models.Model):
     code = models.CharField(max_length=25)
