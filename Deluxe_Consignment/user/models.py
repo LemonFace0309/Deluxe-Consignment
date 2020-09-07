@@ -46,7 +46,7 @@ class Order(models.Model):
     coupon = models.ForeignKey('Coupon', on_delete=models.SET_NULL, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False)
-    delivery = models.CharField(max_length=100, choices=DELIVERY_OPTIONS, default='Shipping',
+    delivery = models.CharField(max_length=100, choices=DELIVERY_OPTIONS, default='Pick-up',
                                 null=True, blank=True)
     shipping_cost = models.FloatField(null=True, blank=True)
     layaway = models.BooleanField(default=False)
