@@ -125,12 +125,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for orders in user.customer.shippingaddress_set.all %}
+                        {% for address in user.customer.shippingaddress_set.all %}
                         <tr>
-                            <th scope="row">{{user.customer.name}}</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <th scope="row">{{address.address}}</th>
+                            <td>{{address.address2}}</td>
+                            <td>{{address.city}}</td>
+                            <td>{{address.province}}</td>
+                            <td>{{address.country}}</td>
+                            <td>{{address.postal_code}}</td>
                         </tr>
                         {% endfor %}
                         </tbody>
