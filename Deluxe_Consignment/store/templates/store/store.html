@@ -13,9 +13,9 @@
             <div class="">
                 <!-- Grid row -->
                 <div class="row">
-                    <div class="col-md-6 col-lg-12">
+                    <div class="col-6 col-lg-12">
                         <!-- Panel -->
-                        <h3 class="font-weight-bold dark-grey-text"><strong>Sort By</strong></h3>
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Sort By</strong></h5>
                         <div class="divider"></div>
                         <form action="" name="sortForm">
                             <select class="mdb-select md-form" id="sort" name="sort" onchange="this.form.submit()">
@@ -29,9 +29,9 @@
                     </div>
 
                     <!-- Brand Filter -->
-                    <div class="col-md-6 col-lg-12 mb-4">
+                    <div class="col-6 col-lg-12 mb-7">
                         <!-- Panel -->
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Brand</strong></h3>
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Brand</strong></h5>
                         <div class="divider"></div>
                         <form action="" name="brandForm">
                             <select class="mdb-select md-form" id="brand" name="brand" onchange="this.form.submit()">
@@ -47,7 +47,7 @@
                     
 
                     <!-- Filter by category -->
-                    <div class="col-md-6 col-lg-12 mb-5">
+                    <div class="col-6 col-lg-12 mb-5">
                         <h5 class="font-weight-bold dark-grey-text mb-3 "><strong>Category</strong></h3>
                             <!-- Radio group -->
                         <form action="">
@@ -77,13 +77,9 @@
                         </form>
                         <!-- Radio group -->
                     </div>
-                </div>
-                <!-- Grid row -->
 
-                <!-- Grid row -->
-                <div class="row">
                     <!-- Filter by price -->
-                    <div class="col-md-6 col-lg-12 mb-5">
+                    <div class="col-6 col-lg-12 mb-5">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Max Price</strong></h3>
                             <div class="divider"></div>
 
@@ -104,6 +100,7 @@
                     <!-- Filter by price -->
                 </div>
                 <!-- Grid row -->
+
             </div>
         </div>
         <!-- Sidebar -->
@@ -114,7 +111,7 @@
             <section class="section pt-4">
                 <div class="row">
                     {% for product in page_obj %}
-                    <div class="col-lg-4 col-md-12 mb-4">
+                    <div class="col-lg-4 col-6 mb-4">
                         <div class="card card-ecommerce">
                             <!-- Card image -->
                             <div class="view overlay">
@@ -130,7 +127,7 @@
                             <div class="card-body">
                                 <h6 class="card-title mb-1">
                                     <a class="dark-grey-text" href="{{ product.get_absolute_url }}">
-                                        {{product.name}}
+                                        {{product.name|truncatechars:55}}
                                     </a>
                                 </h6>
 
@@ -225,7 +222,7 @@
                                                 <h3 class="h3-responsive mt-xl-0 mt-1"> {{product.name}} </h3>
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h4 class="text-center">
-                                                    <span class="font-weight-bold">${{product.discount_price}}</span>
+                                                    <span class="">${{product.discount_price}}</span>
                                                     {% if product.discount_price != product.price %}
                                                         <span class="green-text ml-2">
                                                             <small><s>${{product.price}}</s></small>
@@ -254,7 +251,7 @@
                                                 {% endif %}
                                                 <div> Quantity: {{ product.quantity }}</div>
 
-                                                <div>
+                                                <div class="d-flex justify-content-between">
                                                     <a href="{{product.get_add_to_cart_url}}"
                                                         class="btn btn-outline-secondary update-cart"
                                                         data-product="{{product.id}}" data-action="add">Add to Bag

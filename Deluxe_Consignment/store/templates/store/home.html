@@ -25,7 +25,7 @@
 <div class="banner"><h1>New Arrivals</h1></div>
 
 <!--Carousel-->
-<div class="container">
+<div class="containerd">
     <section class="section pb-3 wow fadeIn" data-wow-delay="0.3s">
         <!--Section heading-->
         <h1 class="font-weight-bold text-center h1 my-5">Designer Brands at Affordable Prices</h1>
@@ -35,31 +35,36 @@
             We sell items from brands suchs as Louis Vuitton, Gucci gang, and PradaPanda.
         </p>
 
-        <div id="carousel-example-multi" class="carousel slide carousel-multi-item v-2" data-ride="carousel">
+        <div id="carousel-multi" class="carousel slide carousel-multi-item v-2" data-ride="carousel">
 
             <!--Controls-->
             <div class="controls-top">
-                <a class="btn-floating" href="#carousel-example-multi" data-slide="prev"><i
+                <a class="btn-floating pink lighten-3" href="#carousel-multi" data-slide="prev"><i
                         class="fas fa-chevron-left"></i></a>
-                <a class="btn-floating" href="#carousel-example-multi" data-slide="next"><i
+                <a class="btn-floating pink lighten-3" href="#carousel-multi" data-slide="next"><i
                         class="fas fa-chevron-right"></i></a>
             </div>
             <!--/.Controls-->
 
             <!-- Indicators -->
             <ol class="carousel-indicators">
-                <li data-target="#carousel-example-multi" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-example-multi" data-slide-to="1"></li>
-                <li data-target="#carousel-example-multi" data-slide-to="2"></li>
-                <li data-target="#carousel-example-multi" data-slide-to="3"></li>
-                <li data-target="#carousel-example-multi" data-slide-to="4"></li>
-                <li data-target="#carousel-example-multi" data-slide-to="5"></li>
+                <li data-target="#carousel-multi" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-multi" data-slide-to="1"></li>
+                <li data-target="#carousel-multi" data-slide-to="2"></li>
+                <li data-target="#carousel-multi" data-slide-to="3"></li>
+                <li data-target="#carousel-multi" data-slide-to="4"></li>
+                <li data-target="#carousel-multi" data-slide-to="5"></li>
+                <li data-target="#carousel-multi" data-slide-to="5"></li>
+                <li data-target="#carousel-multi" data-slide-to="5"></li>
+                <li data-target="#carousel-multi" data-slide-to="5"></li>
+                <li data-target="#carousel-multi" data-slide-to="5"></li>
+                <li data-target="#carousel-multi" data-slide-to="5"></li>
             </ol>
             <!--/.Indicators-->
 
             <div class="carousel-inner v-2" role="listbox">
 
-                {% for product in products|slice:":6" %}
+                {% for product in featured %}
                 <div {% if forloop.counter == 1 %} class="carousel-item active"
                      {% else %} class="carousel-item" {% endif %}>
                     <div class="col-md-4">
@@ -122,139 +127,114 @@
 </div>
 
 <!-- Modal: modalQuickView -->
-{% for product in products|slice:":6" %}
+{% for product in featured %}
 <div class="modal fade" id="modalQuickView{{forloop.counter}}" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+    aria-labelledby="{{product.name}" aria-hidden="true">
+    
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="row">
+                    <!--Carousel Wrapper-->
                     <div class="col-lg-5">
-                        <!--Carousel Wrapper-->
                         <div id="carousel-thumb{{forloop.counter}}"
-                             class="carousel slide carousel-fade carousel-thumbnails"
-                             data-ride="carousel">
+                                class="carousel slide carousel-fade carousel-thumbnails h-100"
+                                data-ride="carousel">
                             <!--Slides-->
                             <div class="carousel-inner" role="listbox">
                                 <div class="carousel-item active">
                                     <a href="{% url 'shop:product-detail' product.slug %}">
                                         <img class="d-block w-100"
-                                             src="{{product.imageURL}}"
-                                             alt="First slide">
+                                                src="{{product.imageURL}}"
+                                                alt="Product Image">
                                     </a>
                                 </div>
+                                
+                                {% for image in product.productimage_set.all %}
                                 <div class="carousel-item">
                                     <a href="{% url 'shop:product-detail' product.slug %}">
                                         <img class="d-block w-100"
-                                             src="{{product.imageURL}}"
-                                             alt="Second slide">
+                                                src="{{image.image.url}}"
+                                                alt="Product Image">
                                     </a>
                                 </div>
-                                <div class="carousel-item">
-                                    <a href="{% url 'shop:product-detail' product.slug %}">
-                                        <img class="d-block w-100"
-                                             src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(25).jpg"
-                                             alt="Third slide">
-                                    </a>
-                                </div>
+                                {% endfor %}
+
                             </div>
                             <!--/.Slides-->
-                            <!--Controls-->
-                            <a class="carousel-control-prev"
-                               href="#carousel-thumb{{forloop.counter}}" role="button"
-                               data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next"
-                               href="#carousel-thumb{{forloop.counter}}" role="button"
-                               data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                            <!--/.Controls-->
+                            <!-- here lies the deprecated controls -->
+
                             <ol class="carousel-indicators">
                                 <li data-target="#carousel-thumb{{forloop.counter}}"
                                     data-slide-to="0" class="active">
                                     <img src="{{product.imageURL}}"
-                                         width="60">
+                                        width="60">
                                 </li>
-                                <li data-target="#carousel-thumb{{forloop.counter}}"
-                                    data-slide-to="1">
-                                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(24).jpg"
-                                         width="60">
+                                
+                                {% for image in product.productimage_set.all %}
+                                <li data-target="#carousel-thumb{{forloop.parentloop.counter}}"
+                                    data-slide-to="{{ forloop.counter }}">
+                                    <img src="{{image.image.url}}"
+                                        width="60">
                                 </li>
-                                <li data-target="#carousel-thumb{{forloop.counter}}"
-                                    data-slide-to="2">
-                                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(25).jpg"
-                                         width="60">
-                                </li>
+                                {% endfor%} 
                             </ol>
                         </div>
-                        <!--/.Carousel Wrapper-->
                     </div>
-                    <div class="col-lg-7">
-                        <h2 class="h2-responsive product-name">
-                            <strong>{{product}}</strong>
-                        </h2>
-                        {% if product.is_new %}
-                        <span class="badge badge-info mb-2 mr-2">NEW</span>
-                        {% endif %}
-                        {% if product.discount_price %}
-                        <span class="badge badge-success mb-4">SALE</span>
-                        <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
-                                    <span class="green-text font-weight-bold">
-                                        <strong>${{product.discount_price}}</strong>
+                    <!--/.Carousel Wrapper-->
+
+                    <div class="product-info col-lg-7">
+                        <div class="product-body">
+                            <h3 class="h3-responsive mt-xl-0 mt-1"> {{product.name}} </h3>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4 class="text-center">
+                                <span class="">${{product.discount_price}}</span>
+                                {% if product.discount_price != product.price %}
+                                    <span class="green-text ml-2">
+                                        <small><s>${{product.price}}</s></small>
                                     </span>
-                            <span class="grey-text">
-                                        <small>
-                                            <s>${{product.price}}</s>
-                                        </small>
-                                    </span>
-                        </h3>
-                        {% else %}
-                        <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4 mt-4">
-                                    <span class="green-text font-weight-bold">
-                                        <strong>${{product.price}}</strong>
-                                    </span>
-                        </h3>
-                        {% endif %}
+                                {% endif%}
+                                </h4>
 
-                        <p class="ml-xl-0 ml-4">{{product.description}}
-                        </p>
-
-                        <p class="ml-xl-0 ml-4">
-
-                            <strong>Brand: </strong>{{product.get_brand}}</p>
-
-                        {% if product.is_shoe %}
-                        <p class="ml-xl-0 ml-4">
-
-                            <strong>Size: </strong>{{product.shoe.size}}</p>
-                        {% endif %}
-
-                        <p class="ml-xl-0 ml-4">
-
-                            <strong>Quantity Available: </strong>{{product.quantity}}</p>
+                                <div class="d-flex align-items-center">
+                                    {% if product.is_new %}
+                                    <span class="badge badge-info">NEW</span>
+                                    {% endif %}
+                                    {% if product.discount_price != product.price %}
+                                    <span class="badge badge-success ml-2">SALE</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div>{{product.description|linebreaks}}</div>
+                        </div>
 
                         <!-- Add to Cart -->
-                        <div class="card-body">
-                            <div class="text-center">
+                        <div class="product-footer">
+                            <!-- information -->
+                            <div> Brand: {{ product.get_brand }}</div>
+                            {% if product.is_shoe %}
+                            <div> Size: {{ product.shoe.size }}</div>
+                            {% endif %}
+                            <div> Quantity: {{ product.quantity }}</div>
+
+                            <div class="d-flex justify-content-between">
                                 <a href="{{product.get_add_to_cart_url}}"
-                                   class="btn btn-secondary update-cart"
-                                   data-product="{{product.id}}" data-action="add">Add to Bag
-                                    <i class="fas fa-shopping-bag ml-2" aria-hidden="true"></i>
+                                    class="btn btn-outline-secondary update-cart"
+                                    data-product="{{product.id}}" data-action="add">Add to Bag
+                                    <i class="fas fa-shopping-bag pink-text ml-1" aria-hidden="true"></i>
                                 </a>
                                 <a href="{% url 'shop:product-detail' product.slug %}"
-                                   class="btn btn-light">Detail View</a>
-                                <button type="button" class="btn btn-secondary"
+                                    class="btn btn-outline-secondary">Detail View</a>
+                                <button type="button" 
+                                    class="btn btn-outline-secondary"
                                         data-dismiss="modal">Close
                                 </button>
                             </div>
                         </div>
                         <!-- /.Add to Cart -->
+
                     </div>
+                    <!-- col7 -->
                 </div>
             </div>
         </div>

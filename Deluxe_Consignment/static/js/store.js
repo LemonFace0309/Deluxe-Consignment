@@ -35,10 +35,3 @@ window.addEventListener('load', () => {
     }, 0);
 }) 
 
-
-function test() {
-    console.log('he')
-    const b = document.querySelector('#radio101')
-    b.checked = true;
-    console.log(b.value)
-}
