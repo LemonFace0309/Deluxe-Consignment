@@ -128,28 +128,71 @@
                         </thead>
                         <tbody>
                         {% for address in user.customer.shippingaddress_set.all %}
-                        <tr>
-                            <th scope="row">{{address.address}}</th>
-                            <td>{{address.address2}}</td>
-                            <td>{{address.city}}</td>
-                            <td>{{address.province}}</td>
-                            <td>{{address.country}}</td>
-                            <td>{{address.postal_code}}</td>
-                            <td>
-                                <a href="{{address.get_edit_address_url}}">
-                                    <button type="button" class="btn btn-sm btn-primary">
-                                        Edit
-                                    </button>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="{{address.get_remove_address_url}}">
-                                    <button type="button" class="btn btn-sm btn-primary">
-                                        Delete
-                                    </button>
-                                </a>
-                            </td>
-                        </tr>
+                        <form method="POST" action="{{address.get_edit_address_url}}">
+                            {% csrf_token %}
+                            <tr>
+                                <th scope="row">
+                                    <div class="md-form">
+                                        <input type="text" id="inputAddress" class="form-control"
+                                               value="{{address.address}}"
+                                               name="address">
+                                        <label for="inputAddress">Address</label>
+                                    </div>
+                                </th>
+                                <td>
+                                    <div class="md-form">
+                                        <input type="text" id="inputAddress2" class="form-control"
+                                               value="{{address.address2}}"
+                                               name="address2">
+                                        <label for="inputAddress2">Address 2</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="md-form">
+                                        <input type="text" id="inputCity" class="form-control"
+                                               value="{{address.city}}"
+                                               name="city">
+                                        <label for="inputCity">City</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="md-form">
+                                        <input type="text" id="inputProvince" class="form-control"
+                                               value="{{address.province}}"
+                                               name="province">
+                                        <label for="inputAddress">Province</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="md-form">
+                                        <input type="text" id="inputCountry" class="form-control"
+                                               value="{{address.country}}"
+                                               name="country">
+                                        <label for="inputCountry">Country</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="md-form">
+                                        <input type="text" id="inputPostalCode" class="form-control"
+                                               value="{{address.postal_code}}"
+                                               name="postal_code">
+                                        <label for="inputPostalCode">Postal Code</label>
+                                    </div>
+                                </td>
+                                <td>
+                                        <button type="submit" class="btn btn-sm btn-primary">
+                                            Change
+                                        </button>
+                                </td>
+                                <td>
+                                    <a href="{{address.get_remove_address_url}}">
+                                        <button type="button" class="btn btn-sm btn-primary">
+                                            Delete
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </form>
                         {% endfor %}
                         </tbody>
                     </table>

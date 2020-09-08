@@ -190,13 +190,15 @@ def account(request):
 def editAddress(request, id):
     if request.method == 'POST':
         try:
-            shippingAddress = get_object_or_404(ShippingAddress, id=id)
             address = request.POST.get('address')
             address2 = request.POST.get('address2')
             city = request.POST.get('city')
-            province = request.POST.get('phone')
+            province = request.POST.get('province')
             country = request.POST.get('country')
-            postal_code = request.Post.get('postal_code')
+            postal_code = request.POST.get('postal_code')
+            print(address)
+            print(postal_code)
+            shippingAddress = get_object_or_404(ShippingAddress, id=id)
             shippingAddress.address = address
             shippingAddress.address2 = address2
             shippingAddress.city = city
@@ -205,7 +207,6 @@ def editAddress(request, id):
             shippingAddress.postal_code = postal_code
             shippingAddress.save()
             messages.success(request, 'Account information changed')
-
         except:
             messages.error(request, 'Unable to change information')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
