@@ -22,6 +22,7 @@ PROVINCE_OPTIONS = (
     ('Prince Edward Island', 'Prince Edward Island'),
     ('Saskatchewan', 'Saskatchewan'),
     ('Yukon', 'Yukon'),
+    ('California', 'California')
 )
 
 DELIVERY_OPTIONS = (
@@ -49,6 +50,7 @@ class Order(models.Model):
                                 null=True, blank=True)
     shipping_cost = models.FloatField(null=True, blank=True)
     layaway = models.BooleanField(default=False)
+    tax = models.FloatField(null=True, blank=True)
     transaction_id = models.CharField(max_length=100, null=True)
 
     def __str__(self):
@@ -61,6 +63,20 @@ class Order(models.Model):
         total = float(total)
         if self.coupon:
             total *= (1 - (self.coupon.discount_percentage/100))
+        if self.tax:
+            total *= 1 + (self.tax / 100)
+        if self.shipping_cost:
+            total += self.shipping_cost
+        return total
+
+    @property
+    def get_cart_ontario_tax_total(self):
+        items = self.orderitem_set.all()
+        total = sum([item.get_total for item in items])
+        total = float(total)
+        if self.coupon:
+            total *= (1 - (self.coupon.discount_percentage/100))
+        total *= 1.13
         if self.shipping_cost:
             total += self.shipping_cost
         return total
@@ -70,10 +86,30 @@ class Order(models.Model):
         items = self.orderitem_set.all()
         return sum([item.quantity for item in items])
 
+    @property
     def get_discount_total(self):
         if self.coupon:
-            return float((self.get_cart_total / (1 - (self.coupon.discount_percentage/100))) - self.get_cart_total)
+            items = self.orderitem_set.all()
+            total = float(sum([item.get_total for item in items]))
+            total = total - total * (1 - (self.coupon.discount_percentage / 100))
+            return total
         return 0
+
+    @property
+    def get_tax_total(self):
+        if self.tax:
+            items = self.orderitem_set.all()
+            total = float(sum([item.get_total for item in items])) - self.get_discount_total
+            total = total * (1 + (self.tax / 100)) - total
+            return total
+        return 0
+
+    @property
+    def get_ontario_tax_total(self):
+        items = self.orderitem_set.all()
+        total = float(sum([item.get_total for item in items])) - self.get_discount_total
+        total = total * 1.13 - total
+        return total
 
 
 class OrderItem(models.Model):

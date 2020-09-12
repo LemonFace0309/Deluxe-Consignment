@@ -60,13 +60,18 @@ for(let i = 0; i < delivery_forms.length; i++){
         })
         .then((res) => res.json())
         .then((data) => {
-            // updating html
-            console.log(data)
+            // Checking if province is filled in correctly
+            if (data == "error") {
+                location.reload()
+                return
+            }
 
+            // Updating html
+            // Shipping
             if (data.delivery == 'Shipping'){
                 // updating shipping cost
-                shipping_cost = document.getElementById('shipping-cost')
-                shipping_cost.textContent = '$' + data.shipping_cost.toFixed(2)
+                shipping_cost = document.getElementsByClassName('shipping-cost')
+                shipping_cost[0].textContent = '$' + data.shipping_cost.toFixed(2)
                 // updating total cost
                 total_cost = document.getElementById('total-cost')
                 total_cost.textContent = '$' + data.get_cart_total.toFixed(2)
@@ -74,24 +79,35 @@ for(let i = 0; i < delivery_forms.length; i++){
                 total_cost = document.getElementById('total-cost-2')
                 total_cost.textContent = '$' + data.get_cart_total.toFixed(2)
             }
+            // Tax
+            if (data.tax) {
+                document.getElementsByClassName('tax-list-item')[0].classList.remove('hidden')
+                document.getElementsByClassName('tax-percent')[0].textContent = 'Tax (' + data.tax +'%)'
+                document.getElementsByClassName('tax-cost')[0].textContent = '$' + data.tax_total.toFixed(2)
+            } else {
+                // Removes tax if user originally ordered from Canada but changed address to the USA after refreshing page
+                if (!document.getElementsByClassName('tax-list-item')[0].classList.contains('hidden')){
+                    document.getElementsByClassName('tax-list-item')[0].classList.add('hidden')
+                }
+            }
             total = data.get_cart_total
 
             // sets form data for order processing in submitFormData function
             document.getElementById('paypal-payment').classList.add(data.delivery)
-        })
 
-        // hiding delivery submission form and revealing payment options
-        document.getElementById('continue-button').classList.add('hidden')
-        for(let i = 0; i < delivery_forms.length; i++){
-            delivery_forms[i].classList.add('hidden')
-            delivery_forms[i].parentElement.parentElement.classList.remove('col-md-8')
-            delivery_forms[i].parentElement.parentElement.classList.add('col-md-4')
-        }
-        nav_tabs = document.getElementsByClassName('nav-tabs')
-        for(let i = 0; i < nav_tabs.length; i++){
-            nav_tabs[i].classList.add('hidden')
-        }
-        document.getElementById('paypal-payment').classList.remove('hidden')
+            // hiding delivery submission form and revealing payment options
+            document.getElementById('continue-button').classList.add('hidden')
+            for(let i = 0; i < delivery_forms.length; i++){
+                delivery_forms[i].classList.add('hidden')
+                delivery_forms[i].parentElement.parentElement.classList.remove('col-md-8')
+                delivery_forms[i].parentElement.parentElement.classList.add('col-md-4')
+            }
+            nav_tabs = document.getElementsByClassName('nav-tabs')
+            for(let i = 0; i < nav_tabs.length; i++){
+                nav_tabs[i].classList.add('hidden')
+            }
+            document.getElementById('paypal-payment').classList.remove('hidden')
+        })
     })
 }
 

@@ -11,6 +11,22 @@ from django.contrib.auth import authenticate, login, logout
 
 from store.utils import cartData, cookieCartData
 
+tax_rate = {
+    'Ontario': 13,
+    'British Columbia': 12,
+    'Quebec': 14.975,
+    'Alberta': 5,
+    'Manitoba': 13,
+    'New Brunswick': 13,
+    'Newfoundland and Labrador': 13,
+    'Northwest Territories': 5,
+    'Nova Scotia': 15,
+    'Nunavut': 5,
+    'Prince Edward Island': 14,
+    'Saskatchewan': 10,
+    'Yukon': 5
+}
+
 
 # Create your views here.
 def createUser(request):
@@ -101,12 +117,23 @@ def updateDelivery(request):
     order.delivery = data['delivery']
 
     if order.delivery == 'Shipping':
+        province = data['shipping']['province']
         if data['shipping']['country'] == 'Canada':
             order.shipping_cost = 15
+            try:
+                order.tax = tax_rate[province]
+            except:
+                print('not working')
+                messages.error(request, 'Please select a province in Canada')
+                return JsonResponse("error", safe=False)
         elif data['shipping']['country'] == 'USA':
             order.shipping_cost = 30
+            order.tax = None
         else:
             order.shipping_cost = 50
+    else:
+        order.tax = 13
+
 
     if data['is_layaway']:
         order.layaway = True
@@ -115,6 +142,8 @@ def updateDelivery(request):
     order_data = {
         'delivery': order.delivery,
         'shipping_cost': order.shipping_cost,
+        'tax': order.tax,
+        'tax_total': order.get_tax_total,
         'is_layaway': order.layaway,
         'get_cart_total': order.get_cart_total,
     }

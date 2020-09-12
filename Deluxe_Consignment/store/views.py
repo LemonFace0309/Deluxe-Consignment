@@ -250,6 +250,16 @@ def checkout(request):
     return render(request, 'store/checkout.html', context)
 
 
+def orderSummary(request, transaction_id):
+    order = get_object_or_404(Order, transaction_id=transaction_id)
+    if order.complete:
+        context = {
+            'order': order,
+        }
+        return render(request, 'store/orderSummary.html', context)
+
+
+
 def consign(request):
     context = {
 

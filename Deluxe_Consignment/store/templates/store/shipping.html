@@ -164,16 +164,27 @@
             </li>
             {% endif %}
 
+            {% if not order.tax %}
+            <li class="list-group-item d-flex justify-content-between lh-condensed bg-light tax-list-item hidden">
+                <span class="text-danger tax-percent"></span>
+                <strong class="text-danger tax-cost"></strong>
+            </li>
+            {% else %}
+            <li class="list-group-item d-flex justify-content-between lh-condensed bg-light tax-list-item">
+                <span class="text-danger tax-percent">Tax ({{order.tax}}%)</span>
+                <strong class="text-danger tax-cost">${{order.get_tax_total|floatformat:2}}</strong>
+            </li>
+            {% endif %}
 
             {% if order.shipping_cost %}
             <li class="list-group-item d-flex justify-content-between lh-condensed bg-light">
                 <span class="text-danger">Shipping</span>
-                <strong class="text-danger">${{order.shipping_cost|floatformat:2}}</strong>
+                <strong class="text-danger shipping-cost">${{order.shipping_cost|floatformat:2}}</strong>
             </li>
             {% else %}
             <li class="list-group-item d-flex justify-content-between lh-condensed bg-light">
                 <span class="text-danger">Shipping</span>
-                <strong id="shipping-cost" class="text-danger">TO BE CALCULATED</strong>
+                <strong class="text-danger shipping-cost">TO BE CALCULATED</strong>
             </li>
             {% endif %}
 

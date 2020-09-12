@@ -103,9 +103,14 @@
             </li>
             {% endif %}
 
+            <li class="list-group-item d-flex justify-content-between lh-condensed bg-light">
+                <span class="text-danger">Tax (13%)</span>
+                <strong class="text-danger">${{order.get_ontario_tax_total|floatformat:2}}</strong>
+            </li>
+
             <li class="list-group-item d-flex justify-content-between">
                 <span>Total (CAD)</span>
-                <strong id="total-cost-2">${{cart_total|floatformat:2}}</strong>
+                <strong id="total-cost-2">${{order.get_cart_ontario_tax_total|floatformat:2}}</strong>
             </li>
         </ul>
         <!-- Cart -->
