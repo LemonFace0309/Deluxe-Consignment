@@ -42,7 +42,6 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
-
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
     coupon = models.ForeignKey('Coupon', on_delete=models.SET_NULL, null=True, blank=True)

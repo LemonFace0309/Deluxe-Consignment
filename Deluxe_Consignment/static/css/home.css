@@ -140,7 +140,7 @@
 
 
 /*  */
-.modal-body {
+.modal-lg .modal-body {
     min-height: 90vh;
 }
 
