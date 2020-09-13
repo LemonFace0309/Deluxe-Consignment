@@ -92,7 +92,10 @@ function removeCover(){
             if (aTags[i].innerText.includes('Free Instagram Feed widget')){
                 console.log();
                 aTags[i].remove();
-                break;
+            }
+            if (aTags[i].innerText.includes('Widget is deactivated')){
+                console.log();
+                aTags[i].remove();
             }
         }
     }, 1000);
