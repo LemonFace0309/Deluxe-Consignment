@@ -18,6 +18,7 @@ urlpatterns = [
     path('about/', store_views.about, name='about'),
     path('payment-policy/', store_views.paymentPolicy, name='payment-policy'),
     path('test-test-test/', store_views.test, name="test"),
+    path('order-summary/<str:transaction_id>/', store_views.orderSummary, name='order-summary'),
 
     path('add-to-cart/<slug>/', store_views.add_to_cart, name='add-to-cart'),
     path('subtract-from-cart/<slug>/', store_views.subtract_from_cart, name='subtract-from-cart'),

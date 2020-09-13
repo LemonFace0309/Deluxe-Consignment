@@ -7,5 +7,7 @@ urlpatterns = [
     path('login-user/', user_views.loginUser, name='login-user'),
     path('logout-user/', user_views.logoutUser, name='logout-user'),
 
+    path('add-coupon/', user_views.addCoupon, name='add-coupon'),
+    path('update-delivery/', user_views.updateDelivery, name='update-delivery'),
     path('process-order/', user_views.processOrder, name='process-order'),
 ]

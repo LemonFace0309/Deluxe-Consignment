@@ -22,7 +22,14 @@ PROVINCE_OPTIONS = (
     ('Prince Edward Island', 'Prince Edward Island'),
     ('Saskatchewan', 'Saskatchewan'),
     ('Yukon', 'Yukon'),
+    ('California', 'California')
 )
+
+DELIVERY_OPTIONS = (
+    ('Shipping', 'Shipping'),
+    ('Pick-up', 'Pick-up')
+)
+
 
 # Create your models here.
 class Customer(models.Model):
@@ -36,23 +43,84 @@ class Customer(models.Model):
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
-    date_ordered = models.DateTimeField(auto_now_add=True)
+    coupon = models.ForeignKey('Coupon', on_delete=models.SET_NULL, null=True, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False)
-    shipping = models.BooleanField(default=False)
+    delivery = models.CharField(max_length=100, choices=DELIVERY_OPTIONS, default='Pick-up',
+                                null=True, blank=True)
+    shipping_cost = models.FloatField(null=True, blank=True)
+    layaway = models.BooleanField(default=False)
+    tax = models.FloatField(null=True, blank=True)
     transaction_id = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return f"{str(self.id)} created by {self.customer.name}"
+        return f"{str(self.id)} created by {str(self.customer)}"
+
+    @property
+    def get_subtotal(self):
+        items = self.orderitem_set.all()
+        total = sum([item.get_total for item in items])
+        total = float(total)
+        return total
 
     @property
     def get_cart_total(self):
         items = self.orderitem_set.all()
-        return sum([item.get_total for item in items])
+        total = sum([item.get_total for item in items])
+        total = float(total)
+        if self.coupon:
+            total *= (1 - (self.coupon.discount_percentage/100))
+        if self.tax:
+            total *= 1 + (self.tax / 100)
+        if self.shipping_cost:
+            total += self.shipping_cost
+        return total
+
+    @property
+    def get_cart_ontario_tax_total(self):
+        items = self.orderitem_set.all()
+        total = sum([item.get_total for item in items])
+        total = float(total)
+        if self.coupon:
+            total *= (1 - (self.coupon.discount_percentage/100))
+        total *= 1.13
+        if self.shipping_cost:
+            total += self.shipping_cost
+        return total
 
     @property
     def get_cart_quantity(self):
         items = self.orderitem_set.all()
         return sum([item.quantity for item in items])
+
+    @property
+    def get_discount_total(self):
+        if self.coupon:
+            items = self.orderitem_set.all()
+            total = float(sum([item.get_total for item in items]))
+            total = total - total * (1 - (self.coupon.discount_percentage / 100))
+            return total
+        return 0
+
+    @property
+    def get_tax_total(self):
+        if self.tax:
+            items = self.orderitem_set.all()
+            total = float(sum([item.get_total for item in items])) - self.get_discount_total
+            total = total * (1 + (self.tax / 100)) - total
+            return total
+        return 0
+
+    @property
+    def get_ontario_tax_total(self):
+        items = self.orderitem_set.all()
+        total = float(sum([item.get_total for item in items])) - self.get_discount_total
+        total = total * 1.13 - total
+        return total
+
+    @property
+    def get_shipping_address(self):
+        return self.shippingaddress_set.first()
 
 
 class OrderItem(models.Model):
@@ -82,3 +150,11 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
+
+
+class Coupon(models.Model):
+    code = models.CharField(max_length=25)
+    discount_percentage = models.FloatField(default=5)
+
+    def __str__(self):
+        return self.code

@@ -34,6 +34,7 @@ class Product(models.Model):
     featured = models.BooleanField(default=False)
     thumbnail = models.ImageField(null=True, blank=True, upload_to='thumbnails')
     quantity = models.IntegerField(default=1)
+    in_stock = models.BooleanField(default=True)
     date_created = models.DateTimeField(default=timezone.now)
     description = models.TextField(max_length=2000, null=True, blank=True)
     slug = models.SlugField(max_length=200, blank=True)
@@ -112,6 +113,12 @@ class Product(models.Model):
         except:
             url = ''
         return url
+
+    @property
+    def get_savings(self):
+        if self.discount_price:
+            return self.price - self.discount_price
+        return 0
 
 
 class ProductImage(models.Model):

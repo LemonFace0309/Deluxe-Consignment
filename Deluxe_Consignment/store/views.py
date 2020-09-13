@@ -9,7 +9,7 @@ from user.models import (
     Customer, Order, OrderItem, ShippingAddress
 )
 from user.forms import (
-    ShippingAddressForm
+    ShippingAddressForm, PickUpForm, CouponForm
 )
 from django.views.generic import (
     DetailView,
@@ -25,12 +25,12 @@ def home(request):
 
     if request.user.is_authenticated:
         data = cartData(request)
-        items = data['items']
-        cart_quantity = data['cart_quantity']
     else:
         data = cookieCartData(request)
-        items = data['items']
-        cart_quantity = data['cart_quantity']
+
+    items = data['items']
+    cart_quantity = data['cart_quantity']
+
     context = {
         'products': products,
         'items': items,
@@ -205,14 +205,13 @@ def cart(request):
 
     if request.user.is_authenticated:
         data = cartData(request)
-        items = data['items']
-        cart_quantity = data['cart_quantity']
-        cart_total = data['cart_total']
     else:
         data = cookieCartData(request)
-        items = data['items']
-        cart_quantity = data['cart_quantity']
-        cart_total = data['cart_total']
+
+    items = data['items']
+    cart_quantity = data['cart_quantity']
+    cart_total = data['cart_total']
+
     context = {
         'products': products,
         'items': items,
@@ -225,25 +224,45 @@ def cart(request):
 def checkout(request):
     if request.user.is_authenticated:
         data = cartData(request)
-        items = data['items']
-        cart_quantity = data['cart_quantity']
-        cart_total = data['cart_total']
     else:
-        data = cookieCartData(request)
-        items = data['items']
-        cart_quantity = data['cart_quantity']
-        cart_total = data['cart_total']
+        if 'code' in request.session:
+            data = cookieCartData(request, code=request.session['code'])
+        else:
+            data = cookieCartData(request)
+
+    order = data['order']
+    items = data['items']
+    cart_quantity = data['cart_quantity']
+    cart_total = data['cart_total']
 
     products = Product.objects.all()
     form = ShippingAddressForm()
+    pick_up_form = PickUpForm()
+    coupon_form = CouponForm()
     context = {
         'products': products,
+        'order': order,
         'items': items,
         'cart_quantity': cart_quantity,
         'cart_total': cart_total,
         'form': form,
+        'pick_up_form': pick_up_form,
+        'coupon_form': coupon_form
     }
     return render(request, 'store/checkout.html', context)
+
+
+def orderSummary(request, transaction_id):
+    # add request.user.customer = order.customer privileges after
+    order = get_object_or_404(Order, transaction_id=transaction_id)
+    if order.complete:
+        context = {
+            'customer': request.user.customer,
+            'order': order,
+            'items': order.orderitem_set.all()
+        }
+        return render(request, 'store/orderSummary.html', context)
+
 
 
 def consign(request):
