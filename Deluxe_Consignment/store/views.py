@@ -251,10 +251,13 @@ def checkout(request):
 
 
 def orderSummary(request, transaction_id):
+    # add request.user.customer = order.customer privileges after
     order = get_object_or_404(Order, transaction_id=transaction_id)
     if order.complete:
         context = {
+            'customer': request.user.customer,
             'order': order,
+            'items': order.orderitem_set.all()
         }
         return render(request, 'store/orderSummary.html', context)
 

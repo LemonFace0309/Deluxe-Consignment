@@ -106,6 +106,12 @@ class Product(models.Model):
             url = ''
         return url
 
+    @property
+    def get_savings(self):
+        if self.discount_price:
+            return self.price - self.discount_price
+        return 0
+
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

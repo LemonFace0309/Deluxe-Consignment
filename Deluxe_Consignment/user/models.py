@@ -57,6 +57,13 @@ class Order(models.Model):
         return f"{str(self.id)} created by {str(self.customer)}"
 
     @property
+    def get_subtotal(self):
+        items = self.orderitem_set.all()
+        total = sum([item.get_total for item in items])
+        total = float(total)
+        return total
+
+    @property
     def get_cart_total(self):
         items = self.orderitem_set.all()
         total = sum([item.get_total for item in items])
@@ -110,6 +117,10 @@ class Order(models.Model):
         total = float(sum([item.get_total for item in items])) - self.get_discount_total
         total = total * 1.13 - total
         return total
+
+    @property
+    def get_shipping_address(self):
+        return self.shippingaddress_set.first()
 
 
 class OrderItem(models.Model):

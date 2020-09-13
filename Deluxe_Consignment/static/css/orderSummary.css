@@ -1,0 +1,49 @@
+.brand {
+    text-align: center;
+}
+
+.brand a {
+    color: black;
+    font-family: 'Sacramento';
+}
+
+.order-confirmation {
+    text-align: center;
+    padding-top: 2vh;
+    padding-bottom: 1vh;
+    background-color: rgba(76, 175, 80, 0.3);
+}
+
+.order-summary {
+    text-align: center;
+    padding-top: 2vh;
+    padding-bottom: 4vh;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.less-bold {
+    font-weight: 600;
+}
+
+.center-hr {
+    width: 10%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.item-img {
+    width: 100%;
+}
+
+
+@media (max-width: 600px) {
+    .brand {
+        font-size: calc(12px + 1vw);
+        width: 100%;
+        justify-self: center;
+        text-align: center;
+    }
+}
