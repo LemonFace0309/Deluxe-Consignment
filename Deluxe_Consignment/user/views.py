@@ -171,8 +171,14 @@ def processOrder(request):
     if 'code' in request.session:
         del request.session['code']
 
-    # order delivery options are set in updateDelivery function
+    # decrease product quantity according to order details
+    for item in order.orderitem_set.all():
+        item.product.quantity -= item.quantity
+        if item.product.quantity <= 0:
+            item.product.in_stock = False
+        item.product.save()
 
+    # order delivery options are set in updateDelivery function
     if order.delivery == 'Shipping':
         ShippingAddress.objects.create(
             customer=customer,
@@ -184,6 +190,7 @@ def processOrder(request):
             country=data['shipping']['country'],
             postal_code=data['shipping']['postal_code'],
         )
+
     order_data = {
         'transaction_id': order.transaction_id,
     }

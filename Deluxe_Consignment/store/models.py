@@ -32,6 +32,7 @@ class Product(models.Model):
     featured = models.BooleanField(default=False)
     thumbnail = models.ImageField(null=True, blank=True)
     quantity = models.IntegerField(default=1)
+    in_stock = models.BooleanField(default=True)
     date_created = models.DateTimeField(auto_now=True)
     description = models.TextField(max_length=2000, null=True, blank=True)
     slug = models.SlugField(max_length=200)
