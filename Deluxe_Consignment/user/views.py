@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
@@ -74,6 +74,29 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     messages.success(request, 'You have been logged out')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def editUser(request):
+    if request.method == 'POST':
+        try:
+            email = request.POST.get('email')
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            phone = request.POST.get('phone')
+            customer = request.user.customer
+            customer.user.first_name = first_name
+            customer.user.last_name = last_name
+            customer.user.email = email
+            customer.phone = phone
+            customer.name = first_name + ' ' + last_name
+            customer.email = email
+            customer.save()
+            customer.user.save()
+            messages.success(request, 'Account information changed')
+
+        except:
+            messages.error(request, 'Unable to change information')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
@@ -197,4 +220,41 @@ def processOrder(request):
     return JsonResponse(order_data)
 
 
+def account(request):
+    context = {
+    }
+    return render(request, 'store/account.html')
 
+
+def editAddress(request, id):
+    if request.method == 'POST':
+        try:
+            address = request.POST.get('address')
+            address2 = request.POST.get('address2')
+            city = request.POST.get('city')
+            province = request.POST.get('province')
+            country = request.POST.get('country')
+            postal_code = request.POST.get('postal_code')
+            print(address)
+            print(postal_code)
+            shippingAddress = get_object_or_404(ShippingAddress, id=id)
+            shippingAddress.address = address
+            shippingAddress.address2 = address2
+            shippingAddress.city = city
+            shippingAddress.province = province
+            shippingAddress.country = country
+            shippingAddress.postal_code = postal_code
+            shippingAddress.save()
+            messages.success(request, 'Account information changed')
+        except:
+            messages.error(request, 'Unable to change information')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def removeAddress(request, id):
+    address = get_object_or_404(ShippingAddress, id=id)
+    customer = address.customer.name
+    if request.user.is_authenticated and request.user.customer.name == customer:
+        address.delete()
+        messages.success(request, f'"{address}" has been successfully removed from your account')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

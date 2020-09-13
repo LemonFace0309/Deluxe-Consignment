@@ -69,7 +69,6 @@ class StoreListView(ListView):
         if brand != '' and brand is not None:
             products = products.filter(brand__icontains=brand)
 
-
         if category == 'shoes':
             products = products.filter(shoe__gt=0)
         elif category == 'bags':
@@ -200,6 +199,7 @@ def update_cookie_cart_quantity(request):
             messages.error(request, f'Your bag does not contain a {product} item to be removed')
             return JsonResponse('remove', safe=False)
 
+
 def cart(request):
     products = Product.objects.all()
 
@@ -288,3 +288,6 @@ def paymentPolicy(request):
 
 def test(request):
     return render(request, 'store/test.html')
+
+
+

@@ -6,6 +6,11 @@ urlpatterns = [
     path('create-user/', user_views.createUser, name='create-user'),
     path('login-user/', user_views.loginUser, name='login-user'),
     path('logout-user/', user_views.logoutUser, name='logout-user'),
+    path('edit-user/', user_views.editUser, name='edit-user'),
+    
+    path('account/', user_views.account, name='account'),
+    path('remove-address/<id>/', user_views.removeAddress, name='remove-address'),
+    path('edit-address/<id>/', user_views.editAddress, name='edit-address'),
 
     path('add-coupon/', user_views.addCoupon, name='add-coupon'),
     path('update-delivery/', user_views.updateDelivery, name='update-delivery'),

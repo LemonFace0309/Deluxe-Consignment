@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 from django.contrib.auth.models import User
 from store.models import Product
 
@@ -34,8 +35,9 @@ DELIVERY_OPTIONS = (
 # Create your models here.
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    name = models.CharField(max_length=200, null=True, blank=True)
-    email = models.EmailField(max_length=200, null=True, blank=True)
+    name = models.CharField(max_length=200, null=True)
+    email = models.EmailField(max_length=200, null=True)
+    phone = models.CharField(max_length=12, null=True)
 
     def __str__(self):
         return self.name
@@ -146,10 +148,20 @@ class ShippingAddress(models.Model):
     province = models.CharField(max_length=200, choices=PROVINCE_OPTIONS, null=True)
     country = models.CharField(max_length=200, choices=COUNTRY_OPTIONS, null=True)
     postal_code = models.CharField(max_length=200, null=True)
-    date_added = models.DateTimeField(auto_now_add=True)
+    date_added = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.address
+
+    def get_remove_address_url(self):
+        return reverse("user:remove-address", kwargs={
+            'id': self.id
+        })
+
+    def get_edit_address_url(self):
+        return reverse("user:edit-address", kwargs={
+            'id': self.id
+        })
 
 
 class Coupon(models.Model):
@@ -158,3 +170,13 @@ class Coupon(models.Model):
 
     def __str__(self):
         return self.code
+
+
+class Message(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    title = models.CharField(max_length=250)
+    message = models.TextField(max_length=5000)
+    date_submitted = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.first_name}\'s Message'

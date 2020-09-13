@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views as store_views
+from user import views as user_views
 from django.views.decorators.cache import never_cache
 from .views import (
     ProductDetailView,
@@ -19,7 +20,7 @@ urlpatterns = [
     path('payment-policy/', store_views.paymentPolicy, name='payment-policy'),
     path('test-test-test/', store_views.test, name="test"),
     path('order-summary/<str:transaction_id>/', store_views.orderSummary, name='order-summary'),
-
+    path('account/', user_views.account, name="account"),
     path('add-to-cart/<slug>/', store_views.add_to_cart, name='add-to-cart'),
     path('subtract-from-cart/<slug>/', store_views.subtract_from_cart, name='subtract-from-cart'),
     path('remove-from-cart/<slug>/', store_views.remove_from_cart, name='remove-from-cart'),
