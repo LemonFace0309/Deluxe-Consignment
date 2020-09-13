@@ -188,12 +188,12 @@ function submitFormData(){
     })
     .then((res) => res.json())
     .then((data) => {
-        console.log('Success:', data)
+        console.log('Success: Order Submitted')
         alert('Transaction completed')
 
         cart = {}
         document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
 
-        window.location.href = "/"
+        window.location.href = "/order-summary/" + data['transaction_id'] + "/"
         })
 }

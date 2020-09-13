@@ -184,7 +184,10 @@ def processOrder(request):
             country=data['shipping']['country'],
             postal_code=data['shipping']['postal_code'],
         )
-    return JsonResponse('Payment submitted...', safe=False)
+    order_data = {
+        'transaction_id': order.transaction_id,
+    }
+    return JsonResponse(order_data)
 
 
 
