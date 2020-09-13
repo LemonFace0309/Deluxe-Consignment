@@ -108,3 +108,7 @@
 .product-footer .btn{
     padding: 10px 15px;
 }
+
+i:hover {
+    color: purple !important;
+}

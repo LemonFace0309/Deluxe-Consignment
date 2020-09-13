@@ -25,105 +25,84 @@
 <div class="banner"><h1>New Arrivals</h1></div>
 
 <!--Carousel-->
-<div class="containerd">
-    <section class="section pb-3 wow fadeIn" data-wow-delay="0.3s">
-        <!--Section heading-->
-        <h1 class="font-weight-bold text-center h1 my-5">Designer Brands at Affordable Prices</h1>
-        <!--Section description-->
-        <p class="text-center grey-text mb-5 mx-auto w-responsive">
+<div class="container">
+    <!-- <section class="section pb-3 wow fadeIn" data-wow-delay="0.3s">
+        <h1 class="font-weight-bold text-center mt-4 h1">Designer Brands at Affordable Prices</h1>
+        <p class="text-center grey-text mx-auto w-responsive">
             We sell great items. We sell bags, shoes, jewelry, and many accessories.
             We sell items from brands suchs as Louis Vuitton, Gucci gang, and PradaPanda.
         </p>
+    </section> -->
 
-        <div id="carousel-multi" class="carousel slide carousel-multi-item v-2" data-ride="carousel">
+    <div id="carousel-multi" class="carousel slide carousel-multi-item v-2" data-ride="carousel">
+        <!--Controls-->
+        <!-- <div class="controls-top">
+            <a class="btn-floating pink lighten-3" href="#carousel-multi" data-slide="prev">
+                <i class="fas fa-chevron-left"></i></a>
+            <a class="btn-floating pink lighten-3" href="#carousel-multi" data-slide="next">
+                <i class="fas fa-chevron-right"></i></a>
+        </div> -->
+        <!--/.Controls-->
 
-            <!--Controls-->
-            <div class="controls-top">
-                <a class="btn-floating pink lighten-3" href="#carousel-multi" data-slide="prev"><i
-                        class="fas fa-chevron-left"></i></a>
-                <a class="btn-floating pink lighten-3" href="#carousel-multi" data-slide="next"><i
-                        class="fas fa-chevron-right"></i></a>
-            </div>
-            <!--/.Controls-->
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            {% for product in featured %} 
+                <li data-target="#carousel-multi" data-slide-to="{{forloop.counter0}}"
+                    {% if forloop.counter == 1 %} class="active" {% endif %}
+                </li>
+            {% endfor%}
 
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#carousel-multi" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-multi" data-slide-to="1"></li>
-                <li data-target="#carousel-multi" data-slide-to="2"></li>
-                <li data-target="#carousel-multi" data-slide-to="3"></li>
-                <li data-target="#carousel-multi" data-slide-to="4"></li>
-                <li data-target="#carousel-multi" data-slide-to="5"></li>
-                <li data-target="#carousel-multi" data-slide-to="5"></li>
-                <li data-target="#carousel-multi" data-slide-to="5"></li>
-                <li data-target="#carousel-multi" data-slide-to="5"></li>
-                <li data-target="#carousel-multi" data-slide-to="5"></li>
-                <li data-target="#carousel-multi" data-slide-to="5"></li>
-            </ol>
-            <!--/.Indicators-->
+            <!-- MAx indicators is 10 btw -->
+        </ol>
+        <!--/.Indicators-->
 
-            <div class="carousel-inner v-2" role="listbox">
+        <div class="carousel-inner v-2 pt-5" role="listbox">
+            {% for product in featured %}
+            <div {% if forloop.counter == 1 %} class="carousel-item active"
+                {% else %} class="carousel-item" {% endif %}>
+                <div class="col-md-4 col-12">
+                    <!--Card-->
+                    <div class="card card-cascade narrower card-ecommerce">
+                        <!--Cart Image-->
+                        <div class="view view-cascade overlay">
+                            <img src="{{product.imageURL}}" class="card-img-top"
+                                alt="Product Image">
+                            <a data-toggle="modal" data-target="#modalQuickView{{forloop.counter}}">
+                                <div class="mask rgba-white-light"></div>
+                            </a>
+                        </div>
+                        <!--Cart Image-->
 
-                {% for product in featured %}
-                <div {% if forloop.counter == 1 %} class="carousel-item active"
-                     {% else %} class="carousel-item" {% endif %}>
-                    <div class="col-md-4">
-                        <!--Card-->
-                        <div class="card card-cascade narrower card-ecommerce">
-                            <!--Cart Image-->
-                            <div class="view view-cascade overlay">
-                                <img src="{{product.imageURL}}" class="card-img-top"
-                                  alt="Product Image">
-                                <a data-toggle="modal" data-target="#modalQuickView{{forloop.counter}}">
-                                  <div class="mask rgba-white-slight"></div>
-                                </a>
-                            </div>
-                            <!--Cart Image-->
+                        <!--Card content-->
+                        <div class="card-body card-body-cascade text-center no-padding">
+                            <h4 class="card-title">
+                                <a class="purple-text" href="{{product.get_absolute_url}}">{{product.name|truncatechars:"40"}}</a>
+                            </h4>
+                            <!--Description-->
+                            <p class="card-text">{{product.description|truncatechars:"40"}}</p>
 
-                            <!--Card content-->
-                            <div class="card-body card-body-cascade text-center no-padding">
-                                <!--Category & Title-->
-                                <a href="" class="text-muted">
-                                  <h5>
-                                    {% if product.is_shoe %}Shoe{% endif %}
-                                    {% if product.is_bag %}Bag{% endif %}
-                                    {% if product.is_accessory %}Accessory{% endif %}
-                                    {% if product.is_slg %}SLGs{% endif %}
-                                  </h5>
-                                </a>
-                                <h4 class="card-title">
-                                  <strong>
-                                    <a href="{{product.get_absolute_url}}">{{product.name}}</a>
-                                  </strong>
-                                </h4>
+                            <div class="card-footer pb-0">
+                                <div class="mb-0">
+                                    {% if product.discount_price != product.price %}
+                                    <span class="float-left">${{product.discount_price}}</span>
+                                    {% else %}
+                                    <span class="float-left">${{product.price}}</span>
+                                    {% endif%}
 
-                                <!--Description-->
-                                <p class="card-text">{{product.description}}</p>
-
-                                <div class="card-footer pb-0">
-                                    <div class="mb-0">
-
-                                        {% if product.discount_price %}
-                                        <span class="float-left">${{product.discount_price}}</span>
-                                        {% else %}
-                                        <span class="float-left">${{product.price}}</span>
-                                        {% endif%}
-
-                                        <a class="update-cart float-right" data-toggle="tooltip" data-placement="top"
-                                           href="{{product.get_add_to_cart_url}}" data-product="{{product.id}}"
-                                           data-action="add" title="Add to Bag">
-                                          <i class="fas fa-shopping-bag grey-text"></i>
-                                        </a>
-                                    </div>
+                                    <a class="update-cart float-right" data-toggle="tooltip" data-placement="top"
+                                        href="{{product.get_add_to_cart_url}}" data-product="{{product.id}}"
+                                        data-action="add" title="Add to Bag">
+                                        <i class="fas fa-shopping-bag grey-text"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
             </div>
+            {% endfor %}
         </div>
-    </section>
+    </div>
 </div>
 
 <!-- Modal: modalQuickView -->
@@ -145,11 +124,11 @@
                                 <div class="carousel-item active">
                                     <a href="{% url 'shop:product-detail' product.slug %}">
                                         <img class="d-block w-100"
-                                                src="{{product.imageURL}}"
-                                                alt="Product Image">
+                                            src="{{product.imageURL}}"
+                                            alt="Product Image">
                                     </a>
                                 </div>
-                                
+
                                 {% for image in product.productimage_set.all %}
                                 <div class="carousel-item">
                                     <a href="{% url 'shop:product-detail' product.slug %}">
@@ -367,7 +346,7 @@
         </div>
     </div>
 </div>
-<p style="text-align: center;">Instagram: @deluxe_consignment</p>
+<p style="text-align: center; font-family: 'Ubuntu';">Instagram: @deluxe_consignment</p>
 <!-- <div class="shop-item-container"> -->
 
 {% endblock content %}

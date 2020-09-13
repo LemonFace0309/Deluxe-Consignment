@@ -103,7 +103,7 @@ class Product(models.Model):
 
     @property
     def is_slg(self):
-        return hasattr(self, "slgs")
+        return hasattr(self, "slg")
 
     @property
     def imageURL(self):

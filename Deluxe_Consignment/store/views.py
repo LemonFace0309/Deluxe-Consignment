@@ -21,7 +21,7 @@ from django.views.generic import (
 # Create your views here.
 def home(request):
     products = Product.objects.all()
-    featured = products.filter(featured=True)[:3]
+    featured = products.filter(featured=True)[:10]
 
     if request.user.is_authenticated:
         data = cartData(request)

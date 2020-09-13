@@ -191,3 +191,33 @@
 .modal .product-footer .btn{
     padding: 10px 15px;
 }
+
+/* Home carousel */
+.card {
+    height: 65vh;
+    display: flex;
+    transition: 300ms;
+}
+
+.card:hover {
+    transform: translateY(-3%);
+}
+
+.card .view{
+    max-height: 60%;
+    /* width: 100%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.card-title {
+    width: 100%;
+    height: 50%;
+}
+
+
+i:hover {
+    color: purple !important;
+}

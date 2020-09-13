@@ -5,7 +5,7 @@
 }
 
 nav {
-    z-index: 10000;
+    z-index: 100;
     background: #f59cb2;
     color: white;
     font-family: 'Ubuntu', sans-serif;
