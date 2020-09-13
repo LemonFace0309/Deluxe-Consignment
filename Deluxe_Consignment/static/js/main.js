@@ -6,7 +6,7 @@ for(var i = 0; i < updateBtns.length; i++) {
             var productId = this.dataset.product
             var action = this.dataset.action
             
-            console.log('productId:', productId, 'action:', action)
+            // console.log('productId:', productId, 'action:', action)
             addCookieItem(productId, action)
         }
     })
@@ -84,18 +84,25 @@ function addCookieItem(productId, action){
 
 
 function removeCover(){
+    console.log('helo')
     setTimeout(() => {
-        var aTags = document.getElementsByTagName('a')
-            // console.log(aTags.length);
+        let aTags = document.getElementsByTagName('a')
         for (i = 0; i < aTags.length; i++){
             // console.log(aTags[i].href);
             if (aTags[i].innerText.includes('Free Instagram Feed widget')){
-                console.log();
                 aTags[i].remove();
-                break;
+            }
+
+            if (aTags[i].innerText.includes('Widget is deactivated')){
+                aTags[i].remove();
             }
         }
     }, 1000);
 }
 
-window.onload = removeCover()
+window.onload = function () {
+    removeCover();
+    setTimeout(() => {
+        removeCover();
+    }, 10000);
+};
