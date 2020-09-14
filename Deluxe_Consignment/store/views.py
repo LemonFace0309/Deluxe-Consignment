@@ -88,12 +88,11 @@ class StoreListView(ListView):
 
         if request.user.is_authenticated:
             data = cartData(request)
-            items = data['items']
-            cart_quantity = data['cart_quantity']
         else:
             data = cookieCartData(request)
-            items = data['items']
-            cart_quantity = data['cart_quantity']
+
+        items = data['items']
+        cart_quantity = data['cart_quantity']
 
         context = {
             'products': products,
@@ -106,9 +105,23 @@ class StoreListView(ListView):
 
 
 class ProductDetailView(DetailView):
-    model = Product
-    context_object_name = 'product'
-    template_name = 'store/product.html'
+    def get(self, request, slug, *args, **kwargs):
+        product = get_object_or_404(Product, slug=slug)
+
+        if request.user.is_authenticated:
+            data = cartData(request)
+        else:
+            data = cookieCartData(request)
+
+        items = data['items']
+        cart_quantity = data['cart_quantity']
+
+        context = {
+            'product': product,
+            'items': items,
+            'cart_quantity': cart_quantity,
+        }
+        return render(request, 'store/product.html', context)
 
     # # Getting Product
     # def get_object(self):

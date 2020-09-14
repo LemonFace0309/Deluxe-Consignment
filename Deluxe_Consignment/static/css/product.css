@@ -1,0 +1,72 @@
+.card {
+    min-height: 90vh;
+}
+
+.product-showcase {
+    height: 70vh
+}
+
+.carousel {
+    max-height: 100%;
+}
+
+.carousel-inner {
+    height: 100%;
+    display: flex;
+    width: 100%;
+}
+
+.carousel-item {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.carousel-item img {
+    height: 100%;
+}
+
+
+.lightbox-showcase {
+    height: 10%;
+    display: flex;
+    /* overflow: hidden; */
+}
+
+.mdb-lightbox {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.mdb-lightbox figure {
+    height: 60px;
+    margin: 0px 3px;
+}
+
+.mdb-lightbox figure a {
+    height: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mdb-lightbox figure a img{
+    width: 60px;
+}
+
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-footer .btn{
+    padding: 10px 15px;
+}
