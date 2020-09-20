@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, JsonResponse
 from .utils import *
 from django.db.models.functions import Lower
+from .filters import ProductFilter 
+
 from django.core.paginator import Paginator
 from user.models import (
     Customer, Order, OrderItem, ShippingAddress
@@ -16,6 +18,7 @@ from django.views.generic import (
     ListView,
 
 )
+
 
 
 # Create your views here.
@@ -94,12 +97,17 @@ class StoreListView(ListView):
         items = data['items']
         cart_quantity = data['cart_quantity']
 
+        
+        productFilter = ProductFilter(request.GET, queryset=products)
+        products = productFilter.qs
+
         context = {
             'products': products,
             'items': items,
             'cart_quantity': cart_quantity,
             'brands': brands,
             'page_obj': page_obj,
+            'productFilter': productFilter,
         }
         return render(request, 'store/store.html', context)
 

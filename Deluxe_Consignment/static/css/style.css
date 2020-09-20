@@ -1,3 +1,7 @@
 .hidden {
     display: none !important;
 }
+
+.page-footer p {
+    margin: 0;
+}
