@@ -7,6 +7,15 @@
     flex-direction: column;
 }
 
+.intro-info-content h1{
+    animation: title-text 1s;
+}
+
+@keyframes title-text {
+    0% {letter-spacing: 10px;}
+    100% {}
+}
+
 .custom-btn {
     display: flex;
     color: white;
@@ -216,6 +225,6 @@
 }
 
 
-i:hover {
+footer i:hover {
     color: purple !important;
 }

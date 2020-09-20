@@ -23,7 +23,7 @@ from django.views.generic import (
 
 # Create your views here.
 def home(request):
-    products = Product.objects.all()
+    products = Product.objects.all().filter(in_stock=True)
     featured = products.filter(featured=True)[:10]
 
     if request.user.is_authenticated:
@@ -45,7 +45,7 @@ def home(request):
 
 class StoreListView(ListView):
     def get(self, request, *args, **kwargs):
-        products = Product.objects.all().order_by('id')
+        products = Product.objects.all().filter(in_stock=True)
         search = request.GET.get('q')
         sort = request.GET.get('sort')
         brand = request.GET.get('brand')
@@ -67,7 +67,7 @@ class StoreListView(ListView):
         elif sort == 'a-z':
             products = products.order_by(Lower('name'), 'discount_price')
         elif sort == 'z-a':
-            products = products.order_by(Lower('-name'), 'discount_price')
+            products = products.order_by(Lower('name'), 'discount_price').reverse()
 
         if brand != '' and brand is not None:
             products = products.filter(brand__icontains=brand)

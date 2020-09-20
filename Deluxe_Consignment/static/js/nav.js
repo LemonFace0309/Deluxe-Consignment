@@ -25,6 +25,6 @@ window.addEventListener('scroll', function() {
     if (url != '/') {
         nav.classList.toggle('sticky', window.scrollY > 80);
     } else {
-        nav.classList.toggle('sticky', window.scrollY > window.innerHeight-150);
+        nav.classList.toggle('sticky', window.scrollY > window.innerHeight+100);
     }
 });
