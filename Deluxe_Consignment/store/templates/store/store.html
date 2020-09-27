@@ -12,10 +12,6 @@
         <div class="col-lg-3">
             <div class="">
                 <!-- Grid row -->
-
-
-
-
                 <!-- <div>
                      <form method="GET">
                         {{ productFilter.form }}
@@ -23,105 +19,85 @@
                      </form>
                 </div> -->
 
-
-
-
-
-
-
-
-
-
-
-
-                <div class="row">
+                <form class="row" name="filter" id="filter" action="">
+                    
+                    <!-- Sorting -->
                     <div class="col-6 col-lg-12">
-                        <!-- Panel -->
                         <h5 class="font-weight-bold dark-grey-text"><strong>Sort By</strong></h5>
-                        <div class="divider"></div>
-                        <form action="" name="sortForm">
-                            <select class="mdb-select md-form" id="sort" name="sort" onchange="this.form.submit()">
-                                <option value="" disabled selected>Choose your option</option>
-                                <option value="pricelow">Price (Low to High)</option>
-                                <option value="pricehigh">Price (High to Low)</option>
-                                <option value="a-z">Name (A to Z)</option>
-                                <option value="z-a">Name (Z to A)</option>
-                            </select>
-                        </form>
+                        <select class="mdb-select md-form" id="sort" name="sort">
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="pricelow">Price (Low to High)</option>
+                            <option value="pricehigh">Price (High to Low)</option>
+                            <option value="a-z">Name (A to Z)</option>
+                            <option value="z-a">Name (Z to A)</option>
+                        </select>
                     </div>
+
 
                     <!-- Brand Filter -->
-                    <div class="col-6 col-lg-12 mb-7">
-                        <!-- Panel -->
+                    <div class="col-6 col-lg-12">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Brand</strong></h5>
+                        <select class="mdb-select md-form" id="brand" name="brand">
+                            <option value="" disabled selected>Brand</option>
+                            {% for brand in brands %}
+                                <option value="{{brand}}">{{ brand }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
+                    <!-- Catergory Filter -->
+                    <div class="col-6 col-lg-12">
+                        <h5 class="font-weight-bold dark-grey-text mb-3"><strong>Catergory</strong></h5>
+                        <div class="form-group ">
+                            <input class="form-check-input submitonchange" name="category" value="shoes"
+                                    type="checkbox" id="radio100">
+                            <label for="radio100" class="form-check-label dark-grey-text">Shoes</label>
+                        </div>
+    
+                        <div class="form-group">
+                            <input class="form-check-input submitonchange" name="category" value="bags" 
+                                type="checkbox" id="radio101">
+                            <label for="radio101" class="form-check-label dark-grey-text">Bags</label>
+                        </div>
+    
+                        <div class="form-group">
+                            <input class="form-check-input submitonchange" name="category" value="accessories" 
+                                type="checkbox" id="radio102">
+                            <label for="radio102" class="form-check-label dark-grey-text">Accessories</label>
+                        </div>
+    
+                        <div class="form-group">
+                            <input class="form-check-input submitonchange" name="category" value="slgs" 
+                                type="checkbox" id="radio103">
+                            <label for="radio103" class="form-check-label dark-grey-text">SLGs</label>
+                        </div>
+                    </div>
+
+
+                    <!-- Price Filter -->
+                    <div class="col-6 col-lg-12">
+                        <h5 class="font-weight-bold dark-grey-text mt-3"><strong>Max Price</strong></h3>
                         <div class="divider"></div>
-                        <form action="" name="brandForm">
-                            <select class="mdb-select md-form" id="brand" name="brand" onchange="this.form.submit()">
-                                <option value="" disabled selected>Brand</option>
-                                {% for brand in brands %}
-                                    <option value="{{brand}}">{{ brand }}</option>
-                                {% endfor %}
-                                <!-- <option value="3">Option 3</option> -->
-                            </select>
-                        </form>
-                    </div>
-                    <!-- Filter by brand -->
-                    
 
-                    <!-- Filter by category -->
-                    <div class="col-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text mb-3 "><strong>Category</strong></h3>
-                            <!-- Radio group -->
-                        <form action="">
-                            <div class="form-group ">
-                                <input class="form-check-input submitonchange" name="category" value="shoes"
-                                       type="radio" id="radio100">
-                                <label for="radio100" class="form-check-label dark-grey-text">Shoes</label>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 text-left">
+                                <p class="dark-grey-text"><strong id="resellerEarnings">$0</strong></p>
                             </div>
 
-                            <div class="form-group">
-                                <input class="form-check-input submitonchange" name="category" value="bags" 
-                                    type="radio" id="radio101">
-                                <label for="radio101" class="form-check-label dark-grey-text">Bags</label>
+                            <div class="col-md-6 text-right">
+                                <p class="dark-grey-text"><strong id="clientPrice">$1500</strong></p>
                             </div>
+                        </div>   
 
-                            <div class="form-group">
-                                <input class="form-check-input submitonchange" name="category" value="accessories" 
-                                    type="radio" id="radio102">
-                                <label for="radio102" class="form-check-label dark-grey-text">Accessories</label>
-                            </div>
-
-                            <div class="form-group">
-                                <input class="form-check-input submitonchange" name="category" value="slgs" 
-                                    type="radio" id="radio103">
-                                <label for="radio103" class="form-check-label dark-grey-text">SLGs</label>
-                            </div>
-                        </form>
-                        <!-- Radio group -->
+                        <div class="range-field">
+                            <input id="calculatorSlider" class=" range-field no-border" name="pricemax" type="range" min="0" max="10000"/>
+                        </div>
                     </div>
 
-                    <!-- Filter by price -->
-                    <div class="col-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Max Price</strong></h3>
-                            <div class="divider"></div>
 
-                            <div class="row justify-content-center">
-                                <div class="col-md-6 text-left">
-                                    <p class="dark-grey-text"><strong id="resellerEarnings">$0</strong></p>
-                                </div>
-
-                                <div class="col-md-6 text-right">
-                                    <p class="dark-grey-text"><strong id="clientPrice">$1500</strong></p>
-                                </div>
-                            </div>
-                            <form class="range-field mt-0">
-                                <input id="calculatorSlider" class="no-border" name="pricemax" type="range" min="0" max="1500"/>
-                                <button class="btn btn-sm blue white-text" type="submit">Search</button>
-                            </form>
-                    </div>
-                    <!-- Filter by price -->
-                </div>
-                <!-- Grid row -->
+                    <button class="btn btn-sm blue white-text" type="submit">Search</button>
+                </form>
 
             </div>
         </div>
@@ -338,5 +314,8 @@
 <!-- Main Container -->
 </main>
 <script src="{% static 'js/store.js' %}"></script>
+<script>
+    // let token  = {{ csrf_token }};
+</script>
 
 {% endblock content %}

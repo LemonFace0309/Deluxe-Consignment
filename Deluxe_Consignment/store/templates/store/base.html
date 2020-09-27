@@ -77,7 +77,7 @@
             document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"  // assigns cookie to main domain of the website
         }
 
-        console.log('Cart: ', cart)
+        // console.log('Cart: ', cart)
     </script>
 
 </head>
@@ -107,6 +107,19 @@
 
 {% endfor %}
 {% endif %}
+
+<!--BOOTSTAP JS-->
+<!-- jQuery -->
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+<!-- Plugin file -->
+<script src="{% static './js/addons-pro/multi-range.min.js'%}"></script>
+<!-- vv This is so all blocks have jq vv -->
 
 <!--Navbar-->
 {% include 'store/navbar.html' %}
@@ -155,23 +168,13 @@
     <!-- Footer Links -->
 
     <div class="footer-copyright text-center py-2">© {% now "Y" %} Copyright:
-        <a href="https://mdbootstrap.com/"> deluxeconsignmentshop.com</a>
+        <a href="{% url 'shop:home' %}"> deluxeconsignmentshop.com</a>
     </div>
 </footer>
 <!-- Footer -->
 
 
-<!--BOOTSTAP JS-->
-<!-- jQuery -->
-<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
-<!-- Plugin file -->
-<script src="{% static './js/addons-pro/multi-range.min.js'%}"></script>
+
 
 <!--JS Files-->
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>

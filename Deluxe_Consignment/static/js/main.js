@@ -84,7 +84,6 @@ function addCookieItem(productId, action){
 
 
 function removeCover(){
-    console.log('helo')
     setTimeout(() => {
         let aTags = document.getElementsByTagName('a')
         for (i = 0; i < aTags.length; i++){

@@ -2,7 +2,6 @@ from django.db import models
 from django.shortcuts import reverse
 from django.contrib.auth.models import User
 from store.models import Product
-from decimal import Decimal
 
 COUNTRY_OPTIONS = (
     ('Canada', 'Canada'),
@@ -69,7 +68,7 @@ class Order(models.Model):
     def get_cart_total(self):
         items = self.orderitem_set.all()
         total = sum([item.get_total for item in items])
-        total = round(total, 2)
+        total = float(total)
         if self.coupon:
             total *= (1 - (self.coupon.discount_percentage/100))
         if self.tax:

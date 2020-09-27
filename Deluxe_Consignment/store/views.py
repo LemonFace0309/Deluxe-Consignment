@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.contrib import messages
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .utils import *
 from django.db.models.functions import Lower
 from .filters import ProductFilter 
@@ -45,7 +45,7 @@ def home(request):
 
 class StoreListView(ListView):
     def get(self, request, *args, **kwargs):
-        products = Product.objects.all().filter(in_stock=True)
+        products = Product.objects.all().filter(in_stock=True).order_by('id') # for pagination
         search = request.GET.get('q')
         sort = request.GET.get('sort')
         brand = request.GET.get('brand')
@@ -57,6 +57,8 @@ class StoreListView(ListView):
             if products.filter(brand__icontains=choice[1]).count() != 0:
                 brands += [choice[1]]
 
+
+        # Filtering
         if search != '' and search is not None:
             products = products.filter(name__icontains=search)
 
@@ -83,6 +85,11 @@ class StoreListView(ListView):
 
         if pricemax != 0 and pricemax is not None:
             products = products.filter(discount_price__lte=pricemax)
+            
+
+        # django-filter
+        # productFilter = ProductFilter(request.GET, queryset=products)
+        # products = productFilter.qs
 
         # Pagination
         paginator = Paginator(products, 8)
@@ -97,9 +104,6 @@ class StoreListView(ListView):
         items = data['items']
         cart_quantity = data['cart_quantity']
 
-        
-        productFilter = ProductFilter(request.GET, queryset=products)
-        products = productFilter.qs
 
         context = {
             'products': products,
@@ -107,7 +111,7 @@ class StoreListView(ListView):
             'cart_quantity': cart_quantity,
             'brands': brands,
             'page_obj': page_obj,
-            'productFilter': productFilter,
+            # 'productFilter': productFilter,
         }
         return render(request, 'store/store.html', context)
 
