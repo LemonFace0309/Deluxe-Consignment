@@ -14,28 +14,50 @@ pages.forEach(page => {
 // end pagination
 
 
-
-// const onChangeElements = document.querySelectorAll('.submitonchange');
-// onChangeElements.forEach(item => {
-//     item.addEventListener('click', () => {
-//         sessionStorage.setItem('catSel', item.id)
-//         // console.log(sessionStorage.getItem('catSel'))
-//         item.closest('form').submit();
-//     })
-// })
+// Filtering
+$(".category").change(function() {
+    $(".category").not(this).prop('checked', false);
+});
 
 
-// let catSel = sessionStorage.getItem('catSel')
-// // let catSel = ''
+
+$(".submit").click(function(e){
+    // e.preventDefault() 
+    let sortOption = document.querySelector('#sort').value
+    let brandOption = document.querySelector('#brand').value
+    let categoryOption = document.querySelector('.category:checked')
+    let priceOption = document.querySelector('#priceSlider').value
+
+    if (categoryOption != null) {
+        categoryOption = categoryOption.id
+    }
+
+    sessionStorage.setItem('sort', sortOption)
+    sessionStorage.setItem('brand', brandOption)
+    sessionStorage.setItem('category', categoryOption)
+    sessionStorage.setItem('price', priceOption)
+});
 
 
-// window.addEventListener('load', () => {
-//     setTimeout(() => {
-//         console.log(localStorage.getItem('catSel'))
-//         console.log(`#${catSel}`)
-//         document.querySelector(`#${sessionStorage.getItem('catSel')}`).checked = true;
-//     }, 0);
-// }) 
+
+
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        // console.log(sessionStorage.getItem('sort'))
+        // console.log(sessionStorage.getItem('brand'))
+        // console.log(sessionStorage.getItem('category'))
+        // console.log(sessionStorage.getItem('price'))
+
+        $('#sort').val(sessionStorage.getItem('sort'));
+        $('#brand').val(sessionStorage.getItem('brand'));
+        $('#priceSlider').val(sessionStorage.getItem('price'));
+
+        if (sessionStorage.getItem('category') != 'null') {
+            document.querySelector(`#${sessionStorage.getItem('category')}`).checked = true;
+        }
+
+    }, 0);
+}) 
 
 
 

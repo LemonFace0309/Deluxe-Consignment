@@ -24,8 +24,8 @@
                     <!-- Sorting -->
                     <div class="col-6 col-lg-12">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Sort By</strong></h5>
-                        <select class="mdb-select md-form" id="sort" name="sort">
-                            <option value="" disabled selected>Choose your option</option>
+                        <select class="mdb-select md-form" id="sort" name="sort" >
+                            <option value="">Choose your option</option>
                             <option value="pricelow">Price (Low to High)</option>
                             <option value="pricehigh">Price (High to Low)</option>
                             <option value="a-z">Name (A to Z)</option>
@@ -38,7 +38,7 @@
                     <div class="col-6 col-lg-12">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Brand</strong></h5>
                         <select class="mdb-select md-form" id="brand" name="brand">
-                            <option value="" disabled selected>Brand</option>
+                            <option value="">Brand</option>
                             {% for brand in brands %}
                                 <option value="{{brand}}">{{ brand }}</option>
                             {% endfor %}
@@ -49,26 +49,26 @@
                     <!-- Catergory Filter -->
                     <div class="col-6 col-lg-12">
                         <h5 class="font-weight-bold dark-grey-text mb-3"><strong>Catergory</strong></h5>
-                        <div class="form-group ">
-                            <input class="form-check-input submitonchange" name="category" value="shoes"
+                        <div class="form-group">
+                            <input class="form-check-input category" name="category" value="shoes"
                                     type="checkbox" id="radio100">
                             <label for="radio100" class="form-check-label dark-grey-text">Shoes</label>
                         </div>
     
                         <div class="form-group">
-                            <input class="form-check-input submitonchange" name="category" value="bags" 
+                            <input class="form-check-input category" name="category" value="bags" 
                                 type="checkbox" id="radio101">
                             <label for="radio101" class="form-check-label dark-grey-text">Bags</label>
                         </div>
     
                         <div class="form-group">
-                            <input class="form-check-input submitonchange" name="category" value="accessories" 
+                            <input class="form-check-input category" name="category" value="accessories" 
                                 type="checkbox" id="radio102">
                             <label for="radio102" class="form-check-label dark-grey-text">Accessories</label>
                         </div>
     
                         <div class="form-group">
-                            <input class="form-check-input submitonchange" name="category" value="slgs" 
+                            <input class="form-check-input category" name="category" value="slgs" 
                                 type="checkbox" id="radio103">
                             <label for="radio103" class="form-check-label dark-grey-text">SLGs</label>
                         </div>
@@ -91,12 +91,14 @@
                         </div>   
 
                         <div class="range-field">
-                            <input id="calculatorSlider" class=" range-field no-border" name="pricemax" type="range" min="0" max="10000"/>
+                            <input id="priceSlider" class=" range-field no-border" name="pricemax" type="range" min="0" max="10000"/>
                         </div>
                     </div>
 
 
-                    <button class="btn btn-sm blue white-text" type="submit">Search</button>
+                    <button class="btn btn-sm blue white-text submit" type="submit">Search</button>
+
+                    
                 </form>
 
             </div>
