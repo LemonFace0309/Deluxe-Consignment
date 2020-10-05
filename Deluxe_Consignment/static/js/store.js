@@ -1,8 +1,8 @@
 const pages = document.querySelectorAll('.paginate a');
 let search = location.search
 
-if (search.indexOf('&') != -1) {
-    search = search.substring(0, search.indexOf('&'))
+if (search.indexOf('&page=') != -1) {
+    search = search.substring(0, search.lastIndexOf('&'))
 }
 
 pages.forEach(page => {
@@ -11,7 +11,22 @@ pages.forEach(page => {
         page.href = `${search}&${pageLink}`
     }
 })
+
+$(".paginate a").click(function() {
+    saveFilter();
+});
 // end pagination
+
+
+$("#filterToggle").click(function() {
+    console.log("wokring")
+    $(".filter").toggleClass("show")
+});
+
+
+
+
+
 
 
 // Filtering
@@ -19,10 +34,7 @@ $(".category").change(function() {
     $(".category").not(this).prop('checked', false);
 });
 
-
-
-$(".submit").click(function(e){
-    // e.preventDefault() 
+function saveFilter() {
     let sortOption = document.querySelector('#sort').value
     let brandOption = document.querySelector('#brand').value
     let categoryOption = document.querySelector('.category:checked')
@@ -31,11 +43,15 @@ $(".submit").click(function(e){
     if (categoryOption != null) {
         categoryOption = categoryOption.id
     }
-
+    
     sessionStorage.setItem('sort', sortOption)
     sessionStorage.setItem('brand', brandOption)
     sessionStorage.setItem('category', categoryOption)
     sessionStorage.setItem('price', priceOption)
+};
+
+$(".submit").click(function() {
+    saveFilter();
 });
 
 
@@ -43,11 +59,6 @@ $(".submit").click(function(e){
 
 window.addEventListener('load', () => {
     setTimeout(() => {
-        // console.log(sessionStorage.getItem('sort'))
-        // console.log(sessionStorage.getItem('brand'))
-        // console.log(sessionStorage.getItem('category'))
-        // console.log(sessionStorage.getItem('price'))
-
         $('#sort').val(sessionStorage.getItem('sort'));
         $('#brand').val(sessionStorage.getItem('brand'));
         $('#priceSlider').val(sessionStorage.getItem('price'));
@@ -56,6 +67,14 @@ window.addEventListener('load', () => {
             document.querySelector(`#${sessionStorage.getItem('category')}`).checked = true;
         }
 
+        if (sessionStorage.getItem('price') == 'null') {
+            document.querySelector('#priceSlider').value = 10000;
+        }
+
+        sessionStorage.setItem('sort', 'null')
+        sessionStorage.setItem('brand', 'null')
+        sessionStorage.setItem('category', 'null')
+        sessionStorage.setItem('price', 'null')
     }, 0);
 }) 
 

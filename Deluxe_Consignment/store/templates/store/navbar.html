@@ -153,7 +153,7 @@
     <div class="nav-container">
         <span id="menu-open" href=""><i class="fas fa-bars fa-1x"></i></span>
         <div class="brand"><a href="{% url 'shop:home' %}">Deluxe Consignment Shop</a></div>
-        <form id="search" action="">
+        <form id="search" action="{% url 'shop:store' %}">
             <input class="form-control" id="searchBar" name="q" type="search" placeholder="Search">
         </form>
         <div id="cart">
