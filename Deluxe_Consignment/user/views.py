@@ -1,15 +1,26 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseRedirect, JsonResponse
+from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
+
 from .forms import *
 from .models import *
 from .utils import *
+from store.utils import cartData, cookieCartData
+
 import datetime
 import json
-from django.contrib.auth import authenticate, login, logout
+import requests
 
-from store.utils import cartData, cookieCartData
+
+MAILCHIMP_API_KEY = settings.MAILCHIMP_API_KEY
+MAILCHIMP_DATA_CENTER = settings.MAILCHIMP_DATA_CENTER
+MAILCHIMP_EMAIL_LIST_ID = settings.MAILCHIMP_EMAIL_LIST_ID
+
+api_url = f'https://{MAILCHIMP_DATA_CENTER}.api.mailchimp.com/3.0'
+members_endpoint = f'{api_url}/lists/{MAILCHIMP_EMAIL_LIST_ID}/members'
 
 tax_rate = {
     'Ontario': 13,
@@ -98,6 +109,48 @@ def editUser(request):
         except:
             messages.error(request, 'Unable to change information')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def subscribe(name, email):
+    flname = name.split(' ')
+    fname = str(flname[0])
+    lname = ""
+    for name in flname[1:]:
+        lname += " " + str(name)
+    lname.strip()
+
+    data = {
+        "email_address": email,
+        "status": "subscribed",
+        "merge_fields": {
+            "FNAME": fname,
+            "LNAME": lname,
+        }
+    }
+    r = requests.post(
+        members_endpoint,
+        auth=("", MAILCHIMP_API_KEY),
+        data=json.dumps(data)
+    )
+    return r.status_code, r.json()
+
+
+def email_list_signup(request):
+    form = EmailSignupForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            subscriber, created = EmailSignup.objects.get_or_create(email=form.instance.email)
+            subscriber.name = form.instance.name
+            if request.user.is_authenticated and subscriber.email == request.user.email:
+                try:
+                    subscriber.user = request.user
+                except:
+                    messages.error(request, "Already subscribed")
+            subscribe(form.instance.name, form.instance.email)
+            subscriber.save()
+            messages.success(request, "Subscription Successful!")
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 
 def addCoupon(request):
