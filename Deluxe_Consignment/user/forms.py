@@ -68,3 +68,20 @@ class CouponForm(ModelForm):
                 'aria-describedby': 'basic-addon2'
             })
         }
+
+
+class EmailSignupForm(ModelForm):
+    name = forms.CharField(widget=forms.TextInput(attrs={
+        'id': "defaultSubscriptionFormPassword",
+        'class': "form-control mb-4",
+        'placeholder': "Name"
+    }), label="", required=False)
+    email = forms.EmailField(widget=forms.TextInput(attrs={
+        'id': "defaultSubscriptionFormEmail",
+        'class': "form-control mb-4",
+        'placeholder': "E-Mail"
+    }), label="")
+
+    class Meta:
+        model = EmailSignup
+        fields = ['name', 'email']

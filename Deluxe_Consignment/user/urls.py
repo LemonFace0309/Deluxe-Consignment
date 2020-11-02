@@ -7,6 +7,7 @@ urlpatterns = [
     path('login-user/', user_views.loginUser, name='login-user'),
     path('logout-user/', user_views.logoutUser, name='logout-user'),
     path('edit-user/', user_views.editUser, name='edit-user'),
+    path('subscribe/', user_views.email_list_signup, name='subscribe'),
     
     path('account/', user_views.account, name='account'),
     path('remove-address/<id>/', user_views.removeAddress, name='remove-address'),
