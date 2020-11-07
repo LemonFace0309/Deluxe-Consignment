@@ -29,8 +29,8 @@ BRAND_CHOICES = [
 class Product(models.Model):
     name = models.CharField(max_length=200)
     brand = models.CharField(max_length=100, choices=BRAND_CHOICES, null=True)
-    price = models.DecimalField(max_digits=99, decimal_places=2)
-    discount_price = models.DecimalField(max_digits=99, decimal_places=2, blank=True, null=True)
+    price = models.DecimalField(max_digits=63, decimal_places=2)
+    discount_price = models.DecimalField(max_digits=63, decimal_places=2, blank=True, null=True)
     featured = models.BooleanField(default=False)
     thumbnail = models.ImageField(null=True, blank=True, upload_to='thumbnails')
     quantity = models.IntegerField(default=1)

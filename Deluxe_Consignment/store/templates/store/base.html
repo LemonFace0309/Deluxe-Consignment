@@ -22,9 +22,30 @@
     <link rel="stylesheet" href="{% static './css/addons-pro/multi-range.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+    <!-- opengl -->
+    <meta property="og:title" content="Deluxe Consignment Shop " />
+    <meta property="og:site_name" content="Deluxe Consigment"/>
+    <meta property="og:url" content="https://deluxeconsignment.ca" />
+    <meta property="og:image" content="{% static 'images/dcs.png' %}" />
+
     <link rel="shortcut icon" href="{% static 'images/dcs.png'%}" />
 
     <title>Deluxe Consginment</title>
+
+    {% load google_analytics_tags %}
+    <div style="display:none">
+        <img src="{% google_analytics %}" width="0" height="0" />
+    </div>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XRECSM6N43"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-XRECSM6N43');
+    </script>
 
     <!-- Cookie -->
     <script>
