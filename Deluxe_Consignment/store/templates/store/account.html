@@ -62,22 +62,39 @@
                         </div>
                         <div class="md-form">
                             <i class="fas fa-envelope prefix"></i>
-                            <input type="email" id="inputEmail" class="form-control validate" name="email"
-                                   value="{{user.email}}">
-                            <label for="inputEmail" data-error="wrong" data-success="right">E-mail</label>
-                        </div>
-                        <div class="md-form">
-                            <i class="fas fa-envelope prefix"></i>
                             <input type="tel" id="inputPhone" class="form-control validate"
                                    value="{{user.customer.phone}}" name="phone">
-                            <label for="inputEmail" data-error="wrong" data-success="right">Phone</label>
+                            <label for="inputPhone" data-error="wrong" data-success="right">Phone</label>
                         </div>
-                        <div class="text-center mt-2">
-                            <button type="submit" class="btn btn-info">Change<i
-                                    class="fas fa-sign-in ml-1"></i></button>
+                        <div class="md-form">
+                            <i class="fas fa-key prefix"></i>
+                            <input type="password" id="inputPassword1" name="password1"
+                                   class="form-control validate">
+                            <label data-error="wrong" data-success="right" for="inputPassword1">
+                                New Password</label>
+                        </div>
+                        <div class="md-form mb-4">
+                            <i class="fas fa-key prefix"></i>
+                            <input type="password" id="inputPassword2" name="password2"
+                                   class="form-control validate">
+                            <label data-error="wrong" data-success="right" for="inputPassword2">
+                                Confirm New Password</label>
+                        </div>
+                        <hr>
+                        <div class="form-row justify-content-end">
+                            <div class="md-form col-sm-8">
+                                <i class="fas fa-key prefix"></i>
+                                <input type="password" id="inputCurPassword" name="cur_password"
+                                       class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="inputCurPassword">
+                                    Confirm Current Password</label>
+                            </div>
+                            <div class="text-center col-sm-4">
+                                <button type="submit" class="btn btn-info">Change<i
+                                        class="fas fa-sign-in ml-1"></i></button>
+                            </div>
                         </div>
                     </form>
-                    <p>hi</p>
                 </div>
                 <div class="tab-pane fade" id="vieworder" role="tabpanel"
                      aria-labelledby="vieworder-tab">
@@ -180,9 +197,9 @@
                                     </div>
                                 </td>
                                 <td>
-                                        <button type="submit" class="btn btn-sm btn-primary">
-                                            Change
-                                        </button>
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                        Change
+                                    </button>
                                 </td>
                                 <td>
                                     <a href="{{address.get_remove_address_url}}">
@@ -234,5 +251,6 @@
 </div>
 <!-- Main Container -->
 </main>
+<div style="padding-bottom: 20vh"></div>
 
 {% endblock content %}

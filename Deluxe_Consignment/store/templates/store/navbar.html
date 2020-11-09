@@ -26,7 +26,7 @@
                 <!-- Tab panels -->
                 <div class="tab-content">
 
-                    <!--Panel 7-->
+                    <!--Login User-->
                     <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
                         <form method="POST" action="{% url 'user:login-user' %}">
                             {% csrf_token %}
@@ -63,9 +63,9 @@
                             </div>
                         </form>
                     </div>
-                    <!--/.Panel 7-->
+                    <!--/.Login User-->
 
-                    <!--Panel 8-->
+                    <!--Create User-->
                     <div class="tab-pane fade" id="panel8" role="tabpanel">
                         <form method="POST" action="{% url 'user:create-user' %}">
                             {% csrf_token %}
@@ -125,7 +125,7 @@
                             </div>
                         </form>
                     </div>
-                    <!--/.Panel 8-->
+                    <!--/.Create User-->
                 </div>
 
             </div>

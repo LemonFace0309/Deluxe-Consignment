@@ -6,6 +6,8 @@ from .models import *
 
 
 class CreateUserForm(UserCreationForm):
+    subscription = forms.BooleanField(required=False)
+
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email', 'password1', 'password2']
@@ -13,6 +15,17 @@ class CreateUserForm(UserCreationForm):
         # error messages like (passwords do not match) do not show as forms are either hardcoded into HTML or because
         # a modal is being used instead of a new page.
         # Therefore, no new form is automatically begin regenerated after error
+
+
+class UpdateUserForm(ModelForm):
+    cur_password = forms.CharField()
+    phone = forms.CharField(max_length=12, required=False)
+    password1 = forms.CharField(max_length=32, required=False)
+    password2 = forms.CharField(max_length=32, required=False)
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name']
 
 
 class ShippingAddressForm(ModelForm):

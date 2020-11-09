@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, password_validation
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -53,6 +53,9 @@ def createUser(request):
             if created:
                 user.set_password(form.cleaned_data['password2'])
                 user.save()
+                if form.cleaned_data['subscription']:
+                    subscribe(form.cleaned_data['first_name'] + " " + form.cleaned_data['last_name'],
+                              form.cleaned_data['email'])
                 messages.success(request, 'Account created successfully')
             else:
                 messages.success(request, 'Account already exists')
@@ -90,24 +93,41 @@ def logoutUser(request):
 
 def editUser(request):
     if request.method == 'POST':
-        try:
-            email = request.POST.get('email')
-            first_name = request.POST.get('first_name')
-            last_name = request.POST.get('last_name')
-            phone = request.POST.get('phone')
-            customer = request.user.customer
-            customer.user.first_name = first_name
-            customer.user.last_name = last_name
-            customer.user.email = email
-            customer.phone = phone
-            customer.name = first_name + ' ' + last_name
-            customer.email = email
-            customer.save()
-            customer.user.save()
-            messages.success(request, 'Account information changed')
-
-        except:
-            messages.error(request, 'Unable to change information')
+        form = UpdateUserForm(request.POST.copy())
+        if form.is_valid() and request.user.is_authenticated:
+            if request.user.check_password(form.cleaned_data['cur_password']):
+                try:
+                    customer = request.user.customer
+                    customer.user.first_name = form.cleaned_data['first_name']
+                    customer.user.last_name = form.cleaned_data['last_name']
+                    customer.phone = form.cleaned_data['phone']
+                    customer.name = form.cleaned_data['first_name'] + ' ' + form.cleaned_data['last_name']
+                    if form.cleaned_data['password1'] and form.cleaned_data['password1'] == form.cleaned_data['password2']:
+                        password = form.cleaned_data['password2']
+                        try:
+                            password_validation.validate_password(password)
+                            customer.user.set_password(password)
+                            customer.save()
+                            customer.user.save()
+                            messages.success(request, 'Account information changed')
+                        except:
+                            messages.error(request, """Invalid Password:
+                                            Your password can’t be too similar to your other personal information. 
+                                            Your password must contain at least 8 characters. 
+                                            Your password can’t be a commonly used password.
+                                            Your password can’t be entirely numeric.""")
+                    elif form.cleaned_data['password1']:
+                        messages.error(request, 'Passwords do not match')
+                    else:
+                        customer.save()
+                        customer.user.save()
+                        messages.success(request, 'Account information changed')
+                except:
+                    messages.error(request, 'Unable to change information')
+            else:
+                messages.error(request, 'Please Confirm Current Password to Make Changes')
+        else:
+            messages.error(request, 'Unable to change information: Please confirm current password')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
@@ -139,8 +159,8 @@ def email_list_signup(request):
     form = EmailSignupForm(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
-            subscriber, created = EmailSignup.objects.get_or_create(email=form.instance.email)
-            subscriber.name = form.instance.name
+            subscriber, created = EmailSignup.objects.get_or_create(email=form.cleaned_data['email'])
+            subscriber.name = form.cleaned_data['name']
             if request.user.is_authenticated and subscriber.email == request.user.email:
                 try:
                     subscriber.user = request.user
