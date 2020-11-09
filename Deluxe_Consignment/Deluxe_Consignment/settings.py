@@ -100,7 +100,7 @@ if os.getenv('GAE_APPLICATION', None):
         }
     }
 else:
-    if True:
+    if False:
         DATABASES = {
             'default': {
                 'ENGINE': 'django.db.backends.mysql',

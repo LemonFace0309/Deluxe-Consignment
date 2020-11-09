@@ -152,7 +152,8 @@
 
     <div class="nav-container">
         <span id="menu-open" href=""><i class="fas fa-bars fa-1x"></i></span>
-        <div class="brand"><a href="{% url 'shop:home' %}">Deluxe Consignment Shop</a></div>
+        <div class="brand d-block d-sm-none"><a href="{% url 'shop:home' %}">Deluxe Consignment</a></div>
+        <div class="brand d-none d-sm-block" d><a href="{% url 'shop:home' %}">Deluxe Consignment Shop</a></div>
         <form id="search" action="{% url 'shop:store' %}">
             <input class="form-control" id="searchBar" name="q" type="search" placeholder="Search">
         </form>
@@ -227,6 +228,8 @@
 <div class="nav-back"></div>
 <!--/.Navbar-->
 
+
+<!-- SMALL NAVBAR -->
 <div class="left-nav">
     <div class="side-nav-header">
         <div>
@@ -236,10 +239,10 @@
         <span class="mr-3" id="menu-close" href=""><i class="fas fa-times fa-1x"></i></span>
     </div>
     <ul>
-        <li><a class="waves-effect" href="#!">Bags</a></li>
-        <li><a class="waves-effect" href="#!">Shoes</a></li>
-        <li><a class="waves-effect" href="#!">Jews</a></li>
-        <li><a class="waves-effect" href="#!">Smores</a></li>
+        <li><a class="waves-effect" href="{% url 'shop:store' %}?category=bags">Bags</a></li>
+        <li><a class="waves-effect" href="{% url 'shop:store' %}">Shoes</a></li>
+        <li><a class="waves-effect" href="{% url 'shop:store' %}">Jewelry</a></li>
+        <li><a class="waves-effect" href="{% url 'shop:store' %}">Smores</a></li>
         <li><a class="waves-effect" href="#!">Designer Brands</a></li>
         <li><a class="waves-effect" href="#!">Bag</a></li>
         <li><a class="waves-effect" href="#!">Bag</a></li>

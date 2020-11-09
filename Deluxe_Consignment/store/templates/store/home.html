@@ -199,7 +199,7 @@
                             {% endif %}
                             <div> Quantity: {{ product.quantity }}</div>
 
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex flex-wrap justify-content-between">
                                 <a href="{{product.get_add_to_cart_url}}"
                                     class="btn btn-outline-secondary update-cart"
                                     data-product="{{product.id}}" data-action="add">Add to Bag
@@ -289,7 +289,7 @@
 
         {{ sub_form }}
 
-        <!-- Sign in button -->
+        
         <button class="btn btn-info btn-block" type="submit">Sign Up</button>
 
     </form>

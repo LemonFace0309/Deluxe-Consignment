@@ -130,6 +130,10 @@
 {% endif %}
 
 
+<!-- JQuery moved higher to allow all  bodies js -->
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+
+
 
 <!--Navbar-->
 {% include 'store/navbar.html' %}
@@ -189,7 +193,8 @@
 <!--JS Files-->
 <!--BOOTSTAP JS-->
 <!-- jQuery -->
-<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<!-- <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script> -->
+<!--    ^^ was moved higher; line 133 -->
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
 <!-- Bootstrap core JavaScript -->
@@ -199,6 +204,9 @@
 <!-- Plugin file -->
 <script src="{% static 'js/addons-pro/multi-range.min.js'%}"></script>
 <!-- vv This is so all blocks have jq vv -->
+
+
+<!-- Polyfills -->
 
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 <script>
