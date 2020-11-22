@@ -179,3 +179,14 @@ class Message(models.Model):
 
     def __str__(self):
         return f'{self.first_name}\'s Message'
+
+
+# Note: subscriber is not attached to a user until user account is created
+class EmailSignup(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=200, null=True)
+    email = models.EmailField(max_length=200, null=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email

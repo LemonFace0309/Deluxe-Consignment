@@ -4,14 +4,17 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .utils import *
 from django.db.models.functions import Lower
-from .filters import ProductFilter 
+# from .filters import ProductFilter 
 
 from django.core.paginator import Paginator
 from user.models import (
     Customer, Order, OrderItem, ShippingAddress
 )
 from user.forms import (
-    ShippingAddressForm, PickUpForm, CouponForm
+    ShippingAddressForm, PickUpForm, CouponForm, EmailSignupForm
+)
+from user.views import (
+    subscribe
 )
 from django.views.generic import (
     DetailView,
@@ -25,6 +28,7 @@ from django.views.generic import (
 def home(request):
     products = Product.objects.all().filter(in_stock=True)
     featured = products.filter(featured=True)[:10]
+    sub_form = EmailSignupForm()
 
     if request.user.is_authenticated:
         data = cartData(request)
@@ -34,11 +38,14 @@ def home(request):
     items = data['items']
     cart_quantity = data['cart_quantity']
 
+    subscribe('charles', 'charles.liu0309@gmail.com')
+
     context = {
         'products': products,
         'items': items,
         'cart_quantity': cart_quantity,
         'featured': featured,
+        'sub_form': sub_form
     }
     return render(request, 'store/home.html', context)
 

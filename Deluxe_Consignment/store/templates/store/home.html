@@ -199,7 +199,7 @@
                             {% endif %}
                             <div> Quantity: {{ product.quantity }}</div>
 
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex flex-wrap justify-content-between">
                                 <a href="{{product.get_add_to_cart_url}}"
                                     class="btn btn-outline-secondary update-cart"
                                     data-product="{{product.id}}" data-action="add">Add to Bag
@@ -277,79 +277,25 @@
 <div class="elfsight-app-08d8354e-a9dc-4db9-a1b9-e25a31c2f2cb"></div>
 
 
-<!--Lightbox-->
-<div class="banner"><h1>Gallery</h1></div>
-<div>
-    <div class="col-md-12">
-        <div id="mdb-lightbox-ui"></div>
-        <div class="mdb-lightbox">
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg"
-                   data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(117).jpg"
-                         class="img-fluid">
-                </a>
-            </figure>
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(98).jpg"
-                   data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(98).jpg"
-                         class="img-fluid"/>
-                </a>
-            </figure>
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(131).jpg"
-                   data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(131).jpg"
-                         class="img-fluid"/>
-                </a>
-            </figure>
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(123).jpg"
-                   data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(123).jpg"
-                         class="img-fluid"/>
-                </a>
-            </figure>
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(118).jpg"
-                   data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(118).jpg"
-                         class="img-fluid"/>
-                </a>
-            </figure>
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(128).jpg"
-                   data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(128).jpg"
-                         class="img-fluid"/>
-                </a>
-            </figure>
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(132).jpg"
-                   data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(132).jpg"
-                         class="img-fluid"/>
-                </a>
-            </figure>
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(115).jpg"
-                   data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(115).jpg"
-                         class="img-fluid"/>
-                </a>
-            </figure>
-            <figure class="col-md-4">
-                <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(133).jpg"
-                   data-size="1600x1067">
-                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(133).jpg"
-                         class="img-fluid"/>
-                </a>
-            </figure>
-        </div>
+<!-- Default form subscription -->
+<div class="banner"><h1>Newsletter Subscription</h1></div>
+<div class="container my-5">
+    <form class="text-center border border-light p-5" method="POST" action="{% url 'user:subscribe' %}">
+    {% csrf_token %}
+
+        <p class="h2 mb-4">Subscribe</p>
+
+        <p>Join our mailing list. We write rarely, but only the best content.</p>
+
+        {{ sub_form }}
+
+        
+        <button class="btn btn-info btn-block" type="submit">Sign Up</button>
+
+    </form>
     </div>
 </div>
-<p class="font-weight-bold" style="text-align: center; font-family: 'Ubuntu';">Instagram: @deluxe_consignment</p>
-<!-- <div class="shop-item-container"> -->
+<!-- Default form subscription -->
+
 
 {% endblock content %}
