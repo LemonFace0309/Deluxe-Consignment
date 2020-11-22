@@ -19,7 +19,7 @@ $(".paginate a").click(function() {
 
 
 $("#filterToggle").click(function() {
-    console.log("wokring")
+    // console.log("wokring")
     $(".filter").toggleClass("show")
 });
 
@@ -63,11 +63,12 @@ window.addEventListener('load', () => {
         $('#brand').val(sessionStorage.getItem('brand'));
         $('#priceSlider').val(sessionStorage.getItem('price'));
 
-        if (sessionStorage.getItem('category') != 'null') {
+        if (sessionStorage.getItem('category') != "null") {
+            // console.log("null check")
             document.querySelector(`#${sessionStorage.getItem('category')}`).checked = true;
         }
 
-        if (sessionStorage.getItem('price') == 'null') {
+        if (sessionStorage.getItem('price') == "null") {
             document.querySelector('#priceSlider').value = 10000;
         }
 
@@ -75,6 +76,8 @@ window.addEventListener('load', () => {
         sessionStorage.setItem('brand', 'null')
         sessionStorage.setItem('category', 'null')
         sessionStorage.setItem('price', 'null')
+
+
     }, 0);
 }) 
 

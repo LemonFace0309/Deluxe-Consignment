@@ -54,15 +54,16 @@
 .banner h1 {
     margin: 0 0;
     text-transform: uppercase;
-    text-align: right;
+    text-align: center;
+    font-size: 25px;
     letter-spacing: 10px;
     color: white;
-    transition: 200ms;
+    transition: 150ms;
     transition-timing-function: ease-in;
 }
 
 .banner:hover h1{
-    letter-spacing: 20px;
+    letter-spacing: 15px;
 }
 
 .section-container {
@@ -143,7 +144,7 @@
     }
 
     .banner h1 {
-        font-size: 30px;
+        font-size: 18px;
     } 
 }
 

@@ -2,7 +2,7 @@ const nav = document.querySelector('nav');
 const menuOpen = document.querySelector('#menu-open');
 const menuClose = document.querySelector('#menu-close');
 const sideNav = document.querySelector('.left-nav');
-const searchBar = document.querySelector('#searchBar');
+
 
 menuOpen.addEventListener('click', () =>  {
     sideNav.classList.add('showSide');
@@ -16,9 +16,14 @@ menuClose.addEventListener('click', () => {
     document.body.style.overflow = "auto";
 });
 
-searchBar.addEventListener('intput', () => {
-
+document.querySelector('#search').addEventListener('submit', () => {
+    let search = document.querySelector('#searchBar').value;
+    sessionStorage.setItem('search', search);
 });
+
+window.addEventListener('load', () => {
+    $('#searchBar').val(sessionStorage.getItem('search'));
+})
 
 window.addEventListener('scroll', function() {
     const url = location.pathname;
