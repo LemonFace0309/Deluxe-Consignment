@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
+try:
+    from .config import *  # uses relative import
+except ImportError:
+    pass
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
@@ -125,7 +130,4 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# MailChimp Api
-MAILCHIMP_API_KEY = 'b43c472ea48fab86a6d9afb8e08f2e5a-us2'
-MAILCHIMP_DATA_CENTER = 'us2'
-MAILCHIMP_EMAIL_LIST_ID = 'ad29c48093'
+
