@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+from decouple import config
 
 try:
     from .config import *  # uses relative import
@@ -25,12 +26,17 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'pulgewp6^ee=9k1up6b6gi^mh6&mq$6vzu*(8v$-p%=4&4nlug'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["deluxe-consignment.uk.r.appspot.com", "*"]
+
+# Google Analytics
+GOOGLE_ANALYTICS = {
+    'google_analytics_id': 'G-XRECSM6N43',
+}
 
 
 # Application definition
@@ -47,7 +53,8 @@ INSTALLED_APPS = [
     'store.apps.StoreConfig',
     'user.apps.UserConfig',
 
-    'django_filters',
+    # 'django_filters',
+    'google_analytics',
 ]
 
 MIDDLEWARE = [
@@ -84,12 +91,42 @@ WSGI_APPLICATION = 'Deluxe_Consignment.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# ./cloud_sql_proxy -instances="deluxe-consignment:us-east4:deluxeconsignment"=tcp:3306
+
+# [START db_setup]
+if os.getenv('GAE_APPLICATION', None):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': config('HOST'),
+            'USER': config('USER'),
+            'PASSWORD': config('USER_PASSWORD'),
+            'NAME': config('DATABASE_NAME'),
+        }
     }
+else:
+    if False:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.mysql',
+                'HOST': '127.0.0.1',
+                'PORT': '3306',
+                'NAME': config('DATABASE_NAME'),
+                'USER': config('USER'),
+                'PASSWORD': config('USER_PASSWORD'),
+            }
+        }
+    else:
+        DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
 }
+# [END db_setup]
+
+
+
 
 
 # Password validation
@@ -124,6 +161,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# V hmm gcloud? V
+# STATIC_ROOT = 'static'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_URL = '/static/'
 

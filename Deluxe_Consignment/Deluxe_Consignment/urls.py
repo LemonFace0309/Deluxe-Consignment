@@ -24,6 +24,7 @@ from user.forms import UserPasswordResetForm
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('user.urls')),
+    path('blog/', include('blog.urls')),
     path('', include('store.urls')),
     path('password-reset/',
          auth_views.PasswordResetView.as_view(template_name='users/password_reset.html',
@@ -39,6 +40,7 @@ urlpatterns = [
     path('password-reset-complete',
          auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),
          name='password_reset_complete'),
+    path('djga/', include('google_analytics.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

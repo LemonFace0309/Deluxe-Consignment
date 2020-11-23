@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .utils import *
 from django.db.models.functions import Lower
-from .filters import ProductFilter 
+# from .filters import ProductFilter 
 
 from django.core.paginator import Paginator
 from user.models import (

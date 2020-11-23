@@ -18,8 +18,8 @@
                         <button type="submit">Search</button>
                      </form>
                 </div> -->
-                <div class="d-flex d-lg-none my-2 justify-content-center">
-                    <i id="filterToggle" class="fas fa-bars black-text"></i>
+                <div class="d-flex d-lg-none mt-2 justify-content-center">
+                    <i id="filterToggle" class="fas fa-2x fa-bars black-text"></i>
                     <!-- <div id="filterToggle">Filter</div> -->
                 </div>
 
@@ -117,7 +117,7 @@
             <section class="section pt-4">
                 <div class="row">
                     {% if page_obj|length == 0 %}
-                        <small>Your serach did not match any results</small>
+                        <small>Your search did not match any results</small>
                     {% endif %}
 
                     {% for product in page_obj %}
@@ -261,7 +261,7 @@
                                                 {% endif %}
                                                 <div> Quantity: {{ product.quantity }}</div>
 
-                                                <div class="d-flex justify-content-between">
+                                                <div class="d-flex flex-wrap justify-content-between">
                                                     <a href="{{product.get_add_to_cart_url}}"
                                                         class="btn btn-outline-secondary update-cart"
                                                         data-product="{{product.id}}" data-action="add">Add to Bag
