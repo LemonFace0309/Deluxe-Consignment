@@ -5,3 +5,7 @@
 .page-footer p {
     margin: 0;
 }
+
+.context {
+    min-height: 100vh;
+}
