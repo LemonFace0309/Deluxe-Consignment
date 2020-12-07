@@ -288,11 +288,12 @@ nav.sticky .menu {
         text-align: center;
     }
     nav {
-        height: auto;
+        height: 110px;
     }
 
     .nav-back {
-        height: 11vh;
+        /* height: 11vh; */
+        height: 110px;
     }
 
     .nav-header,
@@ -308,6 +309,7 @@ nav.sticky .menu {
 
     .nav-container #cart{
         order: 3;
+        width: 80px;
     }
 
     .nav-container #search{
@@ -316,6 +318,7 @@ nav.sticky .menu {
         margin-bottom: 4px;
     }
     .nav-container #searchBar{
+        padding: 3px;
         width: 85%;
     }
 
