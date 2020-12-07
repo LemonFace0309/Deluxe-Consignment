@@ -15,5 +15,7 @@
 
 # Python pycache:
 __pycache__/
+db.sqlite3
+
 # Ignored by the build system
 /setup.cfg
