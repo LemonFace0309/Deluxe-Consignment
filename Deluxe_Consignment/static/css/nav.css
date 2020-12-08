@@ -14,7 +14,8 @@ nav {
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    height: 25vh;
+    /* height: 25vh; */
+    height: 160px;
     transition: 120ms ease-in;
 }
 
@@ -30,7 +31,7 @@ nav {
 
 .nav-container {
     display: grid;
-    grid-template-columns: 40% 40% 20%;
+    grid-template-columns: minmax(100px, 500px) 3fr 2fr;
     align-items: center;
     justify-items: center;
     height: 100%;
@@ -75,11 +76,14 @@ nav {
 }
 
 .nav-container #cart {
+    width: 110px;
+    /* border: 2px solid red; */
     justify-self: right;
 }
 
 .nav-back {
-    height: 25vh; 
+    /* height: 25vh;  */
+    height: 160px;
     background: white;
 }
 
@@ -266,6 +270,10 @@ nav.sticky .menu {
         position: absolute;
     }
 
+    .nav-container {
+        grid-template-columns: minmax(100px, 280px) 3fr 2fr;
+    }
+
     .nav-container .brand {
         font-size: calc(22px);
     }
@@ -280,11 +288,12 @@ nav.sticky .menu {
         text-align: center;
     }
     nav {
-        height: auto;
+        height: 110px;
     }
 
     .nav-back {
-        height: 11vh;
+        /* height: 11vh; */
+        height: 110px;
     }
 
     .nav-header,
@@ -300,6 +309,7 @@ nav.sticky .menu {
 
     .nav-container #cart{
         order: 3;
+        width: 80px;
     }
 
     .nav-container #search{
@@ -308,6 +318,7 @@ nav.sticky .menu {
         margin-bottom: 4px;
     }
     .nav-container #searchBar{
+        padding: 3px;
         width: 85%;
     }
 
