@@ -108,13 +108,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for orders in user.customer.order_set.all %}
-                        {% if orders.complete == False %}
+                        {% for order in user.customer.order_set.all %}
+                        {% if order.complete == True and order.status == 'Complete' %}
                         <tr>
-                            <th scope="row">{{orders.transaction_id}}</th>
-                            <td>{{orders.delivery}}</td>
-                            <td>{{orders.date_created}}</td>
-                            <td>{{orders.get_cart_total}}</td>
+                            <th scope="row">{{order.transaction_id}}</th>
+                            <td>{{order.delivery}}</td>
+                            <td>{{order.date_created}}</td>
+                            <td>${{order.get_cart_total}}</td>
                         </tr>
                         {% endif %}
                         {% endfor %}
@@ -225,17 +225,19 @@
                             <th scope="col">Transaction ID</th>
                             <th scope="col">Delivery Method</th>
                             <th scope="col">Date Ordered</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Total</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for orders in user.customer.order_set.all %}
-                        {% if orders.complete == True %}
+                        {% for order in user.customer.order_set.all %}
+                        {% if order.complete == True %}
                         <tr>
-                            <th scope="row">{{orders.transaction_id}}</th>
-                            <td>{{orders.delivery}}</td>
-                            <td>{{orders.date_created}}</td>
-                            <td>{{orders.get_cart_total}}</td>
+                            <th scope="row">{{order.transaction_id}}</th>
+                            <td>{{order.delivery}}</td>
+                            <td>{{order.date_created}}</td>
+                            <td>{{order.status}}</td>
+                            <td>{{order.get_cart_total}}</td>
                         </tr>
                         {% endif %}
                         {% endfor %}

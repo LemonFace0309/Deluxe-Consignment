@@ -296,7 +296,7 @@ def processOrder(request):
 def account(request):
     context = {
     }
-    return render(request, 'store/account.html')
+    return render(request, 'user/account.html')
 
 
 def editAddress(request, id):
