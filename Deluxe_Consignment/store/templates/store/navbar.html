@@ -144,7 +144,7 @@
     <div class="nav-header">
         {% if not request.user.is_authenticated %}
             <a class="mt-md-2 mr-md-2" href="" data-toggle="modal" data-target="#modalLRForm">
-                <h4>Login or Register</h4>
+                <h4>Login | Register</h4>
             </a>
         {% else %}
             <a href="{% url 'user:logout-user' %}">Sign Out</a>
@@ -178,18 +178,21 @@
             <li><a href="{% url 'shop:store' %}">Shop</a> <!--do not like for mobile purposes -->
                 <div class="menu-sub">
                     <div class="menu-col">
-                        <div class="menu-category"><a href="">Brands</a></div>
+                        <div class="menu-category">Brands</div>
                         <ul>
+                            <li><a href="{% url 'shop:store' %}?brand=Celine">Celine</a></li>
                             <li><a href="{% url 'shop:store' %}?brand=Burberry">Burberry</a></li>
+                            <li><a href="{% url 'shop:store' %}?brand=Gucci">Gucci</a></li>
                         </ul>
 
                     </div>
                     <div class="menu-col">
-                        <div class="menu-category"><a href="">Categories</a></div>
+                        <div class="menu-category">Categories</div>
                         <ul>
-                            <li><a href="">Small</a></li>
-                            <li><a href="">Small</a></li>
-                            <li><a href="">Small</a></li>
+                            <li><a href="{% url 'shop:store' %}?category=shoes">Shoes</a></li>
+                            <li><a href="{% url 'shop:store' %}?category=bags">Bags</a></li>
+                            <li><a href="{% url 'shop:store' %}?category=accessories">Accessories</a></li>
+                            <li><a href="{% url 'shop:store' %}?category=slgs">SLGs</a></li>
                         </ul>
 
                     </div>
