@@ -26,17 +26,9 @@
                        href="#recentlyviewed" role="tab"
                        aria-controls="recentlyviewed" aria-selected="false">Recently Viewed</a>
                 </li>
-                <li><a class="nav-link" id="messages-tab" data-toggle="tab"
-                       href="#messages" role="tab"
-                       aria-controls="messages" aria-selected="false">Messages</a>
-                </li>
                 <li><a class="nav-link" id="addressbook-tab" data-toggle="tab"
                        href="#addressbook" role="tab"
                        aria-controls="addressbook" aria-selected="false">Address book</a>
-                </li>
-                <li><a class="nav-link" id="payment-tab" data-toggle="tab"
-                       href="#payment" role="tab"
-                       aria-controls="payment" aria-selected="false">Payment Information</a>
                 </li>
                 <li><a class="nav-link" id="trackorder-tab" data-toggle="tab"
                        href="#trackorder" role="tab"
@@ -125,9 +117,6 @@
                      aria-labelledby="recentlyviewed-tab">
                     <p>Recently Viewed Content</p>
                 </div>
-                <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages-tab">
-                    <p>Message Content</p>
-                </div>
                 <div class="tab-pane fade" id="addressbook" role="tabpanel"
                      aria-labelledby="addressbook-tab">
                     <table class="table table-hover">
@@ -213,9 +202,6 @@
                         {% endfor %}
                         </tbody>
                     </table>
-                </div>
-                <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
-                    <p>Payment Content</p>
                 </div>
                 <div class="tab-pane fade" id="trackorder" role="tabpanel"
                      aria-labelledby="trackorder-tab">

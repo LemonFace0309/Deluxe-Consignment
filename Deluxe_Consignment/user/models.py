@@ -35,7 +35,7 @@ STATUS_OPTIONS = (
     ('Not Ordered', 'Not Ordered'),
     ('In Progress', 'In Progress'),
     ('Shipped', 'Shipped'),
-    ('Ready for Pickup', 'Ready for Pickup')
+    ('Ready for Pickup', 'Ready for Pickup'),
     ('Complete', 'Complete')
 )
 
