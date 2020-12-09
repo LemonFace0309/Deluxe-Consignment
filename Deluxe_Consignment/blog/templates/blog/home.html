@@ -1,0 +1,58 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Section: Blog v.3 -->
+<section class="my-5">
+    <div class="container">
+        <!-- Section heading -->
+        <h2 class="h1-responsive font-weight-bold text-center my-5">Recent posts</h2>
+        <!-- Section description -->
+        <p class="text-center dark-grey-text w-responsive mx-auto mb-5">Duis aute irure dolor in reprehenderit in
+            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+        {% for post in posts %}
+        <!-- Grid row -->
+        <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-lg-5 col-xl-4">
+
+                <!-- Featured image -->
+                <div class="view overlay rounded z-depth-1-half mb-lg-0 mb-4">
+                    <img class="img-fluid" src="{{ post.imageURL }}"
+                         alt="Sample image">
+                    <a href="{% url 'blog:post' post.slug %}">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-7 col-xl-8">
+
+                <!-- Post title -->
+                <h3 class="font-weight-bold mb-3"><strong>{{ post.title }}</strong></h3>
+                <!-- Excerpt -->
+                <p class="dark-grey-text">{{ post.content|truncatewords:50 }}...</p>
+                <!-- Post data -->
+                <p>by <a class="font-weight-bold">{{ post.author }}</a>, {{ post.date_created|date:"M j, Y" }}</p>
+                <!-- Read more button -->
+                <a class="btn btn-primary btn-md" href="{% url 'blog:post' post.slug %}">Read more</a>
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+        <hr class="my-5">
+        {% endfor %}
+
+    </div>
+</section>
+<!-- Section: Blog v.3 -->
+{% endblock content %}

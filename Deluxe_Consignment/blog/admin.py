@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import Blog
+from .models import Post
 
-class BlogAdmin(admin.ModelAdmin):
+class PostAdmin(admin.ModelAdmin):
     readonly_fields = ('date_created',)
     list_filter = ('date_created',)
 
     class Meta:
-        model = Blog
+        model = Post
 
 # Register your models here.
-admin.site.register(Blog, BlogAdmin)
+admin.site.register(Post, PostAdmin)

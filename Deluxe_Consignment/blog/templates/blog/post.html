@@ -7,21 +7,19 @@
 
 <div class="container">
     <section class="container mt-5">
-        {% for blog in blogs %}
             <article class="blog-box col-12 mb-5 px-5 py-3">
                 <div class="">
                     <h1>
-                        {{ blog.title }}
+                        {{ post.title }}
                     </h1>
 
-                    <span> {{ blog.date_created|date:"F d Y"}} </span>
+                    <span> {{ post.date_created|date:"F d Y"}} </span>
                 </div>
 
                 <p class="pt-5">
-                    {{ blog.content }}
+                    {{ post.content }}
                 </p>
             </article>
-        {% endfor %}
     </section>
 </div>
 

@@ -21,3 +21,10 @@ def update_customer(sender, instance, created, **kwargs):
         print('Customer Profile Updated')
 
 post_save.connect(update_customer, sender=User)
+
+
+
+
+
+
+
