@@ -141,6 +141,7 @@
 
 <!--NavBar-->
 <nav>
+    <!-- Top nav -->
     <div class="nav-header">
         {% if not request.user.is_authenticated %}
             <a href="" data-toggle="modal" data-target="#modalLRForm">Login | Register</a>
@@ -150,6 +151,7 @@
         {% endif %}
     </div>
 
+    <!-- Main Nav contents -->
     <div class="nav-container">
         <span id="menu-open" href=""><i class="fas fa-bars fa-1x"></i></span>
         <div class="brand d-block d-sm-none"><a href="{% url 'shop:home' %}">Deluxe Consignment</a></div>
@@ -171,10 +173,14 @@
             </a>
         </div>
     </div>
+
+    <!-- Nav bottom mega menu -->
     <div class="menu">
         <ul>
             <li><a href="{% url 'shop:store' %}">Shop</a> <!--do not like for mobile purposes -->
+                <!-- Mega menu display -->
                 <div class="menu-sub">
+                    <!-- Menu Column -->
                     <div class="menu-col">
                         <div class="menu-category">Brands</div>
                         <ul>
@@ -232,7 +238,7 @@
 <!--/.Navbar-->
 
 
-<!-- SMALL NAVBAR -->
+<!-- SIDE NAVBAR -->
 <div class="left-nav">
     <div class="side-nav-header">
         <div>

@@ -4,11 +4,13 @@ const menuClose = document.querySelector('#menu-close');
 const sideNav = document.querySelector('.left-nav');
 
 
+// Responsive: Open Side Menu
 menuOpen.addEventListener('click', () =>  {
     sideNav.classList.add('showSide');
     document.body.style.overflow = "hidden";
 });
 
+// Responsive: Close Side Menu
 menuClose.addEventListener('click', () => {
     sideNav.classList.remove('showSide');
     sideNav.classList.add('hideSide');
@@ -16,15 +18,20 @@ menuClose.addEventListener('click', () => {
     document.body.style.overflow = "auto";
 });
 
+
+// Search for item
 document.querySelector('#search').addEventListener('submit', () => {
     let search = document.querySelector('#searchBar').value;
     sessionStorage.setItem('search', search);
 });
 
+// Load search term after refresh
 window.addEventListener('load', () => {
     $('#searchBar').val(sessionStorage.getItem('search'));
 })
 
+
+// Collapse Navbar when scrolling
 window.addEventListener('scroll', function() {
     const url = location.pathname;
     if (url != '/') {

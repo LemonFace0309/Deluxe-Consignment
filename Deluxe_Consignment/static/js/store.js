@@ -1,3 +1,6 @@
+
+// Pagination
+//  Modifies URL to different pages
 const pages = document.querySelectorAll('.paginate a');
 let search = location.search
 
@@ -18,18 +21,15 @@ $(".paginate a").click(function() {
 // end pagination
 
 
+// Filtering
+
+// Responsive Mobile Filter Bar
 $("#filterToggle").click(function() {
     // console.log("wokring")
     $(".filter").toggleClass("show")
 });
 
-
-
-
-
-
-
-// Filtering
+// Makes checkboxes behave like radio buttons
 $(".category").change(function() {
     $(".category").not(this).prop('checked', false);
 });
@@ -56,7 +56,7 @@ $(".submit").click(function() {
 
 
 
-
+// Load filter options on load
 window.addEventListener('load', () => {
     setTimeout(() => {
         $('#sort').val(sessionStorage.getItem('sort'));
