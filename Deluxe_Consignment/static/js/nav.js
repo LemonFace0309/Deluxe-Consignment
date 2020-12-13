@@ -25,6 +25,7 @@ window.addEventListener('load', () => {
     $('#searchBar').val(sessionStorage.getItem('search'));
 })
 
+// See nav.css for sticky class
 window.addEventListener('scroll', function() {
     const url = location.pathname;
     if (url != '/') {

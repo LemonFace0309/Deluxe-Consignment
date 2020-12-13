@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.db import models
 from django.utils import timezone
 import datetime
@@ -8,7 +9,7 @@ class Post(models.Model):
     author = models.CharField(max_length=100, default="Jenny Liu", null=True, blank=True)
     title = models.CharField(max_length=100)
     thumbnail = models.ImageField(null=True, blank=True, upload_to='thumbnails')
-    content = models.TextField(max_length=50000, default="Content")
+    body = RichTextField(blank=True, null=True)
     slug = models.SlugField(max_length=200, null=True, blank=True)
     date_created = models.DateTimeField(default=timezone.now)
 

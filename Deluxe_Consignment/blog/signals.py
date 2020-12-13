@@ -8,7 +8,7 @@ from django.template.defaultfilters import slugify
 def create_blog_slug(sender, created, instance, **kwargs):
     # instance.save() creates infinite recursive loop for some reason.
     # more details can be found here: https://medium.com/bilesanmiahmad/how-to-prevent-recursionerror-maximum-recursion-depth-exceeded-when-using-django-signals-dbfe1615eff1
-    Post.objects.filter(title=instance.title, thumbnail=instance.thumbnail, content=instance.content,
+    Post.objects.filter(title=instance.title, thumbnail=instance.thumbnail, body=instance.body,
                         date_created=instance.date_created).update(slug=slugify(instance.title)
     )
 
