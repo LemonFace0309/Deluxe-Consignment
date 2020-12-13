@@ -262,6 +262,7 @@ def processOrder(request):
 
     if total == order.get_cart_total:
         order.complete = True
+        order.status = "In Progress"
     order.save()
 
     if 'code' in request.session:
@@ -296,7 +297,7 @@ def processOrder(request):
 def account(request):
     context = {
     }
-    return render(request, 'store/account.html')
+    return render(request, 'user/account.html')
 
 
 def editAddress(request, id):

@@ -1,0 +1,26 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
+
+
+<div class="container">
+    <section class="container mt-5">
+            <article class="blog-box col-12 mb-5 px-5 py-3">
+                <div class="">
+                    <h1>
+                        {{ post.title }}
+                    </h1>
+
+                    <span> {{ post.date_created|date:"F d Y"}} </span>
+                </div>
+
+                <p class="pt-5">
+                    {{ post.content }}
+                </p>
+            </article>
+    </section>
+</div>
+
+{% endblock content %}
