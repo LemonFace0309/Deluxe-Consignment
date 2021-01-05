@@ -145,7 +145,7 @@
     <div class="nav-header">
         {% if not request.user.is_authenticated %}
             <a class="mt-md-2 mr-md-2" href="" data-toggle="modal" data-target="#modalLRForm">
-                <h4>Login | Register</h4>
+                Login | Register
             </a>
         {% else %}
             <a href="{% url 'user:logout-user' %}">Sign Out</a>
@@ -189,6 +189,7 @@
                             <li><a href="{% url 'shop:store' %}?brand=Celine">Celine</a></li>
                             <li><a href="{% url 'shop:store' %}?brand=Burberry">Burberry</a></li>
                             <li><a href="{% url 'shop:store' %}?brand=Gucci">Gucci</a></li>
+                            <li><a href="{% url 'shop:store' %}?brand=Balenciaga">Balenciaga</a></li>
                         </ul>
 
                     </div>
@@ -203,16 +204,16 @@
 
                     </div>
                     <div class="menu-col">
-                        <img src="{% static 'images/lv.jpg'%}" alt="">
+                        <a href="{% url 'shop:store' %}?brand=Louis Vuitton"><img src="{% static 'images/lv.jpg'%}" alt=""></a>
                     </div>
                     <div class="menu-col">
-                        <img src="{% static 'images/chanel.jpg'%}" alt="">
+                        <a href="{% url 'shop:store' %}?brand=Chanel"><img src="{% static 'images/chanel.jpg'%}" alt=""></a>
                     </div>
                 </div>
             </li>
 
             <li><a href="{% url 'shop:about' %}">About</a>
-                <div class="menu-sub">
+                <!-- <div class="menu-sub">
                     <div class="menu-col">
                         <div class="menu-category"><a href="">Shoe</a></div>
                         <ul>
@@ -229,7 +230,7 @@
                             <li><a href="">Small</a></li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
             </li>
             <li><a href="{% url 'shop:consign' %}">Consign</a></li>
             <li><a href="{% url 'blog:home' %}">Blog</a></li>

@@ -99,7 +99,7 @@ class StoreListView(ListView):
         # products = productFilter.qs
 
         # Pagination
-        paginator = Paginator(products, 8)
+        paginator = Paginator(products, 24)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
