@@ -1,10 +1,11 @@
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 from .models import *
 
 
+# raise validationerrors whenever you have time
 class CreateUserForm(UserCreationForm):
     subscription = forms.BooleanField(required=False)
 
@@ -26,6 +27,17 @@ class UpdateUserForm(ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name']
+
+
+class UserPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super(UserPasswordResetForm, self).__init__(*args, **kwargs)
+
+    email = forms.EmailField(label='', widget=forms.EmailInput(attrs={
+        'class': 'form-control',
+        'type': 'email',
+        'name': 'email'
+        }))
 
 
 class ShippingAddressForm(ModelForm):

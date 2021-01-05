@@ -97,7 +97,7 @@ nav.sticky {
 }
 
 nav.sticky .nav-header {
-    display: none;
+    /*display: none;*/
 }
 
 nav.sticky .nav-container {

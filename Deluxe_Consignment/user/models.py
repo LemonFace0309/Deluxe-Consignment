@@ -31,6 +31,14 @@ DELIVERY_OPTIONS = (
     ('Pick-up', 'Pick-up')
 )
 
+STATUS_OPTIONS = (
+    ('Not Ordered', 'Not Ordered'),
+    ('In Progress', 'In Progress'),
+    ('Shipped', 'Shipped'),
+    ('Ready for Pickup', 'Ready for Pickup'),
+    ('Complete', 'Complete')
+)
+
 
 # Create your models here.
 class Customer(models.Model):
@@ -46,6 +54,7 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
     coupon = models.ForeignKey('Coupon', on_delete=models.SET_NULL, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=100, choices=STATUS_OPTIONS, default='Not Ordered')
     complete = models.BooleanField(default=False)
     delivery = models.CharField(max_length=100, choices=DELIVERY_OPTIONS, default='Pick-up',
                                 null=True, blank=True)

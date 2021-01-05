@@ -55,7 +55,7 @@
                             <!--Footer-->
                             <div class="modal-footer">
                                 <div class="options text-center text-md-right mt-1">
-                                    <p>Forgot <a href="#" class="blue-text">Password?</a></p>
+                                    <p>Forgot <a href="{% url 'password_reset' %}" class="blue-text">Password?</a></p>
                                 </div>
                                 <button type="button" class="btn btn-outline-info waves-effect ml-auto"
                                         data-dismiss="modal">Close
@@ -144,7 +144,9 @@
     <!-- Top nav -->
     <div class="nav-header">
         {% if not request.user.is_authenticated %}
-            <a href="" data-toggle="modal" data-target="#modalLRForm">Login | Register</a>
+            <a class="mt-md-2 mr-md-2" href="" data-toggle="modal" data-target="#modalLRForm">
+                <h4>Login | Register</h4>
+            </a>
         {% else %}
             <a href="{% url 'user:logout-user' %}">Sign Out</a>
             <a href="{% url 'user:account'%}">Profile</a>
@@ -230,7 +232,7 @@
                 </div>
             </li>
             <li><a href="{% url 'shop:consign' %}">Consign</a></li>
-            <li><a href="{% url 'shop:blog' %}">Blog</a></li>
+            <li><a href="{% url 'blog:home' %}">Blog</a></li>
         </ul>
     </div>
 </nav>

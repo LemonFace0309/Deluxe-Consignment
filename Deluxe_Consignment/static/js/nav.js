@@ -32,6 +32,7 @@ window.addEventListener('load', () => {
 
 
 // Collapse Navbar when scrolling
+// See nav.css for sticky class
 window.addEventListener('scroll', function() {
     const url = location.pathname;
     if (url != '/') {
