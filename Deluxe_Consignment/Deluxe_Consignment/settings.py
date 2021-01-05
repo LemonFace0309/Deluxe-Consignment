@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'store.apps.StoreConfig',
     'user.apps.UserConfig',
 
+    'ckeditor',
     # 'django_filters',
     'google_analytics',
 ]
